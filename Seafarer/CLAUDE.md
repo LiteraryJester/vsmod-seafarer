@@ -1,33 +1,40 @@
-# Salt and Sand - Vintage Story Mod
+# Seafarer - Vintage Story Mod
+
+> **Successor to `vsmod-salt-and-sand`** — that repo remains on disk as a historical archive. All new work happens here.
 
 ## Project Overview
-A Vintage Story mod (modid: `seafarer`) that started as a log barge/raft mod and is expanding in scope. Currently adds a logbarge boat type with accessory slots, raft sails, and storage expansion points.
+A Vintage Story mod (modid: `seafarer`) focused on ocean exploration — seafaring vessels, tropical crops, food preservation, salt pans, and port trader networks. Migrated from `vsmod-salt-and-sand` to this dedicated repo in April 2026. Hard-depends on ProgressionFramework for training, quests, and evolving traders.
 
 ## Build & Run
 - **Build**: `dotnet build` from repo root, or use `build.ps1` / `build.sh` (Cake build)
+- **Explicit build**: `dotnet build Seafarer/Seafarer.csproj`
 - **Target**: .NET 10.0
-- **Output**: `SaltAndSand/bin/Debug/Mods/mod/` (copied to VS mod folder)
+- **Output**: `Seafarer/bin/Debug/Mods/mod/` (copied to VS mod folder)
 - **Dependencies**: Vintage Story install at `$(VINTAGE_STORY)` env var — references VintagestoryAPI, VSSurvivalMod, VSEssentials, VSCreativeMod, VintagestoryLib, Harmony, protobuf-net, cairo-sharp, Newtonsoft.Json, Microsoft.Data.Sqlite
 - **Game version**: 1.21.0+
 
 ## Project Structure
 ```
-SaltAndSand/
-├── SaltAndSand/                    # Main mod project
-│   ├── SaltAndSandModSystem.cs     # Entry point (ModSystem subclass)
-│   ├── modinfo.json                # Mod metadata
+Seafarer/                               # solution root
+├── Seafarer/                           # C# project
+│   ├── SeafarerModSystem.cs            # entry point (ModSystem subclass)
+│   ├── modinfo.json                    # modid: "seafarer"
+│   ├── Block/                          # block classes (DryingFrame, SaltPan, Griddle, etc.)
+│   ├── BlockEntity/                    # block entities for above
+│   ├── CollectibleBehavior/            # ClamShuck, CoconutCrack, PlaceBurrito, ShellCrush
+│   ├── Entity/                         # EntityProjectileBarbed
+│   ├── EntityBehavior/                 # Exposure + helpers (ExposureCondition, ExposureConfig)
+│   ├── Item/                           # ItemMudRake
+│   ├── Recipe/                         # Griddle + PrepTable recipe types + registries
+│   ├── Config/                         # DryingFrame, Griddle, SaltPan, MudRake configs
+│   ├── quests/                         # character design docs (markdown)
 │   ├── assets/
-│   │   ├── seafarer/            # Mod-namespaced assets
-│   │   │   ├── entities/           # Entity definitions (JSON5)
-│   │   │   ├── itemtypes/          # Item type definitions
-│   │   │   ├── recipes/grid/       # Crafting recipes
-│   │   │   ├── shapes/             # 3D model shapes
-│   │   │   ├── config/handbook/    # Handbook guide entries
-│   │   │   └── lang/en.json        # English translations
-│   │   └── game/patches/           # JSON patches to base game data
-│   └── SaltAndSand.csproj
-├── ZZCakeBuild/                    # Cake build system
-└── SaltAndSand.sln
+│   │   ├── seafarer/                   # mod-namespaced assets (blocktypes, itemtypes, entities, shapes, textures, sounds, recipes, lang, config)
+│   │   └── game/patches/               # JSON patches to base game data
+│   └── Seafarer.csproj
+├── docs/                               # design specs and implementation plans
+├── ZZCakeBuild/                        # Cake build system
+└── Seafarer.sln
 ```
 
 ## Vintage Story Modding Conventions
@@ -71,7 +78,7 @@ SaltAndSand/
 - Quest definitions at `assets/seafarer/config/quests/*.json`; tradelists at `assets/seafarer/config/tradelists/*.json`; dialogue at `assets/seafarer/config/dialogue/*.json`.
 - Trader entities (Drake, Morgan, Celeste, Reva, etc.) use `"class": "EntityEvolvingTrader"` — the class itself is registered by ProgressionFramework at Start.
 - Training book items (`seafarer:trainingbook-*`) use `"class": "ItemTrainingBook"` — same pattern.
-- Salt-and-sand's csproj has a `ProjectReference` to the framework csproj; framework types are resolvable at compile time.
+- Seafarer's csproj has a `ProjectReference` to the framework csproj; framework types are resolvable at compile time.
 
 ## Reference Resources (local paths)
 - **VintagestoryAPI source**: `D:\Development\vs\vsapi\` — canonical interfaces (`ICoreAPI`, `ModSystem`, `Entity`, etc.). WSL: `/mnt/d/Development/vs/vsapi/`.
@@ -111,10 +118,10 @@ message.
 
 ### Food validation
 Run after changes to files under:
-  - `SaltAndSand/assets/seafarer/itemtypes/food/`
-  - `SaltAndSand/assets/seafarer/patches/expandedfoods-*.json`
-  - `SaltAndSand/assets/seafarer/patches/brewing.json`
-  - `SaltAndSand/assets/seafarer/lang/en.json`
+  - `Seafarer/Seafarer/assets/seafarer/itemtypes/food/`
+  - `Seafarer/Seafarer/assets/seafarer/patches/expandedfoods-*.json`
+  - `Seafarer/Seafarer/assets/seafarer/patches/brewing.json`
+  - `Seafarer/Seafarer/assets/seafarer/lang/en.json`
 
     python3 validate-food.py
 
