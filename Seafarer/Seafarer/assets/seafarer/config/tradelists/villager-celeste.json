@@ -1,0 +1,19 @@
+{
+    "money": { "avg": 25, "var": 5 },
+    "selling": {
+        "maxItems": 8,
+        "list": [
+            { "code": "paper-parchment", "type": "item", "stacksize": 4, "stock": { "avg": 6, "var": 2 }, "price": { "avg": 3, "var": 0.5 } },
+            { "code": "book-plain-deerskin", "type": "item", "stacksize": 1, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 8, "var": 2 } },
+            { "code": "ink-darkgreen", "type": "item", "stacksize": 2, "stock": { "avg": 4, "var": 1 }, "price": { "avg": 2, "var": 0.5 } }
+        ]
+    },
+    "buying": {
+        "maxItems": 6,
+        "list": [
+            { "code": "hide-raw-large", "type": "item", "stacksize": 1, "stock": { "avg": 6, "var": 2 }, "price": { "avg": 3, "var": 0.5 } },
+            { "code": "hide-raw-medium", "type": "item", "stacksize": 1, "stock": { "avg": 8, "var": 2 }, "price": { "avg": 2, "var": 0.5 } },
+            { "code": "hide-raw-small", "type": "item", "stacksize": 1, "stock": { "avg": 10, "var": 3 }, "price": { "avg": 1, "var": 0.25 } }
+        ]
+    }
+}

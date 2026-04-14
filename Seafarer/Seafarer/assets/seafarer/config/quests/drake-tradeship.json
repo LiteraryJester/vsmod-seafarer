@@ -1,0 +1,140 @@
+{
+  "code": "drake-tradeship",
+  "npc": "drake",
+  "scope": "server",
+  "groupLangKey": "quest-group-rebuilding-tortuga",
+  "titleLangKey": "quest-drake-tradeship-title",
+  "descriptionLangKey": "quest-drake-tradeship-desc",
+  "autoEnable": true,
+  "objectives": [
+    {
+      "code": "boards",
+      "type": "delivery",
+      "items": [{ "item": "game:plank-birch", "quantity": 1 }],
+      "required": 298,
+      "rewards": [
+        {
+          "type": "addSellingItem",
+          "itemCode": "game:chisel-copper",
+          "itemType": "item",
+          "stacksize": 1,
+          "stockAvg": 2,
+          "stockVar": 1,
+          "priceAvg": 5,
+          "priceVar": 1
+        },
+        {
+          "type": "addSellingItem",
+          "itemCode": "game:hammer-copper",
+          "itemType": "item",
+          "stacksize": 1,
+          "stockAvg": 2,
+          "stockVar": 1,
+          "priceAvg": 5,
+          "priceVar": 1
+        },
+        {
+          "type": "giveItem",
+          "itemCode": "game:chisel-copper",
+          "itemType": "item",
+          "stacksize": 1
+        },
+        {
+          "type": "giveItem",
+          "itemCode": "game:hammer-copper",
+          "itemType": "item",
+          "stacksize": 1
+        }
+      ]
+    },
+    {
+      "code": "rope",
+      "type": "delivery",
+      "items": [{ "item": "game:rope", "quantity": 1 }],
+      "required": 27,
+      "rewards": [
+        {
+          "type": "addSellingItem",
+          "itemCode": "game:saw-copper",
+          "itemType": "item",
+          "stacksize": 1,
+          "stockAvg": 2,
+          "stockVar": 1,
+          "priceAvg": 5,
+          "priceVar": 1
+        },
+        {
+          "type": "addSellingItem",
+          "itemCode": "game:shears-copper",
+          "itemType": "item",
+          "stacksize": 1,
+          "stockAvg": 2,
+          "stockVar": 1,
+          "priceAvg": 5,
+          "priceVar": 1
+        },
+        {
+          "type": "giveItem",
+          "itemCode": "game:saw-copper",
+          "itemType": "item",
+          "stacksize": 1
+        },
+        {
+          "type": "giveItem",
+          "itemCode": "game:shears-copper",
+          "itemType": "item",
+          "stacksize": 1
+        }
+      ]
+    },
+    {
+      "code": "linen",
+      "type": "delivery",
+      "items": [{ "item": "game:linen-normal-down", "quantity": 1 }],
+      "required": 21,
+      "rewards": [
+        {
+          "type": "addSellingItem",
+          "itemCode": "game:pickaxe-copper",
+          "itemType": "item",
+          "stacksize": 1,
+          "stockAvg": 2,
+          "stockVar": 1,
+          "priceAvg": 5,
+          "priceVar": 1
+        },
+        {
+          "type": "addSellingItem",
+          "itemCode": "game:prospectingpick-copper",
+          "itemType": "item",
+          "stacksize": 1,
+          "stockAvg": 2,
+          "stockVar": 1,
+          "priceAvg": 5,
+          "priceVar": 1
+        },
+        {
+          "type": "giveItem",
+          "itemCode": "game:pickaxe-copper",
+          "itemType": "item",
+          "stacksize": 1
+        },
+        {
+          "type": "giveItem",
+          "itemCode": "game:prospectingpick-copper",
+          "itemType": "item",
+          "stacksize": 1
+        }
+      ]
+    }
+  ],
+  "rewards": [
+    {
+      "type": "incrementEntityVariable",
+      "variableName": "rebuilding-tier",
+      "amount": 1,
+      "thresholdValue": 4,
+      "thresholdVariable": "entity.rebuilding-complete"
+    }
+  ]
+}

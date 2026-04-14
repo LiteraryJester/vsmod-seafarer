@@ -1,0 +1,52 @@
+{
+    code: "tomatobushcutting",
+    class: "BlockRequireFertileGround",
+    entityClass: "Generic",
+    entityBehaviors: [
+        {
+            name: "FruitingBushCutting",
+            properties: {
+                matureBlockCode: "seafarer:tomatobush-grown-free",
+                matureDaysMin: 60,
+                matureDaysMax: 120
+            }
+        }
+    ],
+    variantgroups: [
+        { code: "cover", states: ["free", "snow"] }
+    ],
+    shape: { base: "game:block/plant/flower/1patch-cross-16x16" },
+    textures: {
+        "stem": { base: "seafarer:block/plant/berrybush/cuttings/tomato-stem1" },
+        "leaves": { base: "seafarer:block/plant/berrybush/cuttings/tomato-leaves1" }
+    },
+    drawtypeByType: {
+        "*-snow": "JSONAndSnowLayer",
+        "*": "JSON"
+    },
+    climateColorMap: "climatePlantTint",
+    seasonColorMap: "seasonalBirch",
+    creativeinventory: { "general": ["*-free"], "seafarer": ["*-free"] },
+    randomizeRotations: true,
+    renderpass: "OpaqueNoCull",
+    renderAlphaTest: 0.4,
+    blockmaterial: "Plant",
+    sidesolid: { "all": false },
+    sideopaque: { "all": false },
+    replaceable: 6000,
+    lightAbsorption: 0,
+    resistance: 0.1,
+    collisionbox: null,
+    selectionbox: { x1: 0.3, y1: 0, z1: 0.3, x2: 0.7, y2: 0.5, z2: 0.7 },
+    sounds: {
+        place: "block/plant",
+        break: "block/plant"
+    },
+    transitionableProps: [{
+        type: "Perish",
+        freshHours: { avg: 360 },
+        transitionHours: { avg: 72 },
+        transitionedStack: { type: "item", code: "game:stick", quantity: 1 },
+        transitionRatio: 1
+    }]
+}

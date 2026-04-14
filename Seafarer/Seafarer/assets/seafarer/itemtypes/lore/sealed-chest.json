@@ -1,0 +1,34 @@
+{
+    "code": "sealed-chest",
+    "maxstacksize": 1,
+    "attributes": {
+        "displaycaseable": true,
+        "shelvable": true
+    },
+    "shape": { "base": "seafarer:block/wood/chest/normal" },
+    "textures": {
+        "sides2": { "base": "seafarer:block/wood/trunk/aged-sides" },
+        "lid": { "base": "seafarer:block/wood/trunk/aged-lid" },
+        "accessories": { "base": "seafarer:block/wood/trunk/aged-accessories" }
+    },
+    "creativeinventory": { "general": ["*"], "items": ["*"] },
+    "heldTpIdleAnimation": "holdunderarm",
+    "guiTransform": {
+        "translation": { "x": 0, "y": -2, "z": 0 },
+        "rotation": { "x": -22, "y": -43, "z": 0 },
+        "origin": { "x": 0.5, "y": 0.5, "z": 0.5 },
+        "scale": 1.5
+    },
+    "groundTransform": {
+        "translation": { "x": 0, "y": 0, "z": 0 },
+        "rotation": { "x": 0, "y": 0, "z": 0 },
+        "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+        "scale": 3.0
+    },
+    "tpHandTransform": {
+        "translation": { "x": -0.8, "y": -0.5, "z": -0.5 },
+        "rotation": { "x": 0, "y": -90, "z": 0 },
+        "origin": { "x": 0.5, "y": 0.5, "z": 0.5 },
+        "scale": 0.5
+    }
+}

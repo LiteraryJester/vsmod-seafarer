@@ -1,0 +1,55 @@
+{
+	"editor": {
+		"allAngles": false,
+		"singleTexture": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textures": {
+		"skin": "game:block/plant/crop/turnip/bulb"
+	},
+	"elements": [
+		{
+			"name": "stalk",
+			"from": [ 7.0, -4.0, 7.0 ],
+			"to": [ 9.0, 18.0, 9.0 ],
+			"rotationOrigin": [ 8.0, 7.0, 8.0 ],
+			"faces": {
+				"north": { "texture": "#skin", "uv": [ 4.0, 0.0, 6.0, 16.0 ] },
+				"east": { "texture": "#skin", "uv": [ 6.0, 0.0, 8.0, 16.0 ] },
+				"south": { "texture": "#skin", "uv": [ 8.0, 0.0, 10.0, 16.0 ] },
+				"west": { "texture": "#skin", "uv": [ 10.0, 0.0, 12.0, 16.0 ] },
+				"up": { "texture": "#skin", "uv": [ 7.0, 7.0, 9.0, 9.0 ] },
+				"down": { "texture": "#skin", "uv": [ 7.0, 7.0, 9.0, 9.0 ] }
+			},
+			"children": [
+				{
+					"name": "node1",
+					"from": [ -0.25, 5.0, -0.25 ],
+					"to": [ 2.25, 5.5, 2.25 ],
+					"faces": {
+						"north": { "texture": "#skin", "uv": [ 3.0, 7.0, 6.0, 7.5 ] },
+						"east": { "texture": "#skin", "uv": [ 3.0, 7.0, 6.0, 7.5 ] },
+						"south": { "texture": "#skin", "uv": [ 3.0, 7.0, 6.0, 7.5 ] },
+						"west": { "texture": "#skin", "uv": [ 3.0, 7.0, 6.0, 7.5 ] },
+						"up": { "texture": "#skin", "uv": [ 6.0, 6.0, 9.0, 9.0 ] },
+						"down": { "texture": "#skin", "uv": [ 6.0, 6.0, 9.0, 9.0 ] }
+					}
+				},
+				{
+					"name": "node2",
+					"from": [ -0.25, 13.0, -0.25 ],
+					"to": [ 2.25, 13.5, 2.25 ],
+					"faces": {
+						"north": { "texture": "#skin", "uv": [ 3.0, 7.0, 6.0, 7.5 ] },
+						"east": { "texture": "#skin", "uv": [ 3.0, 7.0, 6.0, 7.5 ] },
+						"south": { "texture": "#skin", "uv": [ 3.0, 7.0, 6.0, 7.5 ] },
+						"west": { "texture": "#skin", "uv": [ 3.0, 7.0, 6.0, 7.5 ] },
+						"up": { "texture": "#skin", "uv": [ 6.0, 6.0, 9.0, 9.0 ] },
+						"down": { "texture": "#skin", "uv": [ 6.0, 6.0, 9.0, 9.0 ] }
+					}
+				}
+			]
+		}
+	]
+}

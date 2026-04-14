@@ -1,0 +1,112 @@
+[
+  {
+    "code": "slackedmeat-bushmeat",
+    "sealHours": 24,
+    "ingredients": [
+      {
+        "type": "item",
+        "code": "game:waterportion",
+        "litres": 1,
+        "consumeLitres": 1
+      },
+      {
+        "type": "item",
+        "code": "seafarer:driedsaltedmeat-bushmeat-whole",
+        "quantity": 1
+      }
+    ],
+    "output": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-bushmeat-whole",
+      "stackSize": 1
+    }
+  },
+  {
+    "code": "slackedmeat-redmeat",
+    "sealHours": 24,
+    "ingredients": [
+      {
+        "type": "item",
+        "code": "game:waterportion",
+        "litres": 1,
+        "consumeLitres": 1
+      },
+      {
+        "type": "item",
+        "code": "seafarer:driedsaltedmeat-redmeat-whole",
+        "quantity": 1
+      }
+    ],
+    "output": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-redmeat-whole",
+      "stackSize": 1
+    }
+  },
+  {
+    "code": "slackedmeat-poultry",
+    "sealHours": 24,
+    "ingredients": [
+      {
+        "type": "item",
+        "code": "game:waterportion",
+        "litres": 1,
+        "consumeLitres": 1
+      },
+      {
+        "type": "item",
+        "code": "seafarer:driedsaltedmeat-poultry-whole",
+        "quantity": 1
+      }
+    ],
+    "output": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-poultry-whole",
+      "stackSize": 1
+    }
+  },
+  {
+    "code": "slackedmeat-fish",
+    "sealHours": 24,
+    "ingredients": [
+      {
+        "type": "item",
+        "code": "game:waterportion",
+        "litres": 1,
+        "consumeLitres": 1
+      },
+      {
+        "type": "item",
+        "code": "seafarer:driedsaltedmeat-fish-whole",
+        "quantity": 1
+      }
+    ],
+    "output": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-fish-whole",
+      "stackSize": 1
+    }
+  },
+  {
+    "code": "slackedmeat-premiumfish",
+    "sealHours": 24,
+    "ingredients": [
+      {
+        "type": "item",
+        "code": "game:waterportion",
+        "litres": 1,
+        "consumeLitres": 1
+      },
+      {
+        "type": "item",
+        "code": "seafarer:driedsaltedmeat-premiumfish-whole",
+        "quantity": 1
+      }
+    ],
+    "output": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-premiumfish-whole",
+      "stackSize": 1
+    }
+  }
+]

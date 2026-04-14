@@ -1,0 +1,68 @@
+[
+  {
+    "code": "fermentedmeat-bushmeat",
+    "sealHours": 336,
+    "ingredients": [
+      {
+        "type": "item",
+        "code": "game:brineportion",
+        "litres": 1,
+        "consumeLitres": 1
+      },
+      {
+        "type": "item",
+        "code": "seafarer:saltedmeat-bushmeat",
+        "quantity": 1
+      }
+    ],
+    "output": {
+      "type": "item",
+      "code": "seafarer:fermentedmeat-bushmeat",
+      "stackSize": 1
+    }
+  },
+  {
+    "code": "fermentedmeat-redmeat",
+    "sealHours": 336,
+    "ingredients": [
+      {
+        "type": "item",
+        "code": "game:brineportion",
+        "litres": 1,
+        "consumeLitres": 1
+      },
+      {
+        "type": "item",
+        "code": "seafarer:saltedmeat-redmeat",
+        "quantity": 1
+      }
+    ],
+    "output": {
+      "type": "item",
+      "code": "seafarer:fermentedmeat-redmeat",
+      "stackSize": 1
+    }
+  },
+  {
+    "code": "fermentedmeat-poultry",
+    "sealHours": 336,
+    "ingredients": [
+      {
+        "type": "item",
+        "code": "game:brineportion",
+        "litres": 1,
+        "consumeLitres": 1
+      },
+      {
+        "type": "item",
+        "code": "seafarer:saltedmeat-poultry",
+        "quantity": 1
+      }
+    ],
+    "output": {
+      "type": "item",
+      "code": "seafarer:fermentedmeat-poultry",
+      "stackSize": 1
+    }
+  }
+]

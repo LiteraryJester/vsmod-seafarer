@@ -1,0 +1,13 @@
+{
+	"ingredientPattern": "PPP",
+	"ingredients": {
+		"P": { "type": "block", "code": "game:planks-*" }
+	},
+	"width": 3,
+	"height": 1,
+	"output": {
+		"type": "block",
+		"code": "seafarer:preptable-left-north",
+		"quantity": 1
+	}
+}

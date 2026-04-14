@@ -1,0 +1,76 @@
+{
+  "code": "drake-tricks",
+  "npc": "drake",
+  "groupLangKey": "quest-group-helping-residents",
+  "titleLangKey": "quest-drake-tricks-title",
+  "descriptionLangKey": "quest-drake-tricks-desc",
+  "autoEnable": true,
+  "prerequisites": ["drake-tradeship"],
+  "objectives": [
+    {
+      "code": "varnish",
+      "type": "delivery",
+      "items": [
+        { "item": "game:resin", "quantity": 18 },
+        { "item": "game:fat", "quantity": 6 }
+      ],
+      "required": 1,
+      "rewards": [
+        {
+          "type": "giveItem",
+          "itemType": "block",
+          "itemCode": "game:woodbucket",
+          "stacksize": 1,
+          "attributes": {
+            "ucontents": [
+              {
+                "type": "item",
+                "code": "seafarer:varnishportion-marine",
+                "stacksize": 200
+              }
+            ]
+          }
+        },
+        { "type": "awardTrainingXP", "training": "shipwright", "xp": 50 }
+      ]
+    },
+    {
+      "code": "canvas",
+      "type": "delivery",
+      "items": [
+        { "item": "game:linen-normal-down", "quantity": 20 },
+        { "item": "game:fat", "quantity": 6 }
+      ],
+      "required": 1,
+      "rewards": [
+        {
+          "type": "giveItem",
+          "itemType": "item",
+          "itemCode": "seafarer:oiled-canvas",
+          "stacksize": 20
+        }
+      ]
+    },
+    {
+      "code": "sail-review",
+      "type": "delivery",
+      "items": [{ "item": "seafarer:oiled-canvas-sail", "quantity": 1 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "shipwright", "xp": 50 }
+      ]
+    }
+  ],
+  "rewards": [
+    {
+      "type": "addSellingItem",
+      "itemCode": "seafarer:trainingbook-shipwright",
+      "itemType": "item",
+      "stacksize": 1,
+      "stockAvg": 1,
+      "stockVar": 0,
+      "priceAvg": 10,
+      "priceVar": 2
+    }
+  ]
+}

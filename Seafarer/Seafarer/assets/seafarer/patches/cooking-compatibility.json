@@ -1,0 +1,193 @@
+[
+  // ==========================================
+  // Vanilla Meaty Stew — protein-base (idx 0)
+  // ==========================================
+  {
+    "op": "addmerge",
+    "path": "/ingredients/0/validStacks/-",
+    "file": "game:recipes/cooking/meatystew.json",
+    "value": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-redmeat-whole",
+      "shapeElement": "bowl/meat stew/*",
+      "textureMapping": ["meat", "group2"]
+    }
+  },
+  {
+    "op": "addmerge",
+    "path": "/ingredients/0/validStacks/-",
+    "file": "game:recipes/cooking/meatystew.json",
+    "value": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-bushmeat-whole",
+      "shapeElement": "bowl/meat stew/*",
+      "textureMapping": ["meat", "group6"]
+    }
+  },
+  {
+    "op": "addmerge",
+    "path": "/ingredients/0/validStacks/-",
+    "file": "game:recipes/cooking/meatystew.json",
+    "value": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-fish-whole",
+      "shapeElement": "bowl/meat stew/*",
+      "textureMapping": ["meat", "group4"]
+    }
+  },
+  {
+    "op": "addmerge",
+    "path": "/ingredients/0/validStacks/-",
+    "file": "game:recipes/cooking/meatystew.json",
+    "value": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-poultry-whole",
+      "shapeElement": "bowl/meat stew/*",
+      "textureMapping": ["meat", "group5"]
+    }
+  },
+
+  // ==========================================
+  // Vanilla Meaty Stew — meat-extra (idx 3)
+  // ==========================================
+  {
+    "op": "addmerge",
+    "path": "/ingredients/3/validStacks/-",
+    "file": "game:recipes/cooking/meatystew.json",
+    "value": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-redmeat-whole",
+      "shapeElement": "bowl/red meat/*",
+      "textureMapping": ["meat", "group2"]
+    }
+  },
+  {
+    "op": "addmerge",
+    "path": "/ingredients/3/validStacks/-",
+    "file": "game:recipes/cooking/meatystew.json",
+    "value": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-bushmeat-whole",
+      "shapeElement": "bowl/red meat/*",
+      "textureMapping": ["meat", "group6"]
+    }
+  },
+  {
+    "op": "addmerge",
+    "path": "/ingredients/3/validStacks/-",
+    "file": "game:recipes/cooking/meatystew.json",
+    "value": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-fish-whole",
+      "shapeElement": "bowl/fish/*",
+      "textureMapping": ["meat", "group4"]
+    }
+  },
+  {
+    "op": "addmerge",
+    "path": "/ingredients/3/validStacks/-",
+    "file": "game:recipes/cooking/meatystew.json",
+    "value": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-poultry-whole",
+      "shapeElement": "bowl/poultry/*",
+      "textureMapping": ["meat", "group3"]
+    }
+  },
+
+  // ==========================================
+  // Vanilla Meaty Stew — meat-extra2 (idx 4)
+  // ==========================================
+  {
+    "op": "addmerge",
+    "path": "/ingredients/4/validStacks/-",
+    "file": "game:recipes/cooking/meatystew.json",
+    "value": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-redmeat-whole",
+      "shapeElement": "bowl/red meat 2/*",
+      "textureMapping": ["meat", "group2"]
+    }
+  },
+  {
+    "op": "addmerge",
+    "path": "/ingredients/4/validStacks/-",
+    "file": "game:recipes/cooking/meatystew.json",
+    "value": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-bushmeat-whole",
+      "shapeElement": "bowl/red meat 2/*",
+      "textureMapping": ["meat", "group6"]
+    }
+  },
+  {
+    "op": "addmerge",
+    "path": "/ingredients/4/validStacks/-",
+    "file": "game:recipes/cooking/meatystew.json",
+    "value": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-fish-whole",
+      "shapeElement": "bowl/fish 2/*",
+      "textureMapping": ["meat", "group4"]
+    }
+  },
+  {
+    "op": "addmerge",
+    "path": "/ingredients/4/validStacks/-",
+    "file": "game:recipes/cooking/meatystew.json",
+    "value": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-poultry-whole",
+      "shapeElement": "bowl/poultry 2/*",
+      "textureMapping": ["meat", "group3"]
+    }
+  },
+
+  // ==========================================
+  // Vanilla Soup — protein-extra (idx 4)
+  // ==========================================
+  {
+    "op": "addmerge",
+    "path": "/ingredients/4/validStacks/-",
+    "file": "game:recipes/cooking/soup.json",
+    "value": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-redmeat-whole",
+      "shapeElement": "bowl/meat/*",
+      "textureMapping": ["meat", "group2"]
+    }
+  },
+  {
+    "op": "addmerge",
+    "path": "/ingredients/4/validStacks/-",
+    "file": "game:recipes/cooking/soup.json",
+    "value": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-bushmeat-whole",
+      "shapeElement": "bowl/meat/*",
+      "textureMapping": ["meat", "group6"]
+    }
+  },
+  {
+    "op": "addmerge",
+    "path": "/ingredients/4/validStacks/-",
+    "file": "game:recipes/cooking/soup.json",
+    "value": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-poultry-whole",
+      "shapeElement": "bowl/meat/*",
+      "textureMapping": ["meat", "group3"]
+    }
+  },
+  {
+    "op": "addmerge",
+    "path": "/ingredients/4/validStacks/-",
+    "file": "game:recipes/cooking/soup.json",
+    "value": {
+      "type": "item",
+      "code": "seafarer:slackedmeat-fish-whole",
+      "shapeElement": "bowl/meat/*",
+      "textureMapping": ["meat", "group4"]
+    }
+  }
+]

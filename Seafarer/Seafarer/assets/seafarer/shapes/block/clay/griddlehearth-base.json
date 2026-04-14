@@ -1,0 +1,65 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+	},
+	"elements": [
+		{
+			"name": "base_floor",
+			"from": [ 1.0, 0.0, 1.0 ],
+			"to": [ 15.0, 1.0, 15.0 ],
+			"faces": {
+				"north": { "texture": "#stone", "uv": [ 0.0, 0.0, 14.0, 1.0 ] },
+				"east": { "texture": "#stone", "uv": [ 0.0, 0.0, 14.0, 1.0 ] },
+				"south": { "texture": "#stone", "uv": [ 0.0, 0.0, 14.0, 1.0 ] },
+				"west": { "texture": "#stone", "uv": [ 0.0, 0.0, 14.0, 1.0 ] },
+				"up": { "texture": "#clay", "uv": [ 0.0, 0.0, 14.0, 14.0 ] },
+				"down": { "texture": "#stone", "uv": [ 0.0, 0.0, 14.0, 14.0 ] }
+			}
+		},
+		{
+			"name": "wall_back",
+			"from": [ 0.0, 0.0, 0.0 ],
+			"to": [ 16.0, 8.0, 2.0 ],
+			"faces": {
+				"north": { "texture": "#stone", "uv": [ 0.0, 0.0, 16.0, 8.0 ] },
+				"east": { "texture": "#stone", "uv": [ 0.0, 0.0, 2.0, 8.0 ] },
+				"south": { "texture": "#stone", "uv": [ 0.0, 0.0, 16.0, 8.0 ] },
+				"west": { "texture": "#stone", "uv": [ 0.0, 0.0, 2.0, 8.0 ] },
+				"up": { "texture": "#stone", "uv": [ 0.0, 0.0, 16.0, 2.0 ] },
+				"down": { "texture": "#stone", "uv": [ 0.0, 0.0, 16.0, 2.0 ] }
+			}
+		},
+		{
+			"name": "wall_left",
+			"from": [ 0.0, 0.0, 2.0 ],
+			"to": [ 2.0, 8.0, 15.0 ],
+			"faces": {
+				"north": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 8.0 ]},
+				"east": { "texture": "#stone", "uv": [ 0.0, 0.0, 13.0, 8.0 ] },
+				"south": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 8.0 ]},
+				"west": { "texture": "#stone", "uv": [ 0.0, 0.0, 13.0, 8.0 ] },
+				"up": { "texture": "#stone", "uv": [ 0.0, 0.0, 2.0, 13.0 ] },
+				"down": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 13.0 ]}
+			}
+		},
+		{
+			"name": "wall_right",
+			"from": [ 14.0, 0.0, 2.0 ],
+			"to": [ 16.0, 8.0, 15.0 ],
+			"faces": {
+				"north": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 8.0 ]},
+				"east": { "texture": "#stone", "uv": [ 0.0, 0.0, 13.0, 8.0 ] },
+				"south": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 8.0 ]},
+				"west": { "texture": "#stone", "uv": [ 0.0, 0.0, 13.0, 8.0 ] },
+				"up": { "texture": "#stone", "uv": [ 0.0, 0.0, 2.0, 13.0 ] },
+				"down": { "texture": "#null", "uv": [ 0.0, 0.0, 2.0, 13.0 ]}
+			}
+		}
+	]}

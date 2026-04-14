@@ -1,0 +1,52 @@
+{
+	code: "boat",
+	class: "ItemBoat",
+	variantgroups: [
+		{ code: "type", states: ["logbarge"] },
+		{ code: "material", states: ["aged"], loadFromProperties: "block/wood" }
+	],
+	shapeByType: {
+		"boat-logbarge-*": { base: "entity/nonliving/boat/boat-logbarge" }
+	},
+	texturesByType: {
+		"*": {
+			"material": { base: "game:block/wood/debarked/{material}" },
+			"wood": { base: "game:block/wood/debarked/{material}" },
+			"planks": { base: "game:block/wood/planks/{material}*" }
+		}
+	},
+	attributes: {
+		handbook: {
+			groupBy: ["boat-{type}-*"],
+			extraSections: [
+				{ title: "handbook-seafarer-craftinfo", text: "handbook-seafarer-craftinfo" }
+			]
+		},
+		descriptionByType: {
+			"boat-logbarge-*": "seafarer:itemdesc-boat-logbarge"
+		}
+	},
+	heldTpIdleAnimation: "holdunderarm",
+	maxstacksize: 1,
+	materialDensity: 1,
+	liquidSelectable: 1,
+	creativeinventory: { "general": ["*"], "items": ["*"], "tools": ["*"], "seafarer": ["*"] },
+	guiTransform: {
+		translation: { x: 4.0, y: 7.0, z: 0.0 },
+		rotation: { x: -32.0, y: -35.0, z: -180.0 },
+		origin: { x: 0.5, y: 0.0, z: 0.5 },
+		scale: 0.5
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 0, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 3.0
+	},
+	tpHandTransform: {
+		translation: { x: -0.73, y: 0.54, z: -0.5 },
+		rotation: { x: -85, y: -34, z: 0 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 0.45
+	}
+}

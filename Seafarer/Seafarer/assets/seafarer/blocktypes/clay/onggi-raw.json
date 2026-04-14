@@ -1,0 +1,85 @@
+{
+  "code": "onggi-raw",
+
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "SingleCenter"
+      }
+    },
+    { "name": "Unplaceable" },
+    { "name": "RightClickPickup" }
+  ],
+
+  "variantgroups": [{ "code": "color", "states": ["blue", "fire", "red"] }],
+
+  "shape": { "base": "seafarer:block/clay/onggi" },
+
+  "textures": {
+    "ceramic": { "base": "game:block/clay/{color}clay" },
+    "interior": { "base": "game:block/clay/{color}clay" }
+  },
+
+  "drawtype": "JSON",
+  "renderPass": "OpaqueNoCull",
+
+  "combustiblePropsByType": {
+    "onggi-raw-fire": {
+      "meltingPoint": 600,
+      "meltingDuration": 30,
+      "smeltedRatio": 1,
+      "smeltingType": "fire",
+      "requiresContainer": false,
+      "smeltedStack": { "type": "block", "code": "seafarer:onggi-fire" }
+    },
+    "onggi-raw-blue": {
+      "meltingPoint": 600,
+      "meltingDuration": 30,
+      "smeltedRatio": 1,
+      "smeltingType": "fire",
+      "requiresContainer": false,
+      "smeltedStack": { "type": "block", "code": "seafarer:onggi-blue" }
+    },
+    "onggi-raw-red": {
+      "meltingPoint": 600,
+      "meltingDuration": 30,
+      "smeltedRatio": 1,
+      "smeltingType": "fire",
+      "requiresContainer": false,
+      "smeltedStack": { "type": "block", "code": "seafarer:onggi-red" }
+    }
+  },
+
+  "creativeinventory": { "general": ["*"], "seafarer": ["*"] },
+  "blockmaterial": "Ceramic",
+  "replaceable": 300,
+  "resistance": 0.75,
+  "maxStackSize": 4,
+  "lightAbsorption": 0,
+  "sidesolid": { "all": false },
+  "sideopaque": { "all": false },
+
+  "collisionbox": {
+    "x1": 0.1875, "y1": 0, "z1": 0.1875,
+    "x2": 0.8125, "y2": 0.625, "z2": 0.8125
+  },
+  "selectionbox": {
+    "x1": 0.1875, "y1": 0, "z1": 0.1875,
+    "x2": 0.8125, "y2": 0.625, "z2": 0.8125
+  },
+
+  "sounds": {
+    "place": "game:block/ceramics",
+    "break": "game:block/ceramics"
+  },
+
+  "guiTransform": {
+    "origin": { "x": 0.5, "y": 0.5, "z": 0.5 },
+    "scale": 2.5
+  },
+  "groundTransform": {
+    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+    "scale": 2.5
+  }
+}

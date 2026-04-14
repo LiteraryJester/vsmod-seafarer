@@ -1,0 +1,384 @@
+{
+	"version": 1,
+
+	"formatting": [
+		{ "type": "separator", "title": "seafarer:configlib-title-drying", "weight": 1.0 },
+		{ "type": "separator", "title": "seafarer:configlib-title-saltpan", "weight": 2.0 },
+		{ "type": "separator", "title": "seafarer:configlib-title-griddle", "weight": 3.0 },
+		{ "type": "separator", "title": "seafarer:configlib-title-exposure", "weight": 4.0 },
+		{ "type": "separator", "title": "seafarer:configlib-title-heatstroke", "weight": 5.0 },
+		{ "type": "separator", "title": "seafarer:configlib-title-frostbite", "weight": 6.0 }
+	],
+
+	"settings": {
+		"boolean": {
+			"DRYING_RAIN_ROT": {
+				"name": "drying-enable-rain-rot",
+				"ingui": "seafarer:configlib-drying-rain-rot",
+				"weight": 1.1,
+				"default": true,
+				"comment": "Enable rain-based spoilage acceleration on drying frames"
+			},
+			"DRYING_WIND": {
+				"name": "drying-enable-wind",
+				"ingui": "seafarer:configlib-drying-wind",
+				"weight": 1.2,
+				"default": true,
+				"comment": "Enable wind-based drying acceleration on drying frames"
+			},
+			"SALTPAN_ENABLED": {
+				"name": "saltpan-enabled",
+				"ingui": "seafarer:configlib-saltpan-enabled",
+				"weight": 2.1,
+				"default": true,
+				"comment": "Master toggle for salt pan evaporation"
+			},
+			"EXPOSURE_ENABLED": {
+				"name": "exposure-enabled",
+				"ingui": "seafarer:configlib-exposure-enabled",
+				"weight": 4.1,
+				"default": true,
+				"comment": "Master toggle for the exposure system"
+			},
+			"HEATSTROKE_ENABLED": {
+				"name": "heatstroke-enabled",
+				"ingui": "seafarer:configlib-heatstroke-enabled",
+				"weight": 4.2,
+				"default": true,
+				"comment": "Enable heatstroke effects"
+			},
+			"FROSTBITE_ENABLED": {
+				"name": "frostbite-enabled",
+				"ingui": "seafarer:configlib-frostbite-enabled",
+				"weight": 4.3,
+				"default": true,
+				"comment": "Enable frostbite effects"
+			}
+		},
+		"float": {
+			"DRYING_RAIN_MULT": {
+				"name": "drying-rain-rot-multiplier",
+				"ingui": "seafarer:configlib-drying-rain-mult",
+				"weight": 1.3,
+				"default": 2.0,
+				"comment": "Max perish speed multiplier during heavy rain",
+				"range": { "min": 1.0, "max": 10.0, "step": 0.5 }
+			},
+			"DRYING_WIND_MULT": {
+				"name": "drying-wind-multiplier",
+				"ingui": "seafarer:configlib-drying-wind-mult",
+				"weight": 1.4,
+				"default": 30.0,
+				"comment": "Wind drying bonus multiplier (higher = faster drying in wind)",
+				"range": { "min": 1.0, "max": 100.0, "step": 1.0 }
+			},
+			"DRYING_SPEED_MULT": {
+				"name": "drying-speed-multiplier",
+				"ingui": "seafarer:configlib-drying-speed-mult",
+				"weight": 1.5,
+				"default": 10.0,
+				"comment": "Base drying speed multiplier on the rack",
+				"range": { "min": 1.0, "max": 50.0, "step": 1.0 }
+			},
+			"DRYING_RAIN_THRESHOLD": {
+				"name": "drying-rain-threshold",
+				"ingui": "seafarer:configlib-drying-rain-threshold",
+				"weight": 1.6,
+				"default": 0.05,
+				"comment": "Rainfall level (0-1) above which rain rot activates",
+				"range": { "min": 0.0, "max": 1.0, "step": 0.05 }
+			},
+			"SALTPAN_CAPACITY": {
+				"name": "saltpan-capacity",
+				"ingui": "seafarer:configlib-saltpan-capacity",
+				"weight": 2.2,
+				"default": 10.0,
+				"comment": "Maximum litres of saltwater the pan holds",
+				"range": { "min": 1.0, "max": 50.0, "step": 1.0 }
+			},
+			"SALTPAN_EVAP_RATE": {
+				"name": "saltpan-evap-rate",
+				"ingui": "seafarer:configlib-saltpan-evap-rate",
+				"weight": 2.3,
+				"default": 0.208,
+				"comment": "Base evaporation rate in litres per hour at 20C",
+				"range": { "min": 0.01, "max": 2.0, "step": 0.01 }
+			},
+			"SALTPAN_YIELD": {
+				"name": "saltpan-salt-yield",
+				"ingui": "seafarer:configlib-saltpan-yield",
+				"weight": 2.4,
+				"default": 0.4,
+				"comment": "Salt items yielded per litre of saltwater evaporated",
+				"range": { "min": 0.1, "max": 5.0, "step": 0.1 }
+			},
+			"SALTPAN_MIN_TEMP": {
+				"name": "saltpan-min-temp",
+				"ingui": "seafarer:configlib-saltpan-min-temp",
+				"weight": 2.5,
+				"default": 0.0,
+				"comment": "Minimum temperature (C) for evaporation to occur",
+				"range": { "min": -20.0, "max": 30.0, "step": 1.0 }
+			},
+			"SALTPAN_MAX_TEMP_MULT": {
+				"name": "saltpan-max-temp-mult",
+				"ingui": "seafarer:configlib-saltpan-max-temp-mult",
+				"weight": 2.6,
+				"default": 2.0,
+				"comment": "Maximum temperature multiplier cap for evaporation",
+				"range": { "min": 1.0, "max": 5.0, "step": 0.25 }
+			},
+			"GRIDDLE_SPEED_CLAY": {
+				"name": "griddle-speed-clay",
+				"ingui": "seafarer:configlib-griddle-speed-clay",
+				"weight": 3.1,
+				"default": 1.0,
+				"comment": "Cook speed multiplier for clay griddle",
+				"range": { "min": 0.5, "max": 5.0, "step": 0.25 }
+			},
+			"GRIDDLE_SPEED_COPPER": {
+				"name": "griddle-speed-copper",
+				"ingui": "seafarer:configlib-griddle-speed-copper",
+				"weight": 3.2,
+				"default": 1.5,
+				"comment": "Cook speed multiplier for copper griddle",
+				"range": { "min": 0.5, "max": 5.0, "step": 0.25 }
+			},
+			"GRIDDLE_SPEED_BRONZE": {
+				"name": "griddle-speed-bronze",
+				"ingui": "seafarer:configlib-griddle-speed-bronze",
+				"weight": 3.3,
+				"default": 1.75,
+				"comment": "Cook speed multiplier for bronze griddle",
+				"range": { "min": 0.5, "max": 5.0, "step": 0.25 }
+			},
+			"GRIDDLE_SPEED_IRON": {
+				"name": "griddle-speed-iron",
+				"ingui": "seafarer:configlib-griddle-speed-iron",
+				"weight": 3.4,
+				"default": 2.0,
+				"comment": "Cook speed multiplier for iron griddle",
+				"range": { "min": 0.5, "max": 5.0, "step": 0.25 }
+			},
+			"GRIDDLE_SPEED_STEEL": {
+				"name": "griddle-speed-steel",
+				"ingui": "seafarer:configlib-griddle-speed-steel",
+				"weight": 3.5,
+				"default": 2.0,
+				"comment": "Cook speed multiplier for steel griddle",
+				"range": { "min": 0.5, "max": 5.0, "step": 0.25 }
+			},
+			"EXPOSURE_HEAT_THRESHOLD": {
+				"name": "exposure-heat-threshold",
+				"ingui": "seafarer:configlib-exposure-heat-threshold",
+				"weight": 4.4,
+				"default": 33.0,
+				"comment": "Temperature (C) above which heat exposure accumulates",
+				"range": { "min": 20.0, "max": 50.0, "step": 1.0 }
+			},
+			"EXPOSURE_COLD_THRESHOLD": {
+				"name": "exposure-cold-threshold",
+				"ingui": "seafarer:configlib-exposure-cold-threshold",
+				"weight": 4.5,
+				"default": 0.0,
+				"comment": "Temperature (C) below which cold exposure accumulates",
+				"range": { "min": -20.0, "max": 15.0, "step": 1.0 }
+			},
+			"EXPOSURE_ACCUM_RATE": {
+				"name": "exposure-accumulation-rate",
+				"ingui": "seafarer:configlib-exposure-accum-rate",
+				"weight": 4.6,
+				"default": 0.01,
+				"comment": "Base exposure gain per game hour at threshold boundary",
+				"range": { "min": 0.001, "max": 0.1, "step": 0.001 }
+			},
+			"EXPOSURE_DECAY_RATE": {
+				"name": "exposure-decay-rate",
+				"ingui": "seafarer:configlib-exposure-decay-rate",
+				"weight": 4.7,
+				"default": 0.004,
+				"comment": "Base exposure loss per game hour when sheltered",
+				"range": { "min": 0.001, "max": 0.1, "step": 0.001 }
+			},
+			"EXPOSURE_WIND_MULT": {
+				"name": "exposure-wind-multiplier",
+				"ingui": "seafarer:configlib-exposure-wind-mult",
+				"weight": 4.8,
+				"default": 0.5,
+				"comment": "Multiplier on accumulation rate from wind speed",
+				"range": { "min": 0.0, "max": 2.0, "step": 0.1 }
+			},
+			"EXPOSURE_TIER1": {
+				"name": "exposure-tier1-threshold",
+				"ingui": "seafarer:configlib-exposure-tier1",
+				"weight": 4.9,
+				"default": 0.4,
+				"comment": "Exposure level (0-1) at which Tier 1 effects begin",
+				"range": { "min": 0.1, "max": 1.0, "step": 0.05 }
+			},
+			"EXPOSURE_TIER2": {
+				"name": "exposure-tier2-threshold",
+				"ingui": "seafarer:configlib-exposure-tier2",
+				"weight": 4.91,
+				"default": 0.7,
+				"comment": "Exposure level (0-1) at which Tier 2 effects begin",
+				"range": { "min": 0.1, "max": 1.0, "step": 0.05 }
+			},
+			"EXPOSURE_TIER3": {
+				"name": "exposure-tier3-threshold",
+				"ingui": "seafarer:configlib-exposure-tier3",
+				"weight": 4.92,
+				"default": 1.0,
+				"comment": "Exposure level (0-1) at which Tier 3 effects begin",
+				"range": { "min": 0.1, "max": 1.0, "step": 0.05 }
+			},
+			"HS_T1_SPEED": {
+				"name": "heatstroke-t1-speed-penalty",
+				"ingui": "seafarer:configlib-hs-t1-speed",
+				"weight": 5.1,
+				"default": 0.1,
+				"comment": "Walk speed reduction at Heatstroke I (0.1 = 10% slower)",
+				"range": { "min": 0.0, "max": 0.5, "step": 0.05 }
+			},
+			"HS_T1_DAMAGE_TAKEN": {
+				"name": "heatstroke-t1-damage-taken",
+				"ingui": "seafarer:configlib-hs-t1-damage-taken",
+				"weight": 5.2,
+				"default": 0.15,
+				"comment": "Extra damage taken at Heatstroke I (0.15 = 15% more)",
+				"range": { "min": 0.0, "max": 1.0, "step": 0.05 }
+			},
+			"HS_T2_HUNGER": {
+				"name": "heatstroke-t2-hunger-rate",
+				"ingui": "seafarer:configlib-hs-t2-hunger",
+				"weight": 5.3,
+				"default": 1.5,
+				"comment": "Hunger rate multiplier at Heatstroke II (1.5 = 50% faster)",
+				"range": { "min": 1.0, "max": 3.0, "step": 0.1 }
+			},
+			"HS_T2_SATIETY": {
+				"name": "heatstroke-t2-satiety-penalty",
+				"ingui": "seafarer:configlib-hs-t2-satiety",
+				"weight": 5.4,
+				"default": 0.5,
+				"comment": "Food effectiveness reduction at Heatstroke II (0.5 = 50% less)",
+				"range": { "min": 0.0, "max": 1.0, "step": 0.1 }
+			},
+			"HS_T3_SPEED": {
+				"name": "heatstroke-t3-speed-penalty",
+				"ingui": "seafarer:configlib-hs-t3-speed",
+				"weight": 5.5,
+				"default": 0.35,
+				"comment": "Walk speed reduction at Heatstroke III",
+				"range": { "min": 0.0, "max": 0.75, "step": 0.05 }
+			},
+			"HS_T3_DAMAGE": {
+				"name": "heatstroke-t3-damage",
+				"ingui": "seafarer:configlib-hs-t3-damage",
+				"weight": 5.6,
+				"default": 0.5,
+				"comment": "HP damage per 10 seconds at Heatstroke III",
+				"range": { "min": 0.0, "max": 2.0, "step": 0.1 }
+			},
+			"FB_T1_HEALTH": {
+				"name": "frostbite-t1-health-reduction",
+				"ingui": "seafarer:configlib-fb-t1-health",
+				"weight": 6.1,
+				"default": 3.0,
+				"comment": "Max health reduction (HP) at Frostbite I",
+				"range": { "min": 0.0, "max": 10.0, "step": 0.5 }
+			},
+			"FB_T2_HEALTH": {
+				"name": "frostbite-t2-health-reduction",
+				"ingui": "seafarer:configlib-fb-t2-health",
+				"weight": 6.2,
+				"default": 6.0,
+				"comment": "Max health reduction (HP) at Frostbite II",
+				"range": { "min": 0.0, "max": 15.0, "step": 0.5 }
+			},
+			"FB_T2_DROP": {
+				"name": "frostbite-t2-item-drop-chance",
+				"ingui": "seafarer:configlib-fb-t2-drop",
+				"weight": 6.3,
+				"default": 0.05,
+				"comment": "Chance per 10s to drop held item at Frostbite II",
+				"range": { "min": 0.0, "max": 0.5, "step": 0.01 }
+			},
+			"FB_T3_HEALTH": {
+				"name": "frostbite-t3-health-reduction",
+				"ingui": "seafarer:configlib-fb-t3-health",
+				"weight": 6.4,
+				"default": 10.0,
+				"comment": "Max health reduction (HP) at Frostbite III",
+				"range": { "min": 0.0, "max": 20.0, "step": 0.5 }
+			},
+			"FB_T3_DROP": {
+				"name": "frostbite-t3-item-drop-chance",
+				"ingui": "seafarer:configlib-fb-t3-drop",
+				"weight": 6.5,
+				"default": 0.15,
+				"comment": "Chance per 10s to drop held item at Frostbite III",
+				"range": { "min": 0.0, "max": 0.5, "step": 0.01 }
+			},
+			"FB_T3_DAMAGE": {
+				"name": "frostbite-t3-damage",
+				"ingui": "seafarer:configlib-fb-t3-damage",
+				"weight": 6.6,
+				"default": 0.5,
+				"comment": "HP damage per 10 seconds at Frostbite III",
+				"range": { "min": 0.0, "max": 2.0, "step": 0.1 }
+			}
+		}
+	},
+
+	"patches": {
+		"boolean": {
+			"seafarer:config/seafarer-defaults.json": {
+				"dryingFrame/enableRainRot": "DRYING_RAIN_ROT",
+				"dryingFrame/enableWindDrying": "DRYING_WIND",
+				"saltPan/enabled": "SALTPAN_ENABLED",
+				"exposure/enabled": "EXPOSURE_ENABLED",
+				"exposure/heatstrokeEnabled": "HEATSTROKE_ENABLED",
+				"exposure/frostbiteEnabled": "FROSTBITE_ENABLED"
+			}
+		},
+		"float": {
+			"seafarer:config/seafarer-defaults.json": {
+				"dryingFrame/rainRotMultiplier": "DRYING_RAIN_MULT",
+				"dryingFrame/windDryMultiplier": "DRYING_WIND_MULT",
+				"dryingFrame/dryingSpeedMultiplier": "DRYING_SPEED_MULT",
+				"dryingFrame/rainThreshold": "DRYING_RAIN_THRESHOLD",
+				"saltPan/capacityLitres": "SALTPAN_CAPACITY",
+				"saltPan/baseEvapRatePerHour": "SALTPAN_EVAP_RATE",
+				"saltPan/saltYieldPerLitre": "SALTPAN_YIELD",
+				"saltPan/minEvaporationTemperature": "SALTPAN_MIN_TEMP",
+				"saltPan/maxTemperatureMultiplier": "SALTPAN_MAX_TEMP_MULT",
+				"griddle/cookSpeedClay": "GRIDDLE_SPEED_CLAY",
+				"griddle/cookSpeedCopper": "GRIDDLE_SPEED_COPPER",
+				"griddle/cookSpeedBronze": "GRIDDLE_SPEED_BRONZE",
+				"griddle/cookSpeedIron": "GRIDDLE_SPEED_IRON",
+				"griddle/cookSpeedSteel": "GRIDDLE_SPEED_STEEL",
+				"exposure/heatThreshold": "EXPOSURE_HEAT_THRESHOLD",
+				"exposure/coldThreshold": "EXPOSURE_COLD_THRESHOLD",
+				"exposure/accumulationRatePerHour": "EXPOSURE_ACCUM_RATE",
+				"exposure/decayRatePerHour": "EXPOSURE_DECAY_RATE",
+				"exposure/windAccumulationMultiplier": "EXPOSURE_WIND_MULT",
+				"exposure/tier1Threshold": "EXPOSURE_TIER1",
+				"exposure/tier2Threshold": "EXPOSURE_TIER2",
+				"exposure/tier3Threshold": "EXPOSURE_TIER3",
+				"exposure/heatstrokeT1SpeedPenalty": "HS_T1_SPEED",
+				"exposure/heatstrokeT1DamageTakenIncrease": "HS_T1_DAMAGE_TAKEN",
+				"exposure/heatstrokeT2HungerRateMultiplier": "HS_T2_HUNGER",
+				"exposure/heatstrokeT2SatietyPenalty": "HS_T2_SATIETY",
+				"exposure/heatstrokeT3SpeedPenalty": "HS_T3_SPEED",
+				"exposure/heatstrokeT3DamagePerTick": "HS_T3_DAMAGE",
+				"exposure/frostbiteT1MaxHealthReduction": "FB_T1_HEALTH",
+				"exposure/frostbiteT2MaxHealthReduction": "FB_T2_HEALTH",
+				"exposure/frostbiteT2ItemDropChance": "FB_T2_DROP",
+				"exposure/frostbiteT3MaxHealthReduction": "FB_T3_HEALTH",
+				"exposure/frostbiteT3ItemDropChance": "FB_T3_DROP",
+				"exposure/frostbiteT3DamagePerTick": "FB_T3_DAMAGE"
+			}
+		}
+	}
+}

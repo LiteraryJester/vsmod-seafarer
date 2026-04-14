@@ -1,0 +1,163 @@
+{
+  "code": "driedsaltedmeat",
+  "maxstacksize": 64,
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "Quadrants",
+        "collisionBox": {
+          "x1": 0, "y1": 0, "z1": 0,
+          "x2": 1, "y2": 0.125, "z2": 1
+        }
+      }
+    }
+  ],
+  "attributes": {
+    "foodTags": ["meat"],
+    "handbook": {
+      "groupBy": ["driedsaltedmeat-*"]
+    },
+    "displaycaseable": true,
+    "shelvable": true,
+    "inContainerTexture": { "base": "game:block/wood/barrel/cured-{type}" },
+    "displayable": {
+      "shelf": {
+        "size": { "width": 6, "height": 1, "length": 4 },
+        "transform": {
+          "translation": { "x": 0.06, "y": 0, "z": 0.03125 }
+        }
+      }
+    },
+    "onDryingFrameProps": {
+      "translation": { "x": 0, "y": 0, "z": 0 },
+      "rotation": { "x": 0, "y": 0, "z": 0 },
+      "origin": { "x": 0.5, "y": 0.5, "z": 0.5 },
+      "scale": 0.75
+    },
+    "inFirePitProps": {
+      "transform": {
+        "scale": 0.9,
+        "origin": { "x": 0.5, "y": 0.0625, "z": 0.5 },
+        "translation": { "x": 0.03125, "y": 0.3125, "z": 0 },
+        "rotation": { "x": 0, "y": 53, "z": 90 }
+      },
+      "useFirepitModel": "Spit"
+    },
+    "onDisplayTransformByType": {
+      "@*-redmeat-(whole|cut)": {
+        "translation": { "x": 0.05, "y": 0, "z": 0.05 },
+        "scale": 1
+      },
+      "*": {
+        "translation": { "x": 0, "y": 0, "z": 0 },
+        "scale": 1
+      }
+    },
+    "meatHookTransformByType": {
+      "@*-poultry-(whole|cut)": {
+        "translation": { "x": -0.01, "y": -0.8, "z": -0.05 },
+        "rotation": { "x": 0, "y": -90, "z": -91 },
+        "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+        "scale": 1
+      },
+      "@*-redmeat-(whole|cut)": {
+        "translation": { "x": 0.025, "y": -0.8, "z": 0.0 },
+        "rotation": { "x": -90, "y": 90, "z": 0 },
+        "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+        "scale": 1
+      },
+      "@*-bushmeat-(whole|cut)": {
+        "translation": { "x": 0, "y": -0.8, "z": -0.02 },
+        "rotation": { "x": 0, "y": -90, "z": 90 },
+        "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+        "scale": 1
+      }
+    }
+  },
+  "variantgroups": [
+    { "code": "type", "states": ["bushmeat", "redmeat", "poultry", "fish", "premiumfish"] },
+    { "code": "form", "states": ["whole", "cut"] }
+  ],
+  "shapeByType": {
+    "*-redmeat-*": { "base": "game:item/food/meat/red" },
+    "*-premiumfish-*": { "base": "game:item/food/meat/fish" },
+    "*": { "base": "game:item/food/meat/{type}" }
+  },
+  "texturesByType": {
+    "*-whole": {
+      "meat": { "base": "seafarer:item/food/meat/driedsalted" }
+    },
+    "*-cut": {
+      "meat": { "base": "seafarer:item/food/meat/driedsalted" }
+    }
+  },
+  "creativeinventoryByType": {
+    "*-whole": { "general": ["*"], "items": ["*"], "seafarer": ["*"] },
+    "*": { "seafarer": ["*"] }
+  },
+  "nutritionPropsByType": {
+    "*-bushmeat-whole": { "satiety": 50, "foodcategory": "Protein" },
+    "*-redmeat-whole": { "satiety": 100, "foodcategory": "Protein" },
+    "*-poultry-whole": { "satiety": 80, "foodcategory": "Protein" },
+    "*-fish-whole": { "satiety": 65, "foodcategory": "Protein" },
+
+    "*-bushmeat-cut": { "satiety": 50, "foodcategory": "Protein" },
+    "*-redmeat-cut": { "satiety": 100, "foodcategory": "Protein" },
+    "*-poultry-cut": { "satiety": 80, "foodcategory": "Protein" },
+    "*-fish-cut": { "satiety": 65, "foodcategory": "Protein" },
+    "*-premiumfish-whole": { "satiety": 65, "foodcategory": "Protein" },
+    "*-premiumfish-cut": { "satiety": 65, "foodcategory": "Protein" }
+  },
+  "transitionablePropsByType": {
+    "*-whole": [
+      {
+        "type": "Perish",
+        "freshHours": { "avg": 4380 },
+        "transitionHours": { "avg": 2190 },
+        "transitionedStack": { "type": "item", "code": "game:rot" },
+        "transitionRatio": 1
+      }
+    ],
+    "*-cut": [
+      {
+        "type": "Perish",
+        "freshHours": { "avg": 480 },
+        "transitionHours": { "avg": 96 },
+        "transitionedStack": { "type": "item", "code": "game:rot" },
+        "transitionRatio": 1
+      }
+    ]
+  },
+  "materialDensity": 600,
+  "guiTransformByType": {
+    "@*-redmeat-(whole|cut)": {
+      "rotate": false,
+      "translation": { "x": 10.5, "y": 5, "z": 0 },
+      "rotation": { "x": 171, "y": -122, "z": 33 },
+      "origin": { "x": 0.4, "y": 0.08, "z": 0.5 },
+      "scale": 4.72
+    },
+    "*": {
+      "rotate": false,
+      "translation": { "x": 0.5, "y": 0, "z": 0 },
+      "rotation": { "x": 171, "y": -122, "z": 28 },
+      "origin": { "x": 0.5, "y": 0.05, "z": 0.53 },
+      "scale": 4.3
+    }
+  },
+  "tpHandTransformByType": {
+    "*": {
+      "translation": { "x": -0.04, "y": 0.26, "z": -0.04 },
+      "rotation": { "x": -78, "y": 15, "z": 0 },
+      "origin": { "x": 0.23, "y": 0, "z": 0.13 },
+      "scale": 0.92
+    }
+  },
+  "groundTransform": {
+    "translation": { "x": 0, "y": 0, "z": 0 },
+    "rotation": { "x": 180, "y": 33, "z": -180 },
+    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+    "scale": 5
+  }
+}

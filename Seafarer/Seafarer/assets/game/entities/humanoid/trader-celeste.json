@@ -1,0 +1,214 @@
+{
+	"code": "humanoid-trader-celeste",
+	"class": "EntityEvolvingTrader",
+	"tags": ["humanoid", "trader", "human", "habitat-land"],
+	"weight": 80,
+	"canClimb": true,
+	"hitboxSize": { "x": 0.6, "y": 1.75 },
+	"deadHitboxSize": { "x": 0.75, "y": 0.5 },
+	"behaviorConfigs": {
+		"nametag": {
+			"showtagonlywhentargeted": true
+		}
+	},
+	"client": {
+		"renderer": "Shape",
+		"shape": { "base": "game:entity/humanoid/trader-female" },
+		"texture": { "base": "game:entity/humanoid/villagerbody/skin/normal*" },
+		"behaviors": [
+			{ "code": "nametag", "showtagonlywhentargeted": true },
+			{ "code": "repulseagents" },
+			{ "code": "controlledphysics", "stepHeight": 1.01 },
+			{ "code": "interpolateposition" },
+			{ "code": "conversable", "dialogue": "seafarer:config/dialogue/celeste" }
+		],
+		"animations": [
+			{ "code": "die", "animation": "die", "animationSpeed": 1.75, "weight": 10, "blendMode": "AddAverage" },
+			{ "code": "hurt", "animation": "hurt", "animationSpeed": 2, "blendMode": "AddAverage" },
+			{ "code": "formal-walk", "animation": "formal-walk", "animationSpeed": 1.5 },
+			{ "code": "rowdywelcome", "animation": "rowdywelcome", "blendMode": "AddAverage" },
+			{ "code": "lazywelcome", "animation": "lazywelcome", "blendMode": "AddAverage" },
+			{ "code": "lazynod", "animation": "lazynod", "blendMode": "AddAverage" }
+		]
+	},
+	"attributes": {
+		"frostOverlayThreshold": -10,
+		"shouldSwivelFromMotion": false,
+		"outfitConfigFileName": "traderaccessories-female",
+		"voiceSounds": [
+			"game:sounds/voice/harp/",
+			"game:sounds/voice/ocarina/",
+			"game:sounds/voice/trumpet/"
+		],
+		"outfitversion": 1,
+		"partialRandomOutfitsByType": {
+			"humanoid-trader-celeste": {
+				"bodyskin": [
+					{ "Code": "bodyskin-14" },
+					{ "Code": "bodyskin-15" },
+					{ "Code": "bodyskin-16" },
+					{ "Code": "bodyskin-17" },
+					{ "Code": "bodyskin-18" }
+				],
+				"hair-base": [
+					{ "Code": "hair-long-braid1", "Weight": 3.0 },
+					{ "Code": "hair-long-braid2", "Weight": 3.0 },
+					{ "Code": "hair-long-dreads" },
+					{ "Code": "hair-13" },
+					{ "Code": "hair-06" }
+				],
+				"arm": [
+					{ "Code": "nothing", "Weight": 4.0 },
+					{ "Code": "arm-tiedrope", "Weight": 3.0 },
+					{ "Code": "arm-braceletgoldl" },
+					{ "Code": "arm-braceletgoldr" },
+					{ "Code": "arm-shoulderpouch", "Weight": 2.0 }
+				],
+				"back": [
+					{ "Code": "nothing", "Weight": 6.0 },
+					{ "Code": "back-spear" },
+					{ "Code": "back-bow" },
+					{ "Code": "back-backpack", "Weight": 2.0 }
+				],
+				"emblem": [
+					{ "Code": "emblem-mapscroll", "Weight": 5.0 },
+					{ "Code": "emblem-boatpin", "Weight": 3.0 },
+					{ "Code": "emblem-waterskin" }
+				],
+				"face": [
+					{ "Code": "nothing", "Weight": 6.0 },
+					{ "Code": "face-headband", "Weight": 5.0 },
+					{ "Code": "face-armor-bandageseye", "Weight": 3.0 },
+					{ "Code": "face-goggles" }
+				],
+				"foot": [
+					{ "Code": "foot-boots2", "Weight": 3.0 },
+					{ "Code": "foot-boots3", "Weight": 3.0 },
+					{ "Code": "foot-boots4", "Weight": 2.0 },
+					{ "Code": "foot-reinforcedboots", "Weight": 2.0 }
+				],
+				"hand": [
+					{ "Code": "nothing", "Weight": 4.0 },
+					{ "Code": "hand-glovesleather", "Weight": 4.0 },
+					{ "Code": "hand-glovesreinforced", "Weight": 3.0 },
+					{ "Code": "hand-glovesforearm", "Weight": 2.0 },
+					{ "Code": "hand-ringsgoldl" },
+					{ "Code": "hand-ringsgoldr" }
+				],
+				"head": [
+					{ "Code": "nothing", "Weight": 3.0 },
+					{ "Code": "head-felthat", "Weight": 5.0 },
+					{ "Code": "head-trapperhat", "Weight": 2.0 },
+					{ "Code": "head-chaperon" }
+				],
+				"lowerbody": [
+					{ "Code": "lowerbody-hose1sailor", "Weight": 4.0 },
+					{ "Code": "lowerbody-pants3", "Weight": 2.0 },
+					{ "Code": "lowerbody-pants8" },
+					{ "Code": "lowerbody-pantssuspender" }
+				],
+				"neck": [
+					{ "Code": "nothing", "Weight": 4.0 },
+					{ "Code": "neck-teethnecklace", "Weight": 2.0 },
+					{ "Code": "neck-tradernecklacegold" },
+					{ "Code": "neck-gearsamulet" }
+				],
+				"shoulder": [
+					{ "Code": "shoulder-shortsleeve-jacket3capelet", "Weight": 5.0 },
+					{ "Code": "shoulder-shortsleeve-jacket1forester", "Weight": 3.0 },
+					{ "Code": "shoulder-sashsimple", "Weight": 2.0 },
+					{ "Code": "shoulder-scarfred" },
+					{ "Code": "shoulder-tiedrope" }
+				],
+				"upperbody": [
+					{ "Code": "upperbody-longsleeve-shirt1worn", "Weight": 3.0 },
+					{ "Code": "upperbody-longsleeve-shirt2worn", "Weight": 3.0 },
+					{ "Code": "upperbody-longsleeve-shirt6tattered", "Weight": 2.0 },
+					{ "Code": "upperbody-longsleeve-shirt9raggedy", "Weight": 2.0 },
+					{ "Code": "upperbody-shortsleeve-shirt17patched" }
+				],
+				"upperbodyover": [
+					{ "Code": "nothing", "Weight": 4.0 },
+					{ "Code": "upperbodyover-shortsleeve-overshirt4vest", "Weight": 3.0 },
+					{ "Code": "upperbodyover-shortsleeve-overshirt1furvest", "Weight": 2.0 },
+					{ "Code": "upperbodyover-armor-leather" }
+				],
+				"waist": [
+					{ "Code": "waist-dagger", "Weight": 5.0 },
+					{ "Code": "waist-spyglass", "Weight": 4.0 },
+					{ "Code": "waist-climbingbelt", "Weight": 3.0 },
+					{ "Code": "waist-sashcenterred", "Weight": 2.0 },
+					{ "Code": "waist-pouchblue", "Weight": 2.0 },
+					{ "Code": "waist-tiedrope" }
+				]
+			}
+		},
+		"tradeProps": {
+			"money": { "avg": 30, "var": 8 },
+			"selling": {
+				"maxItems": 10,
+				"list": [
+					{ "code": "game:locatormap-treasures", "type": "item", "stacksize": 1, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 15, "var": 3 } },
+					{ "code": "game:locatormap-dungeon", "type": "item", "stacksize": 1, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 20, "var": 4 } },
+					{ "code": "game:locatormap-treasurehunter", "type": "item", "stacksize": 1, "stock": { "avg": 1, "var": 1 }, "price": { "avg": 25, "var": 5 } }
+				]
+			},
+			"buying": {
+				"maxItems": 6,
+				"list": [
+					{ "code": "game:lore-book-*", "type": "item", "stacksize": 1, "stock": { "avg": 4, "var": 1 }, "price": { "avg": 6, "var": 1.5 } }
+				]
+			}
+		}
+	},
+	"server": {
+		"attributes": {
+			"pathfinder": {
+				"minTurnAnglePerSec": 720,
+				"maxTurnAnglePerSec": 1440
+			}
+		},
+		"behaviors": [
+			{ "code": "nametag", "showtagonlywhentargeted": true, "selectFromRandomName": ["Celeste"] },
+			{ "code": "repulseagents" },
+			{ "code": "controlledphysics", "stepHeight": 1.01 },
+			{ "code": "reviveondeath", "minHours": 24, "maxHours": 72 },
+			{ "code": "health", "currenthealth": 30, "maxhealth": 30 },
+			{
+				"code": "emotionstates",
+				"states": [
+					{ "code": "aggressiveondamage", "duration": 6, "chance": 0.8, "slot": 0, "priority": 2, "accumType": "noaccum" }
+				]
+			},
+			{
+				"code": "taskai",
+				"aitasks": [
+					{
+						"code": "meleeattack", "entityCodes": ["player"], "priority": 2,
+						"damage": 8, "mincooldown": 2000, "maxcooldown": 3000,
+						"attackDurationMs": 900, "damagePlayerAtMs": 300,
+						"animation": "Attack", "animationSpeed": 2,
+						"whenInEmotionState": "aggressiveondamage"
+					},
+					{
+						"code": "seekentity", "entityCodes": ["player"], "priority": 1.5,
+						"mincooldown": 1000, "maxcooldown": 1500, "seekingRange": 20,
+						"movespeed": 0.035, "animation": "Run", "animationSpeed": 1.75,
+						"whenInEmotionState": "aggressiveondamage"
+					},
+					{ "code": "idle", "priority": 1.2, "minduration": 2500, "maxduration": 2500, "mincooldown": 2000, "maxcooldown": 10000, "animation": "laugh" },
+					{ "code": "idle", "priority": 1.2, "minduration": 2500, "maxduration": 2500, "mincooldown": 5000, "maxcooldown": 30000, "animation": "idle2" },
+					{
+						"code": "wander", "priority": 1.0, "movespeed": 0.01,
+						"animation": "Walk", "wanderChance": 0.005,
+						"maxDistanceToSpawn": 4, "wanderRangeMin": 1, "wanderRangeMax": 3,
+						"teleportWhenOutOfRange": true, "teleportInGameHours": 1
+					},
+					{ "code": "lookaround", "priority": 0.5 }
+				]
+			},
+			{ "code": "conversable", "dialogue": "seafarer:config/dialogue/celeste" }
+		]
+	},
+	"sounds": {}
+}

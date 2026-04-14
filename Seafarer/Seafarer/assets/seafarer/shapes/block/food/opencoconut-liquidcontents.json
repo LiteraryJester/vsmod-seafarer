@@ -1,0 +1,27 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {},
+	"textures": {
+		"contents": "seafarer:block/liquid/coconutwater"
+	},
+	"elements": [
+		{
+			"name": "liquidcontents",
+			"from": [5.0, 1.0, 5.0],
+			"to": [11.0, 4.0, 11.0],
+			"faces": {
+				"north": { "texture": "#contents", "uv": [0, 0, 6, 3] },
+				"east": { "texture": "#contents", "uv": [0, 0, 6, 3] },
+				"south": { "texture": "#contents", "uv": [0, 0, 6, 3] },
+				"west": { "texture": "#contents", "uv": [0, 0, 6, 3] },
+				"up": { "texture": "#contents", "uv": [0, 0, 6, 6] },
+				"down": { "texture": "#contents", "uv": [0, 0, 6, 6], "enabled": false }
+			}
+		}
+	]
+}

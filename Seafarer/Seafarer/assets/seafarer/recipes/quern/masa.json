@@ -1,0 +1,11 @@
+{
+	"ingredientPattern": "I",
+	"ingredients": {
+		"I": { "type": "item", "code": "seafarer:nixtamal", "quantity": 1 }
+	},
+	"output": {
+		"type": "item",
+		"code": "seafarer:masa",
+		"quantity": 2
+	}
+}

@@ -1,0 +1,14 @@
+[
+	{
+		"op": "addmerge",
+		"path": "/attributes",
+		"side": "server",
+		"value": {
+			"attachableToEntity": {
+				"categoryCode": "barrel",
+				"attachedShape": { "base": "game:block/wood/barrel/closed" }
+			}
+		},
+		"file": "game:blocktypes/wood/barrel.json"
+	}
+]

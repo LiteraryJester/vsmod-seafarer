@@ -1,0 +1,11 @@
+[
+	{
+		code: "cornbeer",
+		sealHours: 336,
+		ingredients: [
+			{ type: "item", code: "game:waterportion", litres: 1 },
+			{ type: "item", code: "seafarer:driedcorn", quantity: 1 }
+		],
+		output: { type: "item", code: "game:ciderportion-corn", litres: 0.2 }
+	}
+]

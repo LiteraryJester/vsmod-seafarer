@@ -1,0 +1,81 @@
+{
+    "code": "flatbread",
+    "maxstacksize": 64,
+    "behaviors": [
+        {
+            "name": "GroundStorable",
+            "properties": {
+                "layout": "Quadrants",
+                "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.1, "z2": 1 }
+            }
+        }
+    ],
+    "variantgroups": [
+        { "code": "grain", "states": ["spelt", "rye", "flax", "rice", "cassava", "amaranth", "sunflower"] },
+        { "code": "type", "states": ["plain", "oiled"] }
+    ],
+    "creativeinventory": {
+        "general": ["*-plain"],
+        "seafarer": ["*"]
+    },
+    "shape": { "base": "seafarer:item/food/flatbread" },
+    "texturesByType": {
+        "*-spelt-*": { "bread": { "base": "game:item/food/grain/speltbread2" } },
+        "*-rye-*": { "bread": { "base": "game:item/food/grain/ryebread2" } },
+        "*-flax-*": { "bread": { "base": "game:item/food/grain/flaxbread2" } },
+        "*-rice-*": { "bread": { "base": "game:item/food/grain/ricebread2" } },
+        "*-cassava-*": { "bread": { "base": "game:item/food/grain/cassavabread2" } },
+        "*-amaranth-*": { "bread": { "base": "game:item/food/grain/amaranthbread2" } },
+        "*-sunflower-*": { "bread": { "base": "game:item/food/grain/sunflowerbread2" } }
+    },
+    "attributes": {
+        "foodTags": ["bread", "grain"],
+        "handbook": { "groupBy": ["flatbread-*"] }
+    },
+    "nutritionPropsByType": {
+        "*-oiled": {
+            "satiety": 250,
+            "foodcategory": "Grain",
+            "health": 0
+        },
+        "*": {
+            "satiety": 200,
+            "foodcategory": "Grain",
+            "health": 0
+        }
+    },
+    "transitionablePropsByType": {
+        "*-oiled": [{
+            "type": "Perish",
+            "freshHours": { "avg": 600 },
+            "transitionHours": { "avg": 200 },
+            "transitionedStack": { "type": "item", "code": "game:rot" },
+            "transitionRatio": 1
+        }],
+        "*": [{
+            "type": "Perish",
+            "freshHours": { "avg": 500 },
+            "transitionHours": { "avg": 200 },
+            "transitionedStack": { "type": "item", "code": "game:rot" },
+            "transitionRatio": 1
+        }]
+    },
+    "guiTransform": {
+        "translation": { "x": 0, "y": 0, "z": 0 },
+        "rotation": { "x": -30, "y": 26, "z": 180 },
+        "origin": { "x": 0.52, "y": 0.07, "z": 0.5 },
+        "scale": 3.92
+    },
+    "groundTransform": {
+        "translation": { "x": 0, "y": 0, "z": 0 },
+        "rotation": { "x": 0, "y": 0, "z": 1 },
+        "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+        "scale": 3.6
+    },
+    "tpHandTransform": {
+        "translation": { "x": -0.54, "y": -0.16, "z": -0.4 },
+        "rotation": { "x": 88, "y": -85, "z": 2 },
+        "origin": { "x": 0.5, "y": 0.13, "z": 0.5 },
+        "scale": 0.8
+    }
+}

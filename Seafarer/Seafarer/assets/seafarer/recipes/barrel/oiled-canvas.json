@@ -1,0 +1,38 @@
+[
+  {
+    "code": "oiledcanvas-flax",
+    "sealHours": 24,
+    "ingredients": [
+      { "type": "item", "code": "game:oilportion-flax", "litres": 1, "consumeLitres": 1 },
+      { "type": "block", "code": "game:linen-normal-down", "quantity": 4 }
+    ],
+    "output": { "type": "item", "code": "seafarer:oiled-canvas", "stackSize": 4 }
+  },
+  {
+    "code": "oiledcanvas-olive",
+    "sealHours": 24,
+    "ingredients": [
+      { "type": "item", "code": "game:oilportion-olive", "litres": 1, "consumeLitres": 1 },
+      { "type": "block", "code": "game:linen-normal-down", "quantity": 4 }
+    ],
+    "output": { "type": "item", "code": "seafarer:oiled-canvas", "stackSize": 4 }
+  },
+  {
+    "code": "oiledcanvas-fat",
+    "sealHours": 24,
+    "ingredients": [
+      { "type": "item", "code": "game:oilportion-fat", "litres": 1, "consumeLitres": 1 },
+      { "type": "block", "code": "game:linen-normal-down", "quantity": 4 }
+    ],
+    "output": { "type": "item", "code": "seafarer:oiled-canvas", "stackSize": 4 }
+  },
+  {
+    "code": "oiledcanvas-coconut",
+    "sealHours": 24,
+    "ingredients": [
+      { "type": "item", "code": "seafarer:oilportion-coconut", "litres": 1, "consumeLitres": 1 },
+      { "type": "block", "code": "game:linen-normal-down", "quantity": 4 }
+    ],
+    "output": { "type": "item", "code": "seafarer:oiled-canvas", "stackSize": 4 }
+  }
+]

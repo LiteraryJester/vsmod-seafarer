@@ -1,0 +1,41 @@
+{
+	"code": "liveclam",
+	"maxstacksize": 16,
+	"behaviors": [
+		{
+			"name": "GroundStorable",
+			"properties": {
+				"layout": "Quadrants",
+				"collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.125, "z2": 1 }
+			}
+		},
+		{ "name": "ClamShuck" }
+	],
+	"attributes": {
+		"displaycaseable": true,
+		"shelvable": true,
+		"handbook": {
+			"groupBy": ["liveclam"]
+		}
+	},
+	"shape": { "base": "game:block/aquatic/seashell/clam" },
+	"textures": {
+		"color": { "base": "seafarer:block/aquatic/seashell/liveclam" }
+	},
+	"creativeinventory": { "general": ["*"], "items": ["*"], "seafarer": ["*"] },
+	"guiTransform": {
+		"rotation": { "x": -43, "y": 132, "z": 0 },
+		"origin": { "x": 0.5, "y": 0.1, "z": 0.5 },
+		"scale": 2.7
+	},
+	"tpHandTransform": {
+		"translation": { "x": -0.87, "y": 0.04, "z": -0.8 },
+		"rotation": { "x": 2, "y": 31, "z": -25 },
+		"origin": { "x": 0.5, "y": -0.1, "z": 0.5 },
+		"scale": 0.6
+	},
+	"groundTransform": {
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 3
+	}
+}

@@ -1,0 +1,80 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {},
+	"textures": {},
+	"elements": [
+		{
+			"name": "Surface",
+			"from": [ 0.0, 8.0, 0.0 ],
+			"to": [ 16.0, 10.0, 16.0 ],
+			"faces": {
+				"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 16.0, 1.0 ] },
+				"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 16.0, 1.0 ], "enabled": false },
+				"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 16.0, 1.0 ] },
+				"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 16.0, 1.0 ] },
+				"up": { "texture": "#planks", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+				"down": { "texture": "#planks", "uv": [ 0.0, 0.0, 16.0, 16.0 ] }
+			},
+			"children": [
+				{
+					"name": "CuttingBoard",
+					"from": [ 1.0, 2.0, 4.0 ],
+					"to": [ 15.0, 2.5, 14.0 ],
+					"rotationOrigin": [ 1.0, 2.0, 4.0 ],
+					"faces": {
+						"north": { "texture": "#cuttingboard", "uv": [ 0.0, 0.0, 14.0, 0.5 ] },
+						"east": { "texture": "#cuttingboard", "uv": [ 0.0, 0.0, 10.0, 0.5 ] },
+						"south": { "texture": "#cuttingboard", "uv": [ 0.0, 0.0, 14.0, 0.5 ] },
+						"west": { "texture": "#cuttingboard", "uv": [ 0.0, 0.0, 10.0, 0.5 ] },
+						"up": { "texture": "#cuttingboard", "uv": [ 0.0, 0.0, 14.0, 10.0 ] },
+						"down": { "texture": "#cuttingboard", "uv": [ 0.0, 0.0, 14.0, 10.0 ] }
+					}
+				}
+			]
+		},
+		{
+			"name": "LegFrontLeft",
+			"from": [ 0.0, 0.0, 14.0 ],
+			"to": [ 2.0, 8.0, 16.0 ],
+			"faces": {
+				"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+				"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+				"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+				"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+				"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+			}
+		},
+		{
+			"name": "LegBackLeft",
+			"from": [ 0.0, 0.0, 0.0 ],
+			"to": [ 2.0, 8.0, 2.0 ],
+			"faces": {
+				"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+				"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+				"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+				"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 4.0 ] },
+				"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+			}
+		},
+		{
+			"name": "BackRail",
+			"from": [ 0.0, 10.0, 0.0 ],
+			"to": [ 16.0, 14.0, 2.0 ],
+			"faces": {
+				"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 16.0, 2.0 ] },
+				"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 2.0 ], "enabled": false },
+				"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 16.0, 2.0 ] },
+				"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 2.0 ] },
+				"up": { "texture": "#wood", "uv": [ 0.0, 0.0, 16.0, 1.0 ] },
+				"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 16.0, 1.0 ] }
+			}
+		},
+	]
+}

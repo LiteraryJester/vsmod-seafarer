@@ -1,0 +1,14 @@
+{
+	"code": "shuckclam",
+	"input": { "code": "seafarer:liveclam", "quantity": 1 },
+	"toolSlotRequires": "game:knife-*",
+	"output": {
+		"type": "item",
+		"code": "seafarer:premiumfish-raw",
+		"quantity": 1
+	},
+	"extraOutputs": [
+		{ "type": "block", "code": "game:seashell-clam-plain", "quantity": 1 }
+	],
+	"sound": "game:sounds/player/knap1"
+}

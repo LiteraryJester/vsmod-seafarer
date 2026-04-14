@@ -1,0 +1,23 @@
+{
+    "money": { "avg": 30, "var": 5 },
+    "selling": {
+        "maxItems": 10,
+        "list": [
+            { "code": "rope", "type": "item", "stacksize": 4, "stock": { "avg": 8, "var": 2 }, "price": { "avg": 3, "var": 0.5 } },
+            { "code": "linen-normal-down", "type": "item", "stacksize": 4, "stock": { "avg": 4, "var": 1 }, "price": { "avg": 4, "var": 1 } },
+            { "code": "plank-oak", "type": "item", "stacksize": 4, "stock": { "avg": 8, "var": 2 }, "price": { "avg": 3, "var": 0.5 } },
+            { "code": "metalparts", "type": "item", "stacksize": 4, "stock": { "avg": 4, "var": 1 }, "price": { "avg": 4, "var": 1 } },
+            { "code": "lantern-up-copper", "type": "block", "stacksize": 1, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 10, "var": 2 } },
+            { "code": "nail-copper", "type": "item", "stacksize": 8, "stock": { "avg": 16, "var": 4 }, "price": { "avg": 2, "var": 0.5 } }
+        ]
+    },
+    "buying": {
+        "maxItems": 6,
+        "list": [
+            { "code": "log-placed-oak-ud", "type": "block", "stacksize": 8, "stock": { "avg": 16, "var": 4 }, "price": { "avg": 1, "var": 0.25 } },
+            { "code": "log-placed-pine-ud", "type": "block", "stacksize": 8, "stock": { "avg": 16, "var": 4 }, "price": { "avg": 1, "var": 0.25 } },
+            { "code": "log-placed-birch-ud", "type": "block", "stacksize": 8, "stock": { "avg": 16, "var": 4 }, "price": { "avg": 1, "var": 0.25 } },
+            { "code": "log-placed-aged-ud", "type": "block", "stacksize": 1, "stock": { "avg": 8, "var": 2 }, "price": { "avg": 6, "var": 1 } }
+        ]
+    }
+}

@@ -1,0 +1,10 @@
+{
+    ingredients: [
+        { type: "item", code: "game:fishfillet-raw" },
+        { type: "item", code: "game:oilportion-*", litres: 0.05 }
+    ],
+    output: { type: "item", code: "seafarer:pansearedfish" },
+    cookingTemp: 150,
+    cookingDuration: 30,
+    minMaterial: "iron"
+}

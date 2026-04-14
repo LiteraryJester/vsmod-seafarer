@@ -1,0 +1,51 @@
+{
+	code: "opencoconut",
+	class: "BlockOpenCoconut",
+	entityClass: "BlockEntityOpenCoconut",
+	behaviors: [
+		{ name: "RightClickPickup" },
+		{ name: "Unstable" }
+	],
+	shape: {
+		base: "seafarer:block/food/opencoconut"
+	},
+	textures: {
+		shell: { base: "seafarer:item/food/coconut" },
+		inside: { base: "seafarer:item/food/coconut" }
+	},
+	attributes: {
+		liquidContainerProps: {
+			capacityLitres: 1,
+			transferSizeLitres: 0.25,
+			emptyShapeLoc: "seafarer:shapes/block/food/opencoconut",
+			opaqueContentShapeLoc: "seafarer:shapes/block/food/opencoconut-contents",
+			liquidContentShapeLoc: "seafarer:shapes/block/food/opencoconut-liquidcontents",
+			liquidMaxYTranslate: 0.05
+		}
+	},
+	creativeinventory: { "general": ["*"], "flora": ["*"], "seafarer": ["*"] },
+	blockmaterial: "Wood",
+	replaceable: 300,
+	liquidSelectable: 1,
+	resistance: 0.5,
+	maxStackSize: 4,
+	lightAbsorption: 0,
+	sideopaque: { all: false },
+	sidesolid: { all: false },
+	sounds: {
+		walk: "walk/wood",
+		place: "block/planks",
+		hit: "block/planks",
+		break: "block/planks"
+	},
+	collisionSelectionBox: { x1: 0.25, y1: 0, z1: 0.25, x2: 0.75, y2: 0.35, z2: 0.75 },
+	guiTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: -25, y: 45, z: 0 },
+		origin: { x: 0.5, y: 0.1, z: 0.5 },
+		scale: 3.0
+	},
+	tpHandTransform: {
+		translation: { x: -1.5, y: -1, z: -1.4 }
+	}
+}

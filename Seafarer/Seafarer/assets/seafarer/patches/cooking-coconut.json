@@ -1,0 +1,229 @@
+[
+	// =====================================================================
+	// SOUP — stock slot (idx 0): coconut milk as liquid base
+	// =====================================================================
+	{ "op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:coconutmilkportion", "shapeElement": "bowl/water" } },
+
+	// =====================================================================
+	// SOUP — vegetable slots (idx 1-3): mod vegetables & coconut products
+	// =====================================================================
+	// Tomato
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:tomato", "shapeElement": "bowl/vegetable base 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:tomato", "shapeElement": "bowl/vegetable base 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:tomato", "shapeElement": "bowl/vegetable base 3/*" } },
+	// Dried tomato
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:driedtomato", "shapeElement": "bowl/vegetable base 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:driedtomato", "shapeElement": "bowl/vegetable base 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:driedtomato", "shapeElement": "bowl/vegetable base 3/*" } },
+	// Chili
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:chili", "shapeElement": "bowl/vegetable base 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:chili", "shapeElement": "bowl/vegetable base 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:chili", "shapeElement": "bowl/vegetable base 3/*" } },
+	// Roasted chili
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:roastedchili-*", "shapeElement": "bowl/vegetable base 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:roastedchili-*", "shapeElement": "bowl/vegetable base 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:roastedchili-*", "shapeElement": "bowl/vegetable base 3/*" } },
+	// Dried chili
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:driedchili", "shapeElement": "bowl/vegetable base 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:driedchili", "shapeElement": "bowl/vegetable base 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:driedchili", "shapeElement": "bowl/vegetable base 3/*" } },
+	// Corn
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:corn", "shapeElement": "bowl/vegetable base 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:corn", "shapeElement": "bowl/vegetable base 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:corn", "shapeElement": "bowl/vegetable base 3/*" } },
+	// Dried corn
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:driedcorn", "shapeElement": "bowl/vegetable base 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:driedcorn", "shapeElement": "bowl/vegetable base 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:driedcorn", "shapeElement": "bowl/vegetable base 3/*" } },
+	// Coconut meat
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:coconutmeat", "shapeElement": "bowl/vegetable base 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:coconutmeat", "shapeElement": "bowl/vegetable base 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:coconutmeat", "shapeElement": "bowl/vegetable base 3/*" } },
+	// Toasted coconut
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:toastedcoconut", "shapeElement": "bowl/vegetable base 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:toastedcoconut", "shapeElement": "bowl/vegetable base 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:toastedcoconut", "shapeElement": "bowl/vegetable base 3/*" } },
+	// Dried coconut
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:driedcoconut", "shapeElement": "bowl/vegetable base 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:driedcoconut", "shapeElement": "bowl/vegetable base 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:driedcoconut", "shapeElement": "bowl/vegetable base 3/*" } },
+
+	// =====================================================================
+	// VEGETABLE STEW — vegetable slots (idx 0-3)
+	// =====================================================================
+	// Tomato
+	{ "op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:tomato", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:tomato", "shapeElement": "bowl/vegetable 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:tomato", "shapeElement": "bowl/vegetable 3/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:tomato", "shapeElement": "bowl/vegetable 4/*" } },
+	// Dried tomato
+	{ "op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:driedtomato", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:driedtomato", "shapeElement": "bowl/vegetable 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:driedtomato", "shapeElement": "bowl/vegetable 3/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:driedtomato", "shapeElement": "bowl/vegetable 4/*" } },
+	// Chili
+	{ "op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:chili", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:chili", "shapeElement": "bowl/vegetable 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:chili", "shapeElement": "bowl/vegetable 3/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:chili", "shapeElement": "bowl/vegetable 4/*" } },
+	// Roasted chili
+	{ "op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:roastedchili-*", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:roastedchili-*", "shapeElement": "bowl/vegetable 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:roastedchili-*", "shapeElement": "bowl/vegetable 3/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:roastedchili-*", "shapeElement": "bowl/vegetable 4/*" } },
+	// Dried chili
+	{ "op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:driedchili", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:driedchili", "shapeElement": "bowl/vegetable 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:driedchili", "shapeElement": "bowl/vegetable 3/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:driedchili", "shapeElement": "bowl/vegetable 4/*" } },
+	// Corn
+	{ "op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:corn", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:corn", "shapeElement": "bowl/vegetable 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:corn", "shapeElement": "bowl/vegetable 3/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:corn", "shapeElement": "bowl/vegetable 4/*" } },
+	// Dried corn
+	{ "op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:driedcorn", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:driedcorn", "shapeElement": "bowl/vegetable 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:driedcorn", "shapeElement": "bowl/vegetable 3/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:driedcorn", "shapeElement": "bowl/vegetable 4/*" } },
+	// Coconut meat
+	{ "op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:coconutmeat", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:coconutmeat", "shapeElement": "bowl/vegetable 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:coconutmeat", "shapeElement": "bowl/vegetable 3/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:coconutmeat", "shapeElement": "bowl/vegetable 4/*" } },
+	// Toasted coconut
+	{ "op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:toastedcoconut", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:toastedcoconut", "shapeElement": "bowl/vegetable 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:toastedcoconut", "shapeElement": "bowl/vegetable 3/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:toastedcoconut", "shapeElement": "bowl/vegetable 4/*" } },
+	// Dried coconut
+	{ "op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:driedcoconut", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:driedcoconut", "shapeElement": "bowl/vegetable 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:driedcoconut", "shapeElement": "bowl/vegetable 3/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:driedcoconut", "shapeElement": "bowl/vegetable 4/*" } },
+
+	// =====================================================================
+	// MEATY STEW — vegetable slots (idx 5=vegetable-base, 6=vegetable-extra)
+	// =====================================================================
+	// Tomato
+	{ "op": "addmerge", "path": "/ingredients/5/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:tomato", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/6/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:tomato", "shapeElement": "bowl/vegetable 2/*" } },
+	// Dried tomato
+	{ "op": "addmerge", "path": "/ingredients/5/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:driedtomato", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/6/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:driedtomato", "shapeElement": "bowl/vegetable 2/*" } },
+	// Chili
+	{ "op": "addmerge", "path": "/ingredients/5/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:chili", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/6/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:chili", "shapeElement": "bowl/vegetable 2/*" } },
+	// Roasted chili
+	{ "op": "addmerge", "path": "/ingredients/5/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:roastedchili-*", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/6/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:roastedchili-*", "shapeElement": "bowl/vegetable 2/*" } },
+	// Dried chili
+	{ "op": "addmerge", "path": "/ingredients/5/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:driedchili", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/6/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:driedchili", "shapeElement": "bowl/vegetable 2/*" } },
+	// Corn
+	{ "op": "addmerge", "path": "/ingredients/5/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:corn", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/6/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:corn", "shapeElement": "bowl/vegetable 2/*" } },
+	// Dried corn
+	{ "op": "addmerge", "path": "/ingredients/5/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:driedcorn", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/6/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:driedcorn", "shapeElement": "bowl/vegetable 2/*" } },
+	// Coconut meat
+	{ "op": "addmerge", "path": "/ingredients/5/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:coconutmeat", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/6/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:coconutmeat", "shapeElement": "bowl/vegetable 2/*" } },
+	// Toasted coconut
+	{ "op": "addmerge", "path": "/ingredients/5/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:toastedcoconut", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/6/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:toastedcoconut", "shapeElement": "bowl/vegetable 2/*" } },
+	// Dried coconut
+	{ "op": "addmerge", "path": "/ingredients/5/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:driedcoconut", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/6/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:driedcoconut", "shapeElement": "bowl/vegetable 2/*" } }
+]

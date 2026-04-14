@@ -1,0 +1,18 @@
+{
+  "code": "saltrubbedmeat",
+  "input": {
+    "code": "game:bushmeat-raw",
+    "quantity": 1
+  },
+  "toolSlotRequires": "seafarer:saltpan-*",
+  "output": {
+    "type": "item",
+    "code": "seafarer:saltrubbedmeat-bushmeat",
+    "quantity": 1
+  },
+  "barrelConsumes": {
+    "code": "game:salt",
+    "quantity": 1
+  },
+  "sound": "game:sounds/player/panning"
+}

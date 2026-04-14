@@ -1,0 +1,76 @@
+{
+	"code": "coconut",
+	"maxstacksize": 32,
+	"behaviors": [
+		{
+			"name": "CoconutCrack",
+			"properties": {
+				"processTime": 2,
+				"processingSound": "game:sounds/player/knap1",
+				"outputBlockCode": "seafarer:opencoconut",
+				"liquidCode": "seafarer:coconutwaterportion",
+				"liquidAmount": 100
+			}
+		},
+		{
+			"name": "GroundStorable",
+			"properties": {
+				"layout": "SingleCenter",
+				"collisionBox": {
+					"x1": 0.2,
+					"y1": 0,
+					"z1": 0.2,
+					"x2": 0.8,
+					"y2": 0.3,
+					"z2": 0.8
+				}
+			}
+		}
+	],
+	"shape": { "base": "seafarer:item/food/coconut" },
+	"texture": { "base": "seafarer:item/food/coconut" },
+	"attributes": {
+		"foodTags": ["coconut", "fruit"],
+		"handbook": {
+			"groupBy": ["seafarer:coconut-*"]
+		},
+		"groundStorageTransform": {
+			"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+			"scale": 0.8
+		}
+	},
+	"creativeinventory": { "general": ["*"], "items": ["*"], "seafarer": ["*"] },
+	"transitionableProps": [
+		{
+			"type": "Perish",
+			"freshHours": { "avg": 960 },
+			"transitionHours": { "avg": 72 },
+			"transitionedStack": { "type": "item", "code": "game:rot" },
+			"transitionRatio": 0.25
+		}
+	],
+	"materialDensity": 800,
+	"guiTransform": {
+		"translation": { "x": 0, "y": 0, "z": 0 },
+		"rotation": { "x": 162, "y": -175, "z": -15 },
+		"origin": { "x": 0.5, "y": 0.19, "z": 0.5 },
+		"scale": 3.19
+	},
+	"fpHandTransform": {
+		"rotation": { "x": 45, "y": 47, "z": -30 },
+		"origin": { "x": 0.5, "y": 0.3, "z": 0.5 },
+		"scale": 1.9
+	},
+	"tpHandTransform": {
+		"translation": { "x": -0.68, "y": -0.18, "z": -0.6 },
+		"rotation": { "x": 0, "y": 0, "z": -84 },
+		"origin": { "x": 0.5, "y": 0.1, "z": 0.5 },
+		"scale": 0.8
+	},
+	"groundTransform": {
+		"translation": { "x": 0, "y": 0, "z": 0 },
+		"rotation": { "x": 0, "y": 0, "z": 0 },
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 4
+	}
+}

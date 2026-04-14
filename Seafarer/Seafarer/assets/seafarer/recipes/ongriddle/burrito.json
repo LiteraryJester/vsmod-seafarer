@@ -1,0 +1,9 @@
+{
+	ingredients: [
+		{ type: "block", code: "seafarer:burrito-raw" }
+	],
+	output: { type: "block", code: "seafarer:burrito-cooked" },
+	cookingTemp: 150,
+	cookingDuration: 25,
+	minMaterial: "clay"
+}

@@ -1,0 +1,32 @@
+[
+    {
+        type: "craft",
+        training: "piemaster",
+        recipe: "game:pie-*",
+        xp: 1
+    },
+    {
+        type: "book",
+        training: "shipwright",
+        item: "seafarer:trainingbook-shipwright",
+        xp: 100
+    },
+    {
+        type: "dialogue",
+        training: "shipwright",
+        trigger: "drake-varnish-lesson",
+        xp: 50
+    },
+    {
+        type: "dialogue",
+        training: "shipwright",
+        trigger: "drake-canvas-lesson",
+        xp: 50
+    },
+    {
+        type: "book",
+        training: "bearhunter",
+        item: "seafarer:trainingbook-bearhunter",
+        xp: 100
+    }
+]

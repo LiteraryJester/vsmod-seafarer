@@ -1,0 +1,9 @@
+{
+	ingredients: [
+		{ type: "item", code: "seafarer:coconutmeat" }
+	],
+	output: { type: "item", code: "seafarer:toastedcoconut" },
+	cookingTemp: 150,
+	cookingDuration: 20,
+	minMaterial: "clay"
+}

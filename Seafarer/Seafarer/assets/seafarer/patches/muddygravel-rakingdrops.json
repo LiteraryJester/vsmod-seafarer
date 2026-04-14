@@ -1,0 +1,18 @@
+[
+	{
+		"op": "add",
+		"path": "/attributes/rakingDrops",
+		"file": "game:blocktypes/soil/muddygravel.json",
+		"value": [
+			{ "type": "item", "code": "seafarer:liveclam", "chance": { "avg": 0.20, "var": 0 } },
+			{ "type": "block", "code": "game:seashell-clam-*", "chance": { "avg": 0.10, "var": 0 } },
+			{ "type": "block", "code": "game:seashell-scallop-*", "chance": { "avg": 0.08, "var": 0 } },
+			{ "type": "block", "code": "game:seashell-sundial-*", "chance": { "avg": 0.06, "var": 0 } },
+			{ "type": "block", "code": "game:seashell-turritella-*", "chance": { "avg": 0.05, "var": 0 } },
+			{ "type": "block", "code": "game:seashell-conch-*", "chance": { "avg": 0.04, "var": 0 } },
+			{ "type": "block", "code": "game:seashell-volute-*", "chance": { "avg": 0.03, "var": 0 } },
+			{ "type": "block", "code": "game:seashell-seastar-*", "chance": { "avg": 0.02, "var": 0 } },
+			{ "type": "item", "code": "game:nugget-nativegold", "chance": { "avg": 0.005, "var": 0 } }
+		]
+	}
+]

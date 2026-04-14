@@ -1,0 +1,24 @@
+[
+    // Add drying transition to base game planks.
+    // Regular wood planks air-dry into seasoned planks over ~1 in-game week (168 hours).
+    // Seasoned, varnished, aged, and veryaged variants are excluded (empty array = no transitions).
+    // VS ByType matching picks the first match, so exclusions must come first.
+    {
+        "op": "add",
+        "path": "/transitionablePropsByType",
+        "value": {
+            "*-seasoned": [],
+            "*-varnished": [],
+            "*-aged": [],
+            "*-veryaged": [],
+            "*": [{
+                "type": "Dry",
+                "freshHours": { "avg": 0 },
+                "transitionHours": { "avg": 168 },
+                "transitionedStack": { "type": "item", "code": "game:plank-seasoned" },
+                "transitionRatio": 1
+            }]
+        },
+        "file": "game:itemtypes/resource/plank.json"
+    }
+]

@@ -1,0 +1,53 @@
+[
+    {
+        "op": "add",
+        "path": "/behaviors/-",
+        "value": {
+            "name": "Carryable",
+            "properties": {
+                "translation": [-0.125, 0, 0],
+                "slots": {
+                    "Hands": {},
+                    "Back": {}
+                }
+            }
+        },
+        "file": "seafarer:blocktypes/clay/amphora.json",
+        "side": "Server",
+        "dependsOn": [{ "modid": "carryon" }]
+    },
+    {
+        "op": "add",
+        "path": "/behaviors/-",
+        "value": {
+            "name": "Carryable",
+            "properties": {
+                "translation": [-0.125, 0, 0],
+                "slots": {
+                    "Hands": {},
+                    "Back": {}
+                }
+            }
+        },
+        "file": "seafarer:blocktypes/clay/amphora-storage.json",
+        "side": "Server",
+        "dependsOn": [{ "modid": "carryon" }]
+    },
+    {
+        "op": "add",
+        "path": "/behaviors/-",
+        "value": {
+            "name": "Carryable",
+            "properties": {
+                "translation": [-0.0625, 0, 0],
+                "slots": {
+                    "Hands": {},
+                    "Back": {}
+                }
+            }
+        },
+        "file": "seafarer:blocktypes/clay/onggi.json",
+        "side": "Server",
+        "dependsOn": [{ "modid": "carryon" }]
+    }
+]

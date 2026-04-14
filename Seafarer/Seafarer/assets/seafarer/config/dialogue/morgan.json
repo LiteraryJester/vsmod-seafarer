@@ -1,0 +1,283 @@
+{
+  "components": [
+    // === First Meeting ===
+    {
+      "code": "testhasmet",
+      "owner": "morgan",
+      "type": "condition",
+      "variable": "player.hasmetmorgan",
+      "isNotValue": "true",
+      "thenJumpTo": "firstmeet",
+      "elseJumpTo": "welcomeback"
+    },
+    {
+      "code": "firstmeet",
+      "owner": "morgan",
+      "type": "talk",
+      "setVariables": { "player.hasmetmorgan": "true" },
+      "text": [{ "value": "seafarer:dialogue-morgan-welcome" }]
+    },
+    {
+      "code": "welcomeback",
+      "owner": "morgan",
+      "type": "talk",
+      "text": [{ "value": "seafarer:dialogue-morgan-welcomeback" }],
+      "jumpTo": "main"
+    },
+
+    // === Main Menu ===
+    {
+      "code": "main",
+      "owner": "player",
+      "type": "talk",
+      "text": [
+        { "value": "dialogue-name", "jumpTo": "name" },
+        { "value": "dialogue-profession", "jumpTo": "profession" },
+        { "value": "dialogue-trade", "jumpTo": "trade" },
+        { "value": "seafarer:dialogue-morgan-tortuga", "jumpTo": "tortuga" },
+        {
+          "value": "seafarer:dialogue-morgan-ask-rebuilding",
+          "jumpTo": "rebuilding-intro",
+          "conditions": [
+            { "variable": "entity.mine-quest-complete", "isNotValue": "true" }
+          ]
+        },
+        {
+          "value": "seafarer:dialogue-morgan-ask-rebuilding",
+          "jumpTo": "rebuilding-done",
+          "conditions": [
+            { "variable": "entity.mine-quest-complete", "isValue": "true" }
+          ]
+        },
+        { "value": "seafarer:dialogue-goodbye", "jumpTo": "goodbye" }
+      ]
+    },
+    {
+      "code": "name",
+      "owner": "morgan",
+      "type": "talk",
+      "trigger": "revealname",
+      "text": [{ "value": "seafarer:dialogue-morgan-name" }],
+      "jumpTo": "main"
+    },
+    {
+      "code": "profession",
+      "owner": "morgan",
+      "type": "talk",
+      "text": [{ "value": "seafarer:dialogue-morgan-profession" }],
+      "jumpTo": "main"
+    },
+    {
+      "code": "trade",
+      "owner": "morgan",
+      "trigger": "opentrade"
+    },
+    {
+      "code": "tortuga",
+      "owner": "morgan",
+      "type": "talk",
+      "text": [{ "value": "seafarer:dialogue-morgan-tortuga-lore" }],
+      "jumpTo": "main"
+    },
+    {
+      "code": "goodbye",
+      "owner": "morgan",
+      "type": "talk",
+      "text": [{ "value": "seafarer:dialogue-morgan-goodbye" }]
+    },
+
+    // === Rebuilding Tortuga: Reopen Mine Quest ===
+    {
+      "code": "rebuilding-intro",
+      "owner": "morgan",
+      "type": "talk",
+      "text": [{ "value": "seafarer:dialogue-morgan-rebuilding-intro" }],
+      "jumpTo": "check-mine-started"
+    },
+
+    // Branch based on quest progress
+    {
+      "code": "check-mine-started",
+      "owner": "morgan",
+      "type": "condition",
+      "variable": "player.morgan-mine-started",
+      "isValue": "true",
+      "thenJumpTo": "mine-inprogress",
+      "elseJumpTo": "mine-offer"
+    },
+
+    // === Quest Not Started: Offer the quest ===
+    {
+      "code": "mine-offer",
+      "owner": "player",
+      "type": "talk",
+      "text": [
+        { "value": "seafarer:dialogue-morgan-accept-mine", "jumpTo": "mine-start" },
+        { "value": "seafarer:dialogue-morgan-not-yet", "jumpTo": "main" }
+      ]
+    },
+
+    // Morgan gives the letter and starts quest
+    {
+      "code": "mine-start",
+      "owner": "morgan",
+      "type": "talk",
+      "setVariables": { "player.morgan-mine-started": "true" },
+      "text": [{ "value": "seafarer:dialogue-morgan-mine-start" }],
+      "trigger": "giveitemstack",
+      "triggerdata": {
+        "type": "item",
+        "code": "seafarer:letter-morgan",
+        "stacksize": 1
+      },
+      "jumpTo": "main"
+    },
+
+    // === Quest In Progress: Check what the player has ===
+    {
+      "code": "mine-inprogress",
+      "owner": "player",
+      "type": "talk",
+      "text": [
+        {
+          "value": "seafarer:dialogue-morgan-have-contract",
+          "jumpTo": "mine-deliver-contract",
+          "conditions": [
+            {
+              "variable": "player.inventory",
+              "isValue": "{type: 'item', code: 'seafarer:signed-contract', stacksize: 1}"
+            }
+          ]
+        },
+        {
+          "value": "seafarer:dialogue-morgan-lost-letter",
+          "jumpTo": "mine-replace-letter",
+          "conditions": [
+            {
+              "variable": "player.inventory",
+              "isNotValue": "{type: 'item', code: 'seafarer:letter-morgan', stacksize: 1}"
+            }
+          ]
+        },
+        { "value": "seafarer:dialogue-morgan-remind-quest", "jumpTo": "mine-reminder" },
+        { "value": "seafarer:dialogue-goodbye", "jumpTo": "goodbye" }
+      ]
+    },
+
+    // Reminder about the quest
+    {
+      "code": "mine-reminder",
+      "owner": "morgan",
+      "type": "talk",
+      "text": [{ "value": "seafarer:dialogue-morgan-mine-reminder" }],
+      "jumpTo": "main"
+    },
+
+    // Replacement letter
+    {
+      "code": "mine-replace-letter",
+      "owner": "morgan",
+      "type": "talk",
+      "text": [{ "value": "seafarer:dialogue-morgan-replace-letter" }],
+      "trigger": "giveitemstack",
+      "triggerdata": {
+        "type": "item",
+        "code": "seafarer:letter-morgan",
+        "stacksize": 1
+      },
+      "jumpTo": "main"
+    },
+
+    // === Quest Completion: Turn in the signed contract ===
+    {
+      "code": "mine-deliver-contract",
+      "owner": "morgan",
+      "type": "talk",
+      "text": [{ "value": "seafarer:dialogue-morgan-mine-contract-received" }],
+      "trigger": "takefrominventory",
+      "triggerdata": {
+        "type": "item",
+        "code": "seafarer:signed-contract"
+      },
+      "jumpTo": "mine-reward-ingots"
+    },
+
+    // Add copper ingots to shop
+    {
+      "code": "mine-reward-ingots",
+      "owner": "morgan",
+      "trigger": "addSellingItem",
+      "triggerdata": {
+        "code": "game:ingot-copper",
+        "type": "item",
+        "stacksize": 4,
+        "stock": { "avg": 8, "var": 2 },
+        "price": { "avg": 3, "var": 0.5 }
+      },
+      "jumpTo": "mine-reward-nails"
+    },
+
+    // Add copper nails to shop
+    {
+      "code": "mine-reward-nails",
+      "owner": "morgan",
+      "trigger": "addSellingItem",
+      "triggerdata": {
+        "code": "game:nail-copper",
+        "type": "item",
+        "stacksize": 8,
+        "stock": { "avg": 16, "var": 4 },
+        "price": { "avg": 1, "var": 0.25 }
+      },
+      "jumpTo": "mine-reward-plates"
+    },
+
+    // Add copper plates to shop
+    {
+      "code": "mine-reward-plates",
+      "owner": "morgan",
+      "trigger": "addSellingItem",
+      "triggerdata": {
+        "code": "game:metalplate-copper",
+        "type": "item",
+        "stacksize": 2,
+        "stock": { "avg": 4, "var": 1 },
+        "price": { "avg": 5, "var": 1 }
+      },
+      "jumpTo": "mine-complete"
+    },
+
+    // Quest complete message and rebuilding increment
+    {
+      "code": "mine-complete",
+      "owner": "morgan",
+      "type": "talk",
+      "setVariables": { "entity.mine-quest-complete": "true" },
+      "text": [{ "value": "seafarer:dialogue-morgan-mine-complete" }],
+      "jumpTo": "increment-rebuilding-tier"
+    },
+
+    {
+      "code": "increment-rebuilding-tier",
+      "owner": "morgan",
+      "trigger": "incrementVariable",
+      "triggerdata": {
+        "scope": "entity",
+        "name": "rebuilding-tier",
+        "amount": 1,
+        "thresholdValue": 4,
+        "thresholdVariable": "entity.rebuilding-complete"
+      },
+      "jumpTo": "main"
+    },
+
+    // === Post-Quest: Rebuilding already done ===
+    {
+      "code": "rebuilding-done",
+      "owner": "morgan",
+      "type": "talk",
+      "text": [{ "value": "seafarer:dialogue-morgan-rebuilding-done" }],
+      "jumpTo": "main"
+    }
+  ]
+}

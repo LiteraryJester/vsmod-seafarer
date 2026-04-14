@@ -1,0 +1,9 @@
+{
+    ingredients: [
+        { type: "item", code: "seafarer:slackedmeat-*-whole", name: "type" }
+    ],
+    output: { type: "item", code: "seafarer:searedslackedmeat-{type}" },
+    cookingTemp: 150,
+    cookingDuration: 40,
+    minMaterial: "clay"
+}

@@ -1,0 +1,91 @@
+{
+  "code": "chili",
+  "maxstacksize": 64,
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "Quadrants",
+        "collisionBox": {
+          "x1": 0,
+          "y1": 0,
+          "z1": 0,
+          "x2": 1,
+          "y2": 0.125,
+          "z2": 1
+        }
+      }
+    }
+  ],
+  "shape": { "base": "seafarer:item/food/vegetable/chili" },
+  "textures": {
+    "bellpepper": { "base": "seafarer:item/food/vegetable/chili" }
+  },
+  "attributes": {
+    "foodTags": ["chili"],
+    "inContainerTexture": { "base": "game:block/wood/barrel/raw-bellpepper" },
+    "onDryingFrameProps": {
+      "translation": { "x": -0.1, "y": -0.37, "z": 0 },
+      "rotation": { "x": 0, "y": 0, "z": 90 },
+      "origin": { "x": 0.5, "y": 0.5, "z": 0.5 },
+      "scale": 0.4
+    },
+    "groundStorageTransform": {
+      "translation": { "x": -0.2, "y": -0.45, "z": 0.1 },
+      "rotation": { "x": 0, "y": 33, "z": 90 },
+      "scale": 0.6
+    },
+    "inPieProperties": {
+      "texture": "seafarer:item/food/vegetable/chili",
+      "partType": "Filling"
+    }
+  },
+  "creativeinventory": { "general": ["*"], "items": ["*"], "seafarer": ["*"] },
+  "nutritionProps": {
+    "satiety": 40,
+    "foodcategory": "Vegetable"
+  },
+  "transitionableProps": [
+    {
+      "type": "Perish",
+      "freshHours": { "avg": 400 },
+      "transitionHours": { "avg": 72 },
+      "transitionedStack": { "type": "item", "code": "game:rot" },
+      "transitionRatio": 0.5
+    },
+    {
+      "type": "Dry",
+      "freshHours": { "avg": 0 },
+      "transitionHours": { "avg": 960 },
+      "transitionedStack": {
+        "type": "item",
+        "code": "seafarer:driedchili"
+      },
+      "transitionRatio": 1
+    }
+  ],
+  "materialDensity": 600,
+  "guiTransform": {
+    "translation": { "x": 3, "y": 0, "z": 0 },
+    "rotation": { "x": -37, "y": 135, "z": -155 },
+    "origin": { "x": 0.5, "y": 0.22, "z": 0.5 },
+    "scale": 3
+  },
+  "fpHandTransform": {
+    "rotation": { "x": 45, "y": 47, "z": -30 },
+    "origin": { "x": 0.5, "y": 0.3, "z": 0.5 },
+    "scale": 1.9
+  },
+  "tpHandTransform": {
+    "translation": { "x": -0.8, "y": -0.18, "z": -0.7 },
+    "rotation": { "x": 0, "y": 0, "z": -76 },
+    "origin": { "x": 0.5, "y": 0.1, "z": 0.5 },
+    "scale": 0.69
+  },
+  "groundTransform": {
+    "translation": { "x": 0, "y": 0.045, "z": 0 },
+    "rotation": { "x": 0, "y": 0, "z": 83 },
+    "origin": { "x": 0.47, "y": 0, "z": 0.5 },
+    "scale": 3
+  }
+}

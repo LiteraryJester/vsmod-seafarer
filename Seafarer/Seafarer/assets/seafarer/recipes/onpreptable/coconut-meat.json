@@ -1,0 +1,7 @@
+{
+	"code": "coconut-meat",
+	"input": { "code": "seafarer:opencoconut", "quantity": 1 },
+	"toolSlotRequires": "game:knife-*",
+	"output": { "type": "item", "code": "seafarer:coconutmeat", "quantity": 4 },
+	"sound": "game:sounds/player/scrape"
+}

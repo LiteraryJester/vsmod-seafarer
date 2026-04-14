@@ -1,0 +1,13 @@
+{
+	ingredient: { type: "item", code: "game:ingot-*", name: "metal", allowedVariants: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "iron", "meteoriciron", "steel"] },
+	requiresTrait: "bearhunter",
+	pattern: [[
+		"##_##_##",
+		"#_##_##_",
+		"________",
+		"##_##___",
+		"#_##____",
+	]],
+	name: "4 Barbed Arrowheads",
+	output: { type: "item", code: "seafarer:arrowhead-barbed-{metal}", stacksize: 4 }
+}

@@ -1,0 +1,19 @@
+[
+  {
+    "op": "addmerge",
+    "path": "/attributes/buildMats/fuel/7",
+    "value": {
+      "type": "item",
+      "code": "seafarer:bagasse",
+      "quantity": 1,
+      "eleCode": "Coal",
+      "textureCodeReplace": {
+        "from": "coal",
+        "to": "ore-lignite"
+      },
+      "burnTimeHours": 14
+    },
+    "file": "game:blocktypes/wood/pitkiln.json",
+    "side": "Server"
+  }
+]

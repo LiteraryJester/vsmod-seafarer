@@ -1,0 +1,203 @@
+{
+	"code": "humanoid-trader-drake",
+	"class": "EntityEvolvingTrader",
+	"tags": ["humanoid", "trader", "human", "habitat-land"],
+	"weight": 80,
+	"canClimb": true,
+	"hitboxSize": { "x": 0.6, "y": 1.85 },
+	"deadHitboxSize": { "x": 0.75, "y": 0.5 },
+	"behaviorConfigs": {
+		"nametag": {
+			"showtagonlywhentargeted": true
+		}
+	},
+	"client": {
+		"renderer": "Shape",
+		"shape": { "base": "game:entity/humanoid/trader-female" },
+		"texture": { "base": "game:entity/humanoid/villagerbody/skin/normal*" },
+		"behaviors": [
+			{ "code": "nametag", "showtagonlywhentargeted": true },
+			{ "code": "repulseagents" },
+			{ "code": "controlledphysics", "stepHeight": 1.01 },
+			{ "code": "interpolateposition" },
+			{ "code": "conversable", "dialogue": "seafarer:config/dialogue/drake" }
+		],
+		"animations": [
+			{ "code": "die", "animation": "die", "animationSpeed": 1.75, "weight": 10, "blendMode": "AddAverage" },
+			{ "code": "hurt", "animation": "hurt", "animationSpeed": 2, "blendMode": "AddAverage" },
+			{ "code": "formal-walk", "animation": "formal-walk", "animationSpeed": 1.5 },
+			{ "code": "rowdywelcome", "animation": "rowdywelcome", "blendMode": "AddAverage" },
+			{ "code": "lazywelcome", "animation": "lazywelcome", "blendMode": "AddAverage" },
+			{ "code": "lazynod", "animation": "lazynod", "blendMode": "AddAverage" }
+		]
+	},
+	"attributes": {
+		"disableElements": ["breasts"],
+		"frostOverlayThreshold": -10,
+		"shouldSwivelFromMotion": false,
+		"outfitConfigFileName": "traderaccessories-male",
+		"voiceSounds": [
+			"game:sounds/voice/duduk/",
+			"game:sounds/voice/oboe/",
+			"game:sounds/voice/tuba/"
+		],
+		"outfitversion": 1,
+		"partialRandomOutfitsByType": {
+			"humanoid-trader-drake": {
+				"bodyskin": [
+					{ "Code": "bodyskin-4" },
+					{ "Code": "bodyskin-5" },
+					{ "Code": "bodyskin-6" },
+					{ "Code": "bodyskin-10" },
+					{ "Code": "bodyskin-11" }
+				],
+				"hair-base": [
+					{ "Code": "hair-short-trimmed" },
+					{ "Code": "hair-short-sideshave" },
+					{ "Code": "hair-bald-horseshoe" },
+					{ "Code": "hair-medium-basic" }
+				],
+				"beard": [
+					{ "Code": "beard-full3" },
+					{ "Code": "beard-full5" },
+					{ "Code": "beard-full7" }
+				],
+				"mustache": [
+					{ "Code": "nothing", "Weight": 4.0 },
+					{ "Code": "mustache-3" }
+				],
+				"arm": [
+					{ "Code": "nothing", "Weight": 6.0 },
+					{ "Code": "arm-tiedrope", "Weight": 2.0 },
+					{ "Code": "arm-shoulderpouch" }
+				],
+				"face": [
+					{ "Code": "nothing", "Weight": 12.0 },
+					{ "Code": "face-pipe", "Weight": 3.0 },
+					{ "Code": "face-headband" }
+				],
+				"foot": [
+					{ "Code": "foot-boots1" },
+					{ "Code": "foot-boots2" },
+					{ "Code": "foot-boots3" },
+					{ "Code": "foot-reinforcedboots" }
+				],
+				"hand": [
+					{ "Code": "nothing", "Weight": 2.0 },
+					{ "Code": "hand-gloveswork", "Weight": 5.0 },
+					{ "Code": "hand-glovesleather", "Weight": 3.0 }
+				],
+				"head": [
+					{ "Code": "nothing", "Weight": 6.0 },
+					{ "Code": "head-felthat", "Weight": 3.0 },
+					{ "Code": "head-skullcap", "Weight": 2.0 }
+				],
+				"lowerbody": [
+					{ "Code": "lowerbody-hose1sailor", "Weight": 6.0 },
+					{ "Code": "lowerbody-pants3" },
+					{ "Code": "lowerbody-pantssuspender", "Weight": 2.0 }
+				],
+				"neck": [
+					{ "Code": "nothing", "Weight": 10.0 },
+					{ "Code": "neck-tradernecklacecopper" }
+				],
+				"shoulder": [
+					{ "Code": "shoulder-apronleather", "Weight": 5.0 },
+					{ "Code": "shoulder-aprontan", "Weight": 2.0 },
+					{ "Code": "shoulder-shortsleeve-vest2sailor", "Weight": 3.0 }
+				],
+				"upperbody": [
+					{ "Code": "upperbody-longsleeve-shirt1worn" },
+					{ "Code": "upperbody-longsleeve-shirt2worn" },
+					{ "Code": "upperbody-longsleeve-shirt9raggedy" },
+					{ "Code": "upperbody-shortsleeve-shirt17patched" }
+				],
+				"upperbodyover": [
+					{ "Code": "nothing", "Weight": 8.0 },
+					{ "Code": "upperbodyover-shortsleeve-overshirt4vest" }
+				],
+				"waist": [
+					{ "Code": "waist-hammer", "Weight": 4.0 },
+					{ "Code": "waist-handsaw", "Weight": 4.0 },
+					{ "Code": "waist-chisel", "Weight": 2.0 },
+					{ "Code": "waist-beltkit" },
+					{ "Code": "waist-tiedrope" }
+				]
+			}
+		},
+		"tradeProps": {
+			"money": { "avg": 25, "var": 6 },
+			"selling": {
+				"maxItems": 4,
+				"list": [
+					{ "code": "game:rope", "type": "item", "stacksize": 8, "stock": { "avg": 16, "var": 4 }, "price": { "avg": 2, "var": 0.5 } }
+				]
+			},
+			"buying": {
+				"maxItems": 4,
+				"list": [
+					{ "code": "game:linen-normal-down", "type": "block", "stacksize": 4, "stock": { "avg": 16, "var": 4 }, "price": { "avg": 2, "var": 0.5 } },
+					{ "code": "game:plank-seasoned", "type": "item", "stacksize": 8, "stock": { "avg": 32, "var": 8 }, "price": { "avg": 3, "var": 0.5 } }
+				]
+			}
+		}
+	},
+	"server": {
+		"attributes": {
+			"pathfinder": {
+				"minTurnAnglePerSec": 720,
+				"maxTurnAnglePerSec": 1440
+			}
+		},
+		"behaviors": [
+			{ "code": "nametag", "showtagonlywhentargeted": true, "selectFromRandomName": ["Drake"] },
+			{ "code": "repulseagents" },
+			{ "code": "controlledphysics", "stepHeight": 1.01 },
+			{ "code": "reviveondeath", "minHours": 24, "maxHours": 72 },
+			{ "code": "health", "currenthealth": 30, "maxhealth": 30 },
+			{
+				"code": "emotionstates",
+				"states": [
+					{ "code": "aggressiveondamage", "duration": 6, "chance": 0.7, "slot": 0, "priority": 2, "accumType": "noaccum" },
+					{ "code": "fleeondamage", "duration": 10, "chance": 0.3, "slot": 0, "priority": 1, "accumType": "max" }
+				]
+			},
+			{
+				"code": "taskai",
+				"aitasks": [
+					{
+						"code": "meleeattack", "entityCodes": ["player"], "priority": 2,
+						"damage": 7, "mincooldown": 2500, "maxcooldown": 3500,
+						"attackDurationMs": 900, "damagePlayerAtMs": 300,
+						"animation": "Attack", "animationSpeed": 2,
+						"whenInEmotionState": "aggressiveondamage"
+					},
+					{
+						"code": "seekentity", "entityCodes": ["player"], "priority": 1.5,
+						"mincooldown": 1000, "maxcooldown": 1500, "seekingRange": 20,
+						"movespeed": 0.035, "animation": "Run", "animationSpeed": 1.75,
+						"whenInEmotionState": "aggressiveondamage"
+					},
+					{
+						"code": "fleeentity", "entityCodes": ["player"], "priority": 1.5,
+						"movespeed": 0.035, "seekingRange": 12,
+						"animation": "Run", "animationSpeed": 1.75,
+						"whenInEmotionState": "fleeondamage"
+					},
+					{ "code": "idle", "priority": 1.2, "minduration": 2500, "maxduration": 2500, "mincooldown": 2000, "maxcooldown": 10000, "animation": "laugh" },
+					{ "code": "idle", "priority": 1.2, "minduration": 2500, "maxduration": 2500, "mincooldown": 5000, "maxcooldown": 30000, "animation": "idle2" },
+					{
+						"code": "wander", "priority": 1.0, "movespeed": 0.01,
+						"animation": "Walk", "wanderChance": 0.005,
+						"maxDistanceToSpawn": 4, "wanderRangeMin": 1, "wanderRangeMax": 3,
+						"teleportWhenOutOfRange": true, "teleportInGameHours": 1
+					},
+					{ "code": "lookaround", "priority": 0.5 }
+				]
+			},
+			{ "code": "conversable", "dialogue": "seafarer:config/dialogue/drake" },
+			{ "code": "entitystatetags" }
+		]
+	},
+	"sounds": {}
+}

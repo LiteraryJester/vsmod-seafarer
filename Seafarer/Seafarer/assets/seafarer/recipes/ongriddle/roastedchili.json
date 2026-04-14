@@ -1,0 +1,10 @@
+{
+    ingredients: [
+        { type: "item", code: "seafarer:chili-*", name: "type" }
+    ],
+    output: { type: "item", code: "seafarer:roastedchili-{type}" },
+    cookingTemp: 150,
+    cookingDuration: 25,
+    minMaterial: "clay",
+    enabled: false
+}

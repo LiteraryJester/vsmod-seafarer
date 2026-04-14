@@ -1,0 +1,48 @@
+{
+    "code": "tortilla",
+    "maxstacksize": 64,
+    "behaviors": [
+        { "name": "GroundStorable", "properties": { "layout": "Quadrants", "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.125, "z2": 1 } } },
+        { "name": "PlaceBurrito" }
+    ],
+    "shape": { "base": "seafarer:item/food/tortilla" },
+    "texture": { "base": "seafarer:item/food/grain/tortilla" },
+    "creativeinventory": { "general": ["*"], "seafarer": ["*"] },
+    "attributes": {
+        "foodTags": ["bread", "grain"],
+        "displaycaseable": true,
+        "shelvable": true,
+        "displayable": {
+            "shelf": {
+                "size": { "width": 3.5, "height": 2, "length": 5 }
+            }
+        }
+    },
+    "materialDensity": 200,
+    "nutritionProps": { "satiety": 240, "foodcategory": "Grain", "health": 1 },
+    "transitionableProps": [{
+        "type": "Perish",
+        "freshHours": { "avg": 480 },
+        "transitionHours": { "avg": 150 },
+        "transitionedStack": { "type": "item", "code": "game:rot" },
+        "transitionRatio": 1
+    }],
+    "guiTransform": {
+        "translation": { "x": 0, "y": 0, "z": 0 },
+        "rotation": { "x": -30, "y": 26, "z": 180 },
+        "origin": { "x": 0.52, "y": 0.07, "z": 0.5 },
+        "scale": 4.9
+    },
+    "groundTransform": {
+        "translation": { "x": 0, "y": 0, "z": 0 },
+        "rotation": { "x": 0, "y": 0, "z": 1 },
+        "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+        "scale": 4.5
+    },
+    "tpHandTransform": {
+        "translation": { "x": -0.54, "y": -0.16, "z": -0.4 },
+        "rotation": { "x": 88, "y": -85, "z": 2 },
+        "origin": { "x": 0.5, "y": 0.13, "z": 0.5 },
+        "scale": 1
+    }
+}

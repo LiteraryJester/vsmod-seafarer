@@ -1,0 +1,17 @@
+{
+	"code": "tortilladough",
+	"input": {
+		"code": "seafarer:masa",
+		"quantity": 1
+	},
+	"output": {
+		"type": "item",
+		"code": "seafarer:tortilladough",
+		"quantity": 2
+	},
+	"barrelConsumes": {
+		"code": "game:waterportion",
+		"quantity": 100
+	},
+	"sound": "game:sounds/player/wetclayform"
+}

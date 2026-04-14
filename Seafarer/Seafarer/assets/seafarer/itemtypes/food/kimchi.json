@@ -1,0 +1,62 @@
+{
+  "code": "kimchi",
+  "maxstacksize": 64,
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "Quadrants",
+        "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.125, "z2": 1 }
+      }
+    }
+  ],
+  "attributes": {
+    "foodTags": ["vegetable", "fermented"],
+    "displaycaseable": true,
+    "shelvable": true,
+    "inContainerTexture": { "base": "game:block/wood/barrel/pickled-cabbage" }
+  },
+  "shape": { "base": "game:item/food/pickledvegetable/sauerkraut" },
+  "creativeinventory": {
+    "general": ["*"],
+    "items": ["*"],
+    "seafarer": ["*"]
+  },
+  "transitionableProps": [
+    {
+      "type": "Perish",
+      "freshHours": { "avg": 5400 },
+      "transitionHours": { "avg": 2700 },
+      "transitionedStack": { "type": "item", "code": "game:rot" },
+      "transitionRatio": 1
+    }
+  ],
+  "nutritionProps": {
+    "satiety": 140,
+    "foodcategory": "Vegetable"
+  },
+  "nutritionPropsWhenInMeal": {
+    "satiety": 160,
+    "foodcategory": "Vegetable"
+  },
+  "materialDensity": 400,
+  "guiTransform": {
+    "rotate": false,
+    "translation": { "x": 0, "y": 0, "z": 0 },
+    "rotation": { "x": 171, "y": -122, "z": 28 },
+    "origin": { "x": 0.5, "y": 0.05, "z": 0.53 },
+    "scale": 4.3
+  },
+  "tpHandTransform": {
+    "translation": { "x": -0.04, "y": 0.26, "z": -0.04 },
+    "rotation": { "x": -78, "y": 15, "z": 0 },
+    "origin": { "x": 0.23, "y": 0, "z": 0.13 },
+    "scale": 0.92
+  },
+  "groundTransform": {
+    "translation": { "x": 0, "y": 0, "z": 0 },
+    "rotation": { "x": 180, "y": 33, "z": -180 },
+    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+    "scale": 5
+  }
+}

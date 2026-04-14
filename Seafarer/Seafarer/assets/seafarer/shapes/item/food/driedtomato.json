@@ -1,0 +1,53 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+	},
+	"elements": [
+		{
+			"name": "driedtomato_center",
+			"from": [ 6.0, 0.0, 5.0 ],
+			"to": [ 10.0, 1.5, 11.0 ],
+			"faces": {
+				"north": { "texture": "#tomato", "uv": [ 4.0, 7.0, 8.0, 8.5 ] },
+				"east":  { "texture": "#tomato", "uv": [ 4.0, 7.0, 10.0, 8.5 ] },
+				"south": { "texture": "#tomato", "uv": [ 4.0, 7.0, 8.0, 8.5 ] },
+				"west":  { "texture": "#tomato", "uv": [ 4.0, 7.0, 10.0, 8.5 ] },
+				"up":    { "texture": "#tomato", "uv": [ 4.0, 4.0, 8.0, 10.0 ] },
+				"down":  { "texture": "#tomato", "uv": [ 4.0, 4.0, 8.0, 10.0 ] }
+			}
+		},
+		{
+			"name": "driedtomato_left",
+			"from": [ 5.0, 0.0, 6.0 ],
+			"to": [ 6.0, 1.0, 10.0 ],
+			"faces": {
+				"north": { "texture": "#tomato", "uv": [ 3.0, 8.0, 4.0, 9.0 ] },
+				"east":  { "texture": "#tomato", "uv": [ 3.0, 8.0, 7.0, 9.0 ] },
+				"south": { "texture": "#tomato", "uv": [ 3.0, 8.0, 4.0, 9.0 ] },
+				"west":  { "texture": "#tomato", "uv": [ 3.0, 8.0, 7.0, 9.0 ] },
+				"up":    { "texture": "#tomato", "uv": [ 3.0, 5.0, 4.0, 9.0 ] },
+				"down":  { "texture": "#tomato", "uv": [ 3.0, 5.0, 4.0, 9.0 ] }
+			}
+		},
+		{
+			"name": "driedtomato_right",
+			"from": [ 10.0, 0.0, 6.0 ],
+			"to": [ 11.0, 1.0, 10.0 ],
+			"faces": {
+				"north": { "texture": "#tomato", "uv": [ 8.0, 8.0, 9.0, 9.0 ] },
+				"east":  { "texture": "#tomato", "uv": [ 8.0, 8.0, 12.0, 9.0 ] },
+				"south": { "texture": "#tomato", "uv": [ 8.0, 8.0, 9.0, 9.0 ] },
+				"west":  { "texture": "#tomato", "uv": [ 8.0, 8.0, 12.0, 9.0 ] },
+				"up":    { "texture": "#tomato", "uv": [ 8.0, 5.0, 9.0, 9.0 ] },
+				"down":  { "texture": "#tomato", "uv": [ 8.0, 5.0, 9.0, 9.0 ] }
+			}
+		}
+	]
+}

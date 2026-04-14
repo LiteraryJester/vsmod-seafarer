@@ -1,0 +1,354 @@
+{
+    "components": [
+        // === First Meeting ===
+        {
+            "code": "testhasmet",
+            "owner": "dawnmarie",
+            "type": "condition",
+            "variable": "player.hasmetdawnmarie",
+            "isNotValue": "true",
+            "thenJumpTo": "firstmeet",
+            "elseJumpTo": "welcomeback"
+        },
+        {
+            "code": "firstmeet",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "setVariables": { "player.hasmetdawnmarie": "true" },
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-welcome" }]
+        },
+        {
+            "code": "welcomeback",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-welcomeback" }],
+            "jumpTo": "main"
+        },
+
+        // === Main Menu ===
+        {
+            "code": "main",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                { "value": "dialogue-name", "jumpTo": "name" },
+                { "value": "dialogue-profession", "jumpTo": "profession" },
+                { "value": "dialogue-trade", "jumpTo": "trade" },
+                {
+                    "value": "seafarer:dialogue-dawnmarie-ask-tradegoods",
+                    "jumpTo": "tradegoods-intro",
+                    "conditions": [
+                        { "variable": "entity.tradegoods-complete", "isNotValue": "true" }
+                    ]
+                },
+                {
+                    "value": "seafarer:dialogue-dawnmarie-ask-tradegoods",
+                    "jumpTo": "tradegoods-done",
+                    "conditions": [
+                        { "variable": "entity.tradegoods-complete", "isValue": "true" }
+                    ]
+                },
+                { "value": "seafarer:dialogue-goodbye", "jumpTo": "goodbye" }
+            ]
+        },
+        {
+            "code": "name",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "trigger": "revealname",
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-name" }],
+            "jumpTo": "main"
+        },
+        {
+            "code": "profession",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-profession" }],
+            "jumpTo": "main"
+        },
+        {
+            "code": "trade",
+            "owner": "dawnmarie",
+            "trigger": "opentrade"
+        },
+        {
+            "code": "goodbye",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-goodbye" }]
+        },
+
+        // === In Need of Trade Goods Quest ===
+        {
+            "code": "tradegoods-intro",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-tradegoods-intro" }],
+            "jumpTo": "check-tradegoods-started"
+        },
+        {
+            "code": "check-tradegoods-started",
+            "owner": "dawnmarie",
+            "type": "condition",
+            "variable": "player.dawnmarie-tradegoods-started",
+            "isValue": "true",
+            "thenJumpTo": "tradegoods-progress",
+            "elseJumpTo": "tradegoods-offer"
+        },
+
+        // === Quest Not Started ===
+        {
+            "code": "tradegoods-offer",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                { "value": "seafarer:dialogue-dawnmarie-accept-tradegoods", "jumpTo": "tradegoods-start" },
+                { "value": "seafarer:dialogue-morgan-not-yet", "jumpTo": "main" }
+            ]
+        },
+        {
+            "code": "tradegoods-start",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "setVariables": { "player.dawnmarie-tradegoods-started": "true" },
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-tradegoods-start" }],
+            "jumpTo": "main"
+        },
+
+        // === Quest In Progress: Delivery Options ===
+        {
+            "code": "tradegoods-progress",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                {
+                    "value": "seafarer:dialogue-dawnmarie-deliver-salt",
+                    "jumpTo": "deliver-salt",
+                    "conditions": [
+                        { "variable": "entity.salt-complete", "isNotValue": "true" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:salt', stacksize: 1}" }
+                    ]
+                },
+                {
+                    "value": "seafarer:dialogue-dawnmarie-deliver-sugar",
+                    "jumpTo": "deliver-sugar",
+                    "conditions": [
+                        { "variable": "entity.sugar-complete", "isNotValue": "true" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'seafarer:sugar', stacksize: 1}" }
+                    ]
+                },
+                { "value": "seafarer:dialogue-dawnmarie-tradegoods-status", "jumpTo": "tradegoods-status" },
+                { "value": "seafarer:dialogue-goodbye", "jumpTo": "goodbye" }
+            ]
+        },
+
+        // === Salt Delivery ===
+        {
+            "code": "deliver-salt",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-salt-thanks" }],
+            "trigger": "takefrominventory",
+            "triggerdata": { "type": "item", "code": "game:salt" },
+            "jumpTo": "increment-salt"
+        },
+        {
+            "code": "increment-salt",
+            "owner": "dawnmarie",
+            "trigger": "incrementVariable",
+            "triggerdata": {
+                "scope": "entity",
+                "name": "salt",
+                "amount": 1,
+                "thresholdValue": 64,
+                "thresholdVariable": "entity.salt-complete"
+            },
+            "jumpTo": "check-salt-done"
+        },
+        {
+            "code": "check-salt-done",
+            "owner": "dawnmarie",
+            "type": "condition",
+            "variable": "entity.salt-complete",
+            "isValue": "true",
+            "thenJumpTo": "salt-reward",
+            "elseJumpTo": "salt-status"
+        },
+        {
+            "code": "salt-status",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-salt-status" }],
+            "jumpTo": "tradegoods-progress"
+        },
+        {
+            "code": "salt-reward",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-salt-complete" }],
+            "jumpTo": "salt-reward-knife"
+        },
+        {
+            "code": "salt-reward-knife",
+            "owner": "dawnmarie",
+            "trigger": "addSellingItem",
+            "triggerdata": {
+                "code": "game:knife-copper",
+                "type": "item",
+                "stacksize": 1,
+                "stock": { "avg": 2, "var": 1 },
+                "price": { "avg": 4, "var": 1 }
+            },
+            "jumpTo": "salt-reward-cleaver"
+        },
+        {
+            "code": "salt-reward-cleaver",
+            "owner": "dawnmarie",
+            "trigger": "addSellingItem",
+            "triggerdata": {
+                "code": "game:cleaver-copper",
+                "type": "item",
+                "stacksize": 1,
+                "stock": { "avg": 2, "var": 1 },
+                "price": { "avg": 5, "var": 1 }
+            },
+            "jumpTo": "check-all-tradegoods"
+        },
+
+        // === Sugar Delivery ===
+        {
+            "code": "deliver-sugar",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-sugar-thanks" }],
+            "trigger": "takefrominventory",
+            "triggerdata": { "type": "item", "code": "seafarer:sugar" },
+            "jumpTo": "increment-sugar"
+        },
+        {
+            "code": "increment-sugar",
+            "owner": "dawnmarie",
+            "trigger": "incrementVariable",
+            "triggerdata": {
+                "scope": "entity",
+                "name": "sugar",
+                "amount": 1,
+                "thresholdValue": 64,
+                "thresholdVariable": "entity.sugar-complete"
+            },
+            "jumpTo": "check-sugar-done"
+        },
+        {
+            "code": "check-sugar-done",
+            "owner": "dawnmarie",
+            "type": "condition",
+            "variable": "entity.sugar-complete",
+            "isValue": "true",
+            "thenJumpTo": "sugar-reward",
+            "elseJumpTo": "sugar-status"
+        },
+        {
+            "code": "sugar-status",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-sugar-status" }],
+            "jumpTo": "tradegoods-progress"
+        },
+        {
+            "code": "sugar-reward",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-sugar-complete" }],
+            "jumpTo": "sugar-reward-hoe"
+        },
+        {
+            "code": "sugar-reward-hoe",
+            "owner": "dawnmarie",
+            "trigger": "addSellingItem",
+            "triggerdata": {
+                "code": "game:hoe-copper",
+                "type": "item",
+                "stacksize": 1,
+                "stock": { "avg": 2, "var": 1 },
+                "price": { "avg": 4, "var": 1 }
+            },
+            "jumpTo": "sugar-reward-scythe"
+        },
+        {
+            "code": "sugar-reward-scythe",
+            "owner": "dawnmarie",
+            "trigger": "addSellingItem",
+            "triggerdata": {
+                "code": "game:scythe-copper",
+                "type": "item",
+                "stacksize": 1,
+                "stock": { "avg": 2, "var": 1 },
+                "price": { "avg": 5, "var": 1 }
+            },
+            "jumpTo": "check-all-tradegoods"
+        },
+
+        // === Check if both objectives are done ===
+        {
+            "code": "check-all-tradegoods",
+            "owner": "dawnmarie",
+            "type": "condition",
+            "variable": "entity.salt-complete",
+            "isValue": "true",
+            "thenJumpTo": "check-all-sugar",
+            "elseJumpTo": "tradegoods-progress"
+        },
+        {
+            "code": "check-all-sugar",
+            "owner": "dawnmarie",
+            "type": "condition",
+            "variable": "entity.sugar-complete",
+            "isValue": "true",
+            "thenJumpTo": "tradegoods-complete",
+            "elseJumpTo": "tradegoods-progress"
+        },
+
+        // === Quest Complete ===
+        {
+            "code": "tradegoods-complete",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "setVariables": { "entity.tradegoods-complete": "true" },
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-tradegoods-complete" }],
+            "jumpTo": "increment-rebuilding-tier"
+        },
+
+        // === Status Check ===
+        {
+            "code": "tradegoods-status",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-tradegoods-statusreport" }],
+            "jumpTo": "tradegoods-progress"
+        },
+
+        // === Post-Quest ===
+        {
+            "code": "tradegoods-done",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-tradegoods-already-done" }],
+            "jumpTo": "main"
+        },
+
+        // === Rebuilding Tier ===
+        {
+            "code": "increment-rebuilding-tier",
+            "owner": "dawnmarie",
+            "trigger": "incrementVariable",
+            "triggerdata": {
+                "scope": "entity",
+                "name": "rebuilding-tier",
+                "amount": 1,
+                "thresholdValue": 4,
+                "thresholdVariable": "entity.rebuilding-complete"
+            },
+            "jumpTo": "main"
+        }
+    ]
+}

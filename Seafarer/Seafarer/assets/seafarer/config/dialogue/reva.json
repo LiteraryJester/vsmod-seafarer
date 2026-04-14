@@ -1,0 +1,84 @@
+{
+    components: [
+        {
+            code: "testhasmet",
+            owner: "reva",
+            type: "condition",
+            variable: "player.hasmetreva",
+            isNotValue: "true",
+            thenJumpTo: "firstmeet",
+            elseJumpTo: "welcomeback"
+        },
+        {
+            code: "firstmeet",
+            owner: "reva",
+            type: "talk",
+            setVariables: { "player.hasmetreva": "true" },
+            text: [
+                { value: "dialogue-reva-welcome" }
+            ]
+        },
+        {
+            code: "main",
+            owner: "player",
+            type: "talk",
+            text: [
+                { value: "dialogue-name", jumpTo: "name" },
+                { value: "dialogue-profession", jumpTo: "profession" },
+                { value: "dialogue-trade", jumpTo: "trade" },
+                { value: "dialogue-reva-treasures", jumpTo: "treasures" },
+                { value: "dialogue-goodbye", jumpTo: "goodbye" }
+            ]
+        },
+        {
+            code: "welcomeback",
+            owner: "reva",
+            type: "talk",
+            text: [
+                { value: "dialogue-reva-welcomeback" }
+            ],
+            jumpTo: "main"
+        },
+        {
+            code: "name",
+            owner: "reva",
+            type: "talk",
+            trigger: "revealname",
+            text: [
+                { value: "dialogue-reva-name" }
+            ],
+            jumpTo: "main"
+        },
+        {
+            code: "profession",
+            owner: "reva",
+            type: "talk",
+            text: [
+                { value: "dialogue-reva-profession" }
+            ],
+            jumpTo: "main"
+        },
+        {
+            code: "trade",
+            owner: "reva",
+            trigger: "opentrade"
+        },
+        {
+            code: "treasures",
+            owner: "reva",
+            type: "talk",
+            text: [
+                { value: "dialogue-reva-treasures-info" }
+            ],
+            jumpTo: "main"
+        },
+        {
+            code: "goodbye",
+            owner: "reva",
+            type: "talk",
+            text: [
+                { value: "dialogue-reva-goodbye" }
+            ]
+        }
+    ]
+}

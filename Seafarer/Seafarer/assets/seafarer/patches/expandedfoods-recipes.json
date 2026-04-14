@@ -1,0 +1,654 @@
+[
+	// ==========================================
+	// Sausage — add slacked meat nuggets to meat input
+	// Recipe 0 (no salt): ingredient 1 = meat
+	// Recipe 1 (with salt): ingredient 1 = meat
+	// Recipe 2 (cheese, no salt): ingredient 1 = meat
+	// Recipe 3 (cheese + salt): ingredient 1 = meat
+	// ==========================================
+	{
+		"file": "expandedfoods:recipes/kneading/sausage.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1, "name": "meat" },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1, "name": "meat" },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1, "name": "meat" }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/sausage.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1, "name": "meat" },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1, "name": "meat" },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1, "name": "meat" }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/sausage.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/2/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1, "name": "meat" },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1, "name": "meat" },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1, "name": "meat" }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/sausage.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/3/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1, "name": "meat" },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1, "name": "meat" },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1, "name": "meat" }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Sausage Fish — add slacked fish nuggets to fish input
+	// Recipe 0 (no salt): ingredient 1 = fish
+	// Recipe 1 (with salt): ingredient 1 = fish
+	// Recipe 2 (cheese): ingredient 1 = fish
+	// Recipe 3 (cheese + salt): ingredient 1 = fish
+	// ==========================================
+	{
+		"file": "expandedfoods:recipes/kneading/sausagefish.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/sausagefish.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/sausagefish.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/2/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/sausagefish.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/3/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Pemmican — add slacked meat nuggets to both meat slots
+	// Recipe 0 (no salt): ingredients 4 and 5 = meat
+	// Recipe 1 (with salt): ingredients 4 and 5 = meat
+	// ==========================================
+	{
+		"file": "expandedfoods:recipes/kneading/pemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/4/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/pemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/5/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/pemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/4/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/pemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/5/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Fish Pemmican — add slacked fish nuggets to fish slots
+	// Recipe 0 (no salt): ingredients 4 (fish required) and 5 (fish or meat)
+	// Recipe 1 (with salt): ingredients 4 (fish required) and 5 (fish or meat)
+	// ==========================================
+	{
+		"file": "expandedfoods:recipes/kneading/fishpemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/4/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/fishpemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/5/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/fishpemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/4/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/fishpemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/5/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Dumplings — add slacked meat nuggets to filling options
+	// Recipe 1 (with filling): ingredient 1 = fillings
+	// Recipe 3 (filling + salt): ingredient 1 = fillings
+	// ==========================================
+	{
+		"file": "expandedfoods:recipes/kneading/dumpling.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/dumpling.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/3/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Breaded Meat Nuggets — add slacked meat smashed forms
+	// EF has 6 recipes (2 per meat type: without salt, with salt)
+	// Recipe 0/1 = bushmeat, ingredient 3 = meat
+	// Recipe 2/3 = poultry, ingredient 3 = meat
+	// Recipe 4/5 = redmeat, ingredient 3 = meat
+	// ==========================================
+	// Bushmeat breaded recipes
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmeatnugget.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/3/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-smashed", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-cut", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmeatnugget.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/3/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-smashed", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-cut", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	// Poultry breaded recipes
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmeatnugget.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/2/ingredients/3/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-smashed", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-cut", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmeatnugget.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/3/ingredients/3/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-smashed", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-cut", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	// Redmeat breaded recipes
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmeatnugget.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/4/ingredients/3/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-smashed", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-cut", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmeatnugget.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/5/ingredients/3/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-smashed", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-cut", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Breaded Balls — add slacked meat nuggets to filling input
+	// Recipe 0 (no salt): ingredient 3 = filling
+	// Recipe 1 (with salt): ingredient 3 = filling
+	// ==========================================
+	{
+		"file": "expandedfoods:recipes/kneading/breadedball.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/3/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/breadedball.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/3/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Sushi — add slacked fish nuggets to fish input
+	// Recipe 0 (salt, no veggie): ingredient 3 = fish
+	// Recipe 1 (no salt, no veggie): ingredient 2 = fish
+	// Recipe 2 (salt + veggie): ingredient 4 = fish
+	// Recipe 3 (veggie, no salt): ingredient 3 = fish
+	// ==========================================
+	{
+		"file": "expandedfoods:recipes/kneading/sushi.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/3/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/sushi.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/2/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/sushi.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/2/ingredients/4/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/sushi.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/3/ingredients/3/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Stuffed Peppers — add slacked meat nuggets to filling slots
+	// Recipes 0-8 have filling ingredient slots that accept meatnugget
+	// Recipe 0: ingredient 1
+	// Recipe 1: ingredients 1, 2
+	// Recipe 2: ingredients 1, 2, 3
+	// Recipe 3: ingredient 1
+	// Recipe 4: ingredients 1, 2
+	// Recipe 5: ingredient 1
+	// Recipe 6: ingredients 1, 2
+	// Recipe 7: ingredients 1, 2, 3
+	// Recipe 8: ingredient 1
+	// ==========================================
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/2/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/2/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/2/ingredients/2/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/2/ingredients/3/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/3/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/4/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/4/ingredients/2/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/5/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/6/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/6/ingredients/2/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/7/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/7/ingredients/2/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/7/ingredients/3/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/8/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:slackedmeat-bushmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-redmeat-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-poultry-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-fish-nugget", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:slackedmeat-premiumfish-nugget", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	}
+]

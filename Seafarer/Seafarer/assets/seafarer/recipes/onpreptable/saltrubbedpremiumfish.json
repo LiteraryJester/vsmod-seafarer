@@ -1,0 +1,12 @@
+{
+  "code": "saltrubbedpremiumfish",
+  "input": { "code": "seafarer:premiumfish-raw", "quantity": 1 },
+  "toolSlotRequires": "seafarer:saltpan-*",
+  "output": {
+    "type": "item",
+    "code": "seafarer:saltrubbedmeat-premiumfish",
+    "quantity": 1
+  },
+  "barrelConsumes": { "code": "game:salt", "quantity": 1 },
+  "sound": "game:sounds/player/panning"
+}

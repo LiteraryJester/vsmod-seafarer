@@ -1,0 +1,165 @@
+[
+    // ==================================================================
+    // Adds "seasoned" and "varnished" variants to all wood-typed blocks
+    // that are crafted from planks. This allows plank-seasoned and
+    // plank-varnished items to be used in recipes that produce these blocks.
+    // ==================================================================
+
+    // --- game:plank (item) ---
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:itemtypes/resource/plank.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:itemtypes/resource/plank.json" },
+    { "op": "replace", "path": "/textures/wood/baseByType",
+        "value": {
+            "*-seasoned": "seafarer:block/wood/planks/seasoned1",
+            "*-varnished": "seafarer:block/wood/planks/varnished1",
+            "*-aged": "block/wood/planks/aged/aged1",
+            "*-veryaged": "block/wood/planks/aged/veryaged1",
+            "*-agedebony": "block/wood/planks/aged/ebony1",
+            "*": "block/wood/planks/{wood}1"
+        },
+        "file": "game:itemtypes/resource/plank.json" },
+
+    // --- game:planks (block) ---
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/wood/woodtyped/planks.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/wood/woodtyped/planks.json" },
+
+    // --- game:plankslab ---
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/wood/woodtyped/plankslab.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/wood/woodtyped/plankslab.json" },
+
+    // --- game:plankstairs ---
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/wood/woodtyped/plankstairs.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/wood/woodtyped/plankstairs.json" },
+
+    // --- game:door (wood variant at index 1) ---
+    { "op": "add", "path": "/variantgroups/1/states/-", "value": "seasoned",
+        "file": "game:blocktypes/wood/woodtyped/door.json" },
+    { "op": "add", "path": "/variantgroups/1/states/-", "value": "varnished",
+        "file": "game:blocktypes/wood/woodtyped/door.json" },
+
+    // --- game:ladder (wood variant at index 1) ---
+    { "op": "add", "path": "/variantgroups/1/states/-", "value": "seasoned",
+        "file": "game:blocktypes/wood/woodtyped/ladder.json" },
+    { "op": "add", "path": "/variantgroups/1/states/-", "value": "varnished",
+        "file": "game:blocktypes/wood/woodtyped/ladder.json" },
+
+    // --- game:trapdoor (material variant at index 1) ---
+    { "op": "add", "path": "/variantgroups/1/states/-", "value": "seasoned",
+        "file": "game:blocktypes/wood/woodtyped/trapdoor.json" },
+    { "op": "add", "path": "/variantgroups/1/states/-", "value": "varnished",
+        "file": "game:blocktypes/wood/woodtyped/trapdoor.json" },
+
+    // --- game:boatseat (item) ---
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:itemtypes/wearable/boatseat.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:itemtypes/wearable/boatseat.json" },
+
+    // --- game:oar (wood variant at index 1) ---
+    { "op": "add", "path": "/variantgroups/1/states/-", "value": "seasoned",
+        "file": "game:itemtypes/tool/oar.json" },
+    { "op": "add", "path": "/variantgroups/1/states/-", "value": "varnished",
+        "file": "game:itemtypes/tool/oar.json" },
+
+    // --- Fences ---
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/wood/woodtyped/fence-free.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/wood/woodtyped/fence-free.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/wood/woodtyped/fence-snow.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/wood/woodtyped/fence-snow.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/wood/woodtyped/fencegate.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/wood/woodtyped/fencegate.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/wood/woodtyped/roughhewnfence-free.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/wood/woodtyped/roughhewnfence-free.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/wood/woodtyped/roughhewnfence-fsnow.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/wood/woodtyped/roughhewnfence-fsnow.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/wood/woodtyped/roughhewnfencegate.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/wood/woodtyped/roughhewnfencegate.json" },
+
+    // --- Other wood blocks ---
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/wood/woodtyped/path.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/wood/woodtyped/path.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/wood/woodtyped/suppportbeam.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/wood/woodtyped/suppportbeam.json" },
+
+    // --- Slanted roofing (hardcoded "material" states list at index 0) ---
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/roofing/slantedroofing.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/roofing/slantedroofing.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/roofing/slantedroofingbottom.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/roofing/slantedroofingbottom.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/roofing/slantedroofingcorner-inner.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/roofing/slantedroofingcorner-inner.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/roofing/slantedroofingcorner-outer.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/roofing/slantedroofingcorner-outer.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/roofing/slantedroofinghalfleft.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/roofing/slantedroofinghalfleft.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/roofing/slantedroofinghalfright.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/roofing/slantedroofinghalfright.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/roofing/slantedroofingridge.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/roofing/slantedroofingridge.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/roofing/slantedroofingridgeend.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/roofing/slantedroofingridgeend.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/roofing/slantedroofingridgehalfleft.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/roofing/slantedroofingridgehalfleft.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/roofing/slantedroofingridgehalfright.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/roofing/slantedroofingridgehalfright.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/roofing/slantedroofingtip.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/roofing/slantedroofingtip.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/roofing/slantedroofingtop.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/roofing/slantedroofingtop.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/roofing/beam-plane.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/roofing/beam-plane.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "seasoned",
+        "file": "game:blocktypes/roofing/beam-ridge.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
+        "file": "game:blocktypes/roofing/beam-ridge.json" }
+]

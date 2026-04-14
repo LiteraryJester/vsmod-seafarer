@@ -1,0 +1,28 @@
+{
+  "ingredient": {
+    "type": "item",
+    "code": "game:ingot-*",
+    "name": "metal",
+    "allowedVariants": [
+      "copper",
+      "tinbronze",
+      "bismuthbronze",
+      "blackbronze",
+      "iron",
+      "meteoriciron",
+      "steel"
+    ]
+  },
+  "pattern": [
+    [
+      "____#___#___#___",
+      "____#___#___#___",
+      "____#___#___#___",
+      "____#########___",
+      "________##______",
+      "________##______"
+    ]
+  ],
+  "name": "Mud rake head",
+  "output": { "type": "item", "code": "seafarer:mudrake-head-{metal}" }
+}

@@ -1,0 +1,56 @@
+{
+	code: "arrow-barbed",
+	class: "ItemArrow",
+	variantgroups: [
+		{ code: "metal", states: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "iron", "meteoriciron", "steel"] }
+	],
+	maxstacksize: 64,
+	storageFlags: 513,
+	shape: { base: "game:item/tool/arrow-copper" },
+	textures: {
+		material: { base: "game:block/metal/ingot/{metal}" }
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"], "tools": ["*"], "seafarer": ["*"] },
+	guiTransform: {
+		rotation: { x: -23, y: -45, z: -145 },
+		origin: { x: 0.7, y: -0.45, z: 0 },
+		scale: 1.44
+	},
+	tpHandTransform: {
+		translation: { x: -1.05, y: -0.4599, z: -0.87 },
+		rotation: { x: 0, y: 2, z: 3 },
+		scale: 0.55
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 0, y: 0, z: 0 },
+		origin: { x: 0.5, y: -0.03, z: 0.5 },
+		scale: 2.64
+	},
+	attributes: {
+		arrowEntityCodeByType: {
+			"*": "seafarer:arrow-barbed-{metal}"
+		},
+		damageByType: {
+			"*-copper": -0.25,
+			"*-tinbronze": 0.75,
+			"*-bismuthbronze": 0.75,
+			"*-blackbronze": 1.25,
+			"*-iron": 1.75,
+			"*-meteoriciron": 2.0,
+			"*-steel": 2.25
+		},
+		breakChanceOnImpactByType: {
+			"*-copper": 0.2,
+			"*-tinbronze": 0.15,
+			"*-bismuthbronze": 0.15,
+			"*-blackbronze": 0.12,
+			"*-iron": 0.12,
+			"*-meteoriciron": 0.1,
+			"*-steel": 0.09
+		},
+		handbook: {
+			groupBy: ["arrow-barbed-*"]
+		}
+	}
+}

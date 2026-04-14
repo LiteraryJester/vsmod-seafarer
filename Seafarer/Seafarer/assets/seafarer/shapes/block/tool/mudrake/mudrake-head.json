@@ -1,0 +1,95 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+		"head": "block/metal/ingot/copper"
+	},
+	"elements": [
+		{
+			"name": "bar",
+			"from": [ 2.0, 7.0, 7.0 ],
+			"to": [ 12.5, 9.0, 9.0 ],
+			"faces": {
+				"north": { "texture": "#head", "uv": [ 2.0, 7.0, 12.5, 9.0 ] },
+				"east": { "texture": "#head", "uv": [ 7.0, 7.0, 9.0, 9.0 ] },
+				"south": { "texture": "#head", "uv": [ 2.0, 7.0, 12.5, 9.0 ] },
+				"west": { "texture": "#head", "uv": [ 7.0, 7.0, 9.0, 9.0 ] },
+				"up": { "texture": "#head", "uv": [ 2.0, 7.0, 12.5, 9.0 ] },
+				"down": { "texture": "#head", "uv": [ 2.0, 7.0, 12.5, 9.0 ] }
+			},
+			"children": [
+				{
+					"name": "tine1",
+					"from": [ 0.0, -6.0, 0.0 ],
+					"to": [ 1.5, 0.0, 2.0 ],
+					"faces": {
+						"north": { "texture": "#head", "uv": [ 0.0, 0.0, 1.5, 6.0 ] },
+						"east": { "texture": "#head", "uv": [ 0.0, 0.0, 2.0, 6.0 ] },
+						"south": { "texture": "#head", "uv": [ 0.0, 0.0, 1.5, 6.0 ] },
+						"west": { "texture": "#head", "uv": [ 0.0, 0.0, 2.0, 6.0 ] },
+						"up": { "texture": "#head", "uv": [ 0.0, 0.0, 1.5, 2.0 ] },
+						"down": { "texture": "#head", "uv": [ 0.0, 0.0, 1.5, 2.0 ] }
+					}
+				},
+				{
+					"name": "tine2",
+					"from": [ 3.0, -6.0, 0.0 ],
+					"to": [ 4.5, 0.0, 2.0 ],
+					"faces": {
+						"north": { "texture": "#head", "uv": [ 0.0, 0.0, 1.5, 6.0 ] },
+						"east": { "texture": "#head", "uv": [ 0.0, 0.0, 2.0, 6.0 ] },
+						"south": { "texture": "#head", "uv": [ 0.0, 0.0, 1.5, 6.0 ] },
+						"west": { "texture": "#head", "uv": [ 0.0, 0.0, 2.0, 6.0 ] },
+						"up": { "texture": "#head", "uv": [ 0.0, 0.0, 1.5, 2.0 ] },
+						"down": { "texture": "#head", "uv": [ 0.0, 0.0, 1.5, 2.0 ] }
+					}
+				},
+				{
+					"name": "tine3",
+					"from": [ 6.0, -6.0, 0.0 ],
+					"to": [ 7.5, 0.0, 2.0 ],
+					"faces": {
+						"north": { "texture": "#head", "uv": [ 0.0, 0.0, 1.5, 6.0 ] },
+						"east": { "texture": "#head", "uv": [ 0.0, 0.0, 2.0, 6.0 ] },
+						"south": { "texture": "#head", "uv": [ 0.0, 0.0, 1.5, 6.0 ] },
+						"west": { "texture": "#head", "uv": [ 0.0, 0.0, 2.0, 6.0 ] },
+						"up": { "texture": "#head", "uv": [ 0.0, 0.0, 1.5, 2.0 ] },
+						"down": { "texture": "#head", "uv": [ 0.0, 0.0, 1.5, 2.0 ] }
+					}
+				},
+				{
+					"name": "tine4",
+					"from": [ 9.0, -6.0, 0.0 ],
+					"to": [ 10.5, 0.0, 2.0 ],
+					"faces": {
+						"north": { "texture": "#head", "uv": [ 0.0, 0.0, 1.5, 6.0 ] },
+						"east": { "texture": "#head", "uv": [ 0.0, 0.0, 2.0, 6.0 ] },
+						"south": { "texture": "#head", "uv": [ 0.0, 0.0, 1.5, 6.0 ] },
+						"west": { "texture": "#head", "uv": [ 0.0, 0.0, 2.0, 6.0 ] },
+						"up": { "texture": "#head", "uv": [ 0.0, 0.0, 1.5, 2.0 ] },
+						"down": { "texture": "#head", "uv": [ 0.0, 0.0, 1.5, 2.0 ] }
+					}
+				},
+				{
+					"name": "socket",
+					"from": [ 3.75, 1.0, -1.0 ],
+					"to": [ 6.75, 5.0, 3.0 ],
+					"rotationOrigin": [ -1.0, 1.0, 0.0 ],
+					"faces": {
+						"north": { "texture": "#head", "uv": [ 5.0, 0.0, 8.0, 4.0 ] },
+						"east": { "texture": "#head", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
+						"south": { "texture": "#head", "uv": [ 5.0, 0.0, 8.0, 4.0 ] },
+						"west": { "texture": "#head", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
+						"up": { "texture": "#head", "uv": [ 5.0, 0.0, 8.0, 4.0 ] },
+						"down": { "texture": "#head", "uv": [ 5.0, 0.0, 8.0, 4.0 ] }
+					}
+				}
+			]
+		}
+	]}

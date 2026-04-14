@@ -1,0 +1,190 @@
+{
+	"code": "humanoid-trader-dawnmarie",
+	"class": "EntityEvolvingTrader",
+	"tags": ["humanoid", "trader", "human", "habitat-land"],
+	"weight": 70,
+	"canClimb": true,
+	"hitboxSize": { "x": 0.6, "y": 1.75 },
+	"deadHitboxSize": { "x": 0.75, "y": 0.5 },
+	"behaviorConfigs": {
+		"nametag": {
+			"showtagonlywhentargeted": true
+		}
+	},
+	"client": {
+		"renderer": "Shape",
+		"shape": { "base": "game:entity/humanoid/trader-female" },
+		"texture": { "base": "game:entity/humanoid/villagerbody/skin/normal*" },
+		"behaviors": [
+			{ "code": "nametag", "showtagonlywhentargeted": true },
+			{ "code": "repulseagents" },
+			{ "code": "controlledphysics", "stepHeight": 1.01 },
+			{ "code": "interpolateposition" },
+			{ "code": "conversable", "dialogue": "seafarer:config/dialogue/dawnmarie" }
+		],
+		"animations": [
+			{ "code": "die", "animation": "die", "animationSpeed": 1.75, "weight": 10, "blendMode": "AddAverage" },
+			{ "code": "hurt", "animation": "hurt", "animationSpeed": 2, "blendMode": "AddAverage" },
+			{ "code": "formal-walk", "animation": "formal-walk", "animationSpeed": 1.5 },
+			{ "code": "rowdywelcome", "animation": "rowdywelcome", "blendMode": "AddAverage" },
+			{ "code": "lazywelcome", "animation": "lazywelcome", "blendMode": "AddAverage" },
+			{ "code": "lazynod", "animation": "lazynod", "blendMode": "AddAverage" }
+		]
+	},
+	"attributes": {
+		"frostOverlayThreshold": -10,
+		"shouldSwivelFromMotion": false,
+		"outfitConfigFileName": "traderaccessories-female",
+		"voiceSounds": [
+			"game:sounds/voice/harp/",
+			"game:sounds/voice/ocarina/",
+			"game:sounds/voice/duduk/"
+		],
+		"outfitversion": 1,
+		"partialRandomOutfitsByType": {
+			"humanoid-trader-dawnmarie": {
+				"bodyskin": [
+					{ "Code": "bodyskin-1" },
+					{ "Code": "bodyskin-2" },
+					{ "Code": "bodyskin-3" },
+					{ "Code": "bodyskin-7" },
+					{ "Code": "bodyskin-8" },
+					{ "Code": "bodyskin-9" }
+				],
+				"hair-base": [
+					{ "Code": "hair-long-combed", "Weight": 3.0 },
+					{ "Code": "hair-long-braid1", "Weight": 2.0 },
+					{ "Code": "hair-06" },
+					{ "Code": "hair-13" },
+					{ "Code": "hair-medium-layered" }
+				],
+				"arm": [
+					{ "Code": "nothing", "Weight": 6.0 },
+					{ "Code": "arm-beadedbracelet", "Weight": 2.0 },
+					{ "Code": "arm-shoulderpouch", "Weight": 3.0 }
+				],
+				"emblem": [
+					{ "Code": "emblem-hideemblem", "Weight": 6.0 },
+					{ "Code": "emblem-mirror" }
+				],
+				"face": [
+					{ "Code": "nothing", "Weight": 12.0 },
+					{ "Code": "face-pincenez", "Weight": 2.0 }
+				],
+				"foot": [
+					{ "Code": "foot-sandals1", "Weight": 2.0 },
+					{ "Code": "foot-sandals2", "Weight": 2.0 },
+					{ "Code": "foot-shoes1", "Weight": 3.0 },
+					{ "Code": "foot-slippers1" },
+					{ "Code": "foot-slippers2" }
+				],
+				"hand": [
+					{ "Code": "nothing", "Weight": 3.0 },
+					{ "Code": "hand-glovesgardening", "Weight": 6.0 },
+					{ "Code": "hand-glovesdirty", "Weight": 2.0 }
+				],
+				"head": [
+					{ "Code": "nothing", "Weight": 3.0 },
+					{ "Code": "head-beret", "Weight": 4.0 },
+					{ "Code": "head-headwrap", "Weight": 3.0 },
+					{ "Code": "head-keffiyeh", "Weight": 2.0 },
+					{ "Code": "head-nadiyanhat" }
+				],
+				"lowerbody": [
+					{ "Code": "lowerbody-pants3", "Weight": 3.0 },
+					{ "Code": "lowerbody-pants4", "Weight": 3.0 },
+					{ "Code": "lowerbody-pants5", "Weight": 2.0 },
+					{ "Code": "lowerbody-hose2" }
+				],
+				"neck": [
+					{ "Code": "nothing", "Weight": 10.0 },
+					{ "Code": "neck-bonenecklace" }
+				],
+				"shoulder": [
+					{ "Code": "shoulder-aprontan", "Weight": 4.0 },
+					{ "Code": "shoulder-apronbrown", "Weight": 4.0 },
+					{ "Code": "shoulder-longsleevebolero", "Weight": 3.0 },
+					{ "Code": "shoulder-scarfgreen", "Weight": 2.0 },
+					{ "Code": "shoulder-shortsleeve-vest4scholar" }
+				],
+				"upperbody": [
+					{ "Code": "upperbody-longsleeve-shirt3squared", "Weight": 3.0 },
+					{ "Code": "upperbody-longsleeve-shirt4embroidered", "Weight": 3.0 },
+					{ "Code": "upperbody-longsleeve-shirt14pastoral", "Weight": 4.0 },
+					{ "Code": "upperbody-longsleeve-shirt7" },
+					{ "Code": "upperbody-longsleeve-shirt1worn" }
+				],
+				"upperbodyover": [
+					{ "Code": "nothing", "Weight": 10.0 }
+				],
+				"waist": [
+					{ "Code": "waist-driedherbs", "Weight": 6.0 },
+					{ "Code": "waist-pouchblue", "Weight": 3.0 },
+					{ "Code": "waist-sack", "Weight": 3.0 },
+					{ "Code": "waist-panningbowl" },
+					{ "Code": "waist-beltwithstring" }
+				]
+			}
+		},
+		"tradeProps": {
+			"money": { "avg": 15, "var": 4 },
+			"selling": {
+				"maxItems": 8,
+				"list": [
+					{ "code": "game:bugnet-copper", "type": "item", "stacksize": 1, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 6, "var": 1 } },
+					{ "code": "seafarer:seeds-sugarcane", "type": "item", "stacksize": 4, "stock": { "avg": 8, "var": 2 }, "price": { "avg": 2, "var": 0.5 } },
+					{ "code": "game:fruittree-cutting-ud", "type": "block", "stacksize": 1, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 8, "var": 1 }, "attributes": { "type": "olive" } }
+				]
+			},
+			"buying": {
+				"maxItems": 6,
+				"list": [
+					{ "code": "game:painting", "type": "block", "stacksize": 1, "stock": { "avg": 3, "var": 1 }, "price": { "avg": 8, "var": 2 } }
+				]
+			}
+		}
+	},
+	"server": {
+		"attributes": {
+			"pathfinder": {
+				"minTurnAnglePerSec": 720,
+				"maxTurnAnglePerSec": 1440
+			}
+		},
+		"behaviors": [
+			{ "code": "nametag", "showtagonlywhentargeted": true, "selectFromRandomName": ["Dawn Marie"] },
+			{ "code": "repulseagents" },
+			{ "code": "controlledphysics", "stepHeight": 1.01 },
+			{ "code": "reviveondeath", "minHours": 24, "maxHours": 72 },
+			{ "code": "health", "currenthealth": 20, "maxhealth": 20 },
+			{
+				"code": "emotionstates",
+				"states": [
+					{ "code": "fleeondamage", "duration": 10, "chance": 0.8, "slot": 0, "priority": 1, "accumType": "max" }
+				]
+			},
+			{
+				"code": "taskai",
+				"aitasks": [
+					{
+						"code": "fleeentity", "entityCodes": ["player"], "priority": 1.5,
+						"movespeed": 0.035, "seekingRange": 12,
+						"animation": "Run", "animationSpeed": 1.75,
+						"whenInEmotionState": "fleeondamage"
+					},
+					{ "code": "idle", "priority": 1.2, "minduration": 2500, "maxduration": 2500, "mincooldown": 2000, "maxcooldown": 10000, "animation": "laugh" },
+					{ "code": "idle", "priority": 1.2, "minduration": 2500, "maxduration": 2500, "mincooldown": 5000, "maxcooldown": 30000, "animation": "idle2" },
+					{
+						"code": "wander", "priority": 1.0, "movespeed": 0.01,
+						"animation": "Walk", "wanderChance": 0.005,
+						"maxDistanceToSpawn": 4, "wanderRangeMin": 1, "wanderRangeMax": 3,
+						"teleportWhenOutOfRange": true, "teleportInGameHours": 1
+					},
+					{ "code": "lookaround", "priority": 0.5 }
+				]
+			},
+			{ "code": "conversable", "dialogue": "seafarer:config/dialogue/dawnmarie" }
+		]
+	},
+	"sounds": {}
+}

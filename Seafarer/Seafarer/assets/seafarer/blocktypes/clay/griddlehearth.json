@@ -1,0 +1,116 @@
+{
+    code: "griddlehearth",
+    class: "BlockGriddleHearth",
+    entityClass: "GriddleHearthEntity",
+
+    variantgroups: [
+        { code: "side", loadFromProperties: "abstract/horizontalorientation" },
+        { code: "material", states: ["clay", "copper", "bronze", "tinbronze", "bismuthbronze", "blackbronze", "iron", "steel"] }
+    ],
+
+    shapeByType: {
+        "*-north-*": { base: "seafarer:block/clay/griddlehearth-combined", rotateY: 0 },
+        "*-east-*": { base: "seafarer:block/clay/griddlehearth-combined", rotateY: 270 },
+        "*-south-*": { base: "seafarer:block/clay/griddlehearth-combined", rotateY: 180 },
+        "*-west-*": { base: "seafarer:block/clay/griddlehearth-combined", rotateY: 90 }
+    },
+
+    texturesByType: {
+        "*-clay": {
+            "stone": { base: "game:block/stone/rock/granite1" },
+            "clay": { base: "game:block/clay/hardened/fire" },
+            "griddle": { base: "game:block/clay/hardened/fire" },
+            "fuel": { base: "game:block/wood/debarked/oak" },
+            "null": { base: "game:block/stone/rock/granite1" }
+        },
+        "*-copper": {
+            "stone": { base: "game:block/stone/rock/granite1" },
+            "clay": { base: "game:block/clay/hardened/fire" },
+            "griddle": { base: "game:block/metal/sheet/copper1" },
+            "fuel": { base: "game:block/wood/debarked/oak" },
+            "null": { base: "game:block/stone/rock/granite1" }
+        },
+        "*-bronze": {
+            "stone": { base: "game:block/stone/rock/granite1" },
+            "clay": { base: "game:block/clay/hardened/fire" },
+            "griddle": { base: "game:block/metal/sheet/tinbronze1" },
+            "fuel": { base: "game:block/wood/debarked/oak" },
+            "null": { base: "game:block/stone/rock/granite1" }
+        },
+        "*-tinbronze": {
+            "stone": { base: "game:block/stone/rock/granite1" },
+            "clay": { base: "game:block/clay/hardened/fire" },
+            "griddle": { base: "game:block/metal/sheet/tinbronze1" },
+            "fuel": { base: "game:block/wood/debarked/oak" },
+            "null": { base: "game:block/stone/rock/granite1" }
+        },
+        "*-bismuthbronze": {
+            "stone": { base: "game:block/stone/rock/granite1" },
+            "clay": { base: "game:block/clay/hardened/fire" },
+            "griddle": { base: "game:block/metal/sheet/bismuthbronze1" },
+            "fuel": { base: "game:block/wood/debarked/oak" },
+            "null": { base: "game:block/stone/rock/granite1" }
+        },
+        "*-blackbronze": {
+            "stone": { base: "game:block/stone/rock/granite1" },
+            "clay": { base: "game:block/clay/hardened/fire" },
+            "griddle": { base: "game:block/metal/sheet/blackbronze1" },
+            "fuel": { base: "game:block/wood/debarked/oak" },
+            "null": { base: "game:block/stone/rock/granite1" }
+        },
+        "*-iron": {
+            "stone": { base: "game:block/stone/rock/granite1" },
+            "clay": { base: "game:block/clay/hardened/fire" },
+            "griddle": { base: "game:block/metal/sheet/iron1" },
+            "fuel": { base: "game:block/wood/debarked/oak" },
+            "null": { base: "game:block/stone/rock/granite1" }
+        },
+        "*-steel": {
+            "stone": { base: "game:block/stone/rock/granite1" },
+            "clay": { base: "game:block/clay/hardened/fire" },
+            "griddle": { base: "game:block/metal/sheet/steel1" },
+            "fuel": { base: "game:block/wood/debarked/oak" },
+            "null": { base: "game:block/stone/rock/granite1" }
+        }
+    },
+
+    drawtype: "JSON",
+    renderPass: "OpaqueNoCull",
+
+    creativeinventory: {
+        "general": ["griddlehearth-north-clay", "griddlehearth-north-iron"],
+        "seafarer": ["griddlehearth-north-clay", "griddlehearth-north-iron"]
+    },
+
+    collisionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.3125, z2: 1 },
+    selectionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.3125, z2: 1 },
+
+    drops: [
+        { type: "block", code: "seafarer:griddlehearthbase-north" }
+    ],
+
+    attributes: {
+        hearthFuelShape: "seafarer:block/clay/griddlehearth-fuel"
+    },
+
+    sounds: {
+        place: "game:block/stone",
+        break: "game:block/stone",
+        hit: "game:block/stone"
+    },
+
+    blockmaterial: "Stone",
+    resistance: 3,
+    lightAbsorption: 0,
+    sidesolid: { all: false },
+    sideopaque: { all: false },
+
+    guiTransform: {
+        origin: { x: 0.5, y: 0.15, z: 0.5 },
+        scale: 2.5
+    },
+    groundTransform: {
+        origin: { x: 0.5, y: 0, z: 0.5 },
+        scale: 3
+    }
+}

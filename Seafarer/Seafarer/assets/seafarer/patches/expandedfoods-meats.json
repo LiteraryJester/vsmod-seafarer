@@ -1,0 +1,315 @@
+[
+	// ==========================================
+	// Expand slackedmeat form variants when EF is installed
+	// ==========================================
+	{
+		"op": "replace", "path": "/variantgroups/1/states",
+		"value": ["whole", "cut", "smashed", "nugget", "tenderpartbaked", "tender", "tendercharred", "nuggetpartbaked", "nuggetcooked", "nuggetcharred"],
+		"file": "seafarer:itemtypes/food/slackedmeat.json",
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Add EF shapes (smashed/nugget use expandedfoods models)
+	// ==========================================
+	{
+		"op": "add", "path": "/shapeByType/@*-(smashed)",
+		"value": { "base": "expandedfoods:item/food/meat/{type}-smash" },
+		"file": "seafarer:itemtypes/food/slackedmeat.json",
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"op": "add", "path": "/shapeByType/@*-(nugget)",
+		"value": { "base": "expandedfoods:item/food/meat/{type}-nugget" },
+		"file": "seafarer:itemtypes/food/slackedmeat.json",
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"op": "add", "path": "/shapeByType/@*-(nuggetpartbaked|nuggetcooked|nuggetcharred)",
+		"value": { "base": "expandedfoods:item/food/meat/{type}-cooked" },
+		"file": "seafarer:itemtypes/food/slackedmeat.json",
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Add bakingPropertiesByType (EF only)
+	// ==========================================
+	{
+		"op": "add", "path": "/attributes/bakingPropertiesByType",
+		"value": {
+			"*-cut": {
+				"temp": 150, "levelFrom": 0.0, "levelTo": 0.25,
+				"startScaleY": 1, "endScaleY": 1,
+				"resultCode": "seafarer:slackedmeat-{type}-tenderpartbaked"
+			},
+			"*-tenderpartbaked": {
+				"temp": 150, "levelFrom": 0.25, "levelTo": 0.5,
+				"startScaleY": 1.0, "endScaleY": 1.0,
+				"resultCode": "seafarer:slackedmeat-{type}-tender",
+				"initialCode": "seafarer:slackedmeat-{type}-cut"
+			},
+			"*-tender": {
+				"temp": 150, "levelFrom": 0.5, "levelTo": 0.75,
+				"startScaleY": 1.0, "endScaleY": 1.0,
+				"resultCode": "seafarer:slackedmeat-{type}-tendercharred",
+				"initialCode": "seafarer:slackedmeat-{type}-tenderpartbaked"
+			},
+			"*-tendercharred": {
+				"temp": 150, "levelFrom": 0.75, "levelTo": 1.0,
+				"startScaleY": 1.0, "endScaleY": 0.9,
+				"initialCode": "seafarer:slackedmeat-{type}-tender"
+			},
+			"*-nugget": {
+				"temp": 150, "levelFrom": 0.0, "levelTo": 0.25,
+				"startScaleY": 1.0, "endScaleY": 1.0,
+				"resultCode": "seafarer:slackedmeat-{type}-nuggetpartbaked"
+			},
+			"*-nuggetpartbaked": {
+				"temp": 150, "levelFrom": 0.25, "levelTo": 0.5,
+				"startScaleY": 1.0, "endScaleY": 1.0,
+				"resultCode": "seafarer:slackedmeat-{type}-nuggetcooked",
+				"initialCode": "seafarer:slackedmeat-{type}-nugget"
+			},
+			"*-nuggetcooked": {
+				"temp": 150, "levelFrom": 0.5, "levelTo": 0.75,
+				"startScaleY": 1.0, "endScaleY": 1.0,
+				"resultCode": "seafarer:slackedmeat-{type}-nuggetcharred",
+				"initialCode": "seafarer:slackedmeat-{type}-nuggetpartbaked"
+			},
+			"*-nuggetcharred": {
+				"temp": 150, "levelFrom": 0.75, "levelTo": 1.0,
+				"startScaleY": 1.0, "endScaleY": 0.9,
+				"initialCode": "seafarer:slackedmeat-{type}-nuggetcooked"
+			}
+		},
+		"file": "seafarer:itemtypes/food/slackedmeat.json",
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Add EF nutrition for extra forms
+	// ==========================================
+	{
+		"op": "addmerge", "path": "/nutritionPropsByType",
+		"value": {
+			"@*-bushmeat-(smashed|nugget)": { "satiety": 140, "foodcategory": "Protein" },
+			"@*-redmeat-(smashed|nugget)": { "satiety": 300, "foodcategory": "Protein" },
+			"@*-poultry-(smashed|nugget)": { "satiety": 220, "foodcategory": "Protein" },
+			"@*-fish-(smashed|nugget)": { "satiety": 180, "foodcategory": "Protein" },
+
+			"@*-bushmeat-(tenderpartbaked|nuggetpartbaked)": { "satiety": 160, "health": 0.5, "foodcategory": "Protein" },
+			"@*-redmeat-(tenderpartbaked|nuggetpartbaked)": { "satiety": 340, "health": 0.5, "foodcategory": "Protein" },
+			"@*-poultry-(tenderpartbaked|nuggetpartbaked)": { "satiety": 250, "health": 0.5, "foodcategory": "Protein" },
+			"@*-fish-(tenderpartbaked|nuggetpartbaked)": { "satiety": 200, "health": 0.5, "foodcategory": "Protein" },
+
+			"@*-bushmeat-(tender|nuggetcooked)": { "satiety": 180, "health": 0.5, "foodcategory": "Protein" },
+			"@*-redmeat-(tender|nuggetcooked)": { "satiety": 370, "health": 0.5, "foodcategory": "Protein" },
+			"@*-poultry-(tender|nuggetcooked)": { "satiety": 280, "health": 0.5, "foodcategory": "Protein" },
+			"@*-fish-(tender|nuggetcooked)": { "satiety": 220, "health": 0.5, "foodcategory": "Protein" },
+
+			"@*-bushmeat-(tendercharred|nuggetcharred)": { "satiety": 170, "health": 0.5, "foodcategory": "Protein" },
+			"@*-redmeat-(tendercharred|nuggetcharred)": { "satiety": 350, "health": 0.5, "foodcategory": "Protein" },
+			"@*-poultry-(tendercharred|nuggetcharred)": { "satiety": 260, "health": 0.5, "foodcategory": "Protein" },
+			"@*-fish-(tendercharred|nuggetcharred)": { "satiety": 210, "health": 0.5, "foodcategory": "Protein" }
+		},
+		"file": "seafarer:itemtypes/food/slackedmeat.json",
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Add EF nutritionPropsWhenInMeal for extra forms
+	// ==========================================
+	{
+		"op": "addmerge", "path": "/attributes/nutritionPropsWhenInMealByType",
+		"value": {
+			"@*-bushmeat-(smashed|nugget)": { "satiety": 200, "foodcategory": "Protein" },
+			"@*-redmeat-(smashed|nugget)": { "satiety": 400, "foodcategory": "Protein" },
+			"@*-poultry-(smashed|nugget)": { "satiety": 300, "foodcategory": "Protein" },
+			"@*-fish-(smashed|nugget)": { "satiety": 260, "foodcategory": "Protein" }
+		},
+		"file": "seafarer:itemtypes/food/slackedmeat.json",
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Add EF inPieProperties for extra forms
+	// ==========================================
+	{
+		"op": "addmerge", "path": "/attributes/inPiePropertiesByType",
+		"value": {
+			"@*-redmeat-(smashed|nugget)": { "texture": "game:block/food/pie/fill-redmeat", "partType": "Filling" },
+			"@*-bushmeat-(smashed|nugget)": { "texture": "game:block/food/pie/fill-bushmeat", "partType": "Filling" },
+			"@*-poultry-(smashed|nugget)": { "texture": "game:block/food/pie/fill-poultry", "partType": "Filling" }
+		},
+		"file": "seafarer:itemtypes/food/slackedmeat.json",
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Add EF perish transitions for extra forms
+	// ==========================================
+	{
+		"op": "addmerge", "path": "/transitionablePropsByType",
+		"value": {
+			"@*-(smashed|nugget)": [{
+				"type": "Perish",
+				"freshHours": { "avg": 120 },
+				"transitionHours": { "avg": 48 },
+				"transitionedStack": { "type": "item", "code": "game:rot" },
+				"transitionRatio": 1
+			}],
+			"@*-(tenderpartbaked|tender|nuggetpartbaked|nuggetcooked)": [{
+				"type": "Perish",
+				"freshHours": { "avg": 96 },
+				"transitionHours": { "avg": 36 },
+				"transitionedStack": { "type": "item", "code": "game:rot" },
+				"transitionRatio": 1
+			}],
+			"@*-(tendercharred|nuggetcharred)": [{
+				"type": "Perish",
+				"freshHours": { "avg": 192 },
+				"transitionHours": { "avg": 48 },
+				"transitionedStack": { "type": "item", "code": "game:rot" },
+				"transitionRatio": 1
+			}]
+		},
+		"file": "seafarer:itemtypes/food/slackedmeat.json",
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Add EF combustibleProps for extra forms
+	// ==========================================
+	{
+		"op": "add", "path": "/combustiblePropsByType",
+		"value": {
+			"@*-(cut|tenderpartbaked|tender)": {
+				"meltingPoint": 150, "meltingDuration": 30,
+				"smeltedRatio": 1, "smeltingType": "cook",
+				"smeltedStack": { "type": "item", "code": "slackedmeat-{type}-tendercharred" },
+				"requiresContainer": false
+			},
+			"@*-(nugget|nuggetpartbaked|nuggetcooked)": {
+				"meltingPoint": 150, "meltingDuration": 30,
+				"smeltedRatio": 1, "smeltingType": "cook",
+				"smeltedStack": { "type": "item", "code": "slackedmeat-{type}-nuggetcharred" },
+				"requiresContainer": false
+			}
+		},
+		"file": "seafarer:itemtypes/food/slackedmeat.json",
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Add EF display/gui transforms for extra forms
+	// ==========================================
+	{
+		"op": "addmerge", "path": "/attributes/onDisplayTransformByType",
+		"value": {
+			"@*-redmeat-(tenderpartbaked|tender|tendercharred)": {
+				"translation": { "x": 0.05, "y": 0, "z": 0.05 },
+				"scale": 1
+			},
+			"@*-(smashed|nugget|nuggetpartbaked|nuggetcooked|nuggetcharred)": {
+				"translation": { "x": 0, "y": 0.25, "z": 0 },
+				"scale": 1.5
+			}
+		},
+		"file": "seafarer:itemtypes/food/slackedmeat.json",
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"op": "addmerge", "path": "/guiTransformByType",
+		"value": {
+			"@*-(smashed|nugget|nuggetpartbaked|nuggetcooked|nuggetcharred)": {
+				"rotate": false,
+				"translation": { "x": 0.0, "y": 0, "z": 0 },
+				"rotation": { "x": 171, "y": -122, "z": 28 },
+				"origin": { "x": 0.43, "y": 0.04, "z": 0.53 },
+				"scale": 7
+			},
+			"@*-redmeat-(tenderpartbaked|tender|tendercharred)": {
+				"rotate": false,
+				"translation": { "x": 10.5, "y": 5, "z": 0 },
+				"rotation": { "x": 171, "y": -122, "z": 33 },
+				"origin": { "x": 0.4, "y": 0.08, "z": 0.5 },
+				"scale": 4.72
+			}
+		},
+		"file": "seafarer:itemtypes/food/slackedmeat.json",
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"op": "addmerge", "path": "/tpHandTransformByType",
+		"value": {
+			"@*-(smashed|nugget|nuggetpartbaked|nuggetcooked|nuggetcharred)": {
+				"translation": { "x": 0.05, "y": -0.05, "z": 0.1 },
+				"rotation": { "x": 1, "y": 9, "z": -11 },
+				"origin": { "x": 0.21, "y": -0.2, "z": 0.15 },
+				"scale": 1
+			}
+		},
+		"file": "seafarer:itemtypes/food/slackedmeat.json",
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Add smashed/nugget prep recipes for slackedmeat (EF only)
+	// ==========================================
+	{
+		"op": "add", "path": "/-",
+		"value": {
+			"ingredientPattern": "H,M", "recipeGroup": 3,
+			"ingredients": {
+				"H": { "type": "item", "code": "game:hammer-*", "isTool": true },
+				"M": { "type": "item", "code": "seafarer:slackedmeat-*-whole", "name": "meat" }
+			},
+			"width": 1, "height": 2,
+			"output": { "type": "item", "code": "seafarer:slackedmeat-{meat}-smashed" }
+		},
+		"file": "seafarer:recipes/grid/slackedmeatprep.json",
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"op": "add", "path": "/-",
+		"value": {
+			"ingredientPattern": "H,M", "recipeGroup": 4,
+			"ingredients": {
+				"H": { "type": "item", "code": "game:stone-*", "name": "stone" },
+				"M": { "type": "item", "code": "seafarer:slackedmeat-*-whole", "name": "meat" }
+			},
+			"width": 1, "height": 2,
+			"output": { "type": "item", "code": "seafarer:slackedmeat-{meat}-smashed" }
+		},
+		"file": "seafarer:recipes/grid/slackedmeatprep.json",
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"op": "add", "path": "/-",
+		"value": {
+			"ingredientPattern": "KM", "recipeGroup": 5,
+			"ingredients": {
+				"K": { "type": "item", "code": "game:knife-*", "isTool": true },
+				"M": { "type": "item", "code": "seafarer:slackedmeat-*-smashed", "name": "meat" }
+			},
+			"width": 2, "height": 1, "shapeless": true,
+			"output": { "type": "item", "code": "seafarer:slackedmeat-{meat}-nugget" }
+		},
+		"file": "seafarer:recipes/grid/slackedmeatprep.json",
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"op": "add", "path": "/-",
+		"value": {
+			"ingredientPattern": "KM", "recipeGroup": 6,
+			"ingredients": {
+				"K": { "type": "item", "code": "game:cleaver-*", "isTool": true },
+				"M": { "type": "item", "code": "seafarer:slackedmeat-*-smashed", "name": "meat" }
+			},
+			"width": 2, "height": 1, "shapeless": true,
+			"output": { "type": "item", "code": "seafarer:slackedmeat-{meat}-nugget" }
+		},
+		"file": "seafarer:recipes/grid/slackedmeatprep.json",
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	}
+]

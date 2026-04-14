@@ -1,0 +1,9 @@
+{
+    ingredients: [
+        { type: "item", code: "game:fishfillet-raw" }
+    ],
+    output: { type: "item", code: "seafarer:searedfish" },
+    cookingTemp: 150,
+    cookingDuration: 40,
+    minMaterial: "clay"
+}

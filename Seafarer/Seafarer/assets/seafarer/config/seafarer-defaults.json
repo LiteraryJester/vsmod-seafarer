@@ -1,0 +1,61 @@
+{
+	"dryingFrame": {
+		"rainRotMultiplier": 2.0,
+		"windDryMultiplier": 30.0,
+		"weatherCheckIntervalMs": 3000,
+		"rainThreshold": 0.05,
+		"enableRainRot": true,
+		"enableWindDrying": true,
+		"dryingSpeedMultiplier": 10.0
+	},
+	"saltPan": {
+		"enabled": true,
+		"capacityLitres": 10.0,
+		"baseEvapRatePerHour": 0.208,
+		"saltYieldPerLitre": 0.4,
+		"weatherCheckIntervalMs": 3000,
+		"rainThreshold": 0.05,
+		"minEvaporationTemperature": 0.0,
+		"temperatureScaleBase": 20.0,
+		"maxTemperatureMultiplier": 2.0
+	},
+	"griddle": {
+		"cookingTickIntervalMs": 500,
+		"cookSpeedClay": 1.0,
+		"cookSpeedCopper": 1.5,
+		"cookSpeedBronze": 1.75,
+		"cookSpeedIron": 2.0,
+		"cookSpeedSteel": 2.0
+	},
+	"exposure": {
+		"enabled": true,
+		"heatstrokeEnabled": true,
+		"frostbiteEnabled": true,
+		"heatThreshold": 33.0,
+		"coldThreshold": 0.0,
+		"accumulationRatePerHour": 0.01,
+		"decayRatePerHour": 0.004,
+		"windAccumulationMultiplier": 0.5,
+		"healingExposureReduction": 0.01,
+		"tier1Threshold": 0.4,
+		"tier2Threshold": 0.7,
+		"tier3Threshold": 1.0,
+		"heatstrokeT1SpeedPenalty": 0.1,
+		"heatstrokeT1DamageTakenIncrease": 0.15,
+		"heatstrokeT2HungerRateMultiplier": 1.5,
+		"heatstrokeT2SatietyPenalty": 0.5,
+		"heatstrokeT3SpeedPenalty": 0.35,
+		"heatstrokeT3DamagePerTick": 0.5,
+		"heatstrokeT3StabilityOffset": -0.5,
+		"frostbiteT1MaxHealthReduction": 3.0,
+		"frostbiteT2MaxHealthReduction": 6.0,
+		"frostbiteT2ItemDropChance": 0.05,
+		"frostbiteT3MaxHealthReduction": 10.0,
+		"frostbiteT3ItemDropChance": 0.15,
+		"frostbiteT3DamagePerTick": 0.5,
+		"hodThirstMultiplierPerTier": 0.25
+	},
+	"mudRake": {
+		"dropRollsPerBlock":3
+	}
+}

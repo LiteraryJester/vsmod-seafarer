@@ -1,0 +1,40 @@
+[
+  {
+    "ingredientPattern": "K,M",
+    "recipeGroup": 1,
+    "ingredients": {
+      "K": { "type": "item", "code": "game:knife-*", "isTool": true },
+      "M": {
+        "type": "item",
+        "code": "seafarer:driedsaltedmeat-*-whole",
+        "name": "meat"
+      }
+    },
+    "width": 1,
+    "height": 2,
+    "shapeless": true,
+    "output": {
+      "type": "item",
+      "code": "seafarer:driedsaltedmeat-{meat}-cut"
+    }
+  },
+  {
+    "ingredientPattern": "K,M",
+    "recipeGroup": 2,
+    "ingredients": {
+      "K": { "type": "item", "code": "game:cleaver-*", "isTool": true },
+      "M": {
+        "type": "item",
+        "code": "seafarer:driedsaltedmeat-*-whole",
+        "name": "meat"
+      }
+    },
+    "width": 1,
+    "height": 2,
+    "shapeless": true,
+    "output": {
+      "type": "item",
+      "code": "seafarer:driedsaltedmeat-{meat}-cut"
+    }
+  }
+]

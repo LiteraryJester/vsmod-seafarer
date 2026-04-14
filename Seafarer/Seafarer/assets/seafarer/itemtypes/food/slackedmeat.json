@@ -1,0 +1,186 @@
+{
+  "code": "slackedmeat",
+  "maxstacksize": 64,
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "Quadrants",
+        "collisionBox": {
+          "x1": 0,
+          "y1": 0,
+          "z1": 0,
+          "x2": 1,
+          "y2": 0.125,
+          "z2": 1
+        }
+      }
+    }
+  ],
+  "attributes": {
+    "foodTags": ["meat"],
+    "handbook": {
+      "groupBy": ["slackedmeat-*"]
+    },
+    "displaycaseable": true,
+    "shelvable": true,
+    "displayable": {
+      "shelf": {
+        "size": { "width": 6, "height": 1, "length": 4 },
+        "transform": {
+          "translation": { "x": 0.06, "y": 0, "z": 0.03125 }
+        }
+      }
+    },
+    "inFirePitProps": {
+      "transform": {
+        "scale": 0.9,
+        "origin": { "x": 0.5, "y": 0.0625, "z": 0.5 },
+        "translation": { "x": 0.03125, "y": 0.3125, "z": 0 },
+        "rotation": { "x": 0, "y": 53, "z": 90 }
+      },
+      "useFirepitModel": "Spit"
+    },
+    "onDisplayTransformByType": {
+      "@*-redmeat-(whole|cut)": {
+        "translation": { "x": 0.05, "y": 0, "z": 0.05 },
+        "scale": 1
+      },
+      "*": {
+        "translation": { "x": 0, "y": 0, "z": 0 },
+        "scale": 1
+      }
+    },
+    "inPiePropertiesByType": {
+      "@*-redmeat-(whole|cut)": {
+        "texture": "game:block/food/pie/fill-redmeat",
+        "partType": "Filling"
+      },
+      "@*-bushmeat-(whole|cut)": {
+        "texture": "game:block/food/pie/fill-bushmeat",
+        "partType": "Filling"
+      },
+      "@*-poultry-(whole|cut)": {
+        "texture": "game:block/food/pie/fill-poultry",
+        "partType": "Filling"
+      }
+    },
+    "nutritionPropsWhenInMealByType": {
+      "@*-bushmeat-(whole|cut)": { "satiety": 200, "foodcategory": "Protein" },
+      "@*-redmeat-(whole|cut)": { "satiety": 400, "foodcategory": "Protein" },
+      "@*-poultry-(whole|cut)": { "satiety": 300, "foodcategory": "Protein" },
+      "@*-fish-(whole|cut)": { "satiety": 260, "foodcategory": "Protein" },
+      "@*-premiumfish-(whole|cut)": { "satiety": 260, "foodcategory": "Protein" }
+    },
+    "meatHookTransformByType": {
+      "@*-poultry-(whole|cut)": {
+        "translation": { "x": -0.01, "y": -0.8, "z": -0.05 },
+        "rotation": { "x": 0, "y": -90, "z": -91 },
+        "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+        "scale": 1
+      },
+      "@*-redmeat-(whole|cut)": {
+        "translation": { "x": 0.025, "y": -0.8, "z": 0.0 },
+        "rotation": { "x": -90, "y": 90, "z": 0 },
+        "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+        "scale": 1
+      },
+      "@*-bushmeat-(whole|cut)": {
+        "translation": { "x": 0, "y": -0.8, "z": -0.02 },
+        "rotation": { "x": 0, "y": -90, "z": 90 },
+        "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+        "scale": 1
+      }
+    }
+  },
+  "variantgroups": [
+    { "code": "type", "states": ["bushmeat", "redmeat", "poultry", "fish", "premiumfish"] },
+    { "code": "form", "states": ["whole", "cut"] }
+  ],
+  "shapeByType": {
+    "*-redmeat-*": { "base": "game:item/food/meat/red" },
+    "*-premiumfish-*": { "base": "game:item/food/meat/fish" },
+    "*": { "base": "game:item/food/meat/{type}" }
+  },
+  "textures": {
+    "meat": { "base": "game:item/food/meat/raw" }
+  },
+  "creativeinventoryByType": {
+    "*-whole": { "general": ["*"], "items": ["*"], "seafarer": ["*"] },
+    "*": { "seafarer": ["*"] }
+  },
+  "nutritionPropsByType": {
+    "*-bushmeat-whole": { "satiety": 140, "foodcategory": "Protein" },
+    "*-redmeat-whole": { "satiety": 300, "foodcategory": "Protein" },
+    "*-poultry-whole": { "satiety": 220, "foodcategory": "Protein" },
+    "*-fish-whole": { "satiety": 180, "foodcategory": "Protein" },
+
+    "*-bushmeat-cut": { "satiety": 140, "foodcategory": "Protein" },
+    "*-redmeat-cut": { "satiety": 300, "foodcategory": "Protein" },
+    "*-poultry-cut": { "satiety": 220, "foodcategory": "Protein" },
+    "*-fish-cut": { "satiety": 180, "foodcategory": "Protein" },
+    "*-premiumfish-whole": { "satiety": 180, "foodcategory": "Protein" },
+    "*-premiumfish-cut": { "satiety": 180, "foodcategory": "Protein" }
+  },
+  "transitionablePropsByType": {
+    "*-whole": [
+      {
+        "type": "Perish",
+        "freshHours": { "avg": 168 },
+        "transitionHours": { "avg": 72 },
+        "transitionedStack": { "type": "item", "code": "game:rot" },
+        "transitionRatio": 1
+      }
+    ],
+    "*-cut": [
+      {
+        "type": "Perish",
+        "freshHours": { "avg": 120 },
+        "transitionHours": { "avg": 48 },
+        "transitionedStack": { "type": "item", "code": "game:rot" },
+        "transitionRatio": 1
+      }
+    ]
+  },
+  "combustiblePropsByType": {
+    "@*-(whole|cut)": {
+      "meltingPoint": 150,
+      "meltingDuration": 30,
+      "smeltedRatio": 1,
+      "smeltingType": "cook",
+      "smeltedStack": { "type": "item", "code": "seafarer:searedslackedmeat-{type}" },
+      "requiresContainer": false
+    }
+  },
+  "materialDensity": 600,
+  "guiTransformByType": {
+    "@*-redmeat-(whole|cut)": {
+      "rotate": false,
+      "translation": { "x": 10.5, "y": 5, "z": 0 },
+      "rotation": { "x": 171, "y": -122, "z": 33 },
+      "origin": { "x": 0.4, "y": 0.08, "z": 0.5 },
+      "scale": 4.72
+    },
+    "*": {
+      "rotate": false,
+      "translation": { "x": 0.5, "y": 0, "z": 0 },
+      "rotation": { "x": 171, "y": -122, "z": 28 },
+      "origin": { "x": 0.5, "y": 0.05, "z": 0.53 },
+      "scale": 4.3
+    }
+  },
+  "tpHandTransformByType": {
+    "*": {
+      "translation": { "x": -0.04, "y": 0.26, "z": -0.04 },
+      "rotation": { "x": -78, "y": 15, "z": 0 },
+      "origin": { "x": 0.23, "y": 0, "z": 0.13 },
+      "scale": 0.92
+    }
+  },
+  "groundTransform": {
+    "translation": { "x": 0, "y": 0, "z": 0 },
+    "rotation": { "x": 180, "y": 33, "z": -180 },
+    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+    "scale": 5
+  }
+}

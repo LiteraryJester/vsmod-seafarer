@@ -1,0 +1,81 @@
+{
+	code: "burrito",
+	class: "BlockBurrito",
+	entityClass: "BlockEntityBurrito",
+	behaviors: [
+		{ name: "UnstableFalling" },
+		{ name: "SneakPlacing" },
+		{ name: "RightClickPickup" }
+	],
+	maxstacksize: 8,
+	variantgroups: [
+		{ code: "state", states: ["raw", "cooked"] }
+	],
+	shape: { base: "seafarer:block/food/burrito" },
+	texturesByType: {
+		"*-raw": {
+			wrap: { base: "seafarer:item/food/grain/tortilla" }
+		},
+		"*-cooked": {
+			wrap: { base: "seafarer:item/food/grain/tortillacooked" }
+		}
+	},
+	creativeinventory: { "general": [""], "items": [""], "seafarer": [""] },
+	creativeinventoryStacksByType: {
+		"burrito-raw": [
+			{
+				tabs: [ "general" ],
+				stacks: [
+					{ type: "block", code: "seafarer:burrito-raw" }
+				]
+			}
+		]
+	},
+	attributes: {
+		handbook: {
+			groupBy: ["burrito-*"]
+		}
+	},
+	transitionablePropsByType: {
+		"*-raw": [{
+			type: "Perish",
+			freshHours: { avg: 48 },
+			transitionHours: { avg: 36 },
+			transitionedStack: { type: "item", code: "game:rot" },
+			transitionRatio: 1
+		}],
+		"*-cooked": [{
+			type: "Perish",
+			freshHours: { avg: 192 },
+			transitionHours: { avg: 48 },
+			transitionedStack: { type: "item", code: "game:rot" },
+			transitionRatio: 1
+		}]
+	},
+	materialDensity: 200,
+	sideOpaque: { all: false },
+	sideSolid: { all: false },
+	sideAo: { all: false },
+	emitSideAo: { all: false },
+	collisionSelectionBox: { x1: 0.125, y1: 0, z1: 0.25, x2: 0.875, y2: 0.25, z2: 0.75 },
+	heldTpIdleAnimation: "holdbothhands",
+	drops: [],
+	guiTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: -30, y: -45, z: 0 },
+		origin: { x: 0.5, y: 0.1, z: 0.5 },
+		scale: 3.5
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 0, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 4.5
+	},
+	tpHandTransform: {
+		translation: { x: -0.86, y: -0.14, z: -0.57 },
+		rotation: { x: -49, y: 29, z: -112 },
+		origin: { x: 0.5, y: 0.13, z: 0.5 },
+		scale: 0.7
+	}
+}

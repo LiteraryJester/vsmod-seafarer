@@ -1,0 +1,21 @@
+[
+	{
+		"op": "add",
+		"path": "/combustibleProps",
+		"file": "game:blocktypes/aquatic/seashell.json",
+		"value": {
+			"meltingPoint": 600,
+			"meltingDuration": 30,
+			"smeltedRatio": 1,
+			"smeltingType": "fire",
+			"requiresContainer": false,
+			"smeltedStack": { "type": "item", "code": "lime" }
+		}
+	},
+	{
+		"op": "add",
+		"path": "/behaviors/-",
+		"file": "game:blocktypes/aquatic/seashell.json",
+		"value": { "name": "ShellCrush" }
+	}
+]

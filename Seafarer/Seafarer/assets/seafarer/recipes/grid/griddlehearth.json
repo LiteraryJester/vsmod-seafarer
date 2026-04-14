@@ -1,0 +1,10 @@
+{
+    "ingredientPattern": "S_S,SCS,SSS",
+    "ingredients": {
+        "S": { "type": "item", "code": "game:stone-*", "allowedVariants": ["andesite", "chalk", "chert", "conglomerate", "limestone", "claystone", "granite", "sandstone", "shale", "basalt", "peridotite", "phyllite", "slate", "bauxite", "suevite", "whitemarble", "greenmarble", "redmarble", "kimberlite"] },
+        "C": { "type": "item", "code": "game:clay-*" }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "seafarer:griddlehearthbase-north" }
+}

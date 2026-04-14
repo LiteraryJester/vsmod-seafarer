@@ -1,0 +1,9 @@
+[
+    {
+        "op": "add",
+        "path": "/attributes/carryable",
+        "value": true,
+        "file": "seafarer:blocktypes/clay/claygriddle.json",
+        "dependsOn": [{ "modid": "carryon" }]
+    }
+]
