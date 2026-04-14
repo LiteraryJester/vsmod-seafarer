@@ -3,7 +3,7 @@ using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 /// <summary>
 /// A small liquid container (1L capacity) representing a cracked-open coconut half-shell.

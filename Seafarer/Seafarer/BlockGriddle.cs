@@ -1,6 +1,6 @@
 using Vintagestory.API.Common;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 public class BlockGriddle : Block
 {
@@ -11,7 +11,7 @@ public class BlockGriddle : Block
 
     public float GetCookSpeedMultiplier()
     {
-        return SaltAndSandModSystem.GriddleConfig.GetCookSpeedMultiplier(GetMaterial());
+        return SeafarerModSystem.GriddleConfig.GetCookSpeedMultiplier(GetMaterial());
     }
 
     public bool GetSupportsOil()

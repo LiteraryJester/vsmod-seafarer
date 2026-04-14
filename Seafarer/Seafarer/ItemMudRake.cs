@@ -3,7 +3,7 @@ using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 public class ItemMudRake : Item
 {
@@ -32,7 +32,7 @@ public class ItemMudRake : Item
         // If block had raking drops, roll the table multiple times
         if (dropsJson != null && world.Side == EnumAppSide.Server)
         {
-            var cfg = SaltAndSandModSystem.MudRakeConfig;
+            var cfg = SeafarerModSystem.MudRakeConfig;
             float multiplier = GetDropRateMultiplier();
 
             for (int i = 0; i < cfg.DropRollsPerBlock; i++)

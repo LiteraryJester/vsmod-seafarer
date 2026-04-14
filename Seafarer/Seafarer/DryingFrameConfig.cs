@@ -1,4 +1,4 @@
-namespace SaltAndSand;
+namespace Seafarer;
 
 public class DryingFrameConfig
 {

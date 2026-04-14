@@ -2,7 +2,7 @@ using System.IO;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 public class PrepTableRecipe : IByteSerializable
 {

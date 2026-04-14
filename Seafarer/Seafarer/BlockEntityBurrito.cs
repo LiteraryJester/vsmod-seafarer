@@ -4,7 +4,7 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 public class BlockEntityBurrito : BlockEntity
 {

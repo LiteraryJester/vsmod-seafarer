@@ -1,7 +1,7 @@
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 public class BehaviorPlaceBurrito : CollectibleBehavior
 {

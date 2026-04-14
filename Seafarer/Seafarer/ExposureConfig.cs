@@ -1,4 +1,4 @@
-namespace SaltAndSand;
+namespace Seafarer;
 
 /// <summary>
 /// Configuration for the exposure system. Loaded from ExposureConfig.json.

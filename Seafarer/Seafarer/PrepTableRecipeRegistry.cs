@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using Vintagestory.API.Common;
 using Vintagestory.API.Server;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 public class PrepTableRecipeRegistry : ModSystem
 {

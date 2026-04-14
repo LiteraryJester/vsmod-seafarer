@@ -4,7 +4,7 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.GameContent;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 public class BlockAmphora : BlockLiquidContainerTopOpened
 {

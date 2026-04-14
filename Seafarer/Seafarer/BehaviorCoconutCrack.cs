@@ -6,7 +6,7 @@ using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
 using Vintagestory.GameContent;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 /// <summary>
 /// Custom ground-stored processable behavior for coconuts.

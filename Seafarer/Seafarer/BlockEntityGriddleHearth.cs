@@ -7,7 +7,7 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 public class BlockEntityGriddleHearth : BlockEntityDisplay
 {
@@ -26,7 +26,7 @@ public class BlockEntityGriddleHearth : BlockEntityDisplay
 
     private InventoryGeneric? inventory;
 
-    private GriddleConfig Config => SaltAndSandModSystem.GriddleConfig;
+    private GriddleConfig Config => SeafarerModSystem.GriddleConfig;
 
     public override InventoryBase Inventory => inventory!;
     public override string InventoryClassName => "griddlehearth";

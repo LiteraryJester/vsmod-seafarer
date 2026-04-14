@@ -9,7 +9,7 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 public class BlockBurrito : Block
 {

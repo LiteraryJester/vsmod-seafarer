@@ -1,7 +1,7 @@
 using System.IO;
 using Vintagestory.API.Common;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 public class GriddleRecipe : IByteSerializable
 {

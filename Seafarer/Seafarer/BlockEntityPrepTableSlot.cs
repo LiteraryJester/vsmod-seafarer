@@ -6,7 +6,7 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 /// <summary>
 /// A single-slot display entity for prep table attachment points.

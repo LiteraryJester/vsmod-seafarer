@@ -6,7 +6,7 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 public class BlockEntitySaltPan : BlockEntity
 {
@@ -17,7 +17,7 @@ public class BlockEntitySaltPan : BlockEntity
     private double lastTickTotalHours;
     private int saltAmount;
 
-    private SaltPanConfig Config => SaltAndSandModSystem.SaltPanConfig;
+    private SaltPanConfig Config => SeafarerModSystem.SaltPanConfig;
 
     public override void Initialize(ICoreAPI api)
     {

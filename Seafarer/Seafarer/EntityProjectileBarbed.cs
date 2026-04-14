@@ -3,7 +3,7 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.GameContent;
 
-namespace SaltAndSand
+namespace Seafarer
 {
     public class EntityProjectileBarbed : EntityProjectile
     {

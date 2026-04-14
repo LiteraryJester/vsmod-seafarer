@@ -2,7 +2,7 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.GameContent;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 public class BlockEntityAmphoraStorage : BlockEntityGenericTypedContainer
 {

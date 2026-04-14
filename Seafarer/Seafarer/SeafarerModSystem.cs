@@ -7,9 +7,9 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 
-namespace SaltAndSand
+namespace Seafarer
 {
-    public class SaltAndSandModSystem : ModSystem
+    public class SeafarerModSystem : ModSystem
     {
         public const string ConfigFilename = "SaltAndSandConfig.json";
         private const string HarmonyId = "seafarer";
@@ -53,7 +53,7 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             api.RegisterEntity("EntityProjectileBarbed", typeof(EntityProjectileBarbed));
 
             harmony = new Harmony(HarmonyId);
-            harmony.PatchAll(typeof(SaltAndSandModSystem).Assembly);
+            harmony.PatchAll(typeof(SeafarerModSystem).Assembly);
         }
 
         public override void Dispose()

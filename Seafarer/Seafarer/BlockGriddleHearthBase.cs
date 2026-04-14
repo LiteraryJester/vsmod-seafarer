@@ -1,6 +1,6 @@
 using Vintagestory.API.Common;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 /// <summary>
 /// The empty stone hearth base. When a griddle is placed on it,

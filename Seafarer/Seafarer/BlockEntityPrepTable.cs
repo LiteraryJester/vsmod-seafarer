@@ -4,7 +4,7 @@ using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 /// <summary>
 /// Left (center) block entity — the work area.

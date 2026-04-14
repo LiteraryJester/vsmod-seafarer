@@ -6,7 +6,7 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 /// <summary>
 /// Block entity for the open coconut liquid container.

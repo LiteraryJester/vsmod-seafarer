@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 public class GriddleConfig
 {

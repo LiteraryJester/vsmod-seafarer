@@ -4,7 +4,7 @@ using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 public class EntityBehaviorExposure : EntityBehavior
 {
@@ -20,7 +20,7 @@ public class EntityBehaviorExposure : EntityBehavior
     private BlockPos plrpos = new BlockPos(0);
     private bool hodInstalled;
 
-    private ExposureConfig Config => SaltAndSandModSystem.ExposureConfig;
+    private ExposureConfig Config => SeafarerModSystem.ExposureConfig;
 
     // --- Persisted state via WatchedAttributes ---
 

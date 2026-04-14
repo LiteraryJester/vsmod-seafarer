@@ -1,4 +1,4 @@
-namespace SaltAndSand;
+namespace Seafarer;
 
 /// <summary>
 /// The type of environmental condition currently affecting the player.

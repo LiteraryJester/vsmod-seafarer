@@ -7,7 +7,7 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
-namespace SaltAndSand;
+namespace Seafarer;
 
 public class BlockEntityDryingFrame : BlockEntityDisplay
 {
@@ -20,7 +20,7 @@ public class BlockEntityDryingFrame : BlockEntityDisplay
     public override string InventoryClassName => "dryingframe";
     public override string AttributeTransformCode => "onDryingFrameProps";
 
-    private DryingFrameConfig Config => SaltAndSandModSystem.Config;
+    private DryingFrameConfig Config => SeafarerModSystem.Config;
 
     public BlockEntityDryingFrame()
     {
