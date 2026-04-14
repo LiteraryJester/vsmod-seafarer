@@ -61,9 +61,9 @@ from collections import defaultdict
 # ── Paths ──────────────────────────────────────────────────────────────────────
 
 SCRIPT_DIR = Path(__file__).parent
-MOD_DIALOGUE = SCRIPT_DIR / "SaltAndSand" / "SaltAndSand" / "assets" / "seafarer" / "config" / "dialogue"
+MOD_DIALOGUE = SCRIPT_DIR / "Seafarer" / "Seafarer" / "assets" / "seafarer" / "config" / "dialogue"
 GAME_DIALOGUE = Path("/mnt/d/Development/vs/assets/survival/config/dialogue")
-MOD_LANG = SCRIPT_DIR / "SaltAndSand" / "SaltAndSand" / "assets" / "seafarer" / "lang" / "en.json"
+MOD_LANG = SCRIPT_DIR / "Seafarer" / "Seafarer" / "assets" / "seafarer" / "lang" / "en.json"
 
 # ── Known values ───────────────────────────────────────────────────────────────
 

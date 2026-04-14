@@ -15,7 +15,7 @@ DEFAULT_EF = Path("/mnt/d/Development/vs/existing mods/ExpandedFoods 2.0.0-dev.7
 
 
 def _default_assets_root() -> Path:
-    return Path(__file__).resolve().parents[1] / "SaltAndSand" / "SaltAndSand" / "assets"
+    return Path(__file__).resolve().parents[1] / "Seafarer" / "Seafarer" / "assets"
 
 
 def run(argv: list[str] | None = None) -> int:
