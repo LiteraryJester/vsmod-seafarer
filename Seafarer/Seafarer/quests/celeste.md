@@ -65,7 +65,7 @@
 ## Quest: The Crimson Rose
 
 **Prerequisites:** None.
-**Completion flag:** `entity.crimsonrose-complete`.
+**Completion flag:** `player.quest-seafarer-celeste-crimsonrose-status = "completed"`.
 
 ### Intro
 
@@ -102,7 +102,7 @@
 > "There. Happy? I've told Morgan she can have the lot. And I suppose I can part with a few tools from my collection. You've earned that much."
 
 *Takes:* `seafarer:sealed-chest`.
-*Sets:* `entity.crimsonrose-complete = true`.
+*Completion:* QuestSystem marks `player.quest-seafarer-celeste-crimsonrose-status = "completed"` and fires the quest rewards listed below.
 
 **Rewards:**
 
@@ -120,7 +120,7 @@
 
 ## Dialog Exchange: Rum for a Treasure Map
 
-**Prerequisites:** Crimson Rose complete (`entity.crimsonrose-complete = true`). Player holds 100 portions (1 L) of `seafarer:spiritportion-whiterum` or `-darkrum`.
+**Prerequisites:** Crimson Rose complete (`player.quest-seafarer-celeste-crimsonrose-status = "completed"`). Player holds 100 portions (1 L) of `seafarer:spiritportion-whiterum` or `-darkrum`.
 
 > **Liquid detection note:** the dialog condition checks loose `spiritportion` items; rum stored inside an amphora as `ucontents` is not visible to the `player.inventory` condition. Players need the portion item in hand or on a utility belt.
 
@@ -181,7 +181,7 @@
 ## Quest: Rust Hunter
 
 **Prerequisites:** `entity.celeste-friendly = true` (earned via Crimson Rose, Pirate Tales, or any prior friendship grant).
-**Completion flag:** `entity.rusthunter-complete`.
+**Completion flag:** `player.quest-seafarer-celeste-rusthunter-status = "completed"`.
 
 ### Intro
 
@@ -190,7 +190,13 @@
 *Celeste* (`dialogue-celeste-rusthunter-intro`):
 > "I am. Those rust monsters attack every night. I do my best, but maybe if we thin their numbers it'll help. Bring me their rotten remains as proof -- ten should do."
 
-> **Kill-tracking note:** the dialog engine has no on-kill trigger, so the quest uses drops as proof-of-kill. `game:rot` is the canonical drifter drop and stands in for the "rust monsters" flavor.
+> **Kill tracking:** the `kill` objective type in ProgressionFramework
+> subscribes to `OnEntityDeath` server-side and increments
+> `global.pf:killcount:game:drifter-*` for every drifter that dies. When
+> the quest starts, the current counter value is snapshotted as the
+> player's baseline. Progress = current - baseline. All players with an
+> active Rust Hunter quest share the same counter, but each has their own
+> baseline, so kills only count forward from whenever each player started.
 
 ### Accept
 
@@ -207,12 +213,12 @@
 *Player* (`dialogue-celeste-rusthunter-status`): "How many do I need to kill?"
 
 *Celeste, status* (`dialogue-celeste-rusthunter-statusreport`):
-> "That's {entity.rustkills} of 10 rust monsters. Keep at it."
+> "That's {player.quest-seafarer-celeste-rusthunter-kills-progress} of 10 rust monsters. Keep at it."
 
 *Celeste, per delivery* (`dialogue-celeste-rusthunter-progress`):
 > "Aye, noted. Keep going."
 
-Each delivery takes 1 × `game:rot` and increments `entity.rustkills`. At 10 deliveries `entity.rusthunter-threshold` flips to `true`.
+The quest tracks kills via `global.pf:killcount:game:drifter-*`; progress shown in status dialog is `player.quest-seafarer-celeste-rusthunter-kills-progress` (current − baseline). At 10 kills the quest completion condition is met.
 
 ### Completion
 
@@ -220,6 +226,7 @@ Each delivery takes 1 × `game:rot` and increments `entity.rustkills`. At 10 del
 > "Quieter nights, finally. Here -- I had this tucked away for a rainy day. Consider it earned."
 
 *Gives:* 1 × `seafarer:cutlass-vengeance` (unique black bronze cutlass).
+*Completion:* QuestSystem marks `player.quest-seafarer-celeste-rusthunter-status = "completed"` and fires the quest rewards listed below.
 
 **Rewards:**
 
@@ -238,7 +245,7 @@ Each delivery takes 1 × `game:rot` and increments `entity.rustkills`. At 10 del
 ## Quest: Bear Hunter
 
 **Prerequisites:** `entity.celeste-friendly = true`.
-**Completion flag:** `entity.bearhunter-complete`.
+**Completion flag:** `player.quest-seafarer-celeste-bearhunter-status = "completed"`.
 
 ### Intro
 
@@ -270,17 +277,18 @@ Deliver any three distinct `game:hide-pelt-bear-<type>-complete` items. Each typ
 
 **Per delivery:**
 
-- `takefrominventory` the pelt
-- `awardTrainingXP` `bearhunter` +50 XP
-- Increment `entity.bearhunter-count`
+- Dialog fires `questDeliver` with `{code: "celeste-bearhunter", objective: "<type>"}`; the framework takes the pelt from inventory and completes that per-type objective.
+- Quest objective reward: `awardTrainingXP` `bearhunter` +50 XP.
 - Celeste (`dialogue-celeste-bearhunter-pelt-thanks`): "A fine pelt. I'll find a wall for it."
 
-At count 3, `entity.bearhunter-threshold` flips to `true`.
+Quest JSON has `requiredObjectiveCount: 3`, so the quest completes as soon as any three per-pelt objectives are complete.
 
 ### Completion
 
 *Celeste* (`dialogue-celeste-bearhunter-reward`):
 > "These'll look good on my wall. Barely had anything to wear -- at least now I can bare all."
+
+*Completion:* QuestSystem marks `player.quest-seafarer-celeste-bearhunter-status = "completed"` and fires the quest rewards listed below.
 
 **Rewards:**
 
@@ -304,25 +312,18 @@ At count 3, `entity.bearhunter-threshold` flips to `true`.
 | Variable | Scope | Purpose |
 |----------|-------|---------|
 | `player.hasmetceleste` | player | First meeting flag |
-| `player.celeste-crimsonrose-started` | player | Crimson Rose quest accepted |
-| `player.celeste-rusthunter-started`  | player | Rust Hunter quest accepted |
-| `player.celeste-bearhunter-started`  | player | Bear Hunter quest accepted |
-| `entity.crimsonrose-complete` | entity | Crimson Rose quest complete |
-| `entity.celeste-friendship`   | entity | Friendship counter (0..N) |
-| `entity.celeste-friendly`     | entity | Boolean gate: friendship ≥ 1 |
+| `player.quest-seafarer-celeste-crimsonrose-status` | player | Crimson Rose quest status (active / completed) |
+| `player.quest-seafarer-celeste-rusthunter-status`  | player | Rust Hunter quest status |
+| `player.quest-seafarer-celeste-rusthunter-kills-progress` | player | Rust Hunter progress counter (kills since quest start) |
+| `player.quest-seafarer-celeste-rusthunter-kills-baseline` | player | Server kill counter value when the quest started |
+| `player.quest-seafarer-celeste-bearhunter-status`  | player | Bear Hunter quest status |
+| `player.quest-seafarer-celeste-bearhunter-<type>-status` | player | Per-pelt objective status (type: polar/brown/black/panda/sun) |
+| `entity.celeste-friendship` | entity | Friendship counter on Celeste (0..N) |
+| `entity.celeste-friendly`   | entity | Boolean gate: friendship ≥ 1 |
 | `entity.celeste-piratetales-told` | entity | Pirate Tales shared (one-shot) |
-| `entity.rustkills` | entity | Rust monster kill counter (rot deliveries) |
-| `entity.rusthunter-threshold` | entity | Rust Hunter threshold reached (≥ 10) |
-| `entity.rusthunter-complete` | entity | Rust Hunter quest complete |
-| `entity.bearhunter-polar-delivered` | entity | Polar pelt delivered |
-| `entity.bearhunter-brown-delivered` | entity | Brown pelt delivered |
-| `entity.bearhunter-black-delivered` | entity | Black pelt delivered |
-| `entity.bearhunter-panda-delivered` | entity | Panda pelt delivered |
-| `entity.bearhunter-sun-delivered`   | entity | Sun pelt delivered |
-| `entity.bearhunter-count` | entity | Total distinct bear pelts delivered |
-| `entity.bearhunter-threshold` | entity | Bear Hunter threshold reached (≥ 3) |
-| `entity.bearhunter-complete` | entity | Bear Hunter quest complete |
-| `entity.rebuilding-tier` | entity | Shared Tortuga rebuilding counter |
+| `global.pf:killcount:game:drifter-*` | global | Server-wide drifter kill counter (framework-managed) |
+| `global.rebuilding-tier` | global | Shared Tortuga rebuilding counter |
+| `global.rebuilding-complete` | global | Flag: rebuilding counter reached 4 |
 
 ## Quest Items
 
