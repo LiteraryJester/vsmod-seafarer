@@ -35,18 +35,29 @@
                 { "value": "dialogue-profession", "jumpTo": "profession" },
                 { "value": "dialogue-trade", "jumpTo": "trade" },
                 { "value": "seafarer:dialogue-celeste-maps", "jumpTo": "maps" },
+                // Crimson Rose: not yet started
                 {
                     "value": "seafarer:dialogue-celeste-ask-crimsonrose",
                     "jumpTo": "crimsonrose-intro",
                     "conditions": [
-                        { "variable": "entity.crimsonrose-complete", "isNotValue": "true" }
+                        { "variable": "player.quest-seafarer-celeste-crimsonrose-status", "isNotValue": "active" },
+                        { "variable": "player.quest-seafarer-celeste-crimsonrose-status", "isNotValue": "completed" }
                     ]
                 },
+                // Crimson Rose: active
+                {
+                    "value": "seafarer:dialogue-celeste-ask-crimsonrose",
+                    "jumpTo": "crimsonrose-inprogress",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-celeste-crimsonrose-status", "isValue": "active" }
+                    ]
+                },
+                // Crimson Rose: completed
                 {
                     "value": "seafarer:dialogue-celeste-ask-crimsonrose",
                     "jumpTo": "crimsonrose-done",
                     "conditions": [
-                        { "variable": "entity.crimsonrose-complete", "isValue": "true" }
+                        { "variable": "player.quest-seafarer-celeste-crimsonrose-status", "isValue": "completed" }
                     ]
                 },
 
@@ -55,7 +66,7 @@
                     "value": "seafarer:dialogue-celeste-offer-rum-whiterum",
                     "jumpTo": "rumtrade-whiterum",
                     "conditions": [
-                        { "variable": "entity.crimsonrose-complete", "isValue": "true" },
+                        { "variable": "player.quest-seafarer-celeste-crimsonrose-status", "isValue": "completed" },
                         { "variable": "player.inventory", "isValue": "{type: 'item', code: 'seafarer:spiritportion-whiterum', stacksize: 100}" }
                     ]
                 },
@@ -63,7 +74,7 @@
                     "value": "seafarer:dialogue-celeste-offer-rum-darkrum",
                     "jumpTo": "rumtrade-darkrum",
                     "conditions": [
-                        { "variable": "entity.crimsonrose-complete", "isValue": "true" },
+                        { "variable": "player.quest-seafarer-celeste-crimsonrose-status", "isValue": "completed" },
                         { "variable": "player.inventory", "isValue": "{type: 'item', code: 'seafarer:spiritportion-darkrum', stacksize: 100}" }
                     ]
                 },
@@ -73,7 +84,7 @@
                     "value": "seafarer:dialogue-celeste-ask-pirate-tales",
                     "jumpTo": "piratetales-take-whiterum",
                     "conditions": [
-                        { "variable": "entity.crimsonrose-complete", "isValue": "true" },
+                        { "variable": "player.quest-seafarer-celeste-crimsonrose-status", "isValue": "completed" },
                         { "variable": "entity.celeste-piratetales-told", "isNotValue": "true" },
                         { "variable": "player.inventory", "isValue": "{type: 'item', code: 'seafarer:spiritportion-whiterum', stacksize: 100}" }
                     ]
@@ -82,7 +93,7 @@
                     "value": "seafarer:dialogue-celeste-ask-pirate-tales",
                     "jumpTo": "piratetales-take-darkrum",
                     "conditions": [
-                        { "variable": "entity.crimsonrose-complete", "isValue": "true" },
+                        { "variable": "player.quest-seafarer-celeste-crimsonrose-status", "isValue": "completed" },
                         { "variable": "entity.celeste-piratetales-told", "isNotValue": "true" },
                         { "variable": "player.inventory", "isValue": "{type: 'item', code: 'seafarer:spiritportion-darkrum', stacksize: 100}" }
                     ]
@@ -167,16 +178,7 @@
             "owner": "celeste",
             "type": "talk",
             "text": [{ "value": "seafarer:dialogue-celeste-crimsonrose-intro" }],
-            "jumpTo": "check-crimsonrose-started"
-        },
-        {
-            "code": "check-crimsonrose-started",
-            "owner": "celeste",
-            "type": "condition",
-            "variable": "player.celeste-crimsonrose-started",
-            "isValue": "true",
-            "thenJumpTo": "crimsonrose-inprogress",
-            "elseJumpTo": "crimsonrose-offer"
+            "jumpTo": "crimsonrose-offer"
         },
 
         // Quest Not Started
@@ -193,8 +195,14 @@
             "code": "crimsonrose-start",
             "owner": "celeste",
             "type": "talk",
-            "setVariables": { "player.celeste-crimsonrose-started": "true" },
+            "trigger": "questStart",
+            "triggerdata": { "code": "celeste-crimsonrose" },
             "text": [{ "value": "seafarer:dialogue-celeste-crimsonrose-start" }],
+            "jumpTo": "crimsonrose-give-map"
+        },
+        {
+            "code": "crimsonrose-give-map",
+            "owner": "celeste",
             "trigger": "giveitemstack",
             "triggerdata": {
                 "type": "item",
@@ -234,48 +242,17 @@
             "code": "crimsonrose-deliver",
             "owner": "celeste",
             "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "celeste-crimsonrose", "objective": "chest" },
             "text": [{ "value": "seafarer:dialogue-celeste-crimsonrose-received" }],
-            "trigger": "takefrominventory",
-            "triggerdata": {
-                "type": "item",
-                "code": "seafarer:sealed-chest"
-            },
-            "jumpTo": "crimsonrose-reward-shovel"
+            "jumpTo": "crimsonrose-complete-line"
         },
         {
-            "code": "crimsonrose-reward-shovel",
-            "owner": "celeste",
-            "trigger": "addSellingItem",
-            "triggerdata": {
-                "code": "game:shovel-copper",
-                "type": "item",
-                "stacksize": 1,
-                "stock": { "avg": 2, "var": 1 },
-                "price": { "avg": 5, "var": 1 }
-            },
-            "jumpTo": "crimsonrose-complete"
-        },
-        {
-            "code": "crimsonrose-complete",
+            "code": "crimsonrose-complete-line",
             "owner": "celeste",
             "type": "talk",
-            "setVariables": { "entity.crimsonrose-complete": "true" },
             "text": [{ "value": "seafarer:dialogue-celeste-crimsonrose-complete" }],
-            "jumpTo": "crimsonrose-grant-friendship"
-        },
-        // Crimson Rose grants +1 friendship (sets entity.celeste-friendly on first point)
-        {
-            "code": "crimsonrose-grant-friendship",
-            "owner": "celeste",
-            "trigger": "incrementVariable",
-            "triggerdata": {
-                "scope": "entity",
-                "name": "celeste-friendship",
-                "amount": 1,
-                "thresholdValue": 1,
-                "thresholdVariable": "entity.celeste-friendly"
-            },
-            "jumpTo": "increment-rebuilding-tier"
+            "jumpTo": "main"
         },
 
         // Post-Quest
