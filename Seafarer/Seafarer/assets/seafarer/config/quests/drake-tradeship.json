@@ -132,9 +132,10 @@
     {
       "type": "incrementEntityVariable",
       "variableName": "rebuilding-tier",
+      "variableScope": "global",
       "amount": 1,
       "thresholdValue": 4,
-      "thresholdVariable": "entity.rebuilding-complete"
+      "thresholdVariable": "global.rebuilding-complete"
     }
   ]
 }

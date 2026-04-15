@@ -54,7 +54,7 @@
             "code": "check-blackbronze-rebuilding",
             "owner": "drake",
             "type": "condition",
-            "variable": "entity.rebuilding-complete",
+            "variable": "global.rebuilding-complete",
             "isValue": "true",
             "thenJumpTo": "check-blackbronze-tradeship",
             "elseJumpTo": "main"

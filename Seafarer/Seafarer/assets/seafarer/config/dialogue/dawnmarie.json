@@ -342,11 +342,11 @@
             "owner": "dawnmarie",
             "trigger": "incrementVariable",
             "triggerdata": {
-                "scope": "entity",
+                "scope": "global",
                 "name": "rebuilding-tier",
                 "amount": 1,
                 "thresholdValue": 4,
-                "thresholdVariable": "entity.rebuilding-complete"
+                "thresholdVariable": "global.rebuilding-complete"
             },
             "jumpTo": "main"
         }
