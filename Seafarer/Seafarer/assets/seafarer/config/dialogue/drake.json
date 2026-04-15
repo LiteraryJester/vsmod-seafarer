@@ -431,6 +431,20 @@
             "jumpTo": "tricks-lesson2"
         },
         {
+            "code": "tricks-lesson2",
+            "owner": "drake",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-drake-tricks-lesson2" }],
+            "jumpTo": "tricks-lesson3"
+        },
+        {
+            "code": "tricks-lesson3",
+            "owner": "drake",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-drake-tricks-lesson3" }],
+            "jumpTo": "tricks-tasks"
+        },
+        {
             "code": "tricks-tasks",
             "owner": "drake",
             "type": "talk",
