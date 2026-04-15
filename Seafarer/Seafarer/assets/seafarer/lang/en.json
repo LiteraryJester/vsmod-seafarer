@@ -910,7 +910,7 @@ Need to portage? Strip off all storage and accessories first, then <hk>Shift</hk
 	"dialogue-celeste-deliver-pelt-panda": "A panda bear pelt, head and all.",
 	"dialogue-celeste-deliver-pelt-sun": "A sun bear pelt, head and all.",
 	"dialogue-celeste-bearhunter-status": "How many pelts do you need?",
-	"dialogue-celeste-bearhunter-statusreport": "That's {entity.bearhunter-count} of 3 different pelts. Different bears, mind you.",
+	"dialogue-celeste-bearhunter-statusreport": "Bring me pelts from three different kinds of bear, head and all. Different bears, mind you.",
 	"dialogue-celeste-bearhunter-pelt-thanks": "A fine pelt. I'll find a wall for it.",
 	"dialogue-celeste-bearhunter-reward": "These'll look good on my wall. Barely had anything to wear, at least now I can bare all.",
 	"dialogue-celeste-bearhunter-already-done": "You've earned your stripes, hunter. The wall's full enough.",
