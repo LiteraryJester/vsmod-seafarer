@@ -895,7 +895,7 @@ Need to portage? Strip off all storage and accessories first, then <hk>Shift</hk
 	"dialogue-celeste-rusthunter-start": "Good. Don't come back empty-handed.",
 	"dialogue-celeste-deliver-rot": "I've got more rot for you.",
 	"dialogue-celeste-rusthunter-status": "How many do I need to kill?",
-	"dialogue-celeste-rusthunter-statusreport": "That's {entity.rustkills} of 10 rust monsters. Keep at it.",
+	"dialogue-celeste-rusthunter-statusreport": "That's {player.quest-seafarer-celeste-rusthunter-kills-progress} of 10 rust monsters. Keep at it.",
 	"dialogue-celeste-rusthunter-progress": "Aye, noted. Keep going.",
 	"dialogue-celeste-rusthunter-reward": "Quieter nights, finally. Here, I had this tucked away for a rainy day. Consider it earned.",
 	"dialogue-celeste-rusthunter-already-done": "You've done your part against the rust. The port sleeps easier now.",

@@ -99,20 +99,30 @@
                     ]
                 },
 
-                // Rust Hunter (gated on having earned friendship)
+                // Rust Hunter: not yet started
                 {
                     "value": "seafarer:dialogue-celeste-ask-rusthunter",
                     "jumpTo": "rusthunter-intro",
                     "conditions": [
                         { "variable": "entity.celeste-friendly", "isValue": "true" },
-                        { "variable": "entity.rusthunter-complete", "isNotValue": "true" }
+                        { "variable": "player.quest-seafarer-celeste-rusthunter-status", "isNotValue": "active" },
+                        { "variable": "player.quest-seafarer-celeste-rusthunter-status", "isNotValue": "completed" }
                     ]
                 },
+                // Rust Hunter: active
+                {
+                    "value": "seafarer:dialogue-celeste-ask-rusthunter",
+                    "jumpTo": "rusthunter-inprogress",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-celeste-rusthunter-status", "isValue": "active" }
+                    ]
+                },
+                // Rust Hunter: completed
                 {
                     "value": "seafarer:dialogue-celeste-ask-rusthunter",
                     "jumpTo": "rusthunter-done",
                     "conditions": [
-                        { "variable": "entity.rusthunter-complete", "isValue": "true" }
+                        { "variable": "player.quest-seafarer-celeste-rusthunter-status", "isValue": "completed" }
                     ]
                 },
 
@@ -417,23 +427,14 @@
         },
 
         // =============================================================
-        // Quest: Rust Hunter (bring 10 rot as proof of kills)
+        // Quest: Rust Hunter
         // =============================================================
         {
             "code": "rusthunter-intro",
             "owner": "celeste",
             "type": "talk",
             "text": [{ "value": "seafarer:dialogue-celeste-rusthunter-intro" }],
-            "jumpTo": "check-rusthunter-started"
-        },
-        {
-            "code": "check-rusthunter-started",
-            "owner": "celeste",
-            "type": "condition",
-            "variable": "player.celeste-rusthunter-started",
-            "isValue": "true",
-            "thenJumpTo": "rusthunter-inprogress",
-            "elseJumpTo": "rusthunter-offer"
+            "jumpTo": "rusthunter-offer"
         },
         {
             "code": "rusthunter-offer",
@@ -448,7 +449,8 @@
             "code": "rusthunter-start",
             "owner": "celeste",
             "type": "talk",
-            "setVariables": { "player.celeste-rusthunter-started": "true" },
+            "trigger": "questStart",
+            "triggerdata": { "code": "celeste-rusthunter" },
             "text": [{ "value": "seafarer:dialogue-celeste-rusthunter-start" }],
             "jumpTo": "main"
         },
@@ -457,118 +459,41 @@
             "owner": "player",
             "type": "talk",
             "text": [
-                {
-                    "value": "seafarer:dialogue-celeste-deliver-rot",
-                    "jumpTo": "rusthunter-deliver",
-                    "conditions": [
-                        { "variable": "entity.rusthunter-complete", "isNotValue": "true" },
-                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:rot', stacksize: 1}" }
-                    ]
-                },
-                { "value": "seafarer:dialogue-celeste-rusthunter-status", "jumpTo": "rusthunter-statusreport" },
+                { "value": "seafarer:dialogue-celeste-rusthunter-status", "jumpTo": "rusthunter-check" },
                 { "value": "seafarer:dialogue-goodbye", "jumpTo": "goodbye" }
             ]
         },
         {
-            "code": "rusthunter-statusreport",
+            "code": "rusthunter-check",
+            "owner": "celeste",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "celeste-rusthunter", "objective": "kills" },
+            "text": [{ "value": "seafarer:dialogue-celeste-rusthunter-progress" }],
+            "jumpTo": "check-rusthunter-complete"
+        },
+        {
+            "code": "check-rusthunter-complete",
+            "owner": "celeste",
+            "type": "condition",
+            "variable": "player.quest-seafarer-celeste-rusthunter-status",
+            "isValue": "completed",
+            "thenJumpTo": "rusthunter-reward-line",
+            "elseJumpTo": "rusthunter-status-line"
+        },
+        {
+            "code": "rusthunter-status-line",
             "owner": "celeste",
             "type": "talk",
             "text": [{ "value": "seafarer:dialogue-celeste-rusthunter-statusreport" }],
             "jumpTo": "main"
         },
         {
-            "code": "rusthunter-deliver",
-            "owner": "celeste",
-            "trigger": "takefrominventory",
-            "triggerdata": { "type": "item", "code": "game:rot" },
-            "jumpTo": "rusthunter-increment"
-        },
-        {
-            "code": "rusthunter-increment",
-            "owner": "celeste",
-            "trigger": "incrementVariable",
-            "triggerdata": {
-                "scope": "entity",
-                "name": "rustkills",
-                "amount": 1,
-                "thresholdValue": 10,
-                "thresholdVariable": "entity.rusthunter-threshold"
-            },
-            "jumpTo": "check-rusthunter-done"
-        },
-        {
-            "code": "check-rusthunter-done",
-            "owner": "celeste",
-            "type": "condition",
-            "variable": "entity.rusthunter-threshold",
-            "isValue": "true",
-            "thenJumpTo": "rusthunter-reward-intro",
-            "elseJumpTo": "rusthunter-progress-line"
-        },
-        {
-            "code": "rusthunter-progress-line",
-            "owner": "celeste",
-            "type": "talk",
-            "text": [{ "value": "seafarer:dialogue-celeste-rusthunter-progress" }],
-            "jumpTo": "rusthunter-inprogress"
-        },
-        {
-            "code": "rusthunter-reward-intro",
+            "code": "rusthunter-reward-line",
             "owner": "celeste",
             "type": "talk",
             "text": [{ "value": "seafarer:dialogue-celeste-rusthunter-reward" }],
-            "jumpTo": "rusthunter-give-vengeance"
-        },
-        {
-            "code": "rusthunter-give-vengeance",
-            "owner": "celeste",
-            "trigger": "giveitemstack",
-            "triggerdata": {
-                "type": "item",
-                "code": "seafarer:cutlass-blackbronze",
-                "stacksize": 1
-            },
-            "jumpTo": "rusthunter-add-copper-cutlass"
-        },
-        {
-            "code": "rusthunter-add-copper-cutlass",
-            "owner": "celeste",
-            "trigger": "addSellingItem",
-            "triggerdata": {
-                "code": "seafarer:cutlass-copper",
-                "type": "item",
-                "stacksize": 1,
-                "stock": { "avg": 2, "var": 1 },
-                "price": { "avg": 8, "var": 2 }
-            },
-            "jumpTo": "rusthunter-add-bronze-cutlass"
-        },
-        {
-            "code": "rusthunter-add-bronze-cutlass",
-            "owner": "celeste",
-            "trigger": "addSellingItem",
-            "triggerdata": {
-                "code": "seafarer:cutlass-blackbronze",
-                "type": "item",
-                "stacksize": 1,
-                "stock": { "avg": 1, "var": 1 },
-                "price": { "avg": 14, "var": 3 }
-            },
-            "jumpTo": "rusthunter-complete"
-        },
-        {
-            "code": "rusthunter-complete",
-            "owner": "celeste",
-            "setVariables": { "entity.rusthunter-complete": "true" },
-            "trigger": "incrementVariable",
-            "triggerdata": {
-                "scope": "entity",
-                "name": "celeste-friendship",
-                "amount": 1,
-                "thresholdValue": 1,
-                "thresholdVariable": "entity.celeste-friendly"
-            },
-            "jumpTo": "increment-rebuilding-tier"
+            "jumpTo": "main"
         },
         {
             "code": "rusthunter-done",
