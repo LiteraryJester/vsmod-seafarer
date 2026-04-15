@@ -174,11 +174,20 @@
                     ]
                 },
 
-                // Tricks: unlocked once tradeship is done
+                // Tricks path A: rebuilding hit tier 4 (cross-NPC counter)
                 {
                     "value": "seafarer:dialogue-drake-ask-tricks",
                     "jumpTo": "tricks-gate",
                     "conditions": [
+                        { "variable": "global.rebuilding-complete", "isValue": "true" }
+                    ]
+                },
+                // Tricks path B: tradeship completed but rebuilding not yet at 4
+                {
+                    "value": "seafarer:dialogue-drake-ask-tricks",
+                    "jumpTo": "tricks-gate",
+                    "conditions": [
+                        { "variable": "global.rebuilding-complete", "isNotValue": "true" },
                         { "variable": "global.quest-seafarer-drake-tradeship-status", "isValue": "completed" }
                     ]
                 }
