@@ -664,21 +664,6 @@
             "type": "talk",
             "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-already-done" }],
             "jumpTo": "main"
-        },
-
-        // === Rebuilding Tier ===
-        {
-            "code": "increment-rebuilding-tier",
-            "owner": "celeste",
-            "trigger": "incrementVariable",
-            "triggerdata": {
-                "scope": "global",
-                "name": "rebuilding-tier",
-                "amount": 1,
-                "thresholdValue": 4,
-                "thresholdVariable": "global.rebuilding-complete"
-            },
-            "jumpTo": "main"
         }
     ]
 }
