@@ -5,7 +5,6 @@
   "titleLangKey": "quest-drake-tricks-title",
   "descriptionLangKey": "quest-drake-tricks-desc",
   "autoEnable": true,
-  "prerequisites": ["drake-tradeship"],
   "objectives": [
     {
       "code": "varnish",
