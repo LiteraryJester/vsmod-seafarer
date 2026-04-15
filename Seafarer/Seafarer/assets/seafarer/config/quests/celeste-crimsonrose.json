@@ -1,0 +1,45 @@
+{
+  "code": "celeste-crimsonrose",
+  "npc": "celeste",
+  "groupLangKey": "quest-group-helping-residents",
+  "titleLangKey": "quest-celeste-crimsonrose-title",
+  "descriptionLangKey": "quest-celeste-crimsonrose-desc",
+  "autoEnable": true,
+  "objectives": [
+    {
+      "code": "chest",
+      "type": "delivery",
+      "items": [{ "item": "seafarer:sealed-chest", "quantity": 1 }],
+      "required": 1,
+      "rewards": [
+        {
+          "type": "addSellingItem",
+          "itemCode": "game:shovel-copper",
+          "itemType": "item",
+          "stacksize": 1,
+          "stockAvg": 2,
+          "stockVar": 1,
+          "priceAvg": 5,
+          "priceVar": 1
+        }
+      ]
+    }
+  ],
+  "rewards": [
+    {
+      "type": "incrementEntityVariable",
+      "variableName": "celeste-friendship",
+      "amount": 1,
+      "thresholdValue": 1,
+      "thresholdVariable": "entity.celeste-friendly"
+    },
+    {
+      "type": "incrementEntityVariable",
+      "variableName": "rebuilding-tier",
+      "variableScope": "global",
+      "amount": 1,
+      "thresholdValue": 4,
+      "thresholdVariable": "global.rebuilding-complete"
+    }
+  ]
+}
