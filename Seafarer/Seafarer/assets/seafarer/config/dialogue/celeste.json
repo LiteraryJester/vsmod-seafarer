@@ -126,20 +126,30 @@
                     ]
                 },
 
-                // Bear Hunter (gated on having earned friendship)
+                // Bear Hunter: not yet started
                 {
                     "value": "seafarer:dialogue-celeste-ask-bearhunter",
                     "jumpTo": "bearhunter-intro",
                     "conditions": [
                         { "variable": "entity.celeste-friendly", "isValue": "true" },
-                        { "variable": "entity.bearhunter-complete", "isNotValue": "true" }
+                        { "variable": "player.quest-seafarer-celeste-bearhunter-status", "isNotValue": "active" },
+                        { "variable": "player.quest-seafarer-celeste-bearhunter-status", "isNotValue": "completed" }
                     ]
                 },
+                // Bear Hunter: active
+                {
+                    "value": "seafarer:dialogue-celeste-ask-bearhunter",
+                    "jumpTo": "bearhunter-inprogress",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-celeste-bearhunter-status", "isValue": "active" }
+                    ]
+                },
+                // Bear Hunter: completed
                 {
                     "value": "seafarer:dialogue-celeste-ask-bearhunter",
                     "jumpTo": "bearhunter-done",
                     "conditions": [
-                        { "variable": "entity.bearhunter-complete", "isValue": "true" }
+                        { "variable": "player.quest-seafarer-celeste-bearhunter-status", "isValue": "completed" }
                     ]
                 },
 
@@ -504,23 +514,14 @@
         },
 
         // =============================================================
-        // Quest: Bear Hunter (3 different bear pelts with head)
+        // Quest: Bear Hunter
         // =============================================================
         {
             "code": "bearhunter-intro",
             "owner": "celeste",
             "type": "talk",
             "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-intro" }],
-            "jumpTo": "check-bearhunter-started"
-        },
-        {
-            "code": "check-bearhunter-started",
-            "owner": "celeste",
-            "type": "condition",
-            "variable": "player.celeste-bearhunter-started",
-            "isValue": "true",
-            "thenJumpTo": "bearhunter-inprogress",
-            "elseJumpTo": "bearhunter-offer"
+            "jumpTo": "bearhunter-offer"
         },
         {
             "code": "bearhunter-offer",
@@ -535,7 +536,8 @@
             "code": "bearhunter-start",
             "owner": "celeste",
             "type": "talk",
-            "setVariables": { "player.celeste-bearhunter-started": "true" },
+            "trigger": "questStart",
+            "triggerdata": { "code": "celeste-bearhunter" },
             "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-start" }],
             "jumpTo": "main"
         },
@@ -548,7 +550,7 @@
                     "value": "seafarer:dialogue-celeste-deliver-pelt-polar",
                     "jumpTo": "bearhunter-deliver-polar",
                     "conditions": [
-                        { "variable": "entity.bearhunter-polar-delivered", "isNotValue": "true" },
+                        { "variable": "player.quest-seafarer-celeste-bearhunter-polar-status", "isNotValue": "completed" },
                         { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:hide-pelt-bear-polar-complete', stacksize: 1}" }
                     ]
                 },
@@ -556,7 +558,7 @@
                     "value": "seafarer:dialogue-celeste-deliver-pelt-brown",
                     "jumpTo": "bearhunter-deliver-brown",
                     "conditions": [
-                        { "variable": "entity.bearhunter-brown-delivered", "isNotValue": "true" },
+                        { "variable": "player.quest-seafarer-celeste-bearhunter-brown-status", "isNotValue": "completed" },
                         { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:hide-pelt-bear-brown-complete', stacksize: 1}" }
                     ]
                 },
@@ -564,7 +566,7 @@
                     "value": "seafarer:dialogue-celeste-deliver-pelt-black",
                     "jumpTo": "bearhunter-deliver-black",
                     "conditions": [
-                        { "variable": "entity.bearhunter-black-delivered", "isNotValue": "true" },
+                        { "variable": "player.quest-seafarer-celeste-bearhunter-black-status", "isNotValue": "completed" },
                         { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:hide-pelt-bear-black-complete', stacksize: 1}" }
                     ]
                 },
@@ -572,7 +574,7 @@
                     "value": "seafarer:dialogue-celeste-deliver-pelt-panda",
                     "jumpTo": "bearhunter-deliver-panda",
                     "conditions": [
-                        { "variable": "entity.bearhunter-panda-delivered", "isNotValue": "true" },
+                        { "variable": "player.quest-seafarer-celeste-bearhunter-panda-status", "isNotValue": "completed" },
                         { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:hide-pelt-bear-panda-complete', stacksize: 1}" }
                     ]
                 },
@@ -580,7 +582,7 @@
                     "value": "seafarer:dialogue-celeste-deliver-pelt-sun",
                     "jumpTo": "bearhunter-deliver-sun",
                     "conditions": [
-                        { "variable": "entity.bearhunter-sun-delivered", "isNotValue": "true" },
+                        { "variable": "player.quest-seafarer-celeste-bearhunter-sun-status", "isNotValue": "completed" },
                         { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:hide-pelt-bear-sun-complete', stacksize: 1}" }
                     ]
                 },
@@ -595,146 +597,66 @@
             "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-statusreport" }],
             "jumpTo": "main"
         },
-
-        // Per-pelt delivery branches
         {
             "code": "bearhunter-deliver-polar",
             "owner": "celeste",
-            "setVariables": { "entity.bearhunter-polar-delivered": "true" },
-            "trigger": "takefrominventory",
-            "triggerdata": { "type": "item", "code": "game:hide-pelt-bear-polar-complete" },
-            "jumpTo": "bearhunter-increment"
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "celeste-bearhunter", "objective": "polar" },
+            "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-pelt-thanks" }],
+            "jumpTo": "check-bearhunter-complete"
         },
         {
             "code": "bearhunter-deliver-brown",
             "owner": "celeste",
-            "setVariables": { "entity.bearhunter-brown-delivered": "true" },
-            "trigger": "takefrominventory",
-            "triggerdata": { "type": "item", "code": "game:hide-pelt-bear-brown-complete" },
-            "jumpTo": "bearhunter-increment"
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "celeste-bearhunter", "objective": "brown" },
+            "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-pelt-thanks" }],
+            "jumpTo": "check-bearhunter-complete"
         },
         {
             "code": "bearhunter-deliver-black",
             "owner": "celeste",
-            "setVariables": { "entity.bearhunter-black-delivered": "true" },
-            "trigger": "takefrominventory",
-            "triggerdata": { "type": "item", "code": "game:hide-pelt-bear-black-complete" },
-            "jumpTo": "bearhunter-increment"
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "celeste-bearhunter", "objective": "black" },
+            "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-pelt-thanks" }],
+            "jumpTo": "check-bearhunter-complete"
         },
         {
             "code": "bearhunter-deliver-panda",
             "owner": "celeste",
-            "setVariables": { "entity.bearhunter-panda-delivered": "true" },
-            "trigger": "takefrominventory",
-            "triggerdata": { "type": "item", "code": "game:hide-pelt-bear-panda-complete" },
-            "jumpTo": "bearhunter-increment"
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "celeste-bearhunter", "objective": "panda" },
+            "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-pelt-thanks" }],
+            "jumpTo": "check-bearhunter-complete"
         },
         {
             "code": "bearhunter-deliver-sun",
             "owner": "celeste",
-            "setVariables": { "entity.bearhunter-sun-delivered": "true" },
-            "trigger": "takefrominventory",
-            "triggerdata": { "type": "item", "code": "game:hide-pelt-bear-sun-complete" },
-            "jumpTo": "bearhunter-increment"
-        },
-
-        // Increment count and award Bear Hunter XP per delivery
-        {
-            "code": "bearhunter-increment",
-            "owner": "celeste",
-            "trigger": "incrementVariable",
-            "triggerdata": {
-                "scope": "entity",
-                "name": "bearhunter-count",
-                "amount": 1,
-                "thresholdValue": 3,
-                "thresholdVariable": "entity.bearhunter-threshold"
-            },
-            "jumpTo": "bearhunter-award-xp"
-        },
-        {
-            "code": "bearhunter-award-xp",
-            "owner": "celeste",
-            "trigger": "awardTrainingXP",
-            "triggerdata": {
-                "training": "bearhunter",
-                "xp": 50
-            },
-            "jumpTo": "bearhunter-pelt-thanks"
-        },
-        {
-            "code": "bearhunter-pelt-thanks",
-            "owner": "celeste",
             "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "celeste-bearhunter", "objective": "sun" },
             "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-pelt-thanks" }],
-            "jumpTo": "check-bearhunter-done"
+            "jumpTo": "check-bearhunter-complete"
         },
         {
-            "code": "check-bearhunter-done",
+            "code": "check-bearhunter-complete",
             "owner": "celeste",
             "type": "condition",
-            "variable": "entity.bearhunter-threshold",
-            "isValue": "true",
-            "thenJumpTo": "bearhunter-reward-intro",
-            "elseJumpTo": "bearhunter-inprogress"
+            "variable": "player.quest-seafarer-celeste-bearhunter-status",
+            "isValue": "completed",
+            "thenJumpTo": "bearhunter-reward-line",
+            "elseJumpTo": "main"
         },
         {
-            "code": "bearhunter-reward-intro",
+            "code": "bearhunter-reward-line",
             "owner": "celeste",
             "type": "talk",
             "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-reward" }],
-            "jumpTo": "bearhunter-give-arrows"
-        },
-        {
-            "code": "bearhunter-give-arrows",
-            "owner": "celeste",
-            "trigger": "giveitemstack",
-            "triggerdata": {
-                "type": "item",
-                "code": "seafarer:arrow-barbed-copper",
-                "stacksize": 24
-            },
-            "jumpTo": "bearhunter-add-arrows"
-        },
-        {
-            "code": "bearhunter-add-arrows",
-            "owner": "celeste",
-            "trigger": "addSellingItem",
-            "triggerdata": {
-                "code": "seafarer:arrow-barbed-copper",
-                "type": "item",
-                "stacksize": 4,
-                "stock": { "avg": 12, "var": 4 },
-                "price": { "avg": 2, "var": 0.5 }
-            },
-            "jumpTo": "bearhunter-add-book"
-        },
-        {
-            "code": "bearhunter-add-book",
-            "owner": "celeste",
-            "trigger": "addSellingItem",
-            "triggerdata": {
-                "code": "seafarer:trainingbook-bearhunter",
-                "type": "item",
-                "stacksize": 1,
-                "stock": { "avg": 1, "var": 0 },
-                "price": { "avg": 10, "var": 2 }
-            },
-            "jumpTo": "bearhunter-complete"
-        },
-        {
-            "code": "bearhunter-complete",
-            "owner": "celeste",
-            "setVariables": { "entity.bearhunter-complete": "true" },
-            "trigger": "incrementVariable",
-            "triggerdata": {
-                "scope": "entity",
-                "name": "celeste-friendship",
-                "amount": 1,
-                "thresholdValue": 1,
-                "thresholdVariable": "entity.celeste-friendly"
-            },
-            "jumpTo": "increment-rebuilding-tier"
+            "jumpTo": "main"
         },
         {
             "code": "bearhunter-done",
