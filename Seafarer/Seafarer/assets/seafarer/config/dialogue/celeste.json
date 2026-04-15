@@ -15,13 +15,64 @@
             "owner": "celeste",
             "type": "talk",
             "setVariables": { "player.hasmetceleste": "true" },
-            "text": [{ "value": "seafarer:dialogue-celeste-welcome" }]
+            "text": [{ "value": "seafarer:dialogue-celeste-welcome" }],
+            "jumpTo": "check-blackbronze-milestone"
         },
         {
             "code": "welcomeback",
             "owner": "celeste",
             "type": "talk",
             "text": [{ "value": "seafarer:dialogue-celeste-welcomeback" }],
+            "jumpTo": "check-blackbronze-milestone"
+        },
+
+        // === Tier-4 milestone: once Tortuga's global rebuilding counter hits
+        // 4, Celeste unlocks blackbronze cutlass + shovel stock. One-shot,
+        // guarded by entity.celeste-blackbronze-unlocked.
+        {
+            "code": "check-blackbronze-milestone",
+            "owner": "celeste",
+            "type": "condition",
+            "variable": "entity.celeste-blackbronze-unlocked",
+            "isValue": "true",
+            "thenJumpTo": "main",
+            "elseJumpTo": "check-blackbronze-rebuilding"
+        },
+        {
+            "code": "check-blackbronze-rebuilding",
+            "owner": "celeste",
+            "type": "condition",
+            "variable": "global.rebuilding-complete",
+            "isValue": "true",
+            "thenJumpTo": "blackbronze-announce",
+            "elseJumpTo": "main"
+        },
+        {
+            "code": "blackbronze-announce",
+            "owner": "celeste",
+            "type": "talk",
+            "setVariables": { "entity.celeste-blackbronze-unlocked": "true" },
+            "text": [{ "value": "seafarer:dialogue-celeste-blackbronze-unlock" }],
+            "jumpTo": "blackbronze-add-cutlass"
+        },
+        {
+            "code": "blackbronze-add-cutlass",
+            "owner": "celeste",
+            "trigger": "addSellingItem",
+            "triggerdata": {
+                "code": "seafarer:cutlass-blackbronze", "type": "item", "stacksize": 1,
+                "stock": { "avg": 1, "var": 1 }, "price": { "avg": 14, "var": 3 }
+            },
+            "jumpTo": "blackbronze-add-shovel"
+        },
+        {
+            "code": "blackbronze-add-shovel",
+            "owner": "celeste",
+            "trigger": "addSellingItem",
+            "triggerdata": {
+                "code": "game:shovel-blackbronze", "type": "item", "stacksize": 1,
+                "stock": { "avg": 1, "var": 1 }, "price": { "avg": 15, "var": 3 }
+            },
             "jumpTo": "main"
         },
 
