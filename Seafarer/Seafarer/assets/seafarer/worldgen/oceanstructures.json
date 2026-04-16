@@ -1,0 +1,16 @@
+{
+    structures: [
+        {
+            "code": "wreck-crimsonrose",
+            "schematics": ["underwater/wreak-crimson-rose"],
+            "placement": "underwater",
+            "chance": 0.015,
+            "minWaterDepth": 4,
+            "maxWaterDepth": 50,
+            "offsetY": 0,
+            "maxCount": 5,
+            "suppressTrees": true,
+            "randomRotation": true
+        }
+    ]
+}

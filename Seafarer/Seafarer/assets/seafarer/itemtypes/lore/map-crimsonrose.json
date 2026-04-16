@@ -10,10 +10,12 @@
         "maxPageCount": 1,
         "locatorPropsbyType": {
             "*": {
-                "schematiccode": "buriedtreasurechest",
+                "schematiccode": "wreck-crimsonrose",
                 "waypointtext": "location-crimsonrose",
                 "waypointicon": "x",
-                "waypointcolor": [0.8, 0.1, 0.1, 1]
+                "waypointcolor": [0.8, 0.1, 0.1, 1],
+                "randomX": 15,
+                "randomZ": 15
             }
         }
     },
