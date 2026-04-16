@@ -28,5 +28,11 @@
         training: "bearhunter",
         item: "seafarer:trainingbook-bearhunter",
         xp: 100
+    },
+    {
+        type: "book",
+        training: "buccaneer",
+        item: "seafarer:trainingbook-buccaneer",
+        xp: 100
     }
 ]

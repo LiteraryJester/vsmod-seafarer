@@ -34,6 +34,23 @@
         ]
     },
     {
+        code: "combat",
+        color: "#8B1A1A",
+        trainings: [
+            {
+                code: "buccaneer",
+                levels: [
+                    {
+                        level: 1,
+                        xp: 100,
+                        title: "Buccaneer",
+                        trait: "buccaneer"
+                    }
+                ]
+            }
+        ]
+    },
+    {
         code: "cooking",
         color: "#C47D2E",
         trainings: [
