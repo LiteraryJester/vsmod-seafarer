@@ -132,7 +132,149 @@ namespace Seafarer.WorldGen
 
         private void OnChunkColumnGen(IChunkColumnGenerateRequest request)
         {
-            // Placeholder — implemented in Task 3
+            if (config.Structures.Length == 0) return;
+
+            var chunks = request.Chunks;
+            int chunkX = request.ChunkX;
+            int chunkZ = request.ChunkZ;
+            var mapChunk = chunks[0].MapChunk;
+            var mapRegion = mapChunk.MapRegion;
+            int seaLevel = sapi.World.SeaLevel;
+
+            foreach (var def in config.Structures)
+            {
+                if (!cachedSchematics.TryGetValue(def.Code, out var variants)) continue;
+
+                rand.InitPositionSeed(chunkX + def.Code.GetHashCode(), chunkZ);
+                float roll = (float)rand.NextInt(10000) / 10000f;
+                if (roll > def.Chance) continue;
+
+                if (def.MaxCount > 0 && CountExistingStructures(mapRegion, def.Code) >= def.MaxCount) continue;
+
+                int localX = rand.NextInt(chunksize);
+                int localZ = rand.NextInt(chunksize);
+                int posX = chunkX * chunksize + localX;
+                int posZ = chunkZ * chunksize + localZ;
+
+                float oceanicity = GetOceanicity(mapRegion, posX, posZ);
+                float beachStrength = GetBeachStrength(mapRegion, posX, posZ);
+
+                int terrainHeight = mapChunk.WorldGenTerrainHeightMap[localZ * chunksize + localX];
+                int waterDepth = seaLevel - terrainHeight;
+
+                if (!IsValidPlacement(def, oceanicity, beachStrength, waterDepth)) continue;
+
+                var variantRotations = variants[rand.NextInt(variants.Length)];
+                int rotationIndex = def.RandomRotation ? rand.NextInt(4) : 0;
+                var schematic = variantRotations[rotationIndex];
+
+                int posY = CalculatePlacementY(def, terrainHeight, schematic);
+                var startPos = new BlockPos(posX, posY, posZ);
+
+                schematic.Place(worldgenBlockAccessor, sapi.World, startPos, EnumReplaceMode.ReplaceAll, true);
+
+                mapRegion.AddGeneratedStructure(new GeneratedStructure()
+                {
+                    Code = def.Code,
+                    Group = "ocean",
+                    Location = new Cuboidi(
+                        startPos.X, startPos.Y, startPos.Z,
+                        startPos.X + schematic.SizeX - 1,
+                        startPos.Y + schematic.SizeY - 1,
+                        startPos.Z + schematic.SizeZ - 1
+                    ),
+                    SuppressTreesAndShrubs = def.SuppressTrees,
+                    SuppressRivulets = true
+                });
+            }
+        }
+
+        private float GetOceanicity(IMapRegion mapRegion, int posX, int posZ)
+        {
+            if (mapRegion.OceanMap == null || mapRegion.OceanMap.Data.Length == 0) return 0;
+
+            var rlX = (posX / chunksize) % regionChunkSize;
+            var rlZ = (posZ / chunksize) % regionChunkSize;
+            var oFac = (float)mapRegion.OceanMap.InnerSize / regionChunkSize;
+
+            var oceanUpLeft = mapRegion.OceanMap.GetUnpaddedInt((int)(rlX * oFac), (int)(rlZ * oFac));
+            var oceanUpRight = mapRegion.OceanMap.GetUnpaddedInt((int)(rlX * oFac + oFac), (int)(rlZ * oFac));
+            var oceanBotLeft = mapRegion.OceanMap.GetUnpaddedInt((int)(rlX * oFac), (int)(rlZ * oFac + oFac));
+            var oceanBotRight = mapRegion.OceanMap.GetUnpaddedInt((int)(rlX * oFac + oFac), (int)(rlZ * oFac + oFac));
+
+            return GameMath.BiLerp(
+                oceanUpLeft, oceanUpRight, oceanBotLeft, oceanBotRight,
+                (float)(posX % chunksize) / chunksize,
+                (float)(posZ % chunksize) / chunksize
+            );
+        }
+
+        private float GetBeachStrength(IMapRegion mapRegion, int posX, int posZ)
+        {
+            if (mapRegion.BeachMap == null || mapRegion.BeachMap.Data.Length == 0) return 0;
+
+            var rlX = (posX / chunksize) % regionChunkSize;
+            var rlZ = (posZ / chunksize) % regionChunkSize;
+            var bFac = (float)mapRegion.BeachMap.InnerSize / regionChunkSize;
+
+            var beachUpLeft = mapRegion.BeachMap.GetUnpaddedInt((int)(rlX * bFac), (int)(rlZ * bFac));
+            var beachUpRight = mapRegion.BeachMap.GetUnpaddedInt((int)(rlX * bFac + bFac), (int)(rlZ * bFac));
+            var beachBotLeft = mapRegion.BeachMap.GetUnpaddedInt((int)(rlX * bFac), (int)(rlZ * bFac + bFac));
+            var beachBotRight = mapRegion.BeachMap.GetUnpaddedInt((int)(rlX * bFac + bFac), (int)(rlZ * bFac + bFac));
+
+            return GameMath.BiLerp(
+                beachUpLeft, beachUpRight, beachBotLeft, beachBotRight,
+                (float)(posX % chunksize) / chunksize,
+                (float)(posZ % chunksize) / chunksize
+            );
+        }
+
+        private bool IsValidPlacement(OceanStructureDef def, float oceanicity, float beachStrength, int waterDepth)
+        {
+            switch (def.Placement)
+            {
+                case EnumOceanPlacement.Underwater:
+                case EnumOceanPlacement.BuriedUnderwater:
+                    return oceanicity > 0 &&
+                           waterDepth >= def.MinWaterDepth &&
+                           waterDepth <= def.MaxWaterDepth;
+
+                case EnumOceanPlacement.Coastal:
+                    bool isBeach = beachStrength > 0;
+                    bool isShallowOcean = oceanicity > 0 &&
+                                          waterDepth >= 0 &&
+                                          waterDepth <= def.MaxWaterDepth;
+                    return isBeach || isShallowOcean;
+
+                default:
+                    return false;
+            }
+        }
+
+        private int CalculatePlacementY(OceanStructureDef def, int terrainHeight, BlockSchematic schematic)
+        {
+            switch (def.Placement)
+            {
+                case EnumOceanPlacement.Underwater:
+                case EnumOceanPlacement.Coastal:
+                    return terrainHeight + def.OffsetY;
+
+                case EnumOceanPlacement.BuriedUnderwater:
+                    return terrainHeight - schematic.SizeY + def.OffsetY;
+
+                default:
+                    return terrainHeight + def.OffsetY;
+            }
+        }
+
+        private int CountExistingStructures(IMapRegion mapRegion, string code)
+        {
+            int count = 0;
+            foreach (var gs in mapRegion.GeneratedStructures)
+            {
+                if (gs.Code == code) count++;
+            }
+            return count;
         }
     }
 }
