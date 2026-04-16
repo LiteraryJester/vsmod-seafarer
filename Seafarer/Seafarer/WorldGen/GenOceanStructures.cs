@@ -60,6 +60,20 @@ namespace Seafarer.WorldGen
             {
                 worldgenBlockAccessor = chunkProvider.GetBlockAccessor(false);
             });
+
+            var parsers = api.ChatCommands.Parsers;
+            api.ChatCommands.GetOrCreate("ocean")
+                .RequiresPrivilege(Privilege.controlserver)
+                .BeginSubCommand("place")
+                    .WithDescription("Force-place an ocean structure at your position")
+                    .RequiresPlayer()
+                    .WithArgs(parsers.Word("code"))
+                    .HandleWith(OnCmdPlace)
+                .EndSubCommand()
+                .BeginSubCommand("list")
+                    .WithDescription("List all registered ocean structure codes")
+                    .HandleWith(OnCmdList)
+                .EndSubCommand();
         }
 
         private void InitWorldGen()
@@ -275,6 +289,48 @@ namespace Seafarer.WorldGen
                 if (gs.Code == code) count++;
             }
             return count;
+        }
+
+        private TextCommandResult OnCmdPlace(TextCommandCallingArgs args)
+        {
+            var code = (string)args[0];
+            var player = args.Caller.Player as IServerPlayer;
+
+            if (!cachedSchematics.TryGetValue(code, out var variants))
+            {
+                return TextCommandResult.Error("Unknown ocean structure code: " + code);
+            }
+
+            var pos = args.Caller.Player.CurrentBlockSelection?.Position
+                      ?? player.Entity.Pos.AsBlockPos;
+
+            var variantRotations = variants[sapi.World.Rand.Next(variants.Length)];
+            var schematic = variantRotations[sapi.World.Rand.Next(4)];
+
+            int placed = schematic.Place(sapi.World.BlockAccessor, sapi.World, pos, EnumReplaceMode.ReplaceAll, true);
+            sapi.World.BlockAccessor.Commit();
+
+            return TextCommandResult.Success(string.Format("Placed '{0}' at {1} ({2} blocks)", code, pos, placed));
+        }
+
+        private TextCommandResult OnCmdList(TextCommandCallingArgs args)
+        {
+            if (config.Structures.Length == 0)
+            {
+                return TextCommandResult.Success("No ocean structures configured.");
+            }
+
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine("Ocean structures:");
+            foreach (var def in config.Structures)
+            {
+                bool hasSchematics = cachedSchematics.ContainsKey(def.Code);
+                sb.AppendLine(string.Format("  {0} — {1}, chance={2}, schematics={3}{4}",
+                    def.Code, def.Placement, def.Chance,
+                    def.Schematics.Length,
+                    hasSchematics ? "" : " [NO VALID SCHEMATICS]"));
+            }
+            return TextCommandResult.Success(sb.ToString());
         }
     }
 }
