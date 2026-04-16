@@ -310,6 +310,24 @@ namespace Seafarer.WorldGen
             int placed = schematic.Place(sapi.World.BlockAccessor, sapi.World, pos, EnumReplaceMode.ReplaceAll, true);
             sapi.World.BlockAccessor.Commit();
 
+            var mapChunk = sapi.WorldManager.GetMapChunk(pos.X / chunksize, pos.Z / chunksize);
+            if (mapChunk != null)
+            {
+                mapChunk.MapRegion.AddGeneratedStructure(new GeneratedStructure()
+                {
+                    Code = code,
+                    Group = "ocean",
+                    Location = new Cuboidi(
+                        pos.X, pos.Y, pos.Z,
+                        pos.X + schematic.SizeX - 1,
+                        pos.Y + schematic.SizeY - 1,
+                        pos.Z + schematic.SizeZ - 1
+                    ),
+                    SuppressTreesAndShrubs = true,
+                    SuppressRivulets = true
+                });
+            }
+
             return TextCommandResult.Success(string.Format("Placed '{0}' at {1} ({2} blocks)", code, pos, placed));
         }
 
