@@ -558,7 +558,7 @@
             "trigger": "giveitemstack",
             "triggerdata": {
                 "type": "item",
-                "code": "seafarer:blackbronze-cutlass",
+                "code": "seafarer:cutlass-blackbronze",
                 "stacksize": 1
             },
             "jumpTo": "main"
@@ -714,7 +714,7 @@
             "owner": "celeste",
             "trigger": "addSellingItem",
             "triggerdata": {
-                "code": "seafarer:barbedarrow-copper", "type": "item", "stacksize": 1,
+                "code": "seafarer:arrow-barbed-copper", "type": "item", "stacksize": 1,
                 "stock": { "avg": 12, "var": 3 }, "price": { "avg": 2, "var": 1 }
             },
             "jumpTo": "bearhunter-reward-add-book"
@@ -724,7 +724,7 @@
             "owner": "celeste",
             "trigger": "addSellingItem",
             "triggerdata": {
-                "code": "seafarer:bearhunter-training-book", "type": "item", "stacksize": 1,
+                "code": "seafarer:trainingbook-bearhunter", "type": "item", "stacksize": 1,
                 "stock": { "avg": 1, "var": 0 }, "price": { "avg": 10, "var": 3 }
             },
             "jumpTo": "bearhunter-reward-give-arrows"
@@ -735,7 +735,7 @@
             "trigger": "giveitemstack",
             "triggerdata": {
                 "type": "item",
-                "code": "seafarer:barbedarrow-copper",
+                "code": "seafarer:arrow-barbed-copper",
                 "stacksize": 24
             },
             "jumpTo": "main"
