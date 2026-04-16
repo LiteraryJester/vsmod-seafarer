@@ -1,6 +1,6 @@
 {
     "code": "map-crimsonrose",
-    "class": "ItemLocatorMap",
+    "class": "ItemOceanLocatorMap",
     "maxstacksize": 1,
     "attributes": {
         "displaycaseable": true,

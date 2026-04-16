@@ -51,6 +51,7 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             api.RegisterCollectibleBehaviorClass("ShellCrush", typeof(BehaviorShellCrush));
             api.RegisterEntityBehaviorClass("seafarer:exposure", typeof(EntityBehaviorExposure));
             api.RegisterEntity("EntityProjectileBarbed", typeof(EntityProjectileBarbed));
+            api.RegisterItemClass("ItemOceanLocatorMap", typeof(ItemOceanLocatorMap));
 
             harmony = new Harmony(HarmonyId);
             harmony.PatchAll(typeof(SeafarerModSystem).Assembly);
