@@ -303,9 +303,25 @@
         {
             "code": "crimsonrose-reminder",
             "owner": "celeste",
+            "type": "condition",
+            "variable": "player.inventory",
+            "isValue": "{type: 'item', code: 'seafarer:map-crimsonrose', stacksize: 1}",
+            "thenJumpTo": "crimsonrose-reminder-hasmap",
+            "elseJumpTo": "crimsonrose-reminder-givemap"
+        },
+        {
+            "code": "crimsonrose-reminder-hasmap",
+            "owner": "celeste",
             "type": "talk",
             "text": [{ "value": "seafarer:dialogue-celeste-crimsonrose-reminder" }],
             "jumpTo": "main"
+        },
+        {
+            "code": "crimsonrose-reminder-givemap",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-crimsonrose-lostmap" }],
+            "jumpTo": "crimsonrose-give-map"
         },
 
         // Quest Completion
