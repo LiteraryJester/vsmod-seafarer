@@ -146,7 +146,6 @@
                 { "value": "dialogue-name", "jumpTo": "name" },
                 { "value": "dialogue-profession", "jumpTo": "profession" },
                 { "value": "dialogue-trade", "jumpTo": "trade" },
-                { "value": "seafarer:dialogue-drake-ships", "jumpTo": "ships" },
 
                 // Tradeship: not yet active/completed → intro + offer
                 {
@@ -212,13 +211,6 @@
             "code": "trade",
             "owner": "drake",
             "trigger": "opentrade"
-        },
-        {
-            "code": "ships",
-            "owner": "drake",
-            "type": "talk",
-            "text": [{ "value": "seafarer:dialogue-drake-ships-info" }],
-            "jumpTo": "main"
         },
 
         // =============================================================

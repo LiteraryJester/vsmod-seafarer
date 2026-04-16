@@ -31,16 +31,6 @@
       "priceVar": 2
     },
     {
-      "type": "addSellingItem",
-      "itemCode": "seafarer:cutlass-blackbronze",
-      "itemType": "item",
-      "stacksize": 1,
-      "stockAvg": 1,
-      "stockVar": 1,
-      "priceAvg": 14,
-      "priceVar": 3
-    },
-    {
       "type": "incrementEntityVariable",
       "variableName": "celeste-friendship",
       "amount": 1,
