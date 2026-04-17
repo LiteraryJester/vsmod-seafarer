@@ -948,7 +948,8 @@ Need to portage? Strip off all storage and accessories first, then <hk>Shift</hk
 	"dialogue-drake-tradeship-statusreport": "Hull needs {global.quest-seafarer-drake-tradeship-boards-progress}/298 boards. Rigging needs {global.quest-seafarer-drake-tradeship-rope-progress}/27 rope. Sails need {global.quest-seafarer-drake-tradeship-linen-progress}/21 linen. Bring what you can.",
 	"dialogue-drake-tradeship-complete": "I'm surprised, didn't really think you'd get this done but you've made a huge difference. She's a beauty. Trade will be flowing again before you know it.",
 	"dialogue-drake-tradeship-already-done": "The ship's built and ready to sail. You did good work, voyager.",
-	"dialogue-drake-blackbronze-unlock": "Tortuga's on her feet again, and the forge has been humming. Been holding back the black bronze line for when we were really back in business -- I'll set them out for sale.",
+	"dialogue-drake-blackbronze-unlock": "Tortuga's on her feet again, and the forge has been humming. We have some new good for sale now.",
+	"dialogue-drake-ask-tradeship-active": "How it the ship going?",
 
 	"dialogue-drake-ask-tricks": "Can you teach me to build ships?",
 	"dialogue-drake-tricks-intro": "Hmm, I guess I have the time now that we aren't struggling.",

@@ -158,18 +158,10 @@
                 },
                 // Tradeship: active → go straight to progress menu
                 {
-                    "value": "seafarer:dialogue-drake-ask-tradeship",
+                    "value": "seafarer:dialogue-drake-ask-tradeship-active",
                     "jumpTo": "tradeship-progress",
                     "conditions": [
                         { "variable": "global.quest-seafarer-drake-tradeship-status", "isValue": "active" }
-                    ]
-                },
-                // Tradeship: completed → post-quest line
-                {
-                    "value": "seafarer:dialogue-drake-ask-tradeship",
-                    "jumpTo": "tradeship-done",
-                    "conditions": [
-                        { "variable": "global.quest-seafarer-drake-tradeship-status", "isValue": "completed" }
                     ]
                 },
 
