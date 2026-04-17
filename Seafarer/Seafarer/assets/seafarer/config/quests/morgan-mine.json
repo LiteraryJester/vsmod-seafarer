@@ -1,0 +1,59 @@
+{
+  "code": "morgan-mine",
+  "npc": "morgan",
+  "scope": "server",
+  "groupLangKey": "quest-group-rebuilding-tortuga",
+  "titleLangKey": "quest-morgan-mine-title",
+  "descriptionLangKey": "quest-morgan-mine-desc",
+  "autoEnable": true,
+  "objectives": [
+    {
+      "code": "contract",
+      "type": "delivery",
+      "items": [{ "item": "seafarer:signed-contract", "quantity": 1 }],
+      "required": 1,
+      "rewards": [
+        {
+          "type": "addSellingItem",
+          "itemCode": "game:ingot-copper",
+          "itemType": "item",
+          "stacksize": 4,
+          "stockAvg": 8,
+          "stockVar": 2,
+          "priceAvg": 3,
+          "priceVar": 0.5
+        },
+        {
+          "type": "addSellingItem",
+          "itemCode": "game:nail-copper",
+          "itemType": "item",
+          "stacksize": 8,
+          "stockAvg": 16,
+          "stockVar": 4,
+          "priceAvg": 1,
+          "priceVar": 0.25
+        },
+        {
+          "type": "addSellingItem",
+          "itemCode": "game:metalplate-copper",
+          "itemType": "item",
+          "stacksize": 2,
+          "stockAvg": 4,
+          "stockVar": 1,
+          "priceAvg": 5,
+          "priceVar": 1
+        }
+      ]
+    }
+  ],
+  "rewards": [
+    {
+      "type": "incrementEntityVariable",
+      "variableName": "rebuilding-tier",
+      "variableScope": "global",
+      "amount": 1,
+      "thresholdValue": 4,
+      "thresholdVariable": "global.rebuilding-complete"
+    }
+  ]
+}
