@@ -47,18 +47,39 @@
                 },
                 // Mine quest: active
                 {
-                    "value": "seafarer:dialogue-morgan-ask-rebuilding",
+                    "value": "seafarer:dialogue-morgan-ask-mine-active",
                     "jumpTo": "mine-inprogress",
                     "conditions": [
                         { "variable": "global.quest-seafarer-morgan-mine-status", "isValue": "active" }
                     ]
                 },
-                // Mine quest: completed
+
+                // Trade goods quest: mine done, tradegoods not yet started
+                {
+                    "value": "seafarer:dialogue-morgan-ask-tradegoods",
+                    "jumpTo": "tradegoods-intro",
+                    "conditions": [
+                        { "variable": "global.quest-seafarer-morgan-mine-status", "isValue": "completed" },
+                        { "variable": "global.quest-seafarer-morgan-tradegoods-status", "isNotValue": "active" },
+                        { "variable": "global.quest-seafarer-morgan-tradegoods-status", "isNotValue": "completed" }
+                    ]
+                },
+                // Trade goods quest: active
+                {
+                    "value": "seafarer:dialogue-morgan-ask-tradegoods-active",
+                    "jumpTo": "tradegoods-progress",
+                    "conditions": [
+                        { "variable": "global.quest-seafarer-morgan-tradegoods-status", "isValue": "active" }
+                    ]
+                },
+
+                // Both quests complete
                 {
                     "value": "seafarer:dialogue-morgan-ask-rebuilding",
                     "jumpTo": "rebuilding-done",
                     "conditions": [
-                        { "variable": "global.quest-seafarer-morgan-mine-status", "isValue": "completed" }
+                        { "variable": "global.quest-seafarer-morgan-mine-status", "isValue": "completed" },
+                        { "variable": "global.quest-seafarer-morgan-tradegoods-status", "isValue": "completed" }
                     ]
                 },
 
@@ -217,12 +238,170 @@
             "jumpTo": "main"
         },
 
-        // Post-Quest
+        // Post-Quest (both complete)
         {
             "code": "rebuilding-done",
             "owner": "morgan",
             "type": "talk",
             "text": [{ "value": "seafarer:dialogue-morgan-rebuilding-done" }],
+            "jumpTo": "main"
+        },
+
+        // =============================================================
+        // Quest: Trade Goods (morgan-tradegoods)
+        // =============================================================
+        {
+            "code": "tradegoods-intro",
+            "owner": "morgan",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-morgan-tradegoods-intro" }],
+            "jumpTo": "tradegoods-offer"
+        },
+
+        {
+            "code": "tradegoods-offer",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                { "value": "seafarer:dialogue-morgan-accept-tradegoods", "jumpTo": "tradegoods-start" },
+                { "value": "seafarer:dialogue-morgan-not-yet", "jumpTo": "main" }
+            ]
+        },
+
+        {
+            "code": "tradegoods-start",
+            "owner": "morgan",
+            "type": "talk",
+            "trigger": "questStart",
+            "triggerdata": { "code": "morgan-tradegoods" },
+            "text": [{ "value": "seafarer:dialogue-morgan-tradegoods-start" }],
+            "jumpTo": "main"
+        },
+
+        // Quest In Progress
+        {
+            "code": "tradegoods-progress",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                // Deliver salt: not yet complete and player has salt
+                {
+                    "value": "seafarer:dialogue-morgan-deliver-salt",
+                    "jumpTo": "deliver-salt",
+                    "conditions": [
+                        { "variable": "global.quest-seafarer-morgan-tradegoods-salt-status", "isNotValue": "completed" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:salt', stacksize: 1}" }
+                    ]
+                },
+                // Deliver sugar: not yet complete and player has sugar
+                {
+                    "value": "seafarer:dialogue-morgan-deliver-sugar",
+                    "jumpTo": "deliver-sugar",
+                    "conditions": [
+                        { "variable": "global.quest-seafarer-morgan-tradegoods-sugar-status", "isNotValue": "completed" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'seafarer:sugar', stacksize: 1}" }
+                    ]
+                },
+                // Ask for status
+                { "value": "seafarer:dialogue-morgan-tradegoods-status", "jumpTo": "tradegoods-statusreport" },
+                { "value": "seafarer:dialogue-goodbye", "jumpTo": "goodbye" }
+            ]
+        },
+
+        // Deliver salt
+        {
+            "code": "deliver-salt",
+            "owner": "morgan",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "morgan-tradegoods", "objective": "salt" },
+            "text": [{ "value": "seafarer:dialogue-morgan-salt-thanks" }],
+            "jumpTo": "after-deliver-salt"
+        },
+        {
+            "code": "after-deliver-salt",
+            "owner": "morgan",
+            "type": "condition",
+            "variable": "global.quest-seafarer-morgan-tradegoods-salt-status",
+            "isValue": "completed",
+            "thenJumpTo": "salt-complete",
+            "elseJumpTo": "salt-status"
+        },
+        {
+            "code": "salt-status",
+            "owner": "morgan",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-morgan-salt-status" }],
+            "jumpTo": "check-tradegoods-done"
+        },
+        {
+            "code": "salt-complete",
+            "owner": "morgan",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-morgan-salt-complete" }],
+            "jumpTo": "check-tradegoods-done"
+        },
+
+        // Deliver sugar
+        {
+            "code": "deliver-sugar",
+            "owner": "morgan",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "morgan-tradegoods", "objective": "sugar" },
+            "text": [{ "value": "seafarer:dialogue-morgan-sugar-thanks" }],
+            "jumpTo": "after-deliver-sugar"
+        },
+        {
+            "code": "after-deliver-sugar",
+            "owner": "morgan",
+            "type": "condition",
+            "variable": "global.quest-seafarer-morgan-tradegoods-sugar-status",
+            "isValue": "completed",
+            "thenJumpTo": "sugar-complete",
+            "elseJumpTo": "sugar-status"
+        },
+        {
+            "code": "sugar-status",
+            "owner": "morgan",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-morgan-sugar-status" }],
+            "jumpTo": "check-tradegoods-done"
+        },
+        {
+            "code": "sugar-complete",
+            "owner": "morgan",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-morgan-sugar-complete" }],
+            "jumpTo": "check-tradegoods-done"
+        },
+
+        // Check if both objectives are complete → quest complete
+        {
+            "code": "check-tradegoods-done",
+            "owner": "morgan",
+            "type": "condition",
+            "variable": "global.quest-seafarer-morgan-tradegoods-status",
+            "isValue": "completed",
+            "thenJumpTo": "tradegoods-complete",
+            "elseJumpTo": "main"
+        },
+
+        // Status report
+        {
+            "code": "tradegoods-statusreport",
+            "owner": "morgan",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-morgan-tradegoods-statusreport" }],
+            "jumpTo": "main"
+        },
+
+        // Quest Complete
+        {
+            "code": "tradegoods-complete",
+            "owner": "morgan",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-morgan-tradegoods-complete" }],
             "jumpTo": "main"
         }
     ]

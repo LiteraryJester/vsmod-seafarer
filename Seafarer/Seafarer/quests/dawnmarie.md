@@ -162,7 +162,7 @@ Each fruit tree cutting can be delivered once. Accepted varieties:
 
 ### Completion
 
-> "The orchard is alive again. I can hardly believe it. Paint it someday, voyager, it deserves to be remembered."
+> "The orchard is alive again. I can hardly believe it. I'll paint it someday, voyager, it deserves to be remembered."
 
 ---
 
