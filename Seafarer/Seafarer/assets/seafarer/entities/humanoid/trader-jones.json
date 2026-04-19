@@ -120,31 +120,19 @@
 				"maxItems": 8,
 				"list": [
 					{ "code": "seafarer:pansearedfish", "type": "item", "stacksize": 1, "stock": { "avg": 3, "var": 1 }, "price": { "avg": 6, "var": 1.5 } },
-					{ "code": "seafarer:searedmeat", "type": "item", "stacksize": 1, "stock": { "avg": 3, "var": 1 }, "price": { "avg": 6, "var": 1.5 } },
-					{ "code": "seafarer:flatbread", "type": "item", "stacksize": 1, "stock": { "avg": 4, "var": 1 }, "price": { "avg": 4, "var": 1 } },
+					{ "code": "seafarer:searedmeat-redmeat", "type": "item", "stacksize": 1, "stock": { "avg": 3, "var": 1 }, "price": { "avg": 6, "var": 1.5 } },
+					{ "code": "seafarer:flatbread-spelt", "type": "item", "stacksize": 1, "stock": { "avg": 4, "var": 1 }, "price": { "avg": 4, "var": 1 } },
 					{ "code": "seafarer:tortilla", "type": "item", "stacksize": 1, "stock": { "avg": 4, "var": 1 }, "price": { "avg": 3, "var": 1 } },
-					{
-						"code": "game:woodbucket", "type": "block", "stacksize": 1,
-						"attributes": { "ucontents": [{ "type": "item", "code": "seafarer:spiritportion-rum", "makefull": true }] },
-						"stock": { "avg": 2, "var": 1 }, "price": { "avg": 18, "var": 3 }
-					},
-					{
-						"code": "game:woodbucket", "type": "block", "stacksize": 1,
-						"attributes": { "ucontents": [{ "type": "item", "code": "seafarer:canejuiceportion", "makefull": true }] },
-						"stock": { "avg": 3, "var": 1 }, "price": { "avg": 8, "var": 2 }
-					},
-					{
-						"code": "game:woodbucket", "type": "block", "stacksize": 1,
-						"attributes": { "ucontents": [{ "type": "item", "code": "seafarer:coconutmilkportion", "makefull": true }] },
-						"stock": { "avg": 2, "var": 1 }, "price": { "avg": 6, "var": 1.5 }
-					}
+					{ "code": "seafarer:amphora", "type": "block", "stacksize": 1, "attributes": { "ucontents": [{ "type": "item", "code": "seafarer:spiritportion-whiterum", "makefull": true }] }, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 18, "var": 3 } },
+					{ "code": "seafarer:amphora", "type": "block", "stacksize": 1, "attributes": { "ucontents": [{ "type": "item", "code": "seafarer:canejuiceportion", "makefull": true }] }, "stock": { "avg": 3, "var": 1 }, "price": { "avg": 8, "var": 2 } },
+					{ "code": "seafarer:amphora", "type": "block", "stacksize": 1, "attributes": { "ucontents": [{ "type": "item", "code": "seafarer:coconutmilkportion", "makefull": true }] }, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 6, "var": 1.5 } }
 				]
 			},
 			"buying": {
 				"maxItems": 8,
 				"list": [
 					{ "code": "game:redmeat-raw", "type": "item", "stacksize": 4, "stock": { "avg": 8, "var": 2 }, "price": { "avg": 3, "var": 0.5 } },
-					{ "code": "game:fish-raw", "type": "item", "stacksize": 4, "stock": { "avg": 10, "var": 2 }, "price": { "avg": 2, "var": 0.5 } },
+					{ "code": "game:fishraw-*", "type": "item", "stacksize": 4, "stock": { "avg": 10, "var": 2 }, "price": { "avg": 2, "var": 0.5 } },
 					{ "code": "game:grain-spelt", "type": "item", "stacksize": 8, "stock": { "avg": 16, "var": 4 }, "price": { "avg": 1.5, "var": 0.5 } },
 					{ "code": "game:grain-rye", "type": "item", "stacksize": 8, "stock": { "avg": 16, "var": 4 }, "price": { "avg": 1.5, "var": 0.5 } },
 					{ "code": "seafarer:tomato", "type": "item", "stacksize": 4, "stock": { "avg": 8, "var": 2 }, "price": { "avg": 2, "var": 0.5 } },
