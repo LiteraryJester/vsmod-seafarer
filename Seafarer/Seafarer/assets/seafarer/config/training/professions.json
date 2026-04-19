@@ -51,6 +51,23 @@
         ]
     },
     {
+        code: "gardening",
+        color: "#4F7F3C",
+        trainings: [
+            {
+                code: "gardener",
+                levels: [
+                    {
+                        level: 1,
+                        xp: 100,
+                        title: "Gardener",
+                        trait: "gardener"
+                    }
+                ]
+            }
+        ]
+    },
+    {
         code: "cooking",
         color: "#C47D2E",
         trainings: [

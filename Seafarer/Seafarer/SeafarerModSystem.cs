@@ -44,6 +44,7 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             api.RegisterBlockEntityClass("BlockEntityOpenCoconut", typeof(BlockEntityOpenCoconut));
             api.RegisterBlockClass("BlockBurrito", typeof(BlockBurrito));
             api.RegisterBlockEntityClass("BlockEntityBurrito", typeof(BlockEntityBurrito));
+            api.RegisterBlockClass("BlockGrowPot", typeof(BlockGrowPot));
             api.RegisterCollectibleBehaviorClass("PlaceBurrito", typeof(BehaviorPlaceBurrito));
             api.RegisterCollectibleBehaviorClass("CoconutCrack", typeof(BehaviorCoconutCrack));
             api.RegisterItemClass("ItemMudRake", typeof(ItemMudRake));

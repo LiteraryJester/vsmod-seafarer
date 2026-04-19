@@ -6,7 +6,7 @@
   "titleLangKey": "quest-dawnmarie-plantation-title",
   "descriptionLangKey": "quest-dawnmarie-plantation-desc",
   "autoEnable": true,
-  "requiredObjectives": 6,
+  "requiredObjectiveCount": 6,
   "objectives": [
     {
       "code": "rice",
@@ -147,9 +147,49 @@
         { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
         { "type": "addSellingItem", "itemCode": "game:seeds-carrot", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
       ]
+    },
+    {
+      "code": "cabbage",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-cabbage", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-cabbage", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
+    },
+    {
+      "code": "pumpkin",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-pumpkin", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-pumpkin", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
+    },
+    {
+      "code": "licorice",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-licorice", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-licorice", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
     }
   ],
   "rewards": [
+    {
+      "type": "addSellingItem",
+      "itemCode": "seafarer:trainingbook-gardener",
+      "itemType": "item",
+      "stacksize": 1,
+      "stockAvg": 1,
+      "stockVar": 0,
+      "priceAvg": 40,
+      "priceVar": 5
+    },
     {
       "type": "incrementEntityVariable",
       "variableName": "rebuilding-tier",

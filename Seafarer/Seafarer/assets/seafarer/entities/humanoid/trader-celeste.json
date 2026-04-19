@@ -1,5 +1,5 @@
 {
-	"code": "humanoid-trader-celeste",
+	"code": "trader-celeste",
 	"class": "EntityEvolvingTrader",
 	"tags": ["humanoid", "trader", "human", "habitat-land"],
 	"weight": 80,
@@ -34,7 +34,7 @@
 	"attributes": {
 		"frostOverlayThreshold": -10,
 		"shouldSwivelFromMotion": false,
-		"outfitConfigFileName": "traderaccessories-female",
+		"outfitConfigFileName": "game:traderaccessories-female",
 		"voiceSounds": [
 			"game:sounds/voice/harp/",
 			"game:sounds/voice/ocarina/",
@@ -42,7 +42,7 @@
 		],
 		"outfitversion": 1,
 		"partialRandomOutfitsByType": {
-			"humanoid-trader-celeste": {
+			"trader-celeste": {
 				"bodyskin": [
 					{ "Code": "bodyskin-14" },
 					{ "Code": "bodyskin-15" },

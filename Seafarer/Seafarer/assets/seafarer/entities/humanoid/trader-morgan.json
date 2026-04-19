@@ -1,5 +1,5 @@
 {
-	"code": "humanoid-trader-morgan",
+	"code": "trader-morgan",
 	"class": "EntityEvolvingTrader",
 	"tags": ["humanoid", "trader", "human", "habitat-land"],
 	"weight": 75,
@@ -34,7 +34,7 @@
 	"attributes": {
 		"frostOverlayThreshold": -10,
 		"shouldSwivelFromMotion": false,
-		"outfitConfigFileName": "traderaccessories-female",
+		"outfitConfigFileName": "game:traderaccessories-female",
 		"voiceSounds": [
 			"game:sounds/voice/trumpet/",
 			"game:sounds/voice/oboe/",
@@ -42,7 +42,7 @@
 		],
 		"outfitversion": 1,
 		"partialRandomOutfitsByType": {
-			"humanoid-trader-morgan": {
+			"trader-morgan": {
 				"bodyskin": [
 					{ "Code": "bodyskin-4" },
 					{ "Code": "bodyskin-5" },

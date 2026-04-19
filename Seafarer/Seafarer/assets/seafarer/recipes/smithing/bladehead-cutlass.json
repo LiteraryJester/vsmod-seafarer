@@ -1,0 +1,13 @@
+{
+	ingredient: { type: "item", code: "game:ingot-*", name: "metal", allowedVariants: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "iron", "meteoriciron", "steel"] },
+	requiresTrait: "buccaneer",
+	pattern: [[
+		"____#######_____",
+		"_###########____",
+		"_#############__",
+		"______#######___",
+		"________________"
+	]],
+	name: "Cutlass",
+	output: { type: "item", code: "seafarer:bladehead-cutlass-{metal}" }
+}

@@ -1,0 +1,116 @@
+{
+	code: "grow-pot",
+	class: "Block",
+	behaviors: [
+		{ name: "GroundStorable" },
+		{ name: "Unplaceable" },
+		{ name: "RightClickPickup" }
+	],
+	variantgroups: [
+		{ code: "color", states: ["blue", "fire", "red"] },
+		{ code: "state", states: ["raw"] }
+	],
+	shape: { base: "game:block/clay/planter/raw" },
+	textures: { all: { base: "game:block/clay/{color}clay" } },
+	attributes: {
+		tempGlowMode: 1,
+		handbook: {
+			groupBy: ["grow-pot-*-{state}"]
+		},
+		onTongTransform: {
+			translation: { x: -1.8, y: -1.25, z: -0.52 },
+			rotation: { x: 9, y: 7, z: 68 },
+			scale: 0.6
+		},
+		onMetalTongTransform: {
+			translation: { x: -1.44, y: -1.28, z: -0.72 },
+			rotation: { x: -4, y: 7, z: 68 },
+			scale: 0.6
+		}
+	},
+	attributesByType: {
+		"grow-pot-red-raw": {
+			beehivekiln: {
+				"0": { "type": "block", "code": "seafarer:grow-pot-tan-fired" },
+				"1": { "type": "block", "code": "seafarer:grow-pot-orange-fired" },
+				"2": { "type": "block", "code": "seafarer:grow-pot-red-fired" },
+				"3": { "type": "block", "code": "seafarer:grow-pot-brown-fired" }
+			}
+		},
+		"grow-pot-blue-raw": {
+			beehivekiln: {
+				"0": { "type": "block", "code": "seafarer:grow-pot-cream-fired" },
+				"1": { "type": "block", "code": "seafarer:grow-pot-gray-fired" },
+				"2": { "type": "block", "code": "seafarer:grow-pot-black-fired" },
+				"3": { "type": "block", "code": "seafarer:grow-pot-black-fired" }
+			}
+		},
+		"grow-pot-fire-raw": {
+			beehivekiln: {
+				"0": { "type": "block", "code": "seafarer:grow-pot-fire-fired" },
+				"1": { "type": "block", "code": "seafarer:grow-pot-fire-fired" },
+				"2": { "type": "block", "code": "seafarer:grow-pot-fire-fired" },
+				"3": { "type": "block", "code": "seafarer:grow-pot-fire-fired" }
+			}
+		}
+	},
+	combustiblePropsByType: {
+		"grow-pot-fire-raw": {
+			meltingPoint: 600,
+			meltingDuration: 30,
+			smeltedRatio: 1,
+			smeltingType: "fire",
+			smeltedStack: { type: "block", code: "seafarer:grow-pot-fire-fired" },
+			requiresContainer: false
+		},
+		"grow-pot-blue-raw": {
+			meltingPoint: 600,
+			meltingDuration: 30,
+			smeltedRatio: 1,
+			smeltingType: "fire",
+			smeltedStack: { type: "block", code: "seafarer:grow-pot-blue-fired" },
+			requiresContainer: false
+		},
+		"grow-pot-red-raw": {
+			meltingPoint: 600,
+			meltingDuration: 30,
+			smeltedRatio: 1,
+			smeltingType: "fire",
+			smeltedStack: { type: "block", code: "seafarer:grow-pot-earthyorange-fired" },
+			requiresContainer: false
+		}
+	},
+	creativeinventory: { "general": ["*"], "decorative": ["*"], "seafarer": ["*"] },
+	heldTpIdleAnimation: "holdunderarm",
+	blockmaterial: "Ceramic",
+	replaceable: 900,
+	resistance: 1.5,
+	lightAbsorption: 1,
+	maxStackSize: 8,
+	sidesolid: { all: false },
+	sideopaque: { all: false },
+	emitsideao: { all: false },
+	sounds: {
+		walk: "game:walk/stone",
+		break: "game:block/ceramicplace",
+		hit: "game:block/ceramichit",
+		place: "game:block/ceramicplace"
+	},
+	collisionbox: {
+		x1: 0.125, y1: 0, z1: 0.125,
+		x2: 0.875, y2: 0.5625, z2: 0.875
+	},
+	selectionbox: {
+		x1: 0.125, y1: 0, z1: 0.125,
+		x2: 0.875, y2: 0.5625, z2: 0.875
+	},
+	guiTransform: {
+		origin: { x: 0.5, y: 0.4, z: 0.5 },
+		scale: 1.42
+	},
+	tpHandTransform: {
+		translation: { x: -1.1, y: -0.5, z: -1 },
+		rotation: { x: 0, y: -86, z: -84 },
+		scale: 0.47
+	}
+}

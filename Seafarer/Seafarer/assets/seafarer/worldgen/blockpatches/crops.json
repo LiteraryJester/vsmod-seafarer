@@ -1,0 +1,52 @@
+[
+	{
+		comment: "Small patches of wild chili bushes — warm, drier tropical edges",
+		blockCodes: ["chilibush-wild-free"],
+		minTemp: 20,
+		maxTemp: 40,
+		minRain: 0.3,
+		maxRain: 0.7,
+		minFertility: 0.3,
+		maxFertility: 0.7,
+		maxForest: 0.8,
+		maxY: 0.65,
+		chance: 0.08,
+		quantity: { dist: "invexp", avg: 2, var: 3 }
+	},
+	{
+		comment: "Small patches of wild tomato bushes — warm temperate to sub-tropical",
+		blockCodes: ["tomatobush-wild-free"],
+		minTemp: 12,
+		maxTemp: 32,
+		minRain: 0.4,
+		maxRain: 0.75,
+		minFertility: 0.3,
+		maxFertility: 0.75,
+		maxForest: 0.7,
+		maxY: 0.65,
+		chance: 0.08,
+		quantity: { dist: "invexp", avg: 2, var: 3 }
+	},
+	{
+		comment: "Small patches of wild corn — warm temperate grasslands",
+		blockCodes: ["crop-corn-4", "crop-corn-6", "crop-corn-8", "crop-corn-9", "crop-corn-11"],
+		minTemp: 15,
+		maxTemp: 35,
+		minRain: 0.4,
+		maxRain: 0.8,
+		maxForest: 0.5,
+		quantity: { avg: 13.3, var: 13.3 },
+		chance: 0.035
+	},
+	{
+		comment: "Small patches of wild sugar cane — hot wet tropical lowlands",
+		blockCodes: ["crop-sugarcane-3", "crop-sugarcane-5", "crop-sugarcane-7", "crop-sugarcane-8"],
+		minTemp: 25,
+		maxTemp: 45,
+		minRain: 0.6,
+		maxRain: 1.0,
+		maxForest: 0.6,
+		quantity: { avg: 8, var: 6 },
+		chance: 0.04
+	}
+]

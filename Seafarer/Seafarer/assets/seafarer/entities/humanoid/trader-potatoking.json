@@ -1,5 +1,5 @@
 {
-	"code": "humanoid-trader-potatoking",
+	"code": "trader-potatoking",
 	"class": "EntityEvolvingTrader",
 	"tags": ["humanoid", "trader", "human", "habitat-land"],
 	"weight": 80,
@@ -35,14 +35,14 @@
 		"disableElements": ["breasts"],
 		"frostOverlayThreshold": -10,
 		"shouldSwivelFromMotion": false,
-		"outfitConfigFileName": "traderaccessories-male",
+		"outfitConfigFileName": "game:traderaccessories-male",
 		"voiceSounds": [
 			"game:sounds/voice/tuba/",
 			"game:sounds/voice/duduk/"
 		],
 		"outfitversion": 1,
 		"partialRandomOutfitsByType": {
-			"humanoid-trader-potatoking": {
+			"trader-potatoking": {
 				"bodyskin": [
 					{ "Code": "bodyskin-4" },
 					{ "Code": "bodyskin-5" },
@@ -81,11 +81,7 @@
 				],
 				"face": [
 					{ "Code": "nothing", "Weight": 2.0 },
-					{ "Code": "face-goggles", "Weight": 6.0 },
-					{ "Code": "face-veiledgoggles", "Weight": 4.0 },
-					{ "Code": "face-primitivegasmask", "Weight": 3.0 },
-					{ "Code": "face-metalmask1", "Weight": 2.0 },
-					{ "Code": "face-oldmask" }
+					{ "Code": "face-goggles", "Weight": 6.0 }
 				],
 				"foot": [
 					{ "Code": "foot-boots3", "Weight": 3.0 },
@@ -107,10 +103,7 @@
 					{ "Code": "head-bonyheadband", "Weight": 3.0 }
 				],
 				"lowerbody": [
-					{ "Code": "lowerbody-pants4", "Weight": 3.0 },
-					{ "Code": "lowerbody-pants5", "Weight": 3.0 },
-					{ "Code": "lowerbody-pantssuspender", "Weight": 4.0 },
-					{ "Code": "lowerbody-pants6bony", "Weight": 2.0 }
+					{ "Code": "nothing", "Weight": 3.0 }
 				],
 				"neck": [
 					{ "Code": "nothing", "Weight": 4.0 },
@@ -123,15 +116,10 @@
 					{ "Code": "shoulder-tiedrope", "Weight": 2.0 }
 				],
 				"upperbody": [
-					{ "Code": "upperbody-longsleeve-shirt8spelunker", "Weight": 5.0 },
-					{ "Code": "upperbody-longsleeve-shirt9raggedy", "Weight": 3.0 },
-					{ "Code": "upperbody-longsleeve-shirt1worn", "Weight": 2.0 },
-					{ "Code": "upperbody-longsleeve-shirt6tattered", "Weight": 2.0 }
+					{ "Code": "nothing", "Weight": 3.0 }
 				],
 				"upperbodyover": [
 					{ "Code": "nothing", "Weight": 3.0 },
-					{ "Code": "upperbodyover-armor-metal", "Weight": 4.0 },
-					{ "Code": "upperbodyover-shortsleeve-overshirt3peltvest", "Weight": 2.0 }
 				],
 				"waist": [
 					{ "Code": "waist-drill", "Weight": 6.0 },

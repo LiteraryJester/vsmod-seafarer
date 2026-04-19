@@ -34,5 +34,11 @@
         training: "buccaneer",
         item: "seafarer:trainingbook-buccaneer",
         xp: 100
+    },
+    {
+        type: "book",
+        training: "gardener",
+        item: "seafarer:trainingbook-gardener",
+        xp: 100
     }
 ]

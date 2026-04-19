@@ -1,5 +1,5 @@
 {
-	"code": "humanoid-trader-dawnmarie",
+	"code": "trader-dawnmarie",
 	"class": "EntityEvolvingTrader",
 	"tags": ["humanoid", "trader", "human", "habitat-land"],
 	"weight": 70,
@@ -34,7 +34,7 @@
 	"attributes": {
 		"frostOverlayThreshold": -10,
 		"shouldSwivelFromMotion": false,
-		"outfitConfigFileName": "traderaccessories-female",
+		"outfitConfigFileName": "game:traderaccessories-female",
 		"voiceSounds": [
 			"game:sounds/voice/harp/",
 			"game:sounds/voice/ocarina/",
@@ -42,7 +42,7 @@
 		],
 		"outfitversion": 1,
 		"partialRandomOutfitsByType": {
-			"humanoid-trader-dawnmarie": {
+			"trader-dawnmarie": {
 				"bodyskin": [
 					{ "Code": "bodyskin-1" },
 					{ "Code": "bodyskin-2" },
@@ -133,7 +133,7 @@
 				"list": [
 					{ "code": "game:bugnet-copper", "type": "item", "stacksize": 1, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 6, "var": 1 } },
 					{ "code": "seafarer:seeds-sugarcane", "type": "item", "stacksize": 4, "stock": { "avg": 8, "var": 2 }, "price": { "avg": 2, "var": 0.5 } },
-					{ "code": "game:fruittree-cutting-ud", "type": "block", "stacksize": 1, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 8, "var": 1 }, "attributes": { "type": "olive" } }
+					{ "code": "game:fruittree-cutting", "type": "block", "stacksize": 1, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 8, "var": 1 }, "attributes": { "type": "olive" } }
 				]
 			},
 			"buying": {

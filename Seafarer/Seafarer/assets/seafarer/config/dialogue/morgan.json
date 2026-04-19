@@ -81,9 +81,8 @@
                         { "variable": "global.quest-seafarer-morgan-mine-status", "isValue": "completed" },
                         { "variable": "global.quest-seafarer-morgan-tradegoods-status", "isValue": "completed" }
                     ]
-                },
+                }
 
-                { "value": "seafarer:dialogue-goodbye", "jumpTo": "goodbye" }
             ]
         },
         {
@@ -113,12 +112,7 @@
             "text": [{ "value": "seafarer:dialogue-morgan-tortuga-lore" }],
             "jumpTo": "main"
         },
-        {
-            "code": "goodbye",
-            "owner": "morgan",
-            "type": "talk",
-            "text": [{ "value": "seafarer:dialogue-morgan-goodbye" }]
-        },
+      
 
         // =============================================================
         // Quest: Reopen the Mine (morgan-mine)
@@ -182,8 +176,7 @@
                         { "variable": "player.inventory", "isNotValue": "{type: 'item', code: 'seafarer:letter-morgan', stacksize: 1}" }
                     ]
                 },
-                { "value": "seafarer:dialogue-morgan-remind-quest", "jumpTo": "mine-reminder" },
-                { "value": "seafarer:dialogue-goodbye", "jumpTo": "goodbye" }
+                { "value": "seafarer:dialogue-morgan-remind-quest", "jumpTo": "mine-reminder" }
             ]
         },
 
@@ -303,8 +296,7 @@
                     ]
                 },
                 // Ask for status
-                { "value": "seafarer:dialogue-morgan-tradegoods-status", "jumpTo": "tradegoods-statusreport" },
-                { "value": "seafarer:dialogue-goodbye", "jumpTo": "goodbye" }
+                { "value": "seafarer:dialogue-morgan-tradegoods-status", "jumpTo": "tradegoods-statusreport" }
             ]
         },
 

@@ -1,5 +1,5 @@
 {
-	"code": "humanoid-trader-drake",
+	"code": "trader-drake",
 	"class": "EntityEvolvingTrader",
 	"tags": ["humanoid", "trader", "human", "habitat-land"],
 	"weight": 80,
@@ -35,7 +35,7 @@
 		"disableElements": ["breasts"],
 		"frostOverlayThreshold": -10,
 		"shouldSwivelFromMotion": false,
-		"outfitConfigFileName": "traderaccessories-male",
+		"outfitConfigFileName": "game:traderaccessories-male",
 		"voiceSounds": [
 			"game:sounds/voice/duduk/",
 			"game:sounds/voice/oboe/",
@@ -43,7 +43,7 @@
 		],
 		"outfitversion": 1,
 		"partialRandomOutfitsByType": {
-			"humanoid-trader-drake": {
+			"trader-drake": {
 				"bodyskin": [
 					{ "Code": "bodyskin-4" },
 					{ "Code": "bodyskin-5" },

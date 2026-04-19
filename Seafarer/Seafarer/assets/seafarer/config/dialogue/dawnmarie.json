@@ -52,6 +52,15 @@
                         { "variable": "global.quest-seafarer-dawnmarie-orchard-status", "isValue": "active" }
                     ]
                 },
+                // Orchard quest: past partial-completion threshold — player can keep
+                // turning in remaining cuttings for their per-objective rewards.
+                {
+                    "value": "seafarer:dialogue-dawnmarie-ask-orchard-active",
+                    "jumpTo": "orchard-progress",
+                    "conditions": [
+                        { "variable": "global.quest-seafarer-dawnmarie-orchard-status", "isValue": "completed" }
+                    ]
+                },
 
                 // Plantation quest: not yet started
                 {
@@ -70,8 +79,15 @@
                         { "variable": "global.quest-seafarer-dawnmarie-plantation-status", "isValue": "active" }
                     ]
                 },
-
-                { "value": "seafarer:dialogue-goodbye", "jumpTo": "goodbye" }
+                // Plantation quest: past partial-completion threshold — player can keep
+                // turning in remaining seeds for their per-objective rewards.
+                {
+                    "value": "seafarer:dialogue-dawnmarie-ask-plantation-active",
+                    "jumpTo": "plantation-progress",
+                    "conditions": [
+                        { "variable": "global.quest-seafarer-dawnmarie-plantation-status", "isValue": "completed" }
+                    ]
+                }
             ]
         },
         {
@@ -93,12 +109,6 @@
             "code": "trade",
             "owner": "dawnmarie",
             "trigger": "opentrade"
-        },
-        {
-            "code": "goodbye",
-            "owner": "dawnmarie",
-            "type": "talk",
-            "text": [{ "value": "seafarer:dialogue-dawnmarie-goodbye" }]
         },
 
         // =============================================================
@@ -143,7 +153,7 @@
                     "jumpTo": "deliver-orchard-pinkapple",
                     "conditions": [
                         { "variable": "global.quest-seafarer-dawnmarie-orchard-pinkapple-status", "isNotValue": "completed" },
-                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-pinkapple', stacksize: 1}" }
+                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-cutting', stacksize: 1, attributes: {type: 'pinkapple'}}" }
                     ]
                 },
                 {
@@ -151,7 +161,7 @@
                     "jumpTo": "deliver-orchard-redapple",
                     "conditions": [
                         { "variable": "global.quest-seafarer-dawnmarie-orchard-redapple-status", "isNotValue": "completed" },
-                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-redapple', stacksize: 1}" }
+                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-cutting', stacksize: 1, attributes: {type: 'redapple'}}" }
                     ]
                 },
                 {
@@ -159,7 +169,7 @@
                     "jumpTo": "deliver-orchard-yellowapple",
                     "conditions": [
                         { "variable": "global.quest-seafarer-dawnmarie-orchard-yellowapple-status", "isNotValue": "completed" },
-                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-yellowapple', stacksize: 1}" }
+                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-cutting', stacksize: 1, attributes: {type: 'yellowapple'}}" }
                     ]
                 },
                 {
@@ -167,7 +177,7 @@
                     "jumpTo": "deliver-orchard-cherry",
                     "conditions": [
                         { "variable": "global.quest-seafarer-dawnmarie-orchard-cherry-status", "isNotValue": "completed" },
-                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-cherry', stacksize: 1}" }
+                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-cutting', stacksize: 1, attributes: {type: 'cherry'}}" }
                     ]
                 },
                 {
@@ -175,7 +185,7 @@
                     "jumpTo": "deliver-orchard-peach",
                     "conditions": [
                         { "variable": "global.quest-seafarer-dawnmarie-orchard-peach-status", "isNotValue": "completed" },
-                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-peach', stacksize: 1}" }
+                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-cutting', stacksize: 1, attributes: {type: 'peach'}}" }
                     ]
                 },
                 {
@@ -183,7 +193,7 @@
                     "jumpTo": "deliver-orchard-pear",
                     "conditions": [
                         { "variable": "global.quest-seafarer-dawnmarie-orchard-pear-status", "isNotValue": "completed" },
-                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-pear', stacksize: 1}" }
+                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-cutting', stacksize: 1, attributes: {type: 'pear'}}" }
                     ]
                 },
                 {
@@ -191,7 +201,7 @@
                     "jumpTo": "deliver-orchard-orange",
                     "conditions": [
                         { "variable": "global.quest-seafarer-dawnmarie-orchard-orange-status", "isNotValue": "completed" },
-                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-orange', stacksize: 1}" }
+                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-cutting', stacksize: 1, attributes: {type: 'orange'}}" }
                     ]
                 },
                 {
@@ -199,7 +209,7 @@
                     "jumpTo": "deliver-orchard-mango",
                     "conditions": [
                         { "variable": "global.quest-seafarer-dawnmarie-orchard-mango-status", "isNotValue": "completed" },
-                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-mango', stacksize: 1}" }
+                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-cutting', stacksize: 1, attributes: {type: 'mango'}}" }
                     ]
                 },
                 {
@@ -207,7 +217,7 @@
                     "jumpTo": "deliver-orchard-breadfruit",
                     "conditions": [
                         { "variable": "global.quest-seafarer-dawnmarie-orchard-breadfruit-status", "isNotValue": "completed" },
-                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-breadfruit', stacksize: 1}" }
+                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-cutting', stacksize: 1, attributes: {type: 'breadfruit'}}" }
                     ]
                 },
                 {
@@ -215,7 +225,7 @@
                     "jumpTo": "deliver-orchard-lychee",
                     "conditions": [
                         { "variable": "global.quest-seafarer-dawnmarie-orchard-lychee-status", "isNotValue": "completed" },
-                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-lychee', stacksize: 1}" }
+                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-cutting', stacksize: 1, attributes: {type: 'lychee'}}" }
                     ]
                 },
                 {
@@ -223,11 +233,18 @@
                     "jumpTo": "deliver-orchard-pomegranate",
                     "conditions": [
                         { "variable": "global.quest-seafarer-dawnmarie-orchard-pomegranate-status", "isNotValue": "completed" },
-                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-pomegranate', stacksize: 1}" }
+                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-cutting', stacksize: 1, attributes: {type: 'pomegranate'}}" }
                     ]
                 },
-                { "value": "seafarer:dialogue-dawnmarie-orchard-status", "jumpTo": "orchard-statusreport" },
-                { "value": "seafarer:dialogue-goodbye", "jumpTo": "goodbye" }
+                {
+                    "value": "seafarer:dialogue-dawnmarie-deliver-orchard-coconut",
+                    "jumpTo": "deliver-orchard-coconut",
+                    "conditions": [
+                        { "variable": "global.quest-seafarer-dawnmarie-orchard-coconut-status", "isNotValue": "completed" },
+                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:fruittree-cutting', stacksize: 1, attributes: {type: 'coconut'}}" }
+                    ]
+                },
+                { "value": "seafarer:dialogue-dawnmarie-orchard-status", "jumpTo": "orchard-statusreport" }
             ]
         },
 
@@ -328,6 +345,15 @@
             "type": "talk",
             "trigger": "questDeliver",
             "triggerdata": { "code": "dawnmarie-orchard", "objective": "pomegranate" },
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-orchard-delivery-thanks" }],
+            "jumpTo": "check-orchard-complete"
+        },
+        {
+            "code": "deliver-orchard-coconut",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "dawnmarie-orchard", "objective": "coconut" },
             "text": [{ "value": "seafarer:dialogue-dawnmarie-orchard-delivery-thanks" }],
             "jumpTo": "check-orchard-complete"
         },
@@ -508,8 +534,31 @@
                         { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:seeds-carrot', stacksize: 10}" }
                     ]
                 },
-                { "value": "seafarer:dialogue-dawnmarie-plantation-status", "jumpTo": "plantation-statusreport" },
-                { "value": "seafarer:dialogue-goodbye", "jumpTo": "goodbye" }
+                {
+                    "value": "seafarer:dialogue-dawnmarie-deliver-plantation-cabbage",
+                    "jumpTo": "deliver-plantation-cabbage",
+                    "conditions": [
+                        { "variable": "global.quest-seafarer-dawnmarie-plantation-cabbage-status", "isNotValue": "completed" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:seeds-cabbage', stacksize: 10}" }
+                    ]
+                },
+                {
+                    "value": "seafarer:dialogue-dawnmarie-deliver-plantation-pumpkin",
+                    "jumpTo": "deliver-plantation-pumpkin",
+                    "conditions": [
+                        { "variable": "global.quest-seafarer-dawnmarie-plantation-pumpkin-status", "isNotValue": "completed" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:seeds-pumpkin', stacksize: 10}" }
+                    ]
+                },
+                {
+                    "value": "seafarer:dialogue-dawnmarie-deliver-plantation-licorice",
+                    "jumpTo": "deliver-plantation-licorice",
+                    "conditions": [
+                        { "variable": "global.quest-seafarer-dawnmarie-plantation-licorice-status", "isNotValue": "completed" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:seeds-licorice', stacksize: 10}" }
+                    ]
+                },
+                { "value": "seafarer:dialogue-dawnmarie-plantation-status", "jumpTo": "plantation-statusreport" }
             ]
         },
 
@@ -637,6 +686,33 @@
             "type": "talk",
             "trigger": "questDeliver",
             "triggerdata": { "code": "dawnmarie-plantation", "objective": "carrot" },
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-plantation-delivery-thanks" }],
+            "jumpTo": "check-plantation-complete"
+        },
+        {
+            "code": "deliver-plantation-cabbage",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "dawnmarie-plantation", "objective": "cabbage" },
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-plantation-delivery-thanks" }],
+            "jumpTo": "check-plantation-complete"
+        },
+        {
+            "code": "deliver-plantation-pumpkin",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "dawnmarie-plantation", "objective": "pumpkin" },
+            "text": [{ "value": "seafarer:dialogue-dawnmarie-plantation-delivery-thanks" }],
+            "jumpTo": "check-plantation-complete"
+        },
+        {
+            "code": "deliver-plantation-licorice",
+            "owner": "dawnmarie",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "dawnmarie-plantation", "objective": "licorice" },
             "text": [{ "value": "seafarer:dialogue-dawnmarie-plantation-delivery-thanks" }],
             "jumpTo": "check-plantation-complete"
         },

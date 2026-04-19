@@ -31,6 +31,16 @@
       "priceVar": 2
     },
     {
+      "type": "addSellingItem",
+      "itemCode": "seafarer:trainingbook-buccaneer",
+      "itemType": "item",
+      "stacksize": 1,
+      "stockAvg": 1,
+      "stockVar": 0,
+      "priceAvg": 10,
+      "priceVar": 3
+    },
+    {
       "type": "incrementEntityVariable",
       "variableName": "celeste-friendship",
       "amount": 1,

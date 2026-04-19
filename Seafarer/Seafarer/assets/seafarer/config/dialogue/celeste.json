@@ -179,8 +179,15 @@
                         { "variable": "player.quest-seafarer-celeste-bearhunter-status", "isValue": "active" }
                     ]
                 },
-
-                { "value": "seafarer:dialogue-goodbye", "jumpTo": "goodbye" }
+                // Bear Hunter: past partial-completion threshold — player can keep
+                // turning in remaining pelts for their per-objective XP rewards.
+                {
+                    "value": "seafarer:dialogue-celeste-ask-bearhunter-active",
+                    "jumpTo": "bearhunter-inprogress",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-celeste-bearhunter-status", "isValue": "completed" }
+                    ]
+                }
             ]
         },
         {
@@ -209,12 +216,6 @@
             "type": "talk",
             "text": [{ "value": "seafarer:dialogue-celeste-maps-info" }],
             "jumpTo": "main"
-        },
-        {
-            "code": "goodbye",
-            "owner": "celeste",
-            "type": "talk",
-            "text": [{ "value": "seafarer:dialogue-celeste-goodbye" }]
         },
 
         // =============================================================
@@ -272,8 +273,7 @@
                         { "variable": "player.inventory", "isValue": "{type: 'item', code: 'seafarer:sealed-chest', stacksize: 1}" }
                     ]
                 },
-                { "value": "seafarer:dialogue-celeste-remind-quest", "jumpTo": "crimsonrose-reminder" },
-                { "value": "seafarer:dialogue-goodbye", "jumpTo": "goodbye" }
+                { "value": "seafarer:dialogue-celeste-remind-quest", "jumpTo": "crimsonrose-reminder" }
             ]
         },
         {
@@ -496,8 +496,7 @@
             "owner": "player",
             "type": "talk",
             "text": [
-                { "value": "seafarer:dialogue-celeste-rusthunter-status", "jumpTo": "rusthunter-check" },
-                { "value": "seafarer:dialogue-goodbye", "jumpTo": "goodbye" }
+                { "value": "seafarer:dialogue-celeste-rusthunter-status", "jumpTo": "rusthunter-check" }
             ]
         },
         {
@@ -530,37 +529,6 @@
             "owner": "celeste",
             "type": "talk",
             "text": [{ "value": "seafarer:dialogue-celeste-rusthunter-reward" }],
-            "jumpTo": "rusthunter-reward-add-cutlass"
-        },
-        {
-            "code": "rusthunter-reward-add-cutlass",
-            "owner": "celeste",
-            "trigger": "addSellingItem",
-            "triggerdata": {
-                "code": "seafarer:cutlass-copper", "type": "item", "stacksize": 1,
-                "stock": { "avg": 2, "var": 1 }, "price": { "avg": 5, "var": 2 }
-            },
-            "jumpTo": "rusthunter-reward-add-book"
-        },
-        {
-            "code": "rusthunter-reward-add-book",
-            "owner": "celeste",
-            "trigger": "addSellingItem",
-            "triggerdata": {
-                "code": "seafarer:trainingbook-buccaneer", "type": "item", "stacksize": 1,
-                "stock": { "avg": 1, "var": 0 }, "price": { "avg": 10, "var": 3 }
-            },
-            "jumpTo": "rusthunter-reward-give-cutlass"
-        },
-        {
-            "code": "rusthunter-reward-give-cutlass",
-            "owner": "celeste",
-            "trigger": "giveitemstack",
-            "triggerdata": {
-                "type": "item",
-                "code": "seafarer:cutlass-blackbronze",
-                "stacksize": 1
-            },
             "jumpTo": "main"
         },
 
@@ -637,8 +605,7 @@
                         { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:hide-pelt-bear-sun-complete', stacksize: 1}" }
                     ]
                 },
-                { "value": "seafarer:dialogue-celeste-bearhunter-status", "jumpTo": "bearhunter-statusreport" },
-                { "value": "seafarer:dialogue-goodbye", "jumpTo": "goodbye" }
+                { "value": "seafarer:dialogue-celeste-bearhunter-status", "jumpTo": "bearhunter-statusreport" }
             ]
         },
         {
@@ -707,37 +674,6 @@
             "owner": "celeste",
             "type": "talk",
             "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-reward" }],
-            "jumpTo": "bearhunter-reward-add-arrows"
-        },
-        {
-            "code": "bearhunter-reward-add-arrows",
-            "owner": "celeste",
-            "trigger": "addSellingItem",
-            "triggerdata": {
-                "code": "seafarer:arrow-barbed-copper", "type": "item", "stacksize": 1,
-                "stock": { "avg": 12, "var": 3 }, "price": { "avg": 2, "var": 1 }
-            },
-            "jumpTo": "bearhunter-reward-add-book"
-        },
-        {
-            "code": "bearhunter-reward-add-book",
-            "owner": "celeste",
-            "trigger": "addSellingItem",
-            "triggerdata": {
-                "code": "seafarer:trainingbook-bearhunter", "type": "item", "stacksize": 1,
-                "stock": { "avg": 1, "var": 0 }, "price": { "avg": 10, "var": 3 }
-            },
-            "jumpTo": "bearhunter-reward-give-arrows"
-        },
-        {
-            "code": "bearhunter-reward-give-arrows",
-            "owner": "celeste",
-            "trigger": "giveitemstack",
-            "triggerdata": {
-                "type": "item",
-                "code": "seafarer:arrow-barbed-copper",
-                "stacksize": 24
-            },
             "jumpTo": "main"
         }
     ]
