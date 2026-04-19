@@ -1,0 +1,20 @@
+{
+	code: "creature",
+	class: "ItemCreature",
+	maxstacksize: 64,
+	variantgroups: [
+		{ code: "type", states: [
+			"trader-celeste", "trader-drake", "trader-morgan",
+			"trader-dawnmarie", "trader-potatoking", "trader-jones"
+		] }
+	],
+	shape: { base: "game:entity/humanoid/trader-female" },
+	texture: { base: "game:entity/humanoid/villagerbody/skin/normal*" },
+	creativeinventory: { "creatures": ["*"], "seafarer": ["*"] },
+	materialDensity: 600,
+	guiTransform: {
+		rotation: { x: 180, y: -67, z: 0 },
+		origin: { x: 0.5, y: 1.5, z: 0.5 },
+		scale: 2.13
+	}
+}

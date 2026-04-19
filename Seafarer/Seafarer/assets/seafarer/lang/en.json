@@ -1049,6 +1049,14 @@ Need to portage? Strip off all storage and accessories first, then <hk>Shift</hk
 	"dialogue-reva-treasures-info": "I acquire rare decorative pieces, ornaments, and curiosities from across the known world. Each piece is unique. My prices reflect their rarity, but then again, you can't put a price on something truly one of a kind.",
 	"dialogue-reva-goodbye": "Until next time. Keep your eyes open for treasure, it's everywhere if you know where to look.",
 
+	"dialogue-jones-welcome": "G'day mate! Welcome to the Last Resort Bar and Pizzeria. Pull up a stool, I'll get you sorted. Still can't quite believe this place is real, but the ale's wet and the fish is fresh, so who's complaining?",
+	"dialogue-jones-welcomeback": "Oi, you're back! Didn't wipe out between here and there, I hope.",
+	"dialogue-jones-name": "Name's Jones, mate. Used to chase the perfect barrel back home, then — crikey, I dunno — one minute I'm paddling out at sunrise, next minute I'm in this rust-cursed world pourin' drinks for strangers. Reckon I must've caught the wrong wave.",
+	"dialogue-jones-profession": "I run the Last Resort. Bar, pizzeria, whatever you need. Well — the 'pizzeria' part's a bit aspirational, truth be told. Ovens round here are a bloody shocker, mate. Workin' on it. For now, it's tavern grub and whatever drinks I can rustle up.",
+	"dialogue-jones-world": "Is any of this actually real, mate?",
+	"dialogue-jones-world-info": "Dunno, grommet. One day I'm watchin' the sun come up over Bondi, next I'm hearin' about temporal storms and rust and towers. Ain't no rust on a surfboard where I'm from, I'll tell ya that. Sometimes I reckon I'm still out there floatin', and this whole show's just a dream I'm havin' while the water carries me somewhere. Either way — the ale's good. That's what matters.",
+	"dialogue-jones-goodbye": "Hooroo, mate. Catch a wave for me, yeah?",
+
 	"dialogue-dawnmarie-welcome": "Oh... a visitor. I didn't think anyone new came here anymore. I suppose you're looking to trade? I don't have much, but what I have is honest work.",
 	"dialogue-dawnmarie-welcomeback": "You came back. I wasn't sure you would.",
 	"dialogue-dawnmarie-name": "Dawn Marie. I used to paint, portraits, landscapes, anything beautiful. Now I grow what I can and try not to think about what I've lost.",
@@ -1147,6 +1155,11 @@ Need to portage? Strip off all storage and accessories first, then <hk>Shift</hk
 	"tradingwindow-trader-potatoking": "Miner's Stockpile - {0}",
 	"prefixandcreature-traderpotatoking": "a miner",
 	"nametag-potatoking": "Stranger",
+
+	"item-creature-trader-jones": "Jones",
+	"tradingwindow-trader-jones": "Last Resort Bar and Pizzeria - {0}",
+	"prefixandcreature-traderjones": "a tavern keeper",
+	"nametag-jones": "Stranger",
 	"dialog-morgan-sugar-status": "Thank you kindly, that's {entity.sugar} of 10 loads of sugar that we need.",
 
 	"configlib-title-drying": "Drying Frame",
