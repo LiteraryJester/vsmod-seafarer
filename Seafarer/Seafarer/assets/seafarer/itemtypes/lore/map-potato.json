@@ -10,7 +10,7 @@
         "maxPageCount": 1,
         "locatorPropsbyType": {
             "*": {
-                "schematiccode": "potato-king-house",
+                "schematiccode": "potatoking",
                 "waypointtext": "location-potato",
                 "waypointicon": "x",
                 "waypointcolor": [0.6, 0.4, 0.1, 1]
