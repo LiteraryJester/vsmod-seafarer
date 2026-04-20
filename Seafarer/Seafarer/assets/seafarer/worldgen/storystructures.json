@@ -1,6 +1,7 @@
 {
   "schematicYOffsets": {
-    "surface/potato-king-house": 30
+    "story/seafarer:potato-king-house": 0,
+    "story/seafarer:tortuga": -52
   },
   "rocktypeRemapGroups": {},
   "structures": [
@@ -11,6 +12,7 @@
       "schematics": ["surface/potato-king-house"],
       "placement": "surface",
       "UseWorldgenHeight": true,
+      "DisableSurfaceTerrainBlending": true,
       "dependsOnStructure": "spawn",
       "minSpawnDistX": -2500,
       "maxSpawnDistX": 2500,
