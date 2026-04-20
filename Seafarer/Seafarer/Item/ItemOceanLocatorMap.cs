@@ -20,7 +20,7 @@ namespace Seafarer
             base.OnLoaded(api);
             strucLocSys = api.ModLoader.GetModSystem<ModSystemStructureLocator>();
             props = Attributes["locatorProps"].AsObject<LocatorProps>();
-            searchRange = Attributes["searchRange"].AsInt(350);
+            searchRange = Attributes["searchRange"].AsInt(2000);
         }
 
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)

@@ -8,7 +8,6 @@
         "readable": true,
         "editable": false,
         "maxPageCount": 1,
-        "searchRange": 10000,
         "locatorPropsbyType": {
             "*": {
                 "schematiccode": "tortuga",
