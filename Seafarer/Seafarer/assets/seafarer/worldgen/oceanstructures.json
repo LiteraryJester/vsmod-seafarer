@@ -2,10 +2,10 @@
   "structures": [
     {
       "code": "wreck-crimsonrose",
-      "schematics": ["underwater/wreak-crimson-rose"],
+      "schematics": ["underwater/wreck-crimson-rose"],
       "placement": "underwater",
       "chance": 0.015,
-      "minWaterDepth": 10,
+      "minWaterDepth": 5,
       "maxWaterDepth": 50,
       "offsetY": 0,
       "maxCount": 1,
@@ -13,12 +13,12 @@
       "randomRotation": true
     },
     {
-      "code": "wreck-crimsonrose",
-      "schematics": ["underwater/wreak-one"],
+      "code": "wreck-one",
+      "schematics": ["underwater/wreck-one"],
       "placement": "underwater",
       "chance": 0.015,
-      "minWaterDepth": 10,
-      "maxWaterDepth": 100,
+      "minWaterDepth": 50,
+      "maxWaterDepth": 50,
       "offsetY": 0,
       "suppressTrees": true,
       "randomRotation": true
@@ -28,9 +28,9 @@
       "schematics": ["costal/tortuga"],
       "placement": "underwater",
       "chance": 0.05,
-      "minWaterDepth": 3,
-      "maxWaterDepth": 15,
-      "offsetY": 0,
+      "minWaterDepth": 10,
+      "maxWaterDepth": 50,
+      "offsetY":0,
       "globalMaxCount": 1,
       "minSpawnDist": 500,
       "maxSpawnDist": 3000,
