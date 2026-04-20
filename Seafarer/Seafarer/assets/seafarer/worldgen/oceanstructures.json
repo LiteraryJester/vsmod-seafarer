@@ -11,7 +11,8 @@
       "maxCount": 1,
       "suppressTrees": true,
       "generateGrass": false,
-      "randomRotation": true
+      "randomRotation": true,
+      "storyStructure": true
     },
     {
       "code": "wreck-one",
@@ -38,7 +39,8 @@
       "maxSpawnDist": 3000,
       "suppressTrees": true,
       "generateGrass": false,
-      "randomRotation": true
+      "randomRotation": true,
+      "storyStructure": true
     }
   ]
 }
