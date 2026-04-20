@@ -1,0 +1,14 @@
+[
+    {
+        "op": "add",
+        "path": "/drops/-",
+        "file": "game:entity/animal/fish/saltwater-adult.json",
+        "value": { "type": "item", "code": "seafarer:map-tortuga", "chance": { "avg": 0.015, "var": 0 } }
+    },
+    {
+        "op": "add",
+        "path": "/drops/-",
+        "file": "game:entity/animal/fish/reef-adult.json",
+        "value": { "type": "item", "code": "seafarer:map-tortuga", "chance": { "avg": 0.015, "var": 0 } }
+    }
+]
