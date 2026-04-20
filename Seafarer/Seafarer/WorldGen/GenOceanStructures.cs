@@ -30,6 +30,11 @@ namespace Seafarer.WorldGen
         [ProtoMember(7)] public int SizeY;
         [ProtoMember(8)] public int SizeZ;
         [ProtoMember(9)] public bool StructureRecorded;
+        // False until Y has been resolved. For OceanSurface reservations, Y is resolved
+        // immediately at reservation time (= seaLevel + OffsetY). For other placement modes,
+        // resolution is deferred to the first chunk-gen event for the chunk containing
+        // (OriginX, OriginZ) — since terrain height is only available per chunk.
+        [ProtoMember(10)] public bool OriginYResolved;
     }
 
     public class OceanStructureDef
@@ -51,6 +56,10 @@ namespace Seafarer.WorldGen
         // Radial distance from world spawn in blocks (0 = no constraint)
         public int MinSpawnDist = 0;
         public int MaxSpawnDist = 0;
+
+        // When true, reservation happens at world init (SaveGameLoaded) rather than
+        // lazily per-chunk. Placement is always chunk-iterative via PlacePartial.
+        public bool StoryStructure = false;
     }
 
     public class OceanStructuresConfig
