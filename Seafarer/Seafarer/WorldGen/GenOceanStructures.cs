@@ -381,7 +381,7 @@ namespace Seafarer.WorldGen
             int terrainHeight = centerMapChunk.WorldGenTerrainHeightMap[(cz % chunksize) * chunksize + (cx % chunksize)];
             int waterDepth = seaLevel - terrainHeight;
             if (def.MinWaterDepth > 0 && waterDepth < def.MinWaterDepth) return false;
-            if (def.MaxWaterDepth > 0 && def.MaxWaterDepth < 255 && waterDepth > def.MaxWaterDepth) return false;
+            if (def.MaxWaterDepth > 0 && waterDepth > def.MaxWaterDepth) return false;
 
             return true;
         }
