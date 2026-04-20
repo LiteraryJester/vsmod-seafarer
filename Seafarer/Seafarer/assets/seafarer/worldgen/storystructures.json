@@ -34,6 +34,7 @@
       "schematics": ["costal/tortuga"],
       "placement": "surface",
       "ExcludeSchematicSizeProtect": true,
+      "DisableSurfaceTerrainBlending": true,
       "dependsOnStructure": "spawn",
       "minSpawnDistX": -3000,
       "maxSpawnDistX":  3000,
