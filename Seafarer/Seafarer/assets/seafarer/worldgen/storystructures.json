@@ -1,6 +1,6 @@
 {
   "schematicYOffsets": {
-    "surface/potato-king-house": 6
+    "surface/potato-king-house": 30
   },
   "rocktypeRemapGroups": {},
   "structures": [
@@ -10,6 +10,7 @@
       "name": "Potato King's House",
       "schematics": ["surface/potato-king-house"],
       "placement": "surface",
+      "UseWorldgenHeight": true,
       "dependsOnStructure": "spawn",
       "minSpawnDistX": -2500,
       "maxSpawnDistX": 2500,
