@@ -22,6 +22,20 @@
       "offsetY": 0,
       "suppressTrees": true,
       "randomRotation": true
+    },
+    {
+      "code": "tortuga",
+      "schematics": ["costal/tortuga"],
+      "placement": "underwater",
+      "chance": 0.05,
+      "minWaterDepth": 3,
+      "maxWaterDepth": 15,
+      "offsetY": 0,
+      "globalMaxCount": 1,
+      "minSpawnDist": 500,
+      "maxSpawnDist": 3000,
+      "suppressTrees": true,
+      "randomRotation": true
     }
   ]
 }
