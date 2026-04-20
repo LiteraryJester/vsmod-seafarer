@@ -26,6 +26,13 @@ namespace Seafarer.WorldGen
         public int MaxCount = 0;
         public bool SuppressTrees = false;
         public bool RandomRotation = true;
+
+        // World-singleton tracking (0 = unlimited)
+        public int GlobalMaxCount = 0;
+
+        // Radial distance from world spawn in blocks (0 = no constraint)
+        public int MinSpawnDist = 0;
+        public int MaxSpawnDist = 0;
     }
 
     public class OceanStructuresConfig
