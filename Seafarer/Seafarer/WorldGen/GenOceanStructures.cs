@@ -215,79 +215,243 @@ namespace Seafarer.WorldGen
             {
                 if (!cachedSchematics.TryGetValue(def.Code, out var variants)) continue;
 
-                rand.InitPositionSeed(chunkX + def.Code.GetHashCode(), chunkZ);
-                float roll = (float)rand.NextInt(10000) / 10000f;
-                if (roll > def.Chance) continue;
-
-                // Global singleton gate: if a per-world cap is set and we've hit it, skip.
-                if (def.GlobalMaxCount > 0)
+                if (def.Placement == EnumOceanPlacement.OceanSurface)
                 {
-                    lock (countsLock)
-                    {
-                        if (globalCounts.TryGetValue(def.Code, out int placed) && placed >= def.GlobalMaxCount)
-                            continue;
-                    }
+                    HandleOceanSurface(request, def, variants, mapRegion, chunkX, chunkZ);
+                    continue;
                 }
 
-                if (def.MaxCount > 0 && CountExistingStructures(mapRegion, def.Code) >= def.MaxCount) continue;
+                HandleLegacyPlacement(request, def, variants, mapChunk, mapRegion, chunkX, chunkZ, seaLevel);
+            }
+        }
 
-                int localX = rand.NextInt(chunksize);
-                int localZ = rand.NextInt(chunksize);
-                int posX = chunkX * chunksize + localX;
-                int posZ = chunkZ * chunksize + localZ;
+        /// <summary>
+        /// Legacy per-chunk placement for Underwater / Coastal / BuriedUnderwater modes.
+        /// Unchanged behavior from pre-OceanSurface era.
+        /// </summary>
+        private void HandleLegacyPlacement(IChunkColumnGenerateRequest request, OceanStructureDef def, BlockSchematicPartial[][] variants,
+            IMapChunk mapChunk, IMapRegion mapRegion, int chunkX, int chunkZ, int seaLevel)
+        {
+            rand.InitPositionSeed(chunkX + def.Code.GetHashCode(), chunkZ);
+            float roll = (float)rand.NextInt(10000) / 10000f;
+            if (roll > def.Chance) return;
 
-                // Spawn-distance gate: radial distance from world spawn.
-                if (def.MinSpawnDist > 0 || def.MaxSpawnDist > 0)
+            if (def.GlobalMaxCount > 0)
+            {
+                lock (countsLock)
                 {
-                    var spawnPos = GetSpawnPosSafe();
-                    if (spawnPos == null) continue; // spawn not yet determined; skip this chunk for this structure
-                    int dx = posX - spawnPos.X;
-                    int dz = posZ - spawnPos.Z;
-                    double dist = Math.Sqrt((double)dx * dx + (double)dz * dz);
-                    if (def.MinSpawnDist > 0 && dist < def.MinSpawnDist) continue;
-                    if (def.MaxSpawnDist > 0 && dist > def.MaxSpawnDist) continue;
+                    if (globalCounts.TryGetValue(def.Code, out int placed) && placed >= def.GlobalMaxCount) return;
                 }
+            }
 
-                float oceanicity = GetOceanicity(mapRegion, posX, posZ);
-                float beachStrength = GetBeachStrength(mapRegion, posX, posZ);
+            if (def.MaxCount > 0 && CountExistingStructures(mapRegion, def.Code) >= def.MaxCount) return;
 
-                int terrainHeight = mapChunk.WorldGenTerrainHeightMap[localZ * chunksize + localX];
-                int waterDepth = seaLevel - terrainHeight;
+            int localX = rand.NextInt(chunksize);
+            int localZ = rand.NextInt(chunksize);
+            int posX = chunkX * chunksize + localX;
+            int posZ = chunkZ * chunksize + localZ;
 
-                if (!IsValidPlacement(def, oceanicity, beachStrength, waterDepth)) continue;
+            if (def.MinSpawnDist > 0 || def.MaxSpawnDist > 0)
+            {
+                var spawnPos = GetSpawnPosSafe();
+                if (spawnPos == null) return;
+                int dx = posX - spawnPos.X;
+                int dz = posZ - spawnPos.Z;
+                double dist = Math.Sqrt((double)dx * dx + (double)dz * dz);
+                if (def.MinSpawnDist > 0 && dist < def.MinSpawnDist) return;
+                if (def.MaxSpawnDist > 0 && dist > def.MaxSpawnDist) return;
+            }
 
-                var variantRotations = variants[rand.NextInt(variants.Length)];
-                int rotationIndex = def.RandomRotation ? rand.NextInt(4) : 0;
-                var schematic = variantRotations[rotationIndex];
+            float oceanicity = GetOceanicity(mapRegion, posX, posZ);
+            float beachStrength = GetBeachStrength(mapRegion, posX, posZ);
 
-                int posY = CalculatePlacementY(def, terrainHeight, schematic);
-                var startPos = new BlockPos(posX, posY, posZ);
+            int terrainHeight = mapChunk.WorldGenTerrainHeightMap[localZ * chunksize + localX];
+            int waterDepth = seaLevel - terrainHeight;
 
-                schematic.Place(worldgenBlockAccessor, sapi.World, startPos, EnumReplaceMode.ReplaceAll, true);
+            if (!IsValidPlacement(def, oceanicity, beachStrength, waterDepth)) return;
 
+            var variantRotations = variants[rand.NextInt(variants.Length)];
+            int rotationIndex = def.RandomRotation ? rand.NextInt(4) : 0;
+            var schematic = variantRotations[rotationIndex];
+
+            int posY = CalculatePlacementY(def, terrainHeight, schematic);
+            var startPos = new BlockPos(posX, posY, posZ);
+
+            schematic.Place(worldgenBlockAccessor, sapi.World, startPos, EnumReplaceMode.ReplaceAll, true);
+
+            mapRegion.AddGeneratedStructure(new GeneratedStructure()
+            {
+                Code = def.Code,
+                Group = "ocean",
+                Location = new Cuboidi(
+                    startPos.X, startPos.Y, startPos.Z,
+                    startPos.X + schematic.SizeX - 1,
+                    startPos.Y + schematic.SizeY - 1,
+                    startPos.Z + schematic.SizeZ - 1
+                ),
+                SuppressTreesAndShrubs = def.SuppressTrees,
+                SuppressRivulets = true
+            });
+
+            if (def.GlobalMaxCount > 0)
+            {
+                lock (countsLock)
+                {
+                    globalCounts.TryGetValue(def.Code, out int placed);
+                    globalCounts[def.Code] = placed + 1;
+                }
+            }
+        }
+
+        /// <summary>
+        /// OceanSurface handler. Runs in two phases per chunk:
+        ///   (a) If no reservation exists and this chunk passes validation, create one.
+        ///   (b) If a reservation exists and its cuboid intersects this chunk, PlacePartial its slice.
+        /// </summary>
+        private void HandleOceanSurface(IChunkColumnGenerateRequest request, OceanStructureDef def, BlockSchematicPartial[][] variants,
+            IMapRegion mapRegion, int chunkX, int chunkZ)
+        {
+            OceanStructureReservation existing;
+            lock (countsLock)
+            {
+                reservations.TryGetValue(def.Code, out existing);
+            }
+
+            // Phase A: try to create a reservation if none exists
+            if (existing == null)
+            {
+                existing = TryReserveOceanSurface(def, variants, mapRegion, chunkX, chunkZ);
+                // existing is non-null only if reservation was successful; fall through to Phase B
+            }
+
+            // Phase B: place whatever slice of the reserved structure falls in this chunk
+            if (existing == null) return;
+            PlaceOceanSurfaceSlice(request, def, variants, mapRegion, chunkX, chunkZ, existing);
+        }
+
+        /// <summary>
+        /// Attempts to pick and reserve a valid OceanSurface location using the current chunk as candidate.
+        /// Returns the reservation on success, null otherwise.
+        /// </summary>
+        private OceanStructureReservation TryReserveOceanSurface(OceanStructureDef def, BlockSchematicPartial[][] variants,
+            IMapRegion mapRegion, int chunkX, int chunkZ)
+        {
+            // Singleton gate
+            if (def.GlobalMaxCount > 0)
+            {
+                lock (countsLock)
+                {
+                    if (globalCounts.TryGetValue(def.Code, out int placed) && placed >= def.GlobalMaxCount) return null;
+                }
+            }
+
+            rand.InitPositionSeed(chunkX + def.Code.GetHashCode(), chunkZ);
+            float roll = (float)rand.NextInt(10000) / 10000f;
+            if (roll > def.Chance) return null;
+
+            int localX = rand.NextInt(chunksize);
+            int localZ = rand.NextInt(chunksize);
+            int candidateX = chunkX * chunksize + localX;
+            int candidateZ = chunkZ * chunksize + localZ;
+
+            if (def.MinSpawnDist > 0 || def.MaxSpawnDist > 0)
+            {
+                var spawnPos = GetSpawnPosSafe();
+                if (spawnPos == null) return null;
+                int dx = candidateX - spawnPos.X;
+                int dz = candidateZ - spawnPos.Z;
+                double dist = Math.Sqrt((double)dx * dx + (double)dz * dz);
+                if (def.MinSpawnDist > 0 && dist < def.MinSpawnDist) return null;
+                if (def.MaxSpawnDist > 0 && dist > def.MaxSpawnDist) return null;
+            }
+
+            int variantIdx = rand.NextInt(variants.Length);
+            var variantRotations = variants[variantIdx];
+            int rotationIndex = def.RandomRotation ? rand.NextInt(4) : 0;
+            var schematic = variantRotations[rotationIndex];
+
+            // Center-based origin: structure centered on candidate position
+            int originX = candidateX - schematic.SizeX / 2;
+            int originZ = candidateZ - schematic.SizeZ / 2;
+
+            if (!ValidateOceanCoverage(mapRegion, originX, originZ, schematic.SizeX, schematic.SizeZ, def)) return null;
+
+            var reservation = new OceanStructureReservation
+            {
+                OriginX = originX,
+                OriginY = sapi.World.SeaLevel + def.OffsetY,
+                OriginZ = originZ,
+                VariantIndex = variantIdx,
+                RotationIndex = rotationIndex,
+                SizeX = schematic.SizeX,
+                SizeY = schematic.SizeY,
+                SizeZ = schematic.SizeZ,
+                StructureRecorded = false
+            };
+
+            lock (countsLock)
+            {
+                // Re-check singleton after validation (another thread may have beaten us)
+                if (def.GlobalMaxCount > 0 && globalCounts.TryGetValue(def.Code, out int placed2) && placed2 >= def.GlobalMaxCount) return null;
+                reservations[def.Code] = reservation;
+                globalCounts[def.Code] = globalCounts.GetValueOrDefault(def.Code) + 1;
+            }
+
+            Mod.Logger.Notification("Ocean structure '{0}' reserved at ({1}, {2}, {3})", def.Code, originX, reservation.OriginY, originZ);
+            return reservation;
+        }
+
+        /// <summary>
+        /// Paints the slice of a reserved schematic that falls within the current chunk.
+        /// First-time placement also records the GeneratedStructure for waypoint discovery.
+        /// </summary>
+        private void PlaceOceanSurfaceSlice(IChunkColumnGenerateRequest request, OceanStructureDef def, BlockSchematicPartial[][] variants,
+            IMapRegion mapRegion, int chunkX, int chunkZ, OceanStructureReservation res)
+        {
+            int footprintMinX = res.OriginX;
+            int footprintMaxX = res.OriginX + res.SizeX;
+            int footprintMinZ = res.OriginZ;
+            int footprintMaxZ = res.OriginZ + res.SizeZ;
+            int chunkMinX = chunkX * chunksize;
+            int chunkMaxX = chunkMinX + chunksize;
+            int chunkMinZ = chunkZ * chunksize;
+            int chunkMaxZ = chunkMinZ + chunksize;
+
+            // Footprint-vs-chunk intersection in XZ
+            if (footprintMaxX <= chunkMinX || footprintMinX >= chunkMaxX) return;
+            if (footprintMaxZ <= chunkMinZ || footprintMinZ >= chunkMaxZ) return;
+
+            // Safety: defensive bounds on variant/rotation indices in case save data is from a different config
+            if (res.VariantIndex < 0 || res.VariantIndex >= variants.Length) return;
+            var rotations = variants[res.VariantIndex];
+            if (res.RotationIndex < 0 || res.RotationIndex >= rotations.Length) return;
+            var schematic = rotations[res.RotationIndex];
+
+            var startPos = new BlockPos(res.OriginX, res.OriginY, res.OriginZ);
+            schematic.PlacePartial(
+                request.Chunks, worldgenBlockAccessor, sapi.World,
+                chunkX, chunkZ, startPos,
+                EnumReplaceMode.ReplaceAll,
+                EnumStructurePlacement.Surface,
+                replaceMeta: true, resolveImports: true
+            );
+
+            if (!res.StructureRecorded)
+            {
                 mapRegion.AddGeneratedStructure(new GeneratedStructure()
                 {
                     Code = def.Code,
                     Group = "ocean",
                     Location = new Cuboidi(
-                        startPos.X, startPos.Y, startPos.Z,
-                        startPos.X + schematic.SizeX - 1,
-                        startPos.Y + schematic.SizeY - 1,
-                        startPos.Z + schematic.SizeZ - 1
+                        res.OriginX, res.OriginY, res.OriginZ,
+                        res.OriginX + res.SizeX - 1,
+                        res.OriginY + res.SizeY - 1,
+                        res.OriginZ + res.SizeZ - 1
                     ),
                     SuppressTreesAndShrubs = def.SuppressTrees,
                     SuppressRivulets = true
                 });
-
-                // Increment the world-global counter so singletons don't repeat.
-                if (def.GlobalMaxCount > 0)
-                {
-                    lock (countsLock)
-                    {
-                        globalCounts.TryGetValue(def.Code, out int placed);
-                        globalCounts[def.Code] = placed + 1;
-                    }
-                }
+                lock (countsLock) { res.StructureRecorded = true; }
             }
         }
 
