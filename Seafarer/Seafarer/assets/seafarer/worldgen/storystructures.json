@@ -1,7 +1,6 @@
 {
   "schematicYOffsets": {
-    "story/seafarer:potato-king-house": 0,
-    "story/seafarer:tortuga": -52
+    "story/seafarer:potato-king-house": 0
   },
   "rocktypeRemapGroups": {},
   "structures": [
@@ -27,32 +26,6 @@
         "shrubs": 50,
         "hotsprings": 100,
         "patches": 30
-      }
-    },
-    {
-      "code": "tortuga",
-      "group": "storystructure",
-      "name": "Tortuga",
-      "schematics": ["costal/tortuga"],
-      "placement": "surface",
-      "ExcludeSchematicSizeProtect": true,
-      "DisableSurfaceTerrainBlending": true,
-      "dependsOnStructure": "spawn",
-      "minSpawnDistX": -3000,
-      "maxSpawnDistX":  3000,
-      "minSpawnDistZ": -3000,
-      "maxSpawnDistZ":  3000,
-      "requireLandform": "shallowislands",
-      "landformRadius": 100,
-      "generateGrass": true,
-      "skipGenerationCategories": {
-        "structures": 300,
-        "trees": 200,
-        "shrubs": 150,
-        "hotsprings": 250,
-        "patches": 100,
-        "pond": 200,
-        "rivulets": 100
       }
     }
   ]
