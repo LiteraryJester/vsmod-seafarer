@@ -133,6 +133,7 @@ namespace Seafarer.WorldGen
             rand = new LCGRandom(sapi.WorldManager.Seed ^ 8415718);
 
             LoadConfig();
+            DetermineOceanStoryStructures();
         }
 
         private void LoadConfig()
@@ -692,7 +693,6 @@ namespace Seafarer.WorldGen
                 }
             }
 
-            DetermineOceanStoryStructures();
         }
 
         private void OnGameWorldSave()
@@ -749,8 +749,8 @@ namespace Seafarer.WorldGen
                     }
                 }
 
-                bool placed0 = TryReserveStoryLocation(def, variants, spawnPos, seaLevel);
-                if (!placed0)
+                bool reserved = TryReserveStoryLocation(def, variants, spawnPos, seaLevel);
+                if (!reserved)
                 {
                     Mod.Logger.Warning("Ocean story structure '{0}': failed to find a valid spot after {1} attempts; will not generate this world.", def.Code, MaxReservationAttempts);
                 }
@@ -790,8 +790,8 @@ namespace Seafarer.WorldGen
                 int originZ = candidateZ - schematic.SizeZ / 2;
 
                 // Force-load the map region containing the candidate center
-                int rx = candidateX / regionSize;
-                int rz = candidateZ / regionSize;
+                int rx = (int)Math.Floor((double)candidateX / regionSize);
+                int rz = (int)Math.Floor((double)candidateZ / regionSize);
                 if (!sapi.WorldManager.BlockingTestMapRegionExists(rx, rz))
                 {
                     // Region failed to load (shouldn't happen under normal circumstances)
