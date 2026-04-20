@@ -345,6 +345,8 @@ namespace Seafarer.WorldGen
                 }
             }
 
+            // NOTE: per-region def.MaxCount is intentionally NOT checked for OceanSurface;
+            // use def.GlobalMaxCount for world-singleton caps.
             rand.InitPositionSeed(chunkX + def.Code.GetHashCode(), chunkZ);
             float roll = (float)rand.NextInt(10000) / 10000f;
             if (roll > def.Chance) return null;
@@ -436,23 +438,25 @@ namespace Seafarer.WorldGen
                 replaceMeta: true, resolveImports: true
             );
 
-            if (!res.StructureRecorded)
+            // Atomic check-and-set so only the first thread adds the GeneratedStructure record.
+            lock (countsLock)
             {
-                mapRegion.AddGeneratedStructure(new GeneratedStructure()
-                {
-                    Code = def.Code,
-                    Group = "ocean",
-                    Location = new Cuboidi(
-                        res.OriginX, res.OriginY, res.OriginZ,
-                        res.OriginX + res.SizeX - 1,
-                        res.OriginY + res.SizeY - 1,
-                        res.OriginZ + res.SizeZ - 1
-                    ),
-                    SuppressTreesAndShrubs = def.SuppressTrees,
-                    SuppressRivulets = true
-                });
-                lock (countsLock) { res.StructureRecorded = true; }
+                if (res.StructureRecorded) return;
+                res.StructureRecorded = true;
             }
+            mapRegion.AddGeneratedStructure(new GeneratedStructure()
+            {
+                Code = def.Code,
+                Group = "ocean",
+                Location = new Cuboidi(
+                    res.OriginX, res.OriginY, res.OriginZ,
+                    res.OriginX + res.SizeX - 1,
+                    res.OriginY + res.SizeY - 1,
+                    res.OriginZ + res.SizeZ - 1
+                ),
+                SuppressTreesAndShrubs = def.SuppressTrees,
+                SuppressRivulets = true
+            });
         }
 
         private float GetOceanicity(IMapRegion mapRegion, int posX, int posZ)
