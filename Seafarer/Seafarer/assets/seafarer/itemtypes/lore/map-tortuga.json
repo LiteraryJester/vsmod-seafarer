@@ -1,0 +1,25 @@
+{
+    "code": "map-tortuga",
+    "class": "ItemOceanLocatorMap",
+    "maxstacksize": 1,
+    "attributes": {
+        "displaycaseable": true,
+        "shelvable": true,
+        "readable": true,
+        "editable": false,
+        "maxPageCount": 1,
+        "searchRange": 10000,
+        "locatorPropsbyType": {
+            "*": {
+                "schematiccode": "tortuga",
+                "waypointtext": "location-tortuga",
+                "waypointicon": "x",
+                "waypointcolor": [0.95, 0.75, 0.2, 1],
+                "randomX": 15,
+                "randomZ": 15
+            }
+        }
+    },
+    "shape": { "base": "game:item/clutter/fishing/bottlemessage" },
+    "creativeinventory": { "general": ["*"], "items": ["*"], "seafarer": ["*"] }
+}
