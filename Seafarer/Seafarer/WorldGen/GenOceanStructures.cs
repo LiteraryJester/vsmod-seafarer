@@ -488,8 +488,8 @@ namespace Seafarer.WorldGen
             // We resolve from the chunk that contains the origin corner (OriginX, OriginZ).
             if (!res.OriginYResolved)
             {
-                int originChunkX = res.OriginX / chunksize;
-                int originChunkZ = res.OriginZ / chunksize;
+                int originChunkX = (int)Math.Floor((double)res.OriginX / chunksize);
+                int originChunkZ = (int)Math.Floor((double)res.OriginZ / chunksize);
                 if (chunkX != originChunkX || chunkZ != originChunkZ)
                 {
                     // Not our job — wait for the chunk that owns the origin
@@ -526,10 +526,14 @@ namespace Seafarer.WorldGen
                     return;
                 }
 
-                res.OriginY = CalculatePlacementY(def, terrainHeight, schematic);
-                res.OriginYResolved = true;
+                int resolvedY = CalculatePlacementY(def, terrainHeight, schematic);
+                lock (countsLock)
+                {
+                    res.OriginY = resolvedY;
+                    res.OriginYResolved = true;
+                }
                 Mod.Logger.Notification("Ocean story structure '{0}' Y resolved to {1} (terrain={2}, placement={3})",
-                    def.Code, res.OriginY, terrainHeight, def.Placement);
+                    def.Code, resolvedY, terrainHeight, def.Placement);
             }
 
             // XZ-footprint intersection with current chunk
@@ -546,11 +550,25 @@ namespace Seafarer.WorldGen
             if (footprintMaxZ <= chunkMinZ || footprintMinZ >= chunkMaxZ) return;
 
             var startPos = new BlockPos(res.OriginX, res.OriginY, res.OriginZ);
+            EnumStructurePlacement placementHint;
+            switch (def.Placement)
+            {
+                case EnumOceanPlacement.Underwater:
+                case EnumOceanPlacement.BuriedUnderwater:
+                    placementHint = EnumStructurePlacement.Underwater;
+                    break;
+                case EnumOceanPlacement.Coastal:
+                case EnumOceanPlacement.OceanSurface:
+                default:
+                    placementHint = EnumStructurePlacement.Surface;
+                    break;
+            }
+
             schematic.PlacePartial(
                 request.Chunks, worldgenBlockAccessor, sapi.World,
                 chunkX, chunkZ, startPos,
                 EnumReplaceMode.ReplaceAll,
-                EnumStructurePlacement.Surface,
+                placementHint,
                 replaceMeta: true, resolveImports: true
             );
 
