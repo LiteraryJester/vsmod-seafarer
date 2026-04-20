@@ -13,12 +13,14 @@ namespace Seafarer
     {
         private ModSystemStructureLocator strucLocSys;
         private LocatorProps props;
+        private int searchRange;
 
         public override void OnLoaded(ICoreAPI api)
         {
             base.OnLoaded(api);
             strucLocSys = api.ModLoader.GetModSystem<ModSystemStructureLocator>();
             props = Attributes["locatorProps"].AsObject<LocatorProps>();
+            searchRange = Attributes["searchRange"].AsInt(350);
         }
 
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
@@ -53,7 +55,7 @@ namespace Seafarer
 
             if (pos == null)
             {
-                var loc = strucLocSys.FindFreshStructureLocation(props.SchematicCode, byEntity.Pos.AsBlockPos, 350);
+                var loc = strucLocSys.FindFreshStructureLocation(props.SchematicCode, byEntity.Pos.AsBlockPos, searchRange);
                 if (loc != null)
                 {
                     attr.SetVec3i("position", loc.Position);
