@@ -4,6 +4,7 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
+using Vintagestory.API.Util;
 
 namespace Seafarer.WorldGen
 {
@@ -54,6 +55,12 @@ namespace Seafarer.WorldGen
         // Each variant is an array of 4 rotations (0, 90, 180, 270).
         private Dictionary<string, BlockSchematic[][]> cachedSchematics = new();
 
+        // World-global count of placed structures, keyed on def.Code.
+        // Accessed from the chunk-gen worker thread and from save hooks, so guard with countsLock.
+        private readonly Dictionary<string, int> globalCounts = new();
+        private readonly object countsLock = new();
+        private const string CountsDataKey = "seafarer-ocean-structure-counts";
+
         public override bool ShouldLoad(EnumAppSide side) => side == EnumAppSide.Server;
         public override double ExecuteOrder() => 0.31;
 
@@ -67,6 +74,9 @@ namespace Seafarer.WorldGen
             {
                 worldgenBlockAccessor = chunkProvider.GetBlockAccessor(false);
             });
+
+            api.Event.SaveGameLoaded += OnSaveGameLoaded;
+            api.Event.GameWorldSave += OnGameWorldSave;
 
             var parsers = api.ChatCommands.Parsers;
             api.ChatCommands.GetOrCreate("ocean")
@@ -296,6 +306,33 @@ namespace Seafarer.WorldGen
                 if (gs.Code == code) count++;
             }
             return count;
+        }
+
+        private void OnSaveGameLoaded()
+        {
+            byte[] data = sapi.WorldManager.SaveGame.GetData(CountsDataKey);
+            lock (countsLock)
+            {
+                globalCounts.Clear();
+                if (data != null)
+                {
+                    var loaded = SerializerUtil.Deserialize<Dictionary<string, int>>(data);
+                    if (loaded != null)
+                    {
+                        foreach (var kv in loaded) globalCounts[kv.Key] = kv.Value;
+                    }
+                }
+            }
+        }
+
+        private void OnGameWorldSave()
+        {
+            Dictionary<string, int> snapshot;
+            lock (countsLock)
+            {
+                snapshot = new Dictionary<string, int>(globalCounts);
+            }
+            sapi.WorldManager.SaveGame.StoreData(CountsDataKey, SerializerUtil.Serialize(snapshot));
         }
 
         private TextCommandResult OnCmdPlace(TextCommandCallingArgs args)
