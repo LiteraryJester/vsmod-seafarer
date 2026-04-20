@@ -154,6 +154,7 @@ namespace Seafarer.WorldGen
                     }
 
                     var baseSchematic = schematicAsset.ToObject<BlockSchematicPartial>();
+                    DedupeFluidIndices(baseSchematic, worldgenBlockAccessor);
                     baseSchematic.Init(worldgenBlockAccessor);
 
                     var rotations = new BlockSchematicPartial[4];
@@ -161,6 +162,7 @@ namespace Seafarer.WorldGen
                     {
                         var copy = (BlockSchematicPartial)baseSchematic.ClonePacked();
                         copy.TransformWhilePacked(sapi.World, EnumOrigin.BottomCenter, r * 90);
+                        DedupeFluidIndices(copy, worldgenBlockAccessor);
                         copy.Init(worldgenBlockAccessor);
                         rotations[r] = copy;
                     }
@@ -180,6 +182,56 @@ namespace Seafarer.WorldGen
 
             Mod.Logger.Notification("Loaded {0} ocean structure definitions with {1} total schematic variants.",
                 config.Structures.Length, cachedSchematics.Count);
+        }
+
+        /// <summary>
+        /// Removes duplicate fluid entries from a schematic's packed Indices/BlockIds arrays.
+        /// Some schematics (esp. WorldEdit-saved) end up with two entries at the same (x,y,z)
+        /// position that both resolve to fluid blocks, which makes BlockSchematicStructure.Init
+        /// throw because FluidBlocksByPos is populated via strict Dictionary.Add. Keeping only
+        /// the first occurrence at each fluid position gives us the same last-write-wins semantic
+        /// the old BlockSchematic.Place path used.
+        /// </summary>
+        private void DedupeFluidIndices(BlockSchematicPartial schem, IBlockAccessor accessor)
+        {
+            var seenFluidIndices = new HashSet<uint>();
+            var keptIndices = new List<uint>(schem.Indices.Count);
+            var keptBlockIds = new List<int>(schem.BlockIds.Count);
+            int removed = 0;
+
+            for (int i = 0; i < schem.Indices.Count; i++)
+            {
+                uint idx = schem.Indices[i];
+                int blockId = schem.BlockIds[i];
+
+                if (!schem.BlockCodes.TryGetValue(blockId, out var blockCode))
+                {
+                    // unknown block id; keep as-is, Init will skip it via its own null check
+                    keptIndices.Add(idx);
+                    keptBlockIds.Add(blockId);
+                    continue;
+                }
+
+                Block block = accessor.GetBlock(blockCode);
+                if (block != null && block.ForFluidsLayer)
+                {
+                    if (!seenFluidIndices.Add(idx))
+                    {
+                        removed++;
+                        continue;
+                    }
+                }
+
+                keptIndices.Add(idx);
+                keptBlockIds.Add(blockId);
+            }
+
+            if (removed > 0)
+            {
+                Mod.Logger.Warning("Schematic had {0} duplicate fluid entries at the same position; kept first occurrence at each.", removed);
+                schem.Indices = keptIndices;
+                schem.BlockIds = keptBlockIds;
+            }
         }
 
         private BlockPos spawnPosCache;
