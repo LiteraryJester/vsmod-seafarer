@@ -10,6 +10,7 @@
       "offsetY": 0,
       "maxCount": 1,
       "suppressTrees": true,
+      "generateGrass": false,
       "randomRotation": true
     },
     {
@@ -20,6 +21,21 @@
       "minWaterDepth": 10,
       "maxWaterDepth": 50,
       "offsetY": 0,
+      "suppressTrees": true,
+      "generateGrass": false,
+      "randomRotation": true
+    },
+    {
+      "code": "tortuga",
+      "schematics": ["costal/tortuga"],
+      "placement": "oceansurface",
+      "chance": 1.0,
+      "minWaterDepth": 5,
+      "maxWaterDepth": 40,
+      "offsetY": -27,
+      "globalMaxCount": 1,
+      "minSpawnDist": 500,
+      "maxSpawnDist": 3000,
       "suppressTrees": true,
       "randomRotation": true
     }
