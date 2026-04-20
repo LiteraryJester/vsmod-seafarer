@@ -37,6 +37,7 @@
       "minSpawnDist": 500,
       "maxSpawnDist": 3000,
       "suppressTrees": true,
+      "generateGrass": false,
       "randomRotation": true
     }
   ]
