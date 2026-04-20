@@ -691,6 +691,8 @@ namespace Seafarer.WorldGen
                     }
                 }
             }
+
+            DetermineOceanStoryStructures();
         }
 
         private void OnGameWorldSave()
@@ -704,6 +706,132 @@ namespace Seafarer.WorldGen
             }
             sapi.WorldManager.SaveGame.StoreData(CountsDataKey, SerializerUtil.Serialize(countsSnapshot));
             sapi.WorldManager.SaveGame.StoreData(ReservationsDataKey, SerializerUtil.Serialize(resSnapshot));
+        }
+
+        private const int MaxReservationAttempts = 30;
+
+        /// <summary>
+        /// Init-time reservation scan for structures flagged StoryStructure = true.
+        /// Called from OnSaveGameLoaded after savegame dicts are deserialized.
+        /// For each story def without an existing reservation, try up to
+        /// MaxReservationAttempts candidate positions in the spawn-distance band.
+        /// Map regions are force-loaded as needed.
+        /// </summary>
+        private void DetermineOceanStoryStructures()
+        {
+            if (config == null || config.Structures.Length == 0) return;
+
+            var spawnPos = GetSpawnPosSafe();
+            if (spawnPos == null)
+            {
+                Mod.Logger.Notification("Ocean story structures: spawn position not yet determined, will retry on next load.");
+                return;
+            }
+
+            int seaLevel = sapi.World.SeaLevel;
+
+            foreach (var def in config.Structures)
+            {
+                if (!def.StoryStructure) continue;
+                if (!cachedSchematics.TryGetValue(def.Code, out var variants)) continue;
+
+                // Already reserved (from previous load or a prior save in this session)
+                bool alreadyReserved;
+                lock (countsLock) { alreadyReserved = reservations.ContainsKey(def.Code); }
+                if (alreadyReserved) continue;
+
+                // Respect GlobalMaxCount — if already at cap (e.g., admin-placed), skip
+                if (def.GlobalMaxCount > 0)
+                {
+                    lock (countsLock)
+                    {
+                        if (globalCounts.TryGetValue(def.Code, out int placed) && placed >= def.GlobalMaxCount) continue;
+                    }
+                }
+
+                bool placed0 = TryReserveStoryLocation(def, variants, spawnPos, seaLevel);
+                if (!placed0)
+                {
+                    Mod.Logger.Warning("Ocean story structure '{0}': failed to find a valid spot after {1} attempts; will not generate this world.", def.Code, MaxReservationAttempts);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Try up to MaxReservationAttempts candidate positions for one story structure.
+        /// Returns true if a reservation was written.
+        /// </summary>
+        private bool TryReserveStoryLocation(OceanStructureDef def, BlockSchematicPartial[][] variants, BlockPos spawnPos, int seaLevel)
+        {
+            // Deterministic-per-world RNG seeded by code + world seed so repeated loads
+            // of the same world tend to converge on the same spot if the first attempts
+            // happen to all miss initially (edge case; reservations are normally persisted).
+            var localRand = new LCGRandom(sapi.WorldManager.Seed ^ (uint)def.Code.GetHashCode());
+
+            int minDist = Math.Max(def.MinSpawnDist, 0);
+            int maxDist = def.MaxSpawnDist > 0 ? def.MaxSpawnDist : 5000;   // reasonable default if unset
+
+            for (int attempt = 0; attempt < MaxReservationAttempts; attempt++)
+            {
+                // Polar sample in the band
+                double angle = localRand.NextDouble() * Math.PI * 2.0;
+                double radius = minDist + localRand.NextDouble() * Math.Max(1, maxDist - minDist);
+                int candidateX = spawnPos.X + (int)(Math.Cos(angle) * radius);
+                int candidateZ = spawnPos.Z + (int)(Math.Sin(angle) * radius);
+
+                // Pick variant + rotation
+                int variantIdx = localRand.NextInt(variants.Length);
+                var rotations = variants[variantIdx];
+                int rotationIdx = def.RandomRotation ? localRand.NextInt(4) : 0;
+                var schematic = rotations[rotationIdx];
+
+                // Center-based origin
+                int originX = candidateX - schematic.SizeX / 2;
+                int originZ = candidateZ - schematic.SizeZ / 2;
+
+                // Force-load the map region containing the candidate center
+                int rx = candidateX / regionSize;
+                int rz = candidateZ / regionSize;
+                if (!sapi.WorldManager.BlockingTestMapRegionExists(rx, rz))
+                {
+                    // Region failed to load (shouldn't happen under normal circumstances)
+                    continue;
+                }
+                var mapRegion = sapi.World.BlockAccessor.GetMapRegion(rx, rz);
+                if (mapRegion == null) continue;
+
+                if (!ValidateOceanCoverage(mapRegion, originX, originZ, schematic.SizeX, schematic.SizeZ, def)) continue;
+
+                // Success — build reservation
+                bool isOceanSurface = def.Placement == EnumOceanPlacement.OceanSurface;
+                var reservation = new OceanStructureReservation
+                {
+                    OriginX = originX,
+                    OriginY = isOceanSurface ? (seaLevel + def.OffsetY) : 0,
+                    OriginZ = originZ,
+                    VariantIndex = variantIdx,
+                    RotationIndex = rotationIdx,
+                    SizeX = schematic.SizeX,
+                    SizeY = schematic.SizeY,
+                    SizeZ = schematic.SizeZ,
+                    StructureRecorded = false,
+                    OriginYResolved = isOceanSurface
+                };
+
+                lock (countsLock)
+                {
+                    reservations[def.Code] = reservation;
+                    globalCounts[def.Code] = globalCounts.GetValueOrDefault(def.Code) + 1;
+                }
+
+                Mod.Logger.Notification("Ocean story structure '{0}' reserved at ({1}, {2}, {3}) [Y {4}resolved]",
+                    def.Code, originX, reservation.OriginY, originZ,
+                    isOceanSurface ? "" : "un");
+
+                return true;
+            }
+
+            return false;
         }
 
         private TextCommandResult OnCmdPlace(TextCommandCallingArgs args)
