@@ -161,6 +161,24 @@ namespace Seafarer.WorldGen
                 config.Structures.Length, cachedSchematics.Count);
         }
 
+        private BlockPos spawnPosCache;
+
+        private BlockPos GetSpawnPosSafe()
+        {
+            if (spawnPosCache != null) return spawnPosCache;
+            try
+            {
+                var ep = sapi.World.DefaultSpawnPosition;
+                if (ep == null) return null;
+                spawnPosCache = ep.AsBlockPos;
+                return spawnPosCache;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         private void OnChunkColumnGen(IChunkColumnGenerateRequest request)
         {
             if (config.Structures.Length == 0) return;
@@ -171,8 +189,6 @@ namespace Seafarer.WorldGen
             var mapChunk = chunks[0].MapChunk;
             var mapRegion = mapChunk.MapRegion;
             int seaLevel = sapi.World.SeaLevel;
-
-            var spawnPos = sapi.World.DefaultSpawnPosition.AsBlockPos;
 
             foreach (var def in config.Structures)
             {
@@ -202,6 +218,8 @@ namespace Seafarer.WorldGen
                 // Spawn-distance gate: radial distance from world spawn.
                 if (def.MinSpawnDist > 0 || def.MaxSpawnDist > 0)
                 {
+                    var spawnPos = GetSpawnPosSafe();
+                    if (spawnPos == null) continue; // spawn not yet determined; skip this chunk for this structure
                     int dx = posX - spawnPos.X;
                     int dz = posZ - spawnPos.Z;
                     double dist = Math.Sqrt((double)dx * dx + (double)dz * dz);
