@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ProtoBuf;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
@@ -17,17 +18,18 @@ namespace Seafarer.WorldGen
         OceanSurface
     }
 
+    [ProtoContract]
     public class OceanStructureReservation
     {
-        public int OriginX;
-        public int OriginY;
-        public int OriginZ;
-        public int VariantIndex;
-        public int RotationIndex;
-        public int SizeX;
-        public int SizeY;
-        public int SizeZ;
-        public bool StructureRecorded;
+        [ProtoMember(1)] public int OriginX;
+        [ProtoMember(2)] public int OriginY;
+        [ProtoMember(3)] public int OriginZ;
+        [ProtoMember(4)] public int VariantIndex;
+        [ProtoMember(5)] public int RotationIndex;
+        [ProtoMember(6)] public int SizeX;
+        [ProtoMember(7)] public int SizeY;
+        [ProtoMember(8)] public int SizeZ;
+        [ProtoMember(9)] public bool StructureRecorded;
     }
 
     public class OceanStructureDef
