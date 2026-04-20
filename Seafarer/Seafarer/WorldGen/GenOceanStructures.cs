@@ -5,6 +5,7 @@ using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.API.Util;
+using Vintagestory.ServerMods;
 
 namespace Seafarer.WorldGen
 {
@@ -12,7 +13,21 @@ namespace Seafarer.WorldGen
     {
         Underwater,
         Coastal,
-        BuriedUnderwater
+        BuriedUnderwater,
+        OceanSurface
+    }
+
+    public class OceanStructureReservation
+    {
+        public int OriginX;
+        public int OriginY;
+        public int OriginZ;
+        public int VariantIndex;
+        public int RotationIndex;
+        public int SizeX;
+        public int SizeY;
+        public int SizeZ;
+        public bool StructureRecorded;
     }
 
     public class OceanStructureDef
@@ -53,13 +68,17 @@ namespace Seafarer.WorldGen
 
         // Key: structure code, Value: array of schematic variants.
         // Each variant is an array of 4 rotations (0, 90, 180, 270).
-        private Dictionary<string, BlockSchematic[][]> cachedSchematics = new();
+        // BlockSchematicPartial (not BlockSchematic) so we can call PlacePartial for chunk-scoped writes.
+        private Dictionary<string, BlockSchematicPartial[][]> cachedSchematics = new();
 
         // World-global count of placed structures, keyed on def.Code.
         // Accessed from the chunk-gen worker thread and from save hooks, so guard with countsLock.
         private readonly Dictionary<string, int> globalCounts = new();
+        // Persistent reservations for OceanSurface structures. Keyed on def.Code.
+        private readonly Dictionary<string, OceanStructureReservation> reservations = new();
         private readonly object countsLock = new();
         private const string CountsDataKey = "seafarer-ocean-structure-counts";
+        private const string ReservationsDataKey = "seafarer-ocean-reservations";
 
         public override bool ShouldLoad(EnumAppSide side) => side == EnumAppSide.Server;
         public override double ExecuteOrder() => 0.31;
@@ -119,7 +138,7 @@ namespace Seafarer.WorldGen
 
             foreach (var def in config.Structures)
             {
-                var variants = new List<BlockSchematic[]>();
+                var variants = new List<BlockSchematicPartial[]>();
 
                 foreach (var schematicPath in def.Schematics)
                 {
@@ -132,13 +151,13 @@ namespace Seafarer.WorldGen
                         continue;
                     }
 
-                    var baseSchematic = schematicAsset.ToObject<BlockSchematic>();
+                    var baseSchematic = schematicAsset.ToObject<BlockSchematicPartial>();
                     baseSchematic.Init(worldgenBlockAccessor);
 
-                    var rotations = new BlockSchematic[4];
+                    var rotations = new BlockSchematicPartial[4];
                     for (int r = 0; r < 4; r++)
                     {
-                        var copy = baseSchematic.ClonePacked();
+                        var copy = (BlockSchematicPartial)baseSchematic.ClonePacked();
                         copy.TransformWhilePacked(sapi.World, EnumOrigin.BottomCenter, r * 90);
                         copy.Init(worldgenBlockAccessor);
                         rotations[r] = copy;
@@ -360,16 +379,27 @@ namespace Seafarer.WorldGen
 
         private void OnSaveGameLoaded()
         {
-            byte[] data = sapi.WorldManager.SaveGame.GetData(CountsDataKey);
+            byte[] countsData = sapi.WorldManager.SaveGame.GetData(CountsDataKey);
+            byte[] resData = sapi.WorldManager.SaveGame.GetData(ReservationsDataKey);
             lock (countsLock)
             {
                 globalCounts.Clear();
-                if (data != null)
+                if (countsData != null)
                 {
-                    var loaded = SerializerUtil.Deserialize<Dictionary<string, int>>(data);
+                    var loaded = SerializerUtil.Deserialize<Dictionary<string, int>>(countsData);
                     if (loaded != null)
                     {
                         foreach (var kv in loaded) globalCounts[kv.Key] = kv.Value;
+                    }
+                }
+
+                reservations.Clear();
+                if (resData != null)
+                {
+                    var loaded = SerializerUtil.Deserialize<Dictionary<string, OceanStructureReservation>>(resData);
+                    if (loaded != null)
+                    {
+                        foreach (var kv in loaded) reservations[kv.Key] = kv.Value;
                     }
                 }
             }
@@ -377,12 +407,15 @@ namespace Seafarer.WorldGen
 
         private void OnGameWorldSave()
         {
-            Dictionary<string, int> snapshot;
+            Dictionary<string, int> countsSnapshot;
+            Dictionary<string, OceanStructureReservation> resSnapshot;
             lock (countsLock)
             {
-                snapshot = new Dictionary<string, int>(globalCounts);
+                countsSnapshot = new Dictionary<string, int>(globalCounts);
+                resSnapshot = new Dictionary<string, OceanStructureReservation>(reservations);
             }
-            sapi.WorldManager.SaveGame.StoreData(CountsDataKey, SerializerUtil.Serialize(snapshot));
+            sapi.WorldManager.SaveGame.StoreData(CountsDataKey, SerializerUtil.Serialize(countsSnapshot));
+            sapi.WorldManager.SaveGame.StoreData(ReservationsDataKey, SerializerUtil.Serialize(resSnapshot));
         }
 
         private TextCommandResult OnCmdPlace(TextCommandCallingArgs args)
