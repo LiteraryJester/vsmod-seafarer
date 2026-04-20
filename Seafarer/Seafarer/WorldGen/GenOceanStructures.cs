@@ -71,10 +71,12 @@ namespace Seafarer.WorldGen
         // BlockSchematicPartial (not BlockSchematic) so we can call PlacePartial for chunk-scoped writes.
         private Dictionary<string, BlockSchematicPartial[][]> cachedSchematics = new();
 
+        // Both dicts below are accessed from the chunk-gen worker thread and from save hooks.
+        // Guard all reads and writes with countsLock.
+
         // World-global count of placed structures, keyed on def.Code.
-        // Accessed from the chunk-gen worker thread and from save hooks, so guard with countsLock.
         private readonly Dictionary<string, int> globalCounts = new();
-        // Persistent reservations for OceanSurface structures. Keyed on def.Code.
+        // Pending/placed OceanSurface reservations, keyed on def.Code.
         private readonly Dictionary<string, OceanStructureReservation> reservations = new();
         private readonly object countsLock = new();
         private const string CountsDataKey = "seafarer-ocean-structure-counts";
