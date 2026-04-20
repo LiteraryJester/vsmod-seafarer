@@ -117,15 +117,17 @@
 		"tradeProps": {
 			"money": { "avg": 35, "var": 8 },
 			"selling": {
-				"maxItems": 8,
+				"maxItems": 10,
 				"list": [
 					{ "code": "seafarer:pansearedfish", "type": "item", "stacksize": 1, "stock": { "avg": 3, "var": 1 }, "price": { "avg": 6, "var": 1.5 } },
 					{ "code": "seafarer:searedmeat-redmeat", "type": "item", "stacksize": 1, "stock": { "avg": 3, "var": 1 }, "price": { "avg": 6, "var": 1.5 } },
 					{ "code": "seafarer:flatbread-spelt", "type": "item", "stacksize": 1, "stock": { "avg": 4, "var": 1 }, "price": { "avg": 4, "var": 1 } },
 					{ "code": "seafarer:tortilla", "type": "item", "stacksize": 1, "stock": { "avg": 4, "var": 1 }, "price": { "avg": 3, "var": 1 } },
+					{ "code": "game:cheese-cheddar-1slice", "type": "item", "stacksize": 1, "stock": { "avg": 4, "var": 1 }, "price": { "avg": 5, "var": 1 } },
 					{ "code": "seafarer:amphora", "type": "block", "stacksize": 1, "attributes": { "ucontents": [{ "type": "item", "code": "seafarer:spiritportion-whiterum", "makefull": true }] }, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 18, "var": 3 } },
 					{ "code": "seafarer:amphora", "type": "block", "stacksize": 1, "attributes": { "ucontents": [{ "type": "item", "code": "seafarer:canejuiceportion", "makefull": true }] }, "stock": { "avg": 3, "var": 1 }, "price": { "avg": 8, "var": 2 } },
-					{ "code": "seafarer:amphora", "type": "block", "stacksize": 1, "attributes": { "ucontents": [{ "type": "item", "code": "seafarer:coconutmilkportion", "makefull": true }] }, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 6, "var": 1.5 } }
+					{ "code": "seafarer:amphora", "type": "block", "stacksize": 1, "attributes": { "ucontents": [{ "type": "item", "code": "seafarer:coconutmilkportion", "makefull": true }] }, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 6, "var": 1.5 } },
+					{ "code": "seafarer:amphora", "type": "block", "stacksize": 1, "attributes": { "ucontents": [{ "type": "item", "code": "game:milkportion", "makefull": true }] }, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 6, "var": 1.5 } }
 				]
 			},
 			"buying": {
