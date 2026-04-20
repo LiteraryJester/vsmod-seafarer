@@ -2,6 +2,7 @@
     "schematicYOffsets": {
         "surface/potato-king-house": -1
     },
+    "rocktypeRemapGroups": {},
     "structures": [
         {
             "code": "potatoking",
