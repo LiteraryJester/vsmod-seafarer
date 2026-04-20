@@ -17,7 +17,7 @@
     textures: {
         "all": { base: "seafarer:item/utility/schematic-outrigger" }
     },
-    creativeinventory: { "general": ["*"], "items": ["*"] },
+    creativeinventory: { "general": ["*"], "items": ["*"], "seafarer": ["*"] },
     guiTransform: {
         translation: { x: 0, y: 0, z: 0 },
         rotation: { x: -54, y: -24, z: -180 },

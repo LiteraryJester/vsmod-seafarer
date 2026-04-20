@@ -11,7 +11,7 @@
         "lid": { "base": "seafarer:block/wood/trunk/aged-lid" },
         "accessories": { "base": "seafarer:block/wood/trunk/aged-accessories" }
     },
-    "creativeinventory": { "general": ["*"], "items": ["*"] },
+    "creativeinventory": { "general": ["*"], "items": ["*"], "seafarer": ["*"] },
     "heldTpIdleAnimation": "holdunderarm",
     "guiTransform": {
         "translation": { "x": 0, "y": -2, "z": 0 },

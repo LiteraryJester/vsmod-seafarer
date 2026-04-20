@@ -20,7 +20,7 @@
         displaycaseable: true,
         shelvable: true
     },
-    creativeinventory: { "general": ["*"], "items": ["*"] },
+    creativeinventory: { "general": ["*"], "items": ["*"], "seafarer": ["*"] },
     maxstacksize: 4,
     materialDensity: 320,
     textures: {

@@ -32,7 +32,7 @@
     textures: {
         "paper": { base: "seafarer:item/lore/letter-morgan" }
     },
-    creativeinventory: { "general": ["*"], "items": ["*"] },
+    creativeinventory: { "general": ["*"], "items": ["*"], "seafarer": ["*"] },
     guiTransform: {
         translation: { x: 0, y: 0, z: 0 },
         rotation: { x: 95, y: 163, z: 35 },

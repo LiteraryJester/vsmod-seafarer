@@ -23,7 +23,7 @@
     "textures": {
         "map-treasures": { "base": "seafarer:item/lore/map-crimsonrose" }
     },
-    "creativeinventory": { "general": ["*"], "items": ["*"] },
+    "creativeinventory": { "general": ["*"], "items": ["*"], "seafarer": ["*"] },
     "guiTransform": {
         "translation": { "x": 0, "y": 0, "z": 0 },
         "rotation": { "x": 13, "y": -39, "z": -163 },
