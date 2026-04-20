@@ -331,6 +331,61 @@ namespace Seafarer.WorldGen
             );
         }
 
+        /// <summary>
+        /// Validates that a candidate footprint has enough open water for OceanSurface placement.
+        /// Moderate rule: center + 4 corners must be ocean; at least 7 of 9 samples ocean overall;
+        /// center water depth within def.MinWaterDepth..MaxWaterDepth (if set).
+        /// </summary>
+        private bool ValidateOceanCoverage(IMapRegion mapRegion, int originX, int originZ, int sizeX, int sizeZ, OceanStructureDef def)
+        {
+            int cx = originX + sizeX / 2;
+            int cz = originZ + sizeZ / 2;
+
+            int[,] samples = new int[9, 2]
+            {
+                { cx, cz },                              // 0: center
+                { originX, originZ },                    // 1-4: corners
+                { originX + sizeX, originZ },
+                { originX, originZ + sizeZ },
+                { originX + sizeX, originZ + sizeZ },
+                { cx, originZ },                         // 5-8: edge midpoints
+                { cx, originZ + sizeZ },
+                { originX, cz },
+                { originX + sizeX, cz }
+            };
+
+            int oceanSamples = 0;
+            bool centerOcean = false;
+            bool cornersAllOcean = true;
+
+            for (int i = 0; i < 9; i++)
+            {
+                float oceanicity = GetOceanicity(mapRegion, samples[i, 0], samples[i, 1]);
+                bool isOcean = oceanicity > 0;
+                if (isOcean) oceanSamples++;
+
+                if (i == 0) centerOcean = isOcean;
+                else if (i <= 4 && !isOcean) cornersAllOcean = false;
+            }
+
+            if (!centerOcean || !cornersAllOcean) return false;
+            if (oceanSamples < 7) return false;
+
+            // Center water-depth check uses the current map chunk's heightmap, which may not be
+            // available if the center is in a neighbor chunk. Accept as valid in that case;
+            // OceanMap sampling already gave us coarse confidence.
+            int seaLevel = sapi.World.SeaLevel;
+            var centerMapChunk = sapi.WorldManager.GetMapChunk(cx / chunksize, cz / chunksize);
+            if (centerMapChunk == null) return true;
+
+            int terrainHeight = centerMapChunk.WorldGenTerrainHeightMap[(cz % chunksize) * chunksize + (cx % chunksize)];
+            int waterDepth = seaLevel - terrainHeight;
+            if (def.MinWaterDepth > 0 && waterDepth < def.MinWaterDepth) return false;
+            if (def.MaxWaterDepth > 0 && def.MaxWaterDepth < 255 && waterDepth > def.MaxWaterDepth) return false;
+
+            return true;
+        }
+
         private bool IsValidPlacement(OceanStructureDef def, float oceanicity, float beachStrength, int waterDepth)
         {
             switch (def.Placement)
