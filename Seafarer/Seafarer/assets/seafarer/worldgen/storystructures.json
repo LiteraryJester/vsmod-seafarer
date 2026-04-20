@@ -26,6 +26,32 @@
         "hotsprings": 100,
         "patches": 30
       }
+    },
+    {
+      "code": "tortuga",
+      "group": "storystructure",
+      "name": "Tortuga",
+      "schematics": ["costal/tortuga"],
+      "placement": "surface",
+      "UseWorldgenHeight": true,
+      "ExcludeSchematicSizeProtect": true,
+      "dependsOnStructure": "spawn",
+      "minSpawnDistX": -3000,
+      "maxSpawnDistX":  3000,
+      "minSpawnDistZ": -3000,
+      "maxSpawnDistZ":  3000,
+      "requireLandform": "flat",
+      "landformRadius": 250,
+      "generateGrass": true,
+      "skipGenerationCategories": {
+        "structures": 300,
+        "trees": 200,
+        "shrubs": 150,
+        "hotsprings": 250,
+        "patches": 100,
+        "pond": 200,
+        "rivulets": 100
+      }
     }
   ]
 }
