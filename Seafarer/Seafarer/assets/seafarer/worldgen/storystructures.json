@@ -1,30 +1,30 @@
 {
-    "schematicYOffsets": {
-        "surface/potato-king-house": -1
-    },
-    "rocktypeRemapGroups": {},
-    "structures": [
-        {
-            "code": "potatoking",
-            "group": "storystructure",
-            "name": "Potato King's House",
-            "schematics": ["surface/potato-king-house"],
-            "placement": "surface",
-            "dependsOnStructure": "spawn",
-            "minSpawnDistX": -2500,
-            "maxSpawnDistX":  2500,
-            "minSpawnDistZ": -2500,
-            "maxSpawnDistZ":  2500,
-            "requireLandform": "veryflat",
-            "landformRadius": 80,
-            "generateGrass": true,
-            "skipGenerationCategories": {
-                "structures": 80,
-                "trees": 50,
-                "shrubs": 50,
-                "hotsprings": 100,
-                "patches": 30
-            }
-        }
-    ]
+  "schematicYOffsets": {
+    "surface/potato-king-house": 6
+  },
+  "rocktypeRemapGroups": {},
+  "structures": [
+    {
+      "code": "potatoking",
+      "group": "storystructure",
+      "name": "Potato King's House",
+      "schematics": ["surface/potato-king-house"],
+      "placement": "surface",
+      "dependsOnStructure": "spawn",
+      "minSpawnDistX": -2500,
+      "maxSpawnDistX": 2500,
+      "minSpawnDistZ": -2500,
+      "maxSpawnDistZ": 2500,
+      "requireLandform": "veryflat",
+      "landformRadius": 80,
+      "generateGrass": true,
+      "skipGenerationCategories": {
+        "structures": 80,
+        "trees": 50,
+        "shrubs": 50,
+        "hotsprings": 100,
+        "patches": 30
+      }
+    }
+  ]
 }
