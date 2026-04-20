@@ -279,7 +279,9 @@ namespace Seafarer.WorldGen
             {
                 if (!cachedSchematics.TryGetValue(def.Code, out var variants)) continue;
 
-                if (def.Placement == EnumOceanPlacement.OceanSurface)
+                // Story structures (any placement mode) + OceanSurface (any story flag) use
+                // the reservation + per-chunk PlacePartial path.
+                if (def.StoryStructure || def.Placement == EnumOceanPlacement.OceanSurface)
                 {
                     HandleOceanSurface(request, def, variants, mapRegion, chunkX, chunkZ);
                     continue;
@@ -368,9 +370,11 @@ namespace Seafarer.WorldGen
         }
 
         /// <summary>
-        /// OceanSurface handler. Runs in two phases per chunk:
-        ///   (a) If no reservation exists and this chunk passes validation, create one.
-        ///   (b) If a reservation exists and its cuboid intersects this chunk, PlacePartial its slice.
+        /// OceanSurface handler. Two phases per chunk:
+        ///   (a) If the def is NOT a story structure and no reservation exists, try to make one lazily.
+        ///       (Story structures reserve at init time in DetermineOceanStoryStructures; we do not
+        ///        make lazy reservations for them here.)
+        ///   (b) If a reservation exists and its cuboid intersects this chunk, place its slice.
         /// </summary>
         private void HandleOceanSurface(IChunkColumnGenerateRequest request, OceanStructureDef def, BlockSchematicPartial[][] variants,
             IMapRegion mapRegion, int chunkX, int chunkZ)
@@ -381,14 +385,12 @@ namespace Seafarer.WorldGen
                 reservations.TryGetValue(def.Code, out existing);
             }
 
-            // Phase A: try to create a reservation if none exists
-            if (existing == null)
+            // Phase A: create a lazy reservation for non-story defs only
+            if (existing == null && !def.StoryStructure)
             {
                 existing = TryReserveOceanSurface(def, variants, mapRegion, chunkX, chunkZ);
-                // existing is non-null only if reservation was successful; fall through to Phase B
             }
 
-            // Phase B: place whatever slice of the reserved structure falls in this chunk
             if (existing == null) return;
             PlaceOceanSurfaceSlice(request, def, variants, mapRegion, chunkX, chunkZ, existing);
         }
@@ -469,11 +471,68 @@ namespace Seafarer.WorldGen
 
         /// <summary>
         /// Paints the slice of a reserved schematic that falls within the current chunk.
+        /// Resolves deferred Y on the first chunk-gen that touches the origin chunk.
         /// First-time placement also records the GeneratedStructure for waypoint discovery.
         /// </summary>
         private void PlaceOceanSurfaceSlice(IChunkColumnGenerateRequest request, OceanStructureDef def, BlockSchematicPartial[][] variants,
             IMapRegion mapRegion, int chunkX, int chunkZ, OceanStructureReservation res)
         {
+            // Defensive bounds on variant/rotation indices in case save data is from a different config
+            if (res.VariantIndex < 0 || res.VariantIndex >= variants.Length) return;
+            var rotations = variants[res.VariantIndex];
+            if (res.RotationIndex < 0 || res.RotationIndex >= rotations.Length) return;
+            var schematic = rotations[res.RotationIndex];
+            int seaLevel = sapi.World.SeaLevel;
+
+            // Resolve Y if still deferred (story structures with non-OceanSurface placement).
+            // We resolve from the chunk that contains the origin corner (OriginX, OriginZ).
+            if (!res.OriginYResolved)
+            {
+                int originChunkX = res.OriginX / chunksize;
+                int originChunkZ = res.OriginZ / chunksize;
+                if (chunkX != originChunkX || chunkZ != originChunkZ)
+                {
+                    // Not our job — wait for the chunk that owns the origin
+                    return;
+                }
+
+                // We are the origin chunk. Resolve Y from terrain.
+                int localX = res.OriginX - originChunkX * chunksize;
+                int localZ = res.OriginZ - originChunkZ * chunksize;
+                // Guard against edge cases (shouldn't happen but safety first)
+                if (localX < 0 || localX >= chunksize || localZ < 0 || localZ >= chunksize) return;
+
+                var mapChunk = request.Chunks[0].MapChunk;
+                int terrainHeight = mapChunk.WorldGenTerrainHeightMap[localZ * chunksize + localX];
+                int waterDepth = seaLevel - terrainHeight;
+
+                float oceanicity = GetOceanicity(mapRegion, res.OriginX, res.OriginZ);
+                float beachStrength = GetBeachStrength(mapRegion, res.OriginX, res.OriginZ);
+
+                if (!IsValidPlacement(def, oceanicity, beachStrength, waterDepth))
+                {
+                    // Coarse OceanMap validation passed at reservation time but fine-grained terrain
+                    // doesn't satisfy the def. Drop the reservation — structure will not generate.
+                    Mod.Logger.Warning("Ocean story structure '{0}': per-chunk terrain failed IsValidPlacement (waterDepth={1}); reservation dropped.",
+                        def.Code, waterDepth);
+                    lock (countsLock)
+                    {
+                        reservations.Remove(def.Code);
+                        if (def.GlobalMaxCount > 0 && globalCounts.TryGetValue(def.Code, out int n) && n > 0)
+                        {
+                            globalCounts[def.Code] = n - 1;
+                        }
+                    }
+                    return;
+                }
+
+                res.OriginY = CalculatePlacementY(def, terrainHeight, schematic);
+                res.OriginYResolved = true;
+                Mod.Logger.Notification("Ocean story structure '{0}' Y resolved to {1} (terrain={2}, placement={3})",
+                    def.Code, res.OriginY, terrainHeight, def.Placement);
+            }
+
+            // XZ-footprint intersection with current chunk
             int footprintMinX = res.OriginX;
             int footprintMaxX = res.OriginX + res.SizeX;
             int footprintMinZ = res.OriginZ;
@@ -483,15 +542,8 @@ namespace Seafarer.WorldGen
             int chunkMinZ = chunkZ * chunksize;
             int chunkMaxZ = chunkMinZ + chunksize;
 
-            // Footprint-vs-chunk intersection in XZ
             if (footprintMaxX <= chunkMinX || footprintMinX >= chunkMaxX) return;
             if (footprintMaxZ <= chunkMinZ || footprintMinZ >= chunkMaxZ) return;
-
-            // Safety: defensive bounds on variant/rotation indices in case save data is from a different config
-            if (res.VariantIndex < 0 || res.VariantIndex >= variants.Length) return;
-            var rotations = variants[res.VariantIndex];
-            if (res.RotationIndex < 0 || res.RotationIndex >= rotations.Length) return;
-            var schematic = rotations[res.RotationIndex];
 
             var startPos = new BlockPos(res.OriginX, res.OriginY, res.OriginZ);
             schematic.PlacePartial(
