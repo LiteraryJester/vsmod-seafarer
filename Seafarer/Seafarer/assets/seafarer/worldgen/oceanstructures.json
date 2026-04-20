@@ -5,7 +5,7 @@
       "schematics": ["underwater/wreck-crimson-rose"],
       "placement": "underwater",
       "chance": 0.015,
-      "minWaterDepth": 5,
+      "minWaterDepth": 10,
       "maxWaterDepth": 50,
       "offsetY": 0,
       "maxCount": 1,
@@ -17,23 +17,9 @@
       "schematics": ["underwater/wreck-one"],
       "placement": "underwater",
       "chance": 0.015,
-      "minWaterDepth": 50,
-      "maxWaterDepth": 50,
-      "offsetY": 0,
-      "suppressTrees": true,
-      "randomRotation": true
-    },
-    {
-      "code": "tortuga",
-      "schematics": ["costal/tortuga"],
-      "placement": "underwater",
-      "chance": 0.05,
       "minWaterDepth": 10,
       "maxWaterDepth": 50,
-      "offsetY":0,
-      "globalMaxCount": 1,
-      "minSpawnDist": 500,
-      "maxSpawnDist": 3000,
+      "offsetY": 0,
       "suppressTrees": true,
       "randomRotation": true
     }
