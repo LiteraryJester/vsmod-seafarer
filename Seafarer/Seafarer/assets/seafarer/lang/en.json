@@ -785,10 +785,13 @@ Need to portage? Strip off all storage and accessories first, then <hk>Shift</hk
 	"itemdesc-map-crimsonrose": "A weathered map showing the location of the Crimson Rose wreck.",
 	"item-map-potato": "Potato King's Map",
 	"itemdesc-map-potato": "A hastily drawn map to the ruins where the last potato can be found.",
+	"item-map-tortuga": "Message in a Bottle — Tortuga",
+	"itemdesc-map-tortuga": "A weathered scroll tucked inside a sea-tumbled bottle, its ink speaking of a far-off port called Tortuga.",
 	"item-sealed-chest": "Sealed Chest",
 	"itemdesc-sealed-chest": "A heavy sealed chest recovered from the wreck of the Crimson Rose.",
 	"location-crimsonrose": "Crimson Rose Wreck",
 	"location-potato": "Last Potato",
+	"location-tortuga": "Tortuga",
 
 	"item-varnishportion-marine": "Marine Varnish",
 	"itemdesc-varnishportion-marine": "A thick waterproof varnish made from resin and fat. Apply to wood or ship hulls to make them watertight.",
