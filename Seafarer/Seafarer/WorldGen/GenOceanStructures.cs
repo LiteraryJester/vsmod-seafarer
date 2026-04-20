@@ -172,6 +172,8 @@ namespace Seafarer.WorldGen
             var mapRegion = mapChunk.MapRegion;
             int seaLevel = sapi.World.SeaLevel;
 
+            var spawnPos = sapi.World.DefaultSpawnPosition.AsBlockPos;
+
             foreach (var def in config.Structures)
             {
                 if (!cachedSchematics.TryGetValue(def.Code, out var variants)) continue;
@@ -180,12 +182,32 @@ namespace Seafarer.WorldGen
                 float roll = (float)rand.NextInt(10000) / 10000f;
                 if (roll > def.Chance) continue;
 
+                // Global singleton gate: if a per-world cap is set and we've hit it, skip.
+                if (def.GlobalMaxCount > 0)
+                {
+                    lock (countsLock)
+                    {
+                        if (globalCounts.TryGetValue(def.Code, out int placed) && placed >= def.GlobalMaxCount)
+                            continue;
+                    }
+                }
+
                 if (def.MaxCount > 0 && CountExistingStructures(mapRegion, def.Code) >= def.MaxCount) continue;
 
                 int localX = rand.NextInt(chunksize);
                 int localZ = rand.NextInt(chunksize);
                 int posX = chunkX * chunksize + localX;
                 int posZ = chunkZ * chunksize + localZ;
+
+                // Spawn-distance gate: radial distance from world spawn.
+                if (def.MinSpawnDist > 0 || def.MaxSpawnDist > 0)
+                {
+                    int dx = posX - spawnPos.X;
+                    int dz = posZ - spawnPos.Z;
+                    double dist = Math.Sqrt((double)dx * dx + (double)dz * dz);
+                    if (def.MinSpawnDist > 0 && dist < def.MinSpawnDist) continue;
+                    if (def.MaxSpawnDist > 0 && dist > def.MaxSpawnDist) continue;
+                }
 
                 float oceanicity = GetOceanicity(mapRegion, posX, posZ);
                 float beachStrength = GetBeachStrength(mapRegion, posX, posZ);
@@ -217,6 +239,16 @@ namespace Seafarer.WorldGen
                     SuppressTreesAndShrubs = def.SuppressTrees,
                     SuppressRivulets = true
                 });
+
+                // Increment the world-global counter so singletons don't repeat.
+                if (def.GlobalMaxCount > 0)
+                {
+                    lock (countsLock)
+                    {
+                        globalCounts.TryGetValue(def.Code, out int placed);
+                        globalCounts[def.Code] = placed + 1;
+                    }
+                }
             }
         }
 
