@@ -40,8 +40,8 @@
       "maxSpawnDistX":  3000,
       "minSpawnDistZ": -3000,
       "maxSpawnDistZ":  3000,
-      "requireLandform": "flat",
-      "landformRadius": 250,
+      "requireLandform": "veryflat",
+      "landformRadius": 300,
       "generateGrass": true,
       "skipGenerationCategories": {
         "structures": 300,
