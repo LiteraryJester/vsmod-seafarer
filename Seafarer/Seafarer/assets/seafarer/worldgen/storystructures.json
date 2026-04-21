@@ -44,7 +44,7 @@
       "minSpawnDistZ": -3000,
       "maxSpawnDistZ":  3000,
       "requireLandform": "shallowislands",
-      "landformRadius": 100,
+      "landformRadius": 10,
       "generateGrass": true,
       "skipGenerationCategories": {
         "structures": 300,
