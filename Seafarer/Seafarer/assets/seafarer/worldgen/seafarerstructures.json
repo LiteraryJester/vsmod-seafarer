@@ -1,7 +1,7 @@
 {
   "schematicYOffsets": {
     "story/seafarer:potato-king-house": 0,
-    "story/seafarer:tortuga": -27,
+    "story/seafarer:tortuga": 27,
     "story/seafarer:wreck-crimson-rose": 0
   },
   "rocktypeRemapGroups": {},
@@ -74,7 +74,8 @@
       "requireOcean": true,
       "minWaterDepth": 10,
       "maxWaterDepth": 80,
-      "landformRadius": 0,
+      "requireLandform": "deep water step mountains",
+      "landformRadius": 60,
       "skipGenerationCategories": {
         "structures": 80, "trees": 60, "shrubs": 60,
         "hotsprings": 80, "patches": 40
