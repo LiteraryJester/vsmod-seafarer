@@ -68,16 +68,12 @@
       "placement": "Underwater",
       "storyStructure": true,
       "useWorldgenHeight": true,
-      "dependsOnStructure": "spawn",
-      "minSpawnDistX": -3000, "maxSpawnDistX": 3000,
-      "minSpawnDistZ": -3000, "maxSpawnDistZ": 3000,
-      "requireOcean": true,
-      "minWaterDepth": 10,
-      "maxWaterDepth": 80,
+      "dependsOnStructure": "tortuga",
+      "minSpawnDistX": 150, "maxSpawnDistX": 400,
+      "minSpawnDistZ": 150, "maxSpawnDistZ": 400,
       "landformRadius": 0,
       "skipGenerationCategories": {
-        "structures": 80, "trees": 60, "shrubs": 60,
-        "hotsprings": 80, "patches": 40
+        "structures": 80
       }
     },
     {
