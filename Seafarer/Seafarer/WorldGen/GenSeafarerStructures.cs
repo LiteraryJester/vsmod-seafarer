@@ -338,6 +338,11 @@ namespace Seafarer.WorldGen
 
                 if (!ResolveStoryStartY(def, loc, request, ref startPos)) continue;
 
+                if (def.ClearFootprint)
+                {
+                    ClearFootprint(chunks, loc.Location, chunkX, chunkZ);
+                }
+
                 int blocksPlaced = def.schematicData.PlacePartial(
                     chunks, worldgenBlockAccessor, api.World,
                     chunkX, chunkZ, startPos, EnumReplaceMode.ReplaceAll,
@@ -571,6 +576,63 @@ namespace Seafarer.WorldGen
             }
 
             return true;
+        }
+
+        private int cachedAirBlockId = -1;
+        private int AirBlockId
+        {
+            get
+            {
+                if (cachedAirBlockId == -1)
+                {
+                    var air = api.World.GetBlock(new AssetLocation("air"));
+                    cachedAirBlockId = air?.Id ?? 0;
+                }
+                return cachedAirBlockId;
+            }
+        }
+
+        /// <summary>
+        /// Fills the structure's XYZ bounding box (clipped to the current chunk)
+        /// with air on the solid layer. Runs before PlacePartial so the schematic's
+        /// blocks overwrite the cleared region and interior negative space stays open.
+        /// </summary>
+        private void ClearFootprint(IServerChunk[] chunks, Cuboidi bounds, int chunkX, int chunkZ)
+        {
+            int chunkMinX = chunkX * chunksize;
+            int chunkMinZ = chunkZ * chunksize;
+            int clipMinX = Math.Max(bounds.X1, chunkMinX);
+            int clipMaxX = Math.Min(bounds.X2, chunkMinX + chunksize);
+            int clipMinZ = Math.Max(bounds.Z1, chunkMinZ);
+            int clipMaxZ = Math.Min(bounds.Z2, chunkMinZ + chunksize);
+            if (clipMinX >= clipMaxX || clipMinZ >= clipMaxZ) return;
+
+            int mapSizeY = api.WorldManager.MapSizeY;
+            int clipMinY = Math.Max(bounds.Y1, 0);
+            int clipMaxY = Math.Min(bounds.Y2, mapSizeY);
+            if (clipMinY >= clipMaxY) return;
+
+            int air = AirBlockId;
+
+            for (int y = clipMinY; y < clipMaxY; y++)
+            {
+                int chunkIndex = y / chunksize;
+                if (chunkIndex < 0 || chunkIndex >= chunks.Length) continue;
+                int localY = y % chunksize;
+                var chunk = chunks[chunkIndex];
+
+                for (int x = clipMinX; x < clipMaxX; x++)
+                {
+                    int localX = x - chunkMinX;
+                    for (int z = clipMinZ; z < clipMaxZ; z++)
+                    {
+                        int localZ = z - chunkMinZ;
+                        int blockIndex = (localY * chunksize + localZ) * chunksize + localX;
+                        chunk.Data.SetBlockUnsafe(blockIndex, air);
+                        chunk.Data.SetFluid(blockIndex, 0);
+                    }
+                }
+            }
         }
 
         private static EnumStructurePlacement ToBaseGamePlacement(EnumSeafarerPlacement p)
