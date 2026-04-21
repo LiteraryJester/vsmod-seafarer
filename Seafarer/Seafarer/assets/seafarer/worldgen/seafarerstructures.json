@@ -69,8 +69,9 @@
       "storyStructure": true,
       "useWorldgenHeight": true,
       "dependsOnStructure": "tortuga",
-      "minSpawnDistX": 150, "maxSpawnDistX": 400,
-      "minSpawnDistZ": 150, "maxSpawnDistZ": 400,
+      "minSpawnDistX": 50, "maxSpawnDistX": 100,
+      "minSpawnDistZ": 50, "maxSpawnDistZ": 100,
+      "clearFootprint": true,
       "landformRadius": 0,
       "skipGenerationCategories": {
         "structures": 80

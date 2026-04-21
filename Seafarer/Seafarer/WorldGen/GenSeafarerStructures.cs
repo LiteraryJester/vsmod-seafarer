@@ -416,7 +416,8 @@ namespace Seafarer.WorldGen
 
                 if (def.Placement is EnumSeafarerPlacement.Surface
                         or EnumSeafarerPlacement.SurfaceRuin
-                        or EnumSeafarerPlacement.Coastal)
+                        or EnumSeafarerPlacement.Coastal
+                        or EnumSeafarerPlacement.Underwater)
                 {
                     UpdateHeightmap(request, worldgenBlockAccessor);
                 }
@@ -471,7 +472,8 @@ namespace Seafarer.WorldGen
                 // Matches base-game GenStoryStructures post-PlacePartial block.
                 if (def.Placement is EnumSeafarerPlacement.Surface
                         or EnumSeafarerPlacement.SurfaceRuin
-                        or EnumSeafarerPlacement.Coastal)
+                        or EnumSeafarerPlacement.Coastal
+                        or EnumSeafarerPlacement.Underwater)
                 {
                     UpdateHeightmap(request, worldgenBlockAccessor);
                 }
