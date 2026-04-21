@@ -197,6 +197,48 @@ namespace Seafarer.WorldGen
 
             serverChannel = api.Network.RegisterChannel("SeafarerGenFailed");
             serverChannel.RegisterMessageType<SeafarerGenFailed>();
+
+            var parsers = api.ChatCommands.Parsers;
+            api.ChatCommands.GetOrCreate("wgen")
+                .BeginSubCommand("seafarer")
+                    .BeginSubCommand("tp")
+                        .WithRootAlias("tpseafarerloc")
+                        .WithDescription("Teleport to a Seafarer story structure")
+                        .RequiresPrivilege(Privilege.controlserver)
+                        .RequiresPlayer()
+                        .WithArgs(parsers.Word("code"))
+                        .HandleWith(OnCmdTp)
+                    .EndSubCommand()
+                    .BeginSubCommand("setpos")
+                        .WithRootAlias("setseafarerstrucpos")
+                        .WithDescription("Set the location of a Seafarer story structure")
+                        .RequiresPrivilege(Privilege.controlserver)
+                        .WithArgs(parsers.Word("code"), parsers.WorldPosition("position"), parsers.OptionalBool("confirm"))
+                        .HandleWith(OnCmdSetPos)
+                    .EndSubCommand()
+                    .BeginSubCommand("listmissing")
+                        .WithDescription("List Seafarer story structures that failed to determine or validate")
+                        .RequiresPrivilege(Privilege.controlserver)
+                        .HandleWith(OnCmdListMissing)
+                    .EndSubCommand()
+                    .BeginSubCommand("rmsc")
+                        .WithDescription("Reset a Seafarer story structure's generation state so /wgen regen will re-place it")
+                        .RequiresPrivilege(Privilege.controlserver)
+                        .WithArgs(parsers.Word("code"))
+                        .HandleWith(OnCmdRmsc)
+                    .EndSubCommand()
+                    .BeginSubCommand("place")
+                        .WithDescription("Force-place a Seafarer structure at your position (debug)")
+                        .RequiresPrivilege(Privilege.controlserver)
+                        .RequiresPlayer()
+                        .WithArgs(parsers.Word("code"))
+                        .HandleWith(OnCmdPlace)
+                    .EndSubCommand()
+                    .BeginSubCommand("list")
+                        .WithDescription("List all registered Seafarer structure codes and status")
+                        .HandleWith(OnCmdList)
+                    .EndSubCommand()
+                .EndSubCommand();
         }
 
         private void OnWorldGenBlockAccessor(IChunkProviderThread chunkProvider)
@@ -961,6 +1003,121 @@ namespace Seafarer.WorldGen
                 if (!storyLocations.ContainsKey(code)) missing.Add(code);
             }
             return missing;
+        }
+
+        private TextCommandResult OnCmdTp(TextCommandCallingArgs args)
+        {
+            var code = (string)args[0];
+            if (!storyLocations.TryGetValue(code, out var loc))
+                return TextCommandResult.Error("No such Seafarer story structure: " + code);
+            var pos = loc.CenterPos.Copy();
+            pos.Y = (loc.Location.Y1 + loc.Location.Y2) / 2;
+            args.Caller.Entity.TeleportTo(pos);
+            return TextCommandResult.Success("Teleporting to " + code);
+        }
+
+        private TextCommandResult OnCmdSetPos(TextCommandCallingArgs args)
+        {
+            var code = (string)args[0];
+            var def = scfg.Structures.FirstOrDefault(s => s.Code == code);
+            if (def == null) return TextCommandResult.Error("No such Seafarer structure: " + code);
+            if (def.schematicData == null) return TextCommandResult.Error("Structure has no schematic loaded: " + code);
+
+            bool confirm = args[2] is bool b && b;
+            var pos = ((Vec3d)args[1]).AsBlockPos;
+
+            if (!confirm)
+            {
+                var chunkRange = (int)Math.Ceiling(def.LandformRadius / (float)chunksize) + 3;
+                return TextCommandResult.Success(
+                    $"Will move '{code}' to {pos}. Add 'true' to confirm. After, regenerate chunks in the area (e.g. /wgen delr {chunkRange}).");
+            }
+
+            int schemX = def.schematicData.SizeX;
+            int schemZ = def.schematicData.SizeZ;
+            int minX = pos.X - schemX / 2;
+            int minZ = pos.Z - schemZ / 2;
+            var cub = new Cuboidi(minX, pos.Y, minZ, minX + schemX, pos.Y + def.schematicData.SizeY, minZ + schemZ);
+
+            var entry = new SeafarerStructureLocation
+            {
+                Code = code,
+                CenterPos = pos,
+                Location = cub,
+                LandformRadius = def.LandformRadius,
+                GenerationRadius = def.GenerationRadius,
+                SkipGenerationFlags = def.SkipGenerationFlags,
+                OceanValidated = true
+            };
+            if (entry.SkipGenerationFlags != null && entry.SkipGenerationFlags.Count > 0)
+            {
+                int max = entry.SkipGenerationFlags.Max(f => f.Value);
+                entry.MaxSkipGenerationRadiusSq = max * max;
+            }
+            storyLocations[code] = entry;
+            LocationsDirty = true;
+
+            return TextCommandResult.Success($"Moved '{code}' to {pos}. Regenerate chunks in this area to materialize it.");
+        }
+
+        private TextCommandResult OnCmdListMissing(TextCommandCallingArgs args)
+        {
+            var missing = GetMissingStructures();
+            if (missing.Count == 0) return TextCommandResult.Success("No missing Seafarer structures.");
+            if (args.Caller.Player is IServerPlayer p)
+            {
+                serverChannel.SendPacket(new SeafarerGenFailed { MissingStructures = missing }, p);
+            }
+            return TextCommandResult.Success("Missing: " + string.Join(", ", missing));
+        }
+
+        private TextCommandResult OnCmdRmsc(TextCommandCallingArgs args)
+        {
+            var code = (string)args[0];
+            if (!storyLocations.TryGetValue(code, out var loc))
+                return TextCommandResult.Error("No such Seafarer story structure: " + code);
+            loc.DidGenerate = false;
+            loc.WorldgenHeight = -1;
+            loc.OceanValidated = false;
+            loc.RockBlockCode = null;
+            LocationsDirty = true;
+            return TextCommandResult.Success($"Reset generation state for '{code}'.");
+        }
+
+        private TextCommandResult OnCmdPlace(TextCommandCallingArgs args)
+        {
+            var code = (string)args[0];
+            var def = scfg.Structures.FirstOrDefault(s => s.Code == code);
+            if (def == null || def.schematicData == null)
+                return TextCommandResult.Error("Unknown or unloaded structure: " + code);
+
+            var player = (IServerPlayer)args.Caller.Player;
+            var pos = player.CurrentBlockSelection?.Position ?? player.Entity.Pos.AsBlockPos;
+
+            int placed = def.schematicData.Place(api.World.BlockAccessor, api.World, pos, EnumReplaceMode.ReplaceAll, true);
+            api.World.BlockAccessor.Commit();
+
+            string note = def.ClearFootprint
+                ? " Note: ClearFootprint not applied for /place. Use /wgen seafarer setpos + /wgen regen if the structure merged with terrain."
+                : "";
+            return TextCommandResult.Success($"Placed '{code}' at {pos} ({placed} blocks).{note}");
+        }
+
+        private TextCommandResult OnCmdList(TextCommandCallingArgs args)
+        {
+            if (scfg == null || scfg.Structures.Length == 0)
+                return TextCommandResult.Success("No Seafarer structures configured.");
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine("Seafarer structures:");
+            foreach (var def in scfg.Structures)
+            {
+                bool loaded = def.schematicData != null;
+                string status = def.StoryStructure
+                    ? (storyLocations.ContainsKey(def.Code) ? "determined" : (attemptedCodes.Contains(def.Code) ? "FAILED" : "pending"))
+                    : $"scattered (chance={def.Chance})";
+                sb.AppendLine($"  {def.Code} — {def.Placement}, {status}{(loaded ? "" : " [NO SCHEMATIC]")}");
+            }
+            return TextCommandResult.Success(sb.ToString());
         }
     }
 }
