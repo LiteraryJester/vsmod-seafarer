@@ -11,6 +11,7 @@ using Vintagestory.API.Server;
 using Vintagestory.API.Util;
 using Vintagestory.ServerMods;
 using Vintagestory.ServerMods.NoObf;
+using VsOrderedDictionary = Vintagestory.API.Datastructures.OrderedDictionary<string, Seafarer.WorldGen.SeafarerStructureLocation>;
 
 #nullable disable
 
@@ -136,5 +137,167 @@ namespace Seafarer.WorldGen
         public int ChunkZ;
         public Cuboidi Bounds;
         public int BlocksPlacedInSlice;
+    }
+
+    [ProtoContract]
+    public class SeafarerGenFailed
+    {
+        [ProtoMember(1)]
+        public List<string> MissingStructures;
+    }
+
+    public class GenSeafarerStructures : ModStdWorldGen
+    {
+        public SeafarerStructuresConfig scfg = new();
+
+        protected ICoreServerAPI api;
+        protected LCGRandom strucRand;
+        protected LCGRandom grassRand;
+        protected IWorldGenBlockAccessor worldgenBlockAccessor;
+        protected BlockLayerConfig blockLayerConfig;
+        protected bool FailedToGenerateLocation;
+        protected IServerNetworkChannel serverChannel;
+
+        protected readonly VsOrderedDictionary storyLocations = new();
+        protected readonly List<string> attemptedCodes = new();
+        protected bool LocationsDirty;
+
+        /// <summary>Look up a story structure location by code. Returns null if not found.</summary>
+        public SeafarerStructureLocation GetLocation(string code)
+        {
+            return storyLocations.TryGetValue(code, out var loc) ? loc : null;
+        }
+
+        /// <summary>Enumerate all story structure locations in insertion order.</summary>
+        public IEnumerable<KeyValuePair<string, SeafarerStructureLocation>> EnumerateLocations()
+        {
+            return storyLocations;
+        }
+        public event Action<SeafarerStructurePlacedEvent> OnStructurePlaced;
+
+        public override bool ShouldLoad(EnumAppSide side) => side == EnumAppSide.Server;
+        public override double ExecuteOrder() => 0.21;
+
+        public override void StartServerSide(ICoreServerAPI api)
+        {
+            this.api = api;
+            base.StartServerSide(api);
+
+            api.Event.SaveGameLoaded += Event_SaveGameLoaded;
+            api.Event.GameWorldSave += Event_GameWorldSave;
+
+            if (TerraGenConfig.DoDecorationPass)
+            {
+                api.Event.InitWorldGenerator(InitWorldGen, "standard");
+                api.Event.ChunkColumnGeneration(OnChunkColumnGen, EnumWorldGenPass.Vegetation, "standard");
+                api.Event.GetWorldgenBlockAccessor(OnWorldGenBlockAccessor);
+            }
+
+            serverChannel = api.Network.RegisterChannel("SeafarerGenFailed");
+            serverChannel.RegisterMessageType<SeafarerGenFailed>();
+        }
+
+        private void OnWorldGenBlockAccessor(IChunkProviderThread chunkProvider)
+        {
+            worldgenBlockAccessor = chunkProvider.GetBlockAccessor(false);
+        }
+
+        public void InitWorldGen()
+        {
+            strucRand = new LCGRandom(api.WorldManager.Seed ^ 2389173L);
+            grassRand = new LCGRandom(api.WorldManager.Seed);
+            blockLayerConfig = BlockLayerConfig.GetInstance(api);
+
+            LoadConfig();
+        }
+
+        private void LoadConfig()
+        {
+            var assets = api.Assets.GetMany<SeafarerStructuresConfig>(api.Logger, "worldgen/seafarerstructures.json");
+
+            scfg = new SeafarerStructuresConfig();
+            var structures = new List<SeafarerStructure>();
+
+            foreach (var (_, conf) in assets)
+            {
+                foreach (var remap in conf.RocktypeRemapGroups)
+                {
+                    scfg.RocktypeRemapGroups.TryAdd(remap.Key, remap.Value);
+                }
+                foreach (var offset in conf.SchematicYOffsets)
+                {
+                    scfg.SchematicYOffsets.TryAdd(offset.Key, offset.Value);
+                }
+                if (conf.Structures != null) structures.AddRange(conf.Structures);
+            }
+
+            scfg.Structures = structures.ToArray();
+
+            foreach (var def in scfg.Structures)
+            {
+                if (def.Schematics == null || def.Schematics.Length == 0) continue;
+                try
+                {
+                    def.schematicData = def.LoadSchematics<BlockSchematicPartial>(api, def.Schematics, null)[0];
+                    def.schematicData.blockLayerConfig = blockLayerConfig;
+
+                    if (scfg.SchematicYOffsets.TryGetValue(
+                        "story/" + def.schematicData.FromFile.GetNameWithDomain().Replace(".json", ""),
+                        out var off))
+                    {
+                        def.schematicData.OffsetY = off;
+                    }
+                }
+                catch (Exception e)
+                {
+                    api.Logger.Error("Seafarer structure '{0}': schematic load failed: {1}", def.Code, e.Message);
+                }
+            }
+
+            api.Logger.Notification("Seafarer structures: loaded {0} definitions.", scfg.Structures.Length);
+        }
+
+        private void OnChunkColumnGen(IChunkColumnGenerateRequest request)
+        {
+            // Story + scattered placement wired up in later tasks.
+        }
+
+        private void Event_SaveGameLoaded()
+        {
+            storyLocations.Clear();
+            attemptedCodes.Clear();
+
+            var locData = api.WorldManager.SaveGame.GetData<VsOrderedDictionary>("seafarer-structure-locations");
+            if (locData != null)
+            {
+                foreach (var kv in locData) storyLocations[kv.Key] = kv.Value;
+            }
+
+            var attempted = api.WorldManager.SaveGame.GetData<List<string>>("attemptedToGenerateSeafarerLocation");
+            if (attempted != null) attemptedCodes.AddRange(attempted);
+        }
+
+        private void Event_GameWorldSave()
+        {
+            if (LocationsDirty)
+            {
+                api.WorldManager.SaveGame.StoreData("seafarer-structure-locations", SerializerUtil.Serialize(storyLocations));
+                LocationsDirty = false;
+            }
+            api.WorldManager.SaveGame.StoreData("attemptedToGenerateSeafarerLocation", attemptedCodes);
+        }
+
+        protected void TriggerOnStructurePlaced(SeafarerStructure def, int chunkX, int chunkZ, Cuboidi bounds, int blocks)
+        {
+            OnStructurePlaced?.Invoke(new SeafarerStructurePlacedEvent
+            {
+                Def = def,
+                Code = def.Code,
+                ChunkX = chunkX,
+                ChunkZ = chunkZ,
+                Bounds = bounds,
+                BlocksPlacedInSlice = blocks
+            });
+        }
     }
 }
