@@ -1088,6 +1088,9 @@ namespace Seafarer.WorldGen
             int dirX = strucRand.NextFloat() > 0.5 ? -1 : 1;
             int dirZ = strucRand.NextFloat() > 0.5 ? -1 : 1;
 
+            bool wantsOceanSampling = def.RequireOcean
+                                      || def.Placement is EnumSeafarerPlacement.Underwater or EnumSeafarerPlacement.OceanSurface;
+
             for (int attempt = 0; attempt < MaxDeterminationAttempts; attempt++)
             {
                 int distanceX = def.MinSpawnDistX + strucRand.NextInt(Math.Max(1, def.MaxSpawnDistX + 1 - def.MinSpawnDistX));
@@ -1095,6 +1098,16 @@ namespace Seafarer.WorldGen
 
                 int px = basePos.X + distanceX * dirX;
                 int pz = basePos.Z + distanceZ * dirZ;
+
+                // Ocean structures: force-load the candidate's map region so we can sample
+                // the real OceanMap. If the candidate isn't actually ocean, try again —
+                // unlike land-based structures where we can fix terrain via ForceLandformAt,
+                // there's no API to force ocean, so we have to find an existing ocean spot.
+                if (wantsOceanSampling && !IsCandidateInOcean(def, px, pz, attempt))
+                {
+                    continue;
+                }
+
                 int py = def.Placement == EnumSeafarerPlacement.Surface || def.Placement == EnumSeafarerPlacement.OceanSurface
                     ? api.World.SeaLevel + def.schematicData.OffsetY
                     : 1;
@@ -1106,9 +1119,6 @@ namespace Seafarer.WorldGen
                 int minZ = pos.Z - schemZ / 2;
                 var loc = new Cuboidi(minX, pos.Y, minZ, minX + schemX, pos.Y + def.schematicData.SizeY, minZ + schemZ);
 
-                // NOTE: Ocean validation is deferred to per-chunk Y-resolution (see Task 5).
-                // Candidate accepted on first attempt; if fine-grained validation fails later,
-                // the reservation is dropped and the structure is reported via listmissing.
                 var entry = new SeafarerStructureLocation
                 {
                     Code = def.Code,
@@ -1117,7 +1127,11 @@ namespace Seafarer.WorldGen
                     LandformRadius = def.LandformRadius,
                     GenerationRadius = def.GenerationRadius,
                     DirX = dirX,
-                    SkipGenerationFlags = def.SkipGenerationFlags
+                    SkipGenerationFlags = def.SkipGenerationFlags,
+                    // Ocean structures have passed the coarse OceanMap sample already.
+                    // Mark OceanValidated so per-chunk validation doesn't re-check and drop
+                    // on finer-grained terrain noise at the origin corner.
+                    OceanValidated = wantsOceanSampling
                 };
                 if (entry.SkipGenerationFlags != null && entry.SkipGenerationFlags.Count > 0)
                 {
@@ -1126,12 +1140,78 @@ namespace Seafarer.WorldGen
                 }
 
                 storyLocations[def.Code] = entry;
-                api.Logger.Notification("Seafarer story structure '{0}' determined at ({1}, {2}, {3})", def.Code, pos.X, pos.Y, pos.Z);
+                api.Logger.Notification("Seafarer story structure '{0}' determined at ({1}, {2}, {3}) after {4} attempt(s)",
+                    def.Code, pos.X, pos.Y, pos.Z, attempt + 1);
                 return;
             }
 
             FailedToGenerateLocation = true;
-            api.Logger.Warning("Seafarer story structure '{0}': no valid candidate found after {1} attempts.", def.Code, MaxDeterminationAttempts);
+            api.Logger.Warning("Seafarer story structure '{0}': no valid candidate found after {1} attempts{2}.",
+                def.Code, MaxDeterminationAttempts,
+                wantsOceanSampling ? " (ocean-sampling enabled — candidates were all land)" : "");
+        }
+
+        /// <summary>
+        /// For ocean structures, verifies a candidate position is actually in ocean by
+        /// force-loading the containing chunk column (which also generates the map region
+        /// with a populated OceanMap) and sampling GetOceanicity at the center.
+        /// Expensive — only called during init-time determination.
+        /// </summary>
+        private bool IsCandidateInOcean(SeafarerStructure def, int px, int pz, int attempt)
+        {
+            int chunkX = (int)Math.Floor((double)px / chunksize);
+            int chunkZ = (int)Math.Floor((double)pz / chunksize);
+
+            try
+            {
+                var chunks = api.WorldManager.BlockingLoadChunkColumn(chunkX, chunkZ);
+                if (chunks == null || chunks.Length == 0) return false;
+
+                int regionSize = api.WorldManager.RegionSize;
+                int regionX = (int)Math.Floor((double)px / regionSize);
+                int regionZ = (int)Math.Floor((double)pz / regionSize);
+                var mapRegion = api.WorldManager.GetMapRegion(regionX, regionZ);
+
+                bool ok = false;
+                if (mapRegion?.OceanMap != null && mapRegion.OceanMap.Data.Length > 0)
+                {
+                    float centerOcean = GetOceanicity(mapRegion, px, pz);
+                    if (centerOcean > 0)
+                    {
+                        // Coarse 9-sample check: center plus corners/midpoints of footprint
+                        int sizeX = def.schematicData.SizeX;
+                        int sizeZ = def.schematicData.SizeZ;
+                        int originX = px - sizeX / 2;
+                        int originZ = pz - sizeZ / 2;
+                        int oceanSamples = 0;
+                        int[,] offsets = new int[8, 2]
+                        {
+                            { originX, originZ },
+                            { originX + sizeX, originZ },
+                            { originX, originZ + sizeZ },
+                            { originX + sizeX, originZ + sizeZ },
+                            { px, originZ },
+                            { px, originZ + sizeZ },
+                            { originX, pz },
+                            { originX + sizeX, pz },
+                        };
+                        for (int i = 0; i < 8; i++)
+                        {
+                            if (GetOceanicity(mapRegion, offsets[i, 0], offsets[i, 1]) > 0) oceanSamples++;
+                        }
+                        ok = oceanSamples >= 6;
+                    }
+                }
+
+                foreach (var c in chunks) c?.Dispose();
+                return ok;
+            }
+            catch (Exception e)
+            {
+                api.Logger.Warning("Seafarer structure '{0}': ocean sampling attempt {1} threw {2}; trying next candidate.",
+                    def.Code, attempt, e.Message);
+                return false;
+            }
         }
 
         public List<string> GetMissingStructures()

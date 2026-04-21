@@ -74,8 +74,7 @@
       "requireOcean": true,
       "minWaterDepth": 10,
       "maxWaterDepth": 80,
-      "requireLandform": "deep water step mountains",
-      "landformRadius": 60,
+      "landformRadius": 0,
       "skipGenerationCategories": {
         "structures": 80, "trees": 60, "shrubs": 60,
         "hotsprings": 80, "patches": 40
