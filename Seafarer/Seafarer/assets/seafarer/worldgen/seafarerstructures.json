@@ -1,7 +1,7 @@
 {
   "schematicYOffsets": {
     "story/seafarer:potato-king-house": 0,
-    "story/seafarer:tortuga": 54,
+    "story/seafarer:tortuga": 27,
     "story/seafarer:wreck-crimson-rose": 0
   },
   "rocktypeRemapGroups": {},
@@ -65,9 +65,8 @@
       "group": "seafarerstructure",
       "name": "Wreck of the Crimson Rose",
       "schematics": ["underwater/wreck-crimson-rose"],
-      "placement": "Underwater",
+      "placement": "OceanSurface",
       "storyStructure": true,
-      "useWorldgenHeight": true,
       "dependsOnStructure": "tortuga",
       "minSpawnDistX": 50, "maxSpawnDistX": 100,
       "minSpawnDistZ": 50, "maxSpawnDistZ": 100,
