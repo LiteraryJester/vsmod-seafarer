@@ -867,18 +867,12 @@ namespace Seafarer.WorldGen
                 int originX = candidateX - schematic.SizeX / 2;
                 int originZ = candidateZ - schematic.SizeZ / 2;
 
-                // Force-load the map region containing the candidate center
-                int rx = (int)Math.Floor((double)candidateX / regionSize);
-                int rz = (int)Math.Floor((double)candidateZ / regionSize);
-                if (!sapi.WorldManager.BlockingTestMapRegionExists(rx, rz))
-                {
-                    // Region failed to load (shouldn't happen under normal circumstances)
-                    continue;
-                }
-                var mapRegion = sapi.World.BlockAccessor.GetMapRegion(rx, rz);
-                if (mapRegion == null) continue;
-
-                if (!ValidateOceanCoverage(mapRegion, originX, originZ, schematic.SizeX, schematic.SizeZ, def)) continue;
+                // NOTE: no init-time OceanMap validation. BlockingTestMapRegionExists only tests
+                // whether a region is already loaded and does not force-generate it, so on fresh
+                // worlds at InitWorldGen phase no regions exist and all candidates would fail.
+                // Base-game story structures use the same approach: pick an X/Z now and rely on
+                // per-chunk IsValidPlacement (in PlaceOceanSurfaceSlice's Y-resolution step) to
+                // drop the reservation if the fine-grained terrain is wrong.
 
                 // Success — build reservation
                 bool isOceanSurface = def.Placement == EnumOceanPlacement.OceanSurface;
