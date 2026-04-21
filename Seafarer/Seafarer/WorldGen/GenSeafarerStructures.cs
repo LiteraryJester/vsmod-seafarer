@@ -314,7 +314,64 @@ namespace Seafarer.WorldGen
             worldgenBlockAccessor.BeginColumn();
 
             PlaceStorySlices(request, mapRegion, chunkX, chunkZ);
-            // Scattered roll wired up in Task 7.
+            PlaceScatteredRolls(request, mapRegion, chunkX, chunkZ);
+        }
+
+        private void PlaceScatteredRolls(IChunkColumnGenerateRequest request, IMapRegion mapRegion, int chunkX, int chunkZ)
+        {
+            var chunks = request.Chunks;
+            var mapChunk = chunks[0].MapChunk;
+
+            foreach (var def in scfg.Structures)
+            {
+                if (def.StoryStructure) continue;
+                if (def.schematicData == null) continue;
+                if (def.Chance <= 0f) continue;
+
+                strucRand.InitPositionSeed(chunkX + StableHash(def.Code), chunkZ);
+                float roll = strucRand.NextFloat();
+                if (roll > def.Chance) continue;
+
+                int localX = strucRand.NextInt(chunksize);
+                int localZ = strucRand.NextInt(chunksize);
+                int posX = chunkX * chunksize + localX;
+                int posZ = chunkZ * chunksize + localZ;
+
+                int terrainHeight = mapChunk.WorldGenTerrainHeightMap[localZ * chunksize + localX];
+                int originX = posX - def.schematicData.SizeX / 2;
+                int originZ = posZ - def.schematicData.SizeZ / 2;
+
+                if (!ValidateOceanPlacement(def, mapRegion, originX, originZ,
+                        def.schematicData.SizeX, def.schematicData.SizeZ, terrainHeight))
+                {
+                    continue;
+                }
+
+                int y = ResolveYFromTerrain(def, terrainHeight);
+                var startPos = new BlockPos(originX, y, originZ, 0);
+                var bounds = new Cuboidi(
+                    originX, y, originZ,
+                    originX + def.schematicData.SizeX, y + def.schematicData.SizeY, originZ + def.schematicData.SizeZ);
+
+                if (def.ClearFootprint)
+                {
+                    ClearFootprint(chunks, bounds, chunkX, chunkZ);
+                }
+
+                int blocksPlaced = def.schematicData.PlacePartial(
+                    chunks, worldgenBlockAccessor, api.World,
+                    chunkX, chunkZ, startPos, EnumReplaceMode.ReplaceAll,
+                    ToBaseGamePlacement(def.Placement),
+                    GlobalConfig.ReplaceMetaBlocks, GlobalConfig.ReplaceMetaBlocks,
+                    null, Array.Empty<int>(), null, def.DisableSurfaceTerrainBlending
+                );
+
+                if (blocksPlaced <= 0) continue;
+
+                EmitRegionRecord(mapRegion, def, bounds);
+                EmitLandClaims(def, bounds);
+                TriggerOnStructurePlaced(def, chunkX, chunkZ, bounds, blocksPlaced);
+            }
         }
 
         private void PlaceStorySlices(IChunkColumnGenerateRequest request, IMapRegion mapRegion, int chunkX, int chunkZ)
@@ -482,6 +539,13 @@ namespace Seafarer.WorldGen
         }
 
         private int RegionChunkSize => api.WorldManager.RegionSize / chunksize;
+
+        private static int StableHash(string s)
+        {
+            return BitConverter.ToInt32(
+                System.Security.Cryptography.SHA256.HashData(
+                    System.Text.Encoding.UTF8.GetBytes(s ?? string.Empty)));
+        }
 
         private float GetOceanicity(IMapRegion mapRegion, int posX, int posZ)
         {
