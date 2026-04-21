@@ -791,18 +791,19 @@ namespace Seafarer.WorldGen
         {
             if (config == null || config.Structures.Length == 0) return;
 
-            var spawnPos = GetSpawnPosSafe();
-            if (spawnPos == null)
+            // Match base-game GenStructures spawn-lookup chain (GenStructures.cs:147-154):
+            // 1) SaveGame.DefaultSpawn — populated from save data, reliable on reloads
+            // 2) map center — fresh worlds where spawn hasn't been determined yet
+            BlockPos spawnPos;
+            var df = sapi.WorldManager.SaveGame.DefaultSpawn;
+            if (df != null)
             {
-                // Fresh worlds: DefaultSpawnPosition isn't set yet at InitWorldGen time
-                // (spawn chunks haven't been generated). Fall back to map center,
-                // matching base-game GenStoryStructures.TryAddStoryLocation.
-                spawnPos = new BlockPos(
-                    sapi.World.BlockAccessor.MapSizeX / 2,
-                    0,
-                    sapi.World.BlockAccessor.MapSizeZ / 2,
-                    0);
-                Mod.Logger.Notification("Ocean story structures: using map center as spawn reference (DefaultSpawnPosition not yet set).");
+                spawnPos = new BlockPos(df.x, df.y ?? 0, df.z, 0);
+            }
+            else
+            {
+                spawnPos = sapi.World.BlockAccessor.MapSize.AsBlockPos / 2;
+                Mod.Logger.Notification("Ocean story structures: using map center as spawn reference (fresh world, no saved spawn yet).");
             }
 
             int seaLevel = sapi.World.SeaLevel;
