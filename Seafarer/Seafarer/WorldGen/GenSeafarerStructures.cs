@@ -649,9 +649,12 @@ namespace Seafarer.WorldGen
         /// </summary>
         private bool ValidateOceanPlacement(SeafarerStructure def, IMapRegion mapRegion, int originX, int originZ, int sizeX, int sizeZ, int terrainHeight)
         {
+            // Only run if the config explicitly asks — Underwater placement alone is NOT
+            // enough to trigger the check. Otherwise Underwater structures anchored to a
+            // land-forcing parent (e.g., wreck near Tortuga's shallowislands) fail
+            // OceanMap sampling and get dropped, even though placement is intended.
             bool wantsOceanCheck = def.RequireOcean
                                    || def.RequireCoast
-                                   || def.Placement is EnumSeafarerPlacement.Underwater or EnumSeafarerPlacement.OceanSurface
                                    || def.MinWaterDepth > 0
                                    || def.MaxWaterDepth < 255;
 
@@ -682,7 +685,7 @@ namespace Seafarer.WorldGen
                 if (!coast) return false;
             }
 
-            if (def.RequireOcean || def.Placement is EnumSeafarerPlacement.Underwater or EnumSeafarerPlacement.OceanSurface)
+            if (def.RequireOcean)
             {
                 if (!centerIsOcean) return false;
 
