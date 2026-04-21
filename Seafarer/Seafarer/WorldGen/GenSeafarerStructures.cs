@@ -935,6 +935,64 @@ namespace Seafarer.WorldGen
 
         private const int MaxDeterminationAttempts = 30;
 
+        /// <summary>
+        /// Registers required landforms and forced climates with GenMaps so the
+        /// landform map produces the correct terrain at each story-structure center.
+        /// Mirrors base-game GenStoryStructures.SetupForceLandform. Must be called
+        /// AFTER DetermineSeafarerStoryStructures so storyLocations is populated.
+        /// </summary>
+        private void SetupForceLandform()
+        {
+            var genmaps = api.ModLoader.GetModSystem<GenMaps>();
+            if (genmaps == null)
+            {
+                api.Logger.Warning("Seafarer: GenMaps mod system not found; required landforms will not be forced.");
+                return;
+            }
+
+            foreach (var kv in storyLocations)
+            {
+                var def = scfg.Structures.FirstOrDefault(s => s.Code == kv.Key);
+                if (def == null)
+                {
+                    api.Logger.Warning("Seafarer: no config for story location '{0}'; terrain will not be forced there.", kv.Key);
+                    continue;
+                }
+                ApplyForcedLandform(genmaps, def, kv.Value);
+            }
+        }
+
+        private void ApplyForcedLandform(GenMaps genmaps, SeafarerStructure def, SeafarerStructureLocation location)
+        {
+            if (def.ForceTemperature != null || def.ForceRain != null)
+            {
+                genmaps.ForceClimateAt(new ForceClimate
+                {
+                    Radius = location.LandformRadius,
+                    CenterPos = location.CenterPos,
+                    Climate = (Climate.DescaleTemperature(def.ForceTemperature ?? 0f) << 16)
+                              + ((def.ForceRain ?? 0) << 8)
+                });
+            }
+
+            if (def.RequireLandform == null) return;
+
+            try
+            {
+                genmaps.ForceLandformAt(new ForceLandform
+                {
+                    Radius = location.LandformRadius,
+                    CenterPos = location.CenterPos,
+                    LandformCode = def.RequireLandform
+                });
+            }
+            catch (Exception e)
+            {
+                api.Logger.Error("Seafarer: ForceLandformAt failed for '{0}' with landform '{1}': {2}",
+                    def.Code, def.RequireLandform, e.Message);
+            }
+        }
+
         protected void DetermineSeafarerStoryStructures()
         {
             BlockPos spawnPos;
@@ -978,6 +1036,7 @@ namespace Seafarer.WorldGen
             }
 
             LocationsDirty = true;
+            SetupForceLandform();
         }
 
         private void TryDetermineLocation(SeafarerStructure def, BlockPos spawnPos)
@@ -1116,6 +1175,12 @@ namespace Seafarer.WorldGen
             }
             storyLocations[code] = entry;
             LocationsDirty = true;
+
+            var genmaps = api.ModLoader.GetModSystem<GenMaps>();
+            if (genmaps != null)
+            {
+                ApplyForcedLandform(genmaps, def, entry);
+            }
 
             return TextCommandResult.Success($"Moved '{code}' to {pos}. Regenerate chunks in this area to materialize it.");
         }
