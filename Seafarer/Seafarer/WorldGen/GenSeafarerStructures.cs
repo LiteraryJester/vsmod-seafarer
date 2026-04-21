@@ -158,6 +158,8 @@ namespace Seafarer.WorldGen
         protected bool FailedToGenerateLocation;
         protected IServerNetworkChannel serverChannel;
 
+        private GenBlockLayers genBlockLayers;
+
         protected readonly VsOrderedDictionary storyLocations = new();
         protected readonly List<string> attemptedCodes = new();
         protected bool LocationsDirty;
@@ -193,6 +195,7 @@ namespace Seafarer.WorldGen
                 api.Event.InitWorldGenerator(InitWorldGen, "standard");
                 api.Event.ChunkColumnGeneration(OnChunkColumnGen, EnumWorldGenPass.Vegetation, "standard");
                 api.Event.GetWorldgenBlockAccessor(OnWorldGenBlockAccessor);
+                genBlockLayers = api.ModLoader.GetModSystem<GenBlockLayers>();
             }
 
             serverChannel = api.Network.RegisterChannel("SeafarerGenFailed");
@@ -411,6 +414,17 @@ namespace Seafarer.WorldGen
 
                 if (blocksPlaced <= 0) continue;
 
+                if (def.Placement is EnumSeafarerPlacement.Surface
+                        or EnumSeafarerPlacement.SurfaceRuin
+                        or EnumSeafarerPlacement.Coastal)
+                {
+                    UpdateHeightmap(request, worldgenBlockAccessor);
+                }
+                if (def.GenerateGrass && genBlockLayers != null)
+                {
+                    GenerateGrass(api, request, grassRand, genBlockLayers);
+                }
+
                 EmitRegionRecord(mapRegion, def, bounds);
                 EmitLandClaims(def, bounds);
                 TriggerOnStructurePlaced(def, chunkX, chunkZ, bounds, blocksPlaced);
@@ -453,6 +467,19 @@ namespace Seafarer.WorldGen
 
                 if (blocksPlaced <= 0) continue;
 
+                // Post-placement fix-ups that later worldgen passes depend on.
+                // Matches base-game GenStoryStructures post-PlacePartial block.
+                if (def.Placement is EnumSeafarerPlacement.Surface
+                        or EnumSeafarerPlacement.SurfaceRuin
+                        or EnumSeafarerPlacement.Coastal)
+                {
+                    UpdateHeightmap(request, worldgenBlockAccessor);
+                }
+                if (def.GenerateGrass && genBlockLayers != null)
+                {
+                    GenerateGrass(api, request, grassRand, genBlockLayers);
+                }
+
                 EmitRegionRecord(mapRegion, def, loc.Location);
                 EmitLandClaims(def, loc.Location);
 
@@ -484,14 +511,8 @@ namespace Seafarer.WorldGen
             {
                 if (def.Placement == EnumSeafarerPlacement.OceanSurface && !loc.OceanValidated)
                 {
-                    int originChunkX0 = (int)Math.Floor((double)loc.Location.X1 / chunksize);
-                    int originChunkZ0 = (int)Math.Floor((double)loc.Location.Z1 / chunksize);
-                    if (chunkX != originChunkX0 || chunkZ != originChunkZ0) return false;
-
-                    int localX0 = loc.Location.X1 - originChunkX0 * chunksize;
-                    int localZ0 = loc.Location.Z1 - originChunkZ0 * chunksize;
-                    if (localX0 < 0 || localX0 >= chunksize || localZ0 < 0 || localZ0 >= chunksize) return false;
-
+                    int localX0 = GameMath.Mod(loc.Location.X1, chunksize);
+                    int localZ0 = GameMath.Mod(loc.Location.Z1, chunksize);
                     var mr = request.Chunks[0].MapChunk.MapRegion;
                     int th = request.Chunks[0].MapChunk.WorldGenTerrainHeightMap[localZ0 * chunksize + localX0];
                     if (!ValidateOceanPlacement(def, mr, loc.Location.X1, loc.Location.Z1,
@@ -525,17 +546,16 @@ namespace Seafarer.WorldGen
                 return true;
             }
 
-            // Need terrain height at origin. Only the origin chunk owns it.
-            // Use floor-division so negative coordinates resolve to the correct chunk:
-            // C# integer division truncates toward zero, so -50/32 = -1 instead of -2.
-            int originChunkX = (int)Math.Floor((double)loc.Location.X1 / chunksize);
-            int originChunkZ = (int)Math.Floor((double)loc.Location.Z1 / chunksize);
-            if (chunkX != originChunkX || chunkZ != originChunkZ) return false;
-
-            int localX = loc.Location.X1 - originChunkX * chunksize;
-            int localZ = loc.Location.Z1 - originChunkZ * chunksize;
-            if (localX < 0 || localX >= chunksize || localZ < 0 || localZ >= chunksize) return false;
-
+            // Read terrain height from the currently-generating chunk using base-game's
+            // approach: (startPos.X % chunksize, startPos.Z % chunksize) indexes into the
+            // current chunk's heightmap. This does NOT index to the structure's world origin —
+            // it indexes to some column of the current chunk. For forced-landform structures
+            // (veryflat, shallowislands, etc.) the terrain is roughly uniform so the height
+            // is close-enough. The FIRST chunk to process caches this height via
+            // loc.WorldgenHeight, and all subsequent slices use the cached value — ensuring
+            // consistent Y across the entire structure even if VS visits chunks out of origin order.
+            int localX = GameMath.Mod(loc.Location.X1, chunksize);
+            int localZ = GameMath.Mod(loc.Location.Z1, chunksize);
             int terrainHeight = request.Chunks[0].MapChunk.WorldGenTerrainHeightMap[localZ * chunksize + localX];
             var mapRegion = request.Chunks[0].MapChunk.MapRegion;
 
