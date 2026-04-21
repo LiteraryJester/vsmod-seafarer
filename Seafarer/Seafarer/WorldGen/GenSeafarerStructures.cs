@@ -162,6 +162,8 @@ namespace Seafarer.WorldGen
         protected readonly List<string> attemptedCodes = new();
         protected bool LocationsDirty;
 
+        private readonly List<string> pendingDrops = new();
+
         /// <summary>Look up a story structure location by code. Returns null if not found.</summary>
         public SeafarerStructureLocation GetLocation(string code)
         {
@@ -351,6 +353,12 @@ namespace Seafarer.WorldGen
 
                 TriggerOnStructurePlaced(def, chunkX, chunkZ, loc.Location, blocksPlaced);
             }
+
+            if (pendingDrops.Count > 0)
+            {
+                foreach (var code in pendingDrops) storyLocations.Remove(code);
+                pendingDrops.Clear();
+            }
         }
 
         /// <summary>
@@ -369,6 +377,31 @@ namespace Seafarer.WorldGen
 
             if (!needsTerrainY)
             {
+                if (def.Placement == EnumSeafarerPlacement.OceanSurface && !loc.OceanValidated)
+                {
+                    int originChunkX0 = loc.Location.X1 / chunksize;
+                    int originChunkZ0 = loc.Location.Z1 / chunksize;
+                    if (chunkX != originChunkX0 || chunkZ != originChunkZ0) return false;
+
+                    int localX0 = loc.Location.X1 - originChunkX0 * chunksize;
+                    int localZ0 = loc.Location.Z1 - originChunkZ0 * chunksize;
+                    if (localX0 < 0 || localX0 >= chunksize || localZ0 < 0 || localZ0 >= chunksize) return false;
+
+                    var mr = request.Chunks[0].MapChunk.MapRegion;
+                    int th = request.Chunks[0].MapChunk.WorldGenTerrainHeightMap[localZ0 * chunksize + localX0];
+                    if (!ValidateOceanPlacement(def, mr, loc.Location.X1, loc.Location.Z1,
+                            def.schematicData.SizeX, def.schematicData.SizeZ, th))
+                    {
+                        api.Logger.Warning(
+                            "Seafarer story structure '{0}': OceanSurface ocean check failed; dropping reservation.", def.Code);
+                        pendingDrops.Add(def.Code);
+                        FailedToGenerateLocation = true;
+                        LocationsDirty = true;
+                        return false;
+                    }
+                    loc.OceanValidated = true;
+                }
+
                 // Surface / OceanSurface: sea level anchored.
                 int y = api.World.SeaLevel + def.schematicData.OffsetY;
                 if (loc.Location.Y1 != y)
@@ -397,6 +430,25 @@ namespace Seafarer.WorldGen
             if (localX < 0 || localX >= chunksize || localZ < 0 || localZ >= chunksize) return false;
 
             int terrainHeight = request.Chunks[0].MapChunk.WorldGenTerrainHeightMap[localZ * chunksize + localX];
+            var mapRegion = request.Chunks[0].MapChunk.MapRegion;
+
+            if (!loc.OceanValidated)
+            {
+                bool ok = ValidateOceanPlacement(def, mapRegion, loc.Location.X1, loc.Location.Z1,
+                    def.schematicData.SizeX, def.schematicData.SizeZ, terrainHeight);
+                if (!ok)
+                {
+                    api.Logger.Warning(
+                        "Seafarer story structure '{0}': per-chunk ocean validation failed (waterDepth={1}); dropping reservation.",
+                        def.Code, api.World.SeaLevel - terrainHeight);
+                    pendingDrops.Add(def.Code);
+                    FailedToGenerateLocation = true;
+                    LocationsDirty = true;
+                    return false;
+                }
+                loc.OceanValidated = true;
+            }
+
             loc.WorldgenHeight = terrainHeight;
             int resolvedY = ResolveYFromTerrain(def, terrainHeight);
             loc.Location.Y1 = resolvedY;
@@ -422,6 +474,103 @@ namespace Seafarer.WorldGen
                 EnumSeafarerPlacement.OceanSurface => api.World.SeaLevel + def.schematicData.OffsetY,
                 _ /* Surface */                    => api.World.SeaLevel + def.schematicData.OffsetY,
             };
+        }
+
+        private int RegionChunkSize => api.WorldManager.RegionSize / chunksize;
+
+        private float GetOceanicity(IMapRegion mapRegion, int posX, int posZ)
+        {
+            if (mapRegion?.OceanMap == null || mapRegion.OceanMap.Data.Length == 0) return 0f;
+            return SampleRegionMap(mapRegion.OceanMap, posX, posZ);
+        }
+
+        private float GetBeachStrength(IMapRegion mapRegion, int posX, int posZ)
+        {
+            if (mapRegion?.BeachMap == null || mapRegion.BeachMap.Data.Length == 0) return 0f;
+            return SampleRegionMap(mapRegion.BeachMap, posX, posZ);
+        }
+
+        private float SampleRegionMap(IntDataMap2D map, int posX, int posZ)
+        {
+            int rlX = (posX / chunksize) % RegionChunkSize;
+            int rlZ = (posZ / chunksize) % RegionChunkSize;
+            if (rlX < 0) rlX += RegionChunkSize;
+            if (rlZ < 0) rlZ += RegionChunkSize;
+
+            float fac = (float)map.InnerSize / RegionChunkSize;
+            int ul = map.GetUnpaddedInt((int)(rlX * fac), (int)(rlZ * fac));
+            int ur = map.GetUnpaddedInt((int)(rlX * fac + fac), (int)(rlZ * fac));
+            int bl = map.GetUnpaddedInt((int)(rlX * fac), (int)(rlZ * fac + fac));
+            int br = map.GetUnpaddedInt((int)(rlX * fac + fac), (int)(rlZ * fac + fac));
+            return GameMath.BiLerp(ul, ur, bl, br,
+                (float)(((posX % chunksize) + chunksize) % chunksize) / chunksize,
+                (float)(((posZ % chunksize) + chunksize) % chunksize) / chunksize);
+        }
+
+        /// <summary>
+        /// 9-sample footprint check against OceanMap. Returns true if the candidate
+        /// origin satisfies the def's ocean/coast/depth requirements.
+        /// </summary>
+        private bool ValidateOceanPlacement(SeafarerStructure def, IMapRegion mapRegion, int originX, int originZ, int sizeX, int sizeZ, int terrainHeight)
+        {
+            bool wantsOceanCheck = def.RequireOcean
+                                   || def.RequireCoast
+                                   || def.Placement is EnumSeafarerPlacement.Underwater or EnumSeafarerPlacement.OceanSurface
+                                   || def.MinWaterDepth > 0
+                                   || def.MaxWaterDepth < 255;
+
+            if (!wantsOceanCheck) return true;
+
+            // If OceanMap isn't populated yet (transient worldgen state), defer validation
+            // rather than permanently dropping the reservation — a later chunk will re-check.
+            if (mapRegion?.OceanMap == null || mapRegion.OceanMap.Data.Length == 0)
+            {
+                return true;
+            }
+
+            int cx = originX + sizeX / 2;
+            int cz = originZ + sizeZ / 2;
+            int seaLevel = api.World.SeaLevel;
+            int waterDepth = seaLevel - terrainHeight;
+
+            if (def.MinWaterDepth > 0 && waterDepth < def.MinWaterDepth) return false;
+            if (def.MaxWaterDepth < 255 && waterDepth > def.MaxWaterDepth) return false;
+
+            float centerOcean = GetOceanicity(mapRegion, cx, cz);
+            bool centerIsOcean = centerOcean > 0;
+
+            if (def.RequireCoast)
+            {
+                float beach = GetBeachStrength(mapRegion, cx, cz);
+                bool coast = beach > 0 || (centerIsOcean && waterDepth <= def.MaxWaterDepth);
+                if (!coast) return false;
+            }
+
+            if (def.RequireOcean || def.Placement is EnumSeafarerPlacement.Underwater or EnumSeafarerPlacement.OceanSurface)
+            {
+                if (!centerIsOcean) return false;
+
+                int oceanSamples = 0;
+                int[,] offsets = new int[8, 2]
+                {
+                    { originX, originZ },
+                    { originX + sizeX, originZ },
+                    { originX, originZ + sizeZ },
+                    { originX + sizeX, originZ + sizeZ },
+                    { cx, originZ },
+                    { cx, originZ + sizeZ },
+                    { originX, cz },
+                    { originX + sizeX, cz },
+                };
+                for (int i = 0; i < 8; i++)
+                {
+                    if (GetOceanicity(mapRegion, offsets[i, 0], offsets[i, 1]) > 0) oceanSamples++;
+                }
+                // center + at least 6 of 8 edge samples must be ocean
+                if (oceanSamples < 6) return false;
+            }
+
+            return true;
         }
 
         private static EnumStructurePlacement ToBaseGamePlacement(EnumSeafarerPlacement p)
