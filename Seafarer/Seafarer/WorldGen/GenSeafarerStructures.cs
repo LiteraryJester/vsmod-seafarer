@@ -294,9 +294,228 @@ namespace Seafarer.WorldGen
             api.Logger.Notification("Seafarer structures: loaded {0} definitions.", scfg.Structures.Length);
         }
 
+        private readonly Cuboidi tmpCuboid = new();
+
         private void OnChunkColumnGen(IChunkColumnGenerateRequest request)
         {
-            // Story + scattered placement wired up in later tasks.
+            if (scfg == null || scfg.Structures.Length == 0) return;
+
+            var chunks = request.Chunks;
+            int chunkX = request.ChunkX;
+            int chunkZ = request.ChunkZ;
+            var mapRegion = chunks[0].MapChunk.MapRegion;
+
+            tmpCuboid.Set(
+                chunkX * chunksize, 0, chunkZ * chunksize,
+                chunkX * chunksize + chunksize, chunks.Length * chunksize, chunkZ * chunksize + chunksize);
+
+            worldgenBlockAccessor.BeginColumn();
+
+            PlaceStorySlices(request, mapRegion, chunkX, chunkZ);
+            // Scattered roll wired up in Task 7.
+        }
+
+        private void PlaceStorySlices(IChunkColumnGenerateRequest request, IMapRegion mapRegion, int chunkX, int chunkZ)
+        {
+            var chunks = request.Chunks;
+
+            foreach (var (code, loc) in storyLocations)
+            {
+                if (!loc.Location.Intersects(tmpCuboid)) continue;
+
+                var def = scfg.Structures.FirstOrDefault(s => s.Code == code);
+                if (def == null || def.schematicData == null) continue;
+
+                if (!loc.DidGenerate)
+                {
+                    loc.DidGenerate = true;
+                    LocationsDirty = true;
+                }
+
+                var startPos = new BlockPos(loc.Location.X1, loc.Location.Y1, loc.Location.Z1, 0);
+
+                if (!ResolveStoryStartY(def, loc, request, ref startPos)) continue;
+
+                int blocksPlaced = def.schematicData.PlacePartial(
+                    chunks, worldgenBlockAccessor, api.World,
+                    chunkX, chunkZ, startPos, EnumReplaceMode.ReplaceAll,
+                    ToBaseGamePlacement(def.Placement),
+                    GlobalConfig.ReplaceMetaBlocks, GlobalConfig.ReplaceMetaBlocks,
+                    null, Array.Empty<int>(), null, def.DisableSurfaceTerrainBlending
+                );
+
+                if (blocksPlaced <= 0) continue;
+
+                EmitRegionRecord(mapRegion, def, loc.Location);
+                EmitLandClaims(def, loc.Location);
+
+                TriggerOnStructurePlaced(def, chunkX, chunkZ, loc.Location, blocksPlaced);
+            }
+        }
+
+        /// <summary>
+        /// Resolves Y for a story-structure chunk slice. Returns false if Y is not yet
+        /// resolvable (e.g. the origin chunk hasn't generated yet).
+        /// </summary>
+        private bool ResolveStoryStartY(SeafarerStructure def, SeafarerStructureLocation loc, IChunkColumnGenerateRequest request, ref BlockPos startPos)
+        {
+            int chunkX = request.ChunkX;
+            int chunkZ = request.ChunkZ;
+
+            bool needsTerrainY = def.Placement is EnumSeafarerPlacement.SurfaceRuin
+                                 or EnumSeafarerPlacement.Coastal
+                                 or EnumSeafarerPlacement.Underwater
+                                 || def.UseWorldgenHeight;
+
+            if (!needsTerrainY)
+            {
+                // Surface / OceanSurface: sea level anchored.
+                int y = api.World.SeaLevel + def.schematicData.OffsetY;
+                if (loc.Location.Y1 != y)
+                {
+                    loc.Location.Y1 = y;
+                    loc.Location.Y2 = y + def.schematicData.SizeY;
+                    LocationsDirty = true;
+                }
+                startPos.Y = y;
+                return true;
+            }
+
+            if (loc.WorldgenHeight >= 0)
+            {
+                startPos.Y = ResolveYFromTerrain(def, loc.WorldgenHeight);
+                return true;
+            }
+
+            // Need terrain height at origin. Only the origin chunk owns it.
+            int originChunkX = loc.Location.X1 / chunksize;
+            int originChunkZ = loc.Location.Z1 / chunksize;
+            if (chunkX != originChunkX || chunkZ != originChunkZ) return false;
+
+            int localX = loc.Location.X1 - originChunkX * chunksize;
+            int localZ = loc.Location.Z1 - originChunkZ * chunksize;
+            if (localX < 0 || localX >= chunksize || localZ < 0 || localZ >= chunksize) return false;
+
+            int terrainHeight = request.Chunks[0].MapChunk.WorldGenTerrainHeightMap[localZ * chunksize + localX];
+            loc.WorldgenHeight = terrainHeight;
+            int resolvedY = ResolveYFromTerrain(def, terrainHeight);
+            loc.Location.Y1 = resolvedY;
+            loc.Location.Y2 = resolvedY + def.schematicData.SizeY;
+            startPos.Y = resolvedY;
+            LocationsDirty = true;
+            return true;
+        }
+
+        private int ResolveYFromTerrain(SeafarerStructure def, int terrainHeight)
+        {
+            // UseWorldgenHeight overrides placement-based Y — matches base-game precedence.
+            if (def.UseWorldgenHeight)
+            {
+                return terrainHeight + def.schematicData.OffsetY;
+            }
+
+            return def.Placement switch
+            {
+                EnumSeafarerPlacement.SurfaceRuin  => terrainHeight - def.schematicData.SizeY + def.schematicData.OffsetY,
+                EnumSeafarerPlacement.Coastal      => terrainHeight + def.schematicData.OffsetY,
+                EnumSeafarerPlacement.Underwater   => terrainHeight + def.schematicData.OffsetY,
+                EnumSeafarerPlacement.OceanSurface => api.World.SeaLevel + def.schematicData.OffsetY,
+                _ /* Surface */                    => api.World.SeaLevel + def.schematicData.OffsetY,
+            };
+        }
+
+        private static EnumStructurePlacement ToBaseGamePlacement(EnumSeafarerPlacement p)
+        {
+            return p switch
+            {
+                EnumSeafarerPlacement.Underwater    => EnumStructurePlacement.Underwater,
+                EnumSeafarerPlacement.SurfaceRuin   => EnumStructurePlacement.SurfaceRuin,
+                EnumSeafarerPlacement.Coastal       => EnumStructurePlacement.Surface,
+                EnumSeafarerPlacement.OceanSurface  => EnumStructurePlacement.Surface,
+                _                                   => EnumStructurePlacement.Surface,
+            };
+        }
+
+        private void EmitRegionRecord(IMapRegion mapRegion, SeafarerStructure def, Cuboidi bounds)
+        {
+            var existing = mapRegion.GeneratedStructures.FirstOrDefault(g => g.Code == def.Code);
+            if (existing != null) return;
+
+            mapRegion.AddGeneratedStructure(new GeneratedStructure
+            {
+                Code = def.Code,
+                Group = "seafarerstructure",
+                Location = bounds.Clone(),
+                SuppressTreesAndShrubs = def.SuppressTrees,
+                SuppressRivulets = true
+            });
+        }
+
+        private void EmitLandClaims(SeafarerStructure def, Cuboidi bounds)
+        {
+            if (!def.BuildProtected) return;
+
+            if (!def.ExcludeSchematicSizeProtect)
+            {
+                var claims = api.World.Claims.Get(bounds.Center.AsBlockPos);
+                if (claims == null || claims.Length == 0)
+                {
+                    api.World.Claims.Add(new LandClaim
+                    {
+                        Areas = new List<Cuboidi> { bounds.Clone() },
+                        Description = def.BuildProtectionDesc,
+                        ProtectionLevel = def.ProtectionLevel,
+                        LastKnownOwnerName = def.BuildProtectionName,
+                        AllowUseEveryone = def.AllowUseEveryone,
+                        AllowTraverseEveryone = def.AllowTraverseEveryone
+                    });
+                }
+            }
+
+            if (def.ExtraLandClaimX > 0 && def.ExtraLandClaimZ > 0)
+            {
+                var center = bounds.Center;
+                var extra = new Cuboidi(
+                    center.X - def.ExtraLandClaimX, 0, center.Z - def.ExtraLandClaimZ,
+                    center.X + def.ExtraLandClaimX, api.WorldManager.MapSizeY, center.Z + def.ExtraLandClaimZ);
+                var claims = api.World.Claims.Get(extra.Center.AsBlockPos);
+                if (claims == null || claims.Length == 0)
+                {
+                    api.World.Claims.Add(new LandClaim
+                    {
+                        Areas = new List<Cuboidi> { extra },
+                        Description = def.BuildProtectionDesc,
+                        ProtectionLevel = def.ProtectionLevel,
+                        LastKnownOwnerName = def.BuildProtectionName,
+                        AllowUseEveryone = def.AllowUseEveryone,
+                        AllowTraverseEveryone = def.AllowTraverseEveryone
+                    });
+                }
+            }
+
+            if (def.CustomLandClaims != null)
+            {
+                foreach (var shape in def.CustomLandClaims)
+                {
+                    var c = shape.Clone();
+                    c.X1 += bounds.X1; c.X2 += bounds.X1;
+                    c.Y1 += bounds.Y1; c.Y2 += bounds.Y1;
+                    c.Z1 += bounds.Z1; c.Z2 += bounds.Z1;
+
+                    var claims = api.World.Claims.Get(c.Center.AsBlockPos);
+                    if (claims != null && claims.Length > 0) continue;
+
+                    api.World.Claims.Add(new LandClaim
+                    {
+                        Areas = new List<Cuboidi> { c },
+                        Description = def.BuildProtectionDesc,
+                        ProtectionLevel = def.ProtectionLevel,
+                        LastKnownOwnerName = def.BuildProtectionName,
+                        AllowUseEveryone = def.AllowUseEveryone,
+                        AllowTraverseEveryone = def.AllowTraverseEveryone
+                    });
+                }
+            }
         }
 
         private void Event_SaveGameLoaded()
