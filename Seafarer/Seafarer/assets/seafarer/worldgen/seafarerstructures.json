@@ -1,7 +1,7 @@
 {
   "schematicYOffsets": {
     "story/seafarer:potato-king-house": 0,
-    "story/seafarer:tortuga": 27,
+    "story/seafarer:tortuga": 54,
     "story/seafarer:wreck-crimson-rose": 0
   },
   "rocktypeRemapGroups": {},
@@ -71,7 +71,6 @@
       "dependsOnStructure": "tortuga",
       "minSpawnDistX": 50, "maxSpawnDistX": 100,
       "minSpawnDistZ": 50, "maxSpawnDistZ": 100,
-      "clearFootprint": true,
       "landformRadius": 0,
       "skipGenerationCategories": {
         "structures": 80
