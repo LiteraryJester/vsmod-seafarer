@@ -484,8 +484,8 @@ namespace Seafarer.WorldGen
             {
                 if (def.Placement == EnumSeafarerPlacement.OceanSurface && !loc.OceanValidated)
                 {
-                    int originChunkX0 = loc.Location.X1 / chunksize;
-                    int originChunkZ0 = loc.Location.Z1 / chunksize;
+                    int originChunkX0 = (int)Math.Floor((double)loc.Location.X1 / chunksize);
+                    int originChunkZ0 = (int)Math.Floor((double)loc.Location.Z1 / chunksize);
                     if (chunkX != originChunkX0 || chunkZ != originChunkZ0) return false;
 
                     int localX0 = loc.Location.X1 - originChunkX0 * chunksize;
@@ -526,8 +526,10 @@ namespace Seafarer.WorldGen
             }
 
             // Need terrain height at origin. Only the origin chunk owns it.
-            int originChunkX = loc.Location.X1 / chunksize;
-            int originChunkZ = loc.Location.Z1 / chunksize;
+            // Use floor-division so negative coordinates resolve to the correct chunk:
+            // C# integer division truncates toward zero, so -50/32 = -1 instead of -2.
+            int originChunkX = (int)Math.Floor((double)loc.Location.X1 / chunksize);
+            int originChunkZ = (int)Math.Floor((double)loc.Location.Z1 / chunksize);
             if (chunkX != originChunkX || chunkZ != originChunkZ) return false;
 
             int localX = loc.Location.X1 - originChunkX * chunksize;
