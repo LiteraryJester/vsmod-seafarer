@@ -1,5 +1,97 @@
 {
-  "schematicYOffsets": {},
+  "schematicYOffsets": {
+    "story/seafarer:potato-king-house": 0,
+    "story/seafarer:tortuga": -27,
+    "story/seafarer:wreck-crimson-rose": 0
+  },
   "rocktypeRemapGroups": {},
-  "structures": []
+  "structures": [
+    {
+      "code": "potatoking",
+      "group": "seafarerstructure",
+      "name": "Potato King's House",
+      "schematics": ["surface/potato-king-house"],
+      "placement": "Surface",
+      "storyStructure": true,
+      "useWorldgenHeight": true,
+      "disableSurfaceTerrainBlending": true,
+      "dependsOnStructure": "spawn",
+      "minSpawnDistX": -2500, "maxSpawnDistX": 2500,
+      "minSpawnDistZ": -2500, "maxSpawnDistZ": 2500,
+      "requireLandform": "veryflat",
+      "landformRadius": 80,
+      "generateGrass": true,
+      "buildProtected": true,
+      "protectionLevel": 10,
+      "buildProtectionName": "custommessage-potatoking",
+      "buildProtectionDesc": "Potato King's House",
+      "allowUseEveryone": false,
+      "allowTraverseEveryone": true,
+      "skipGenerationCategories": {
+        "structures": 80, "trees": 50, "shrubs": 50,
+        "hotsprings": 100, "patches": 30
+      }
+    },
+    {
+      "code": "tortuga",
+      "group": "seafarerstructure",
+      "name": "Tortuga",
+      "schematics": ["costal/tortuga"],
+      "placement": "Coastal",
+      "storyStructure": true,
+      "clearFootprint": true,
+      "excludeSchematicSizeProtect": true,
+      "disableSurfaceTerrainBlending": true,
+      "dependsOnStructure": "spawn",
+      "minSpawnDistX": -3000, "maxSpawnDistX": 3000,
+      "minSpawnDistZ": -3000, "maxSpawnDistZ": 3000,
+      "requireCoast": true,
+      "requireLandform": "shallowislands",
+      "landformRadius": 10,
+      "generateGrass": true,
+      "buildProtected": true,
+      "protectionLevel": 10,
+      "buildProtectionName": "custommessage-tortuga",
+      "buildProtectionDesc": "Tortuga — neutral port",
+      "allowUseEveryone": true,
+      "allowTraverseEveryone": true,
+      "skipGenerationCategories": {
+        "structures": 300, "trees": 200, "shrubs": 150,
+        "hotsprings": 250, "patches": 100, "pond": 200, "rivulets": 100
+      }
+    },
+    {
+      "code": "wreck-crimsonrose",
+      "group": "seafarerstructure",
+      "name": "Wreck of the Crimson Rose",
+      "schematics": ["underwater/wreck-crimson-rose"],
+      "placement": "Underwater",
+      "storyStructure": true,
+      "useWorldgenHeight": true,
+      "dependsOnStructure": "spawn",
+      "minSpawnDistX": -3000, "maxSpawnDistX": 3000,
+      "minSpawnDistZ": -3000, "maxSpawnDistZ": 3000,
+      "requireOcean": true,
+      "minWaterDepth": 10,
+      "maxWaterDepth": 80,
+      "landformRadius": 0,
+      "skipGenerationCategories": {
+        "structures": 80, "trees": 60, "shrubs": 60,
+        "hotsprings": 80, "patches": 40
+      }
+    },
+    {
+      "code": "wreck-one",
+      "group": "seafarerstructure",
+      "schematics": ["underwater/wreck-one"],
+      "placement": "Underwater",
+      "storyStructure": false,
+      "chance": 0.015,
+      "requireOcean": true,
+      "minWaterDepth": 10,
+      "maxWaterDepth": 50,
+      "suppressTrees": true,
+      "randomRotation": true
+    }
+  ]
 }

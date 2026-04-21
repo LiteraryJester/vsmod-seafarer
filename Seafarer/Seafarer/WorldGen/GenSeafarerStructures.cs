@@ -755,8 +755,14 @@ namespace Seafarer.WorldGen
 
         private void EmitRegionRecord(IMapRegion mapRegion, SeafarerStructure def, Cuboidi bounds)
         {
-            var existing = mapRegion.GeneratedStructures.FirstOrDefault(g => g.Code == def.Code);
-            if (existing != null) return;
+            // Story structures: dedup by code so slice re-entry across chunk-gen events
+            // doesn't emit duplicate records for the same reservation.
+            // Scattered structures: multiple instances per region are legitimate, do not dedup.
+            if (def.StoryStructure)
+            {
+                var existing = mapRegion.GeneratedStructures.FirstOrDefault(g => g.Code == def.Code);
+                if (existing != null) return;
+            }
 
             mapRegion.AddGeneratedStructure(new GeneratedStructure
             {
