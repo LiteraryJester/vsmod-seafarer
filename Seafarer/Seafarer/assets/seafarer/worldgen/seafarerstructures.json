@@ -65,12 +65,14 @@
       "group": "seafarerstructure",
       "name": "Wreck of the Crimson Rose",
       "schematics": ["underwater/wreck-crimson-rose"],
-      "placement": "OceanSurface",
+      "placement": "Surface",
       "storyStructure": true,
+      "useWorldgenHeight": true,
       "dependsOnStructure": "tortuga",
       "minSpawnDistX": 50, "maxSpawnDistX": 100,
       "minSpawnDistZ": 50, "maxSpawnDistZ": 100,
-      "landformRadius": 0,
+      "requireLandform": "smallshallowislands",
+      "landformRadius": 30,
       "skipGenerationCategories": {
         "structures": 80
       }
