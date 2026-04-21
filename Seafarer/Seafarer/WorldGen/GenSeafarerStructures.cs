@@ -209,6 +209,8 @@ namespace Seafarer.WorldGen
             blockLayerConfig = BlockLayerConfig.GetInstance(api);
 
             LoadConfig();
+            DetermineSeafarerStoryStructures();
+            strucRand.SetWorldSeed(api.WorldManager.Seed ^ 2389173L);
         }
 
         private void LoadConfig()
@@ -233,6 +235,23 @@ namespace Seafarer.WorldGen
 
             scfg.Structures = structures.ToArray();
 
+            // Resolve skip-generation-categories to SHA-hashed flags so base-game worldgen
+            // can match against our radii.
+            foreach (var def in scfg.Structures)
+            {
+                if (def.SkipGenerationCategories != null)
+                {
+                    def.SkipGenerationFlags = new Dictionary<int, int>();
+                    foreach (var category in def.SkipGenerationCategories)
+                    {
+                        int key = BitConverter.ToInt32(
+                            System.Security.Cryptography.SHA256.HashData(
+                                System.Text.Encoding.UTF8.GetBytes(category.Key.ToLowerInvariant())));
+                        def.SkipGenerationFlags.Add(key, category.Value);
+                    }
+                }
+            }
+
             foreach (var def in scfg.Structures)
             {
                 if (def.Schematics == null || def.Schematics.Length == 0) continue;
@@ -252,6 +271,24 @@ namespace Seafarer.WorldGen
                 {
                     api.Logger.Error("Seafarer structure '{0}': schematic load failed: {1}", def.Code, e.Message);
                 }
+            }
+
+            // Validate dependsOnStructure ordering: a dep must be "spawn" or refer to a code
+            // that appears earlier in the array. DetermineSeafarerStoryStructures iterates in
+            // array order and looks up deps in storyLocations, so later-declared deps will
+            // silently fail. Warn here so config authors catch the problem before runtime.
+            var seenCodes = new HashSet<string>();
+            foreach (var def in scfg.Structures)
+            {
+                if (!string.IsNullOrEmpty(def.DependsOnStructure)
+                    && def.DependsOnStructure != "spawn"
+                    && !seenCodes.Contains(def.DependsOnStructure))
+                {
+                    api.Logger.Warning(
+                        "Seafarer structure '{0}' depends on '{1}' which is not declared before it in the config. Reorder the config so dependencies come first, or determination will fail.",
+                        def.Code, def.DependsOnStructure);
+                }
+                seenCodes.Add(def.Code);
             }
 
             api.Logger.Notification("Seafarer structures: loaded {0} definitions.", scfg.Structures.Length);
@@ -298,6 +335,138 @@ namespace Seafarer.WorldGen
                 Bounds = bounds,
                 BlocksPlacedInSlice = blocks
             });
+        }
+
+        private const int MaxDeterminationAttempts = 30;
+
+        protected void DetermineSeafarerStoryStructures()
+        {
+            BlockPos spawnPos;
+            var df = api.WorldManager.SaveGame.DefaultSpawn;
+            if (df != null)
+            {
+                spawnPos = new BlockPos(df.x, df.y ?? 0, df.z, 0);
+            }
+            else
+            {
+                spawnPos = api.World.BlockAccessor.MapSize.AsBlockPos / 2;
+            }
+
+            int i = 0;
+            foreach (var def in scfg.Structures)
+            {
+                if (!def.StoryStructure) { i++; continue; }
+
+                // Already determined (persisted from prior load)
+                if (storyLocations.TryGetValue(def.Code, out var existing))
+                {
+                    // refresh runtime-tunable fields in case the asset was edited
+                    existing.LandformRadius = def.LandformRadius;
+                    existing.GenerationRadius = def.GenerationRadius;
+                    existing.SkipGenerationFlags = def.SkipGenerationFlags;
+                    if (existing.SkipGenerationFlags != null && existing.SkipGenerationFlags.Count > 0)
+                    {
+                        int max = existing.SkipGenerationFlags.Max(f => f.Value);
+                        existing.MaxSkipGenerationRadiusSq = max * max;
+                    }
+                    i++;
+                    continue;
+                }
+
+                if (attemptedCodes.Contains(def.Code)) { i++; continue; }
+
+                strucRand.SetWorldSeed(api.WorldManager.Seed + 2389173 + i);
+                TryDetermineLocation(def, spawnPos);
+                attemptedCodes.Add(def.Code);
+                i++;
+            }
+
+            LocationsDirty = true;
+        }
+
+        private void TryDetermineLocation(SeafarerStructure def, BlockPos spawnPos)
+        {
+            BlockPos basePos = spawnPos;
+            if (!string.IsNullOrEmpty(def.DependsOnStructure) && def.DependsOnStructure != "spawn")
+            {
+                if (storyLocations.TryGetValue(def.DependsOnStructure, out var dep))
+                {
+                    basePos = dep.CenterPos.Copy();
+                }
+                else
+                {
+                    FailedToGenerateLocation = true;
+                    api.Logger.Error(
+                        "Seafarer structure '{0}' depends on '{1}', which was not found. Use /wgen seafarer setpos to place it manually.",
+                        def.Code, def.DependsOnStructure);
+                    return;
+                }
+            }
+
+            if (def.schematicData == null)
+            {
+                api.Logger.Error("Seafarer structure '{0}': no schematic data, skipping determination.", def.Code);
+                FailedToGenerateLocation = true;
+                return;
+            }
+
+            int dirX = strucRand.NextFloat() > 0.5 ? -1 : 1;
+            int dirZ = strucRand.NextFloat() > 0.5 ? -1 : 1;
+
+            for (int attempt = 0; attempt < MaxDeterminationAttempts; attempt++)
+            {
+                int distanceX = def.MinSpawnDistX + strucRand.NextInt(Math.Max(1, def.MaxSpawnDistX + 1 - def.MinSpawnDistX));
+                int distanceZ = def.MinSpawnDistZ + strucRand.NextInt(Math.Max(1, def.MaxSpawnDistZ + 1 - def.MinSpawnDistZ));
+
+                int px = basePos.X + distanceX * dirX;
+                int pz = basePos.Z + distanceZ * dirZ;
+                int py = def.Placement == EnumSeafarerPlacement.Surface || def.Placement == EnumSeafarerPlacement.OceanSurface
+                    ? api.World.SeaLevel + def.schematicData.OffsetY
+                    : 1;
+
+                var pos = new BlockPos(px, py, pz, 0);
+                int schemX = def.schematicData.SizeX;
+                int schemZ = def.schematicData.SizeZ;
+                int minX = pos.X - schemX / 2;
+                int minZ = pos.Z - schemZ / 2;
+                var loc = new Cuboidi(minX, pos.Y, minZ, minX + schemX, pos.Y + def.schematicData.SizeY, minZ + schemZ);
+
+                // NOTE: Ocean validation is deferred to per-chunk Y-resolution (see Task 5).
+                // Candidate accepted on first attempt; if fine-grained validation fails later,
+                // the reservation is dropped and the structure is reported via listmissing.
+                var entry = new SeafarerStructureLocation
+                {
+                    Code = def.Code,
+                    CenterPos = pos,
+                    Location = loc,
+                    LandformRadius = def.LandformRadius,
+                    GenerationRadius = def.GenerationRadius,
+                    DirX = dirX,
+                    SkipGenerationFlags = def.SkipGenerationFlags
+                };
+                if (entry.SkipGenerationFlags != null && entry.SkipGenerationFlags.Count > 0)
+                {
+                    int max = entry.SkipGenerationFlags.Max(f => f.Value);
+                    entry.MaxSkipGenerationRadiusSq = max * max;
+                }
+
+                storyLocations[def.Code] = entry;
+                api.Logger.Notification("Seafarer story structure '{0}' determined at ({1}, {2}, {3})", def.Code, pos.X, pos.Y, pos.Z);
+                return;
+            }
+
+            FailedToGenerateLocation = true;
+            api.Logger.Warning("Seafarer story structure '{0}': no valid candidate found after {1} attempts.", def.Code, MaxDeterminationAttempts);
+        }
+
+        public List<string> GetMissingStructures()
+        {
+            var missing = new List<string>();
+            foreach (var code in attemptedCodes)
+            {
+                if (!storyLocations.ContainsKey(code)) missing.Add(code);
+            }
+            return missing;
         }
     }
 }
