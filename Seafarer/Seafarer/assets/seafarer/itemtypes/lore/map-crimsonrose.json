@@ -10,7 +10,7 @@
         "maxPageCount": 1,
         "locatorPropsbyType": {
             "*": {
-                "schematiccode": "wreck-crimsonrose",
+                "schematiccode": "wreck-crimson-rose",
                 "waypointtext": "location-crimsonrose",
                 "waypointicon": "x",
                 "waypointcolor": [0.8, 0.1, 0.1, 1],
