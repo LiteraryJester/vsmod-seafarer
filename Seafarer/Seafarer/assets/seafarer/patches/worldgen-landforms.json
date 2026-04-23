@@ -1,6 +1,6 @@
 [
   {
-    "file": "survival:worldgen/landforms",
+    "file": "game:worldgen/landforms",
     "op": "add",
     "path": "/variants/-",
     "value": {
