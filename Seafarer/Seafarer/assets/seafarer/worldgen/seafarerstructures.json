@@ -47,7 +47,7 @@
       "minSpawnDistX": -1000, "maxSpawnDistX": 1000,
       "minSpawnDistZ": -1000, "maxSpawnDistZ": 1000,
       "requireCoast": true,
-      "requireLandform": "mediumseapillarswatery",
+      "requireLandform": "saltwater",
       "landformRadius": 200,
       "generateGrass": true,
       "buildProtected": true,
