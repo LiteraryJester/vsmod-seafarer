@@ -153,6 +153,17 @@
                 "code": "seafarer:letter-morgan",
                 "stacksize": 1
             },
+            "jumpTo": "mine-give-map-potatoking"
+        },
+        {
+            "code": "mine-give-map-potatoking",
+            "owner": "morgan",
+            "trigger": "giveitemstack",
+            "triggerdata": {
+                "type": "item",
+                "code": "seafarer:map-potatoking",
+                "stacksize": 1
+            },
             "jumpTo": "main"
         },
 
@@ -208,6 +219,17 @@
             "triggerdata": {
                 "type": "item",
                 "code": "seafarer:letter-morgan",
+                "stacksize": 1
+            },
+            "jumpTo": "mine-replace-map-potatoking"
+        },
+        {
+            "code": "mine-replace-map-potatoking",
+            "owner": "morgan",
+            "trigger": "giveitemstack",
+            "triggerdata": {
+                "type": "item",
+                "code": "seafarer:map-potatoking",
                 "stacksize": 1
             },
             "jumpTo": "main"
