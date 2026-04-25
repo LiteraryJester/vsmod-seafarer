@@ -15,7 +15,8 @@
             "owner": "potatoking",
             "type": "talk",
             "setVariables": { "player.hasmetpotatoking": "true" },
-            "text": [{ "value": "seafarer:dialogue-potatoking-welcome" }]
+            "text": [{ "value": "seafarer:dialogue-potatoking-welcome" }],
+            "jumpTo": "main"
         },
         {
             "code": "welcomeback",
@@ -32,29 +33,34 @@
             "type": "talk",
             "text": [
                 { "value": "dialogue-name", "jumpTo": "name" },
+
+                // Quest not started, player presented Morgan's letter
                 {
                     "value": "seafarer:dialogue-potatoking-show-letter",
-                    "jumpTo": "letter-received",
+                    "jumpTo": "lastpotato-letter-received",
                     "conditions": [
-                        { "variable": "entity.letter-received", "isNotValue": "true" },
+                        { "variable": "global.quest-seafarer-potatoking-lastpotato-status", "isNotValue": "active" },
+                        { "variable": "global.quest-seafarer-potatoking-lastpotato-status", "isNotValue": "completed" },
                         { "variable": "player.inventory", "isValue": "{type: 'item', code: 'seafarer:letter-morgan', stacksize: 1}" }
                     ]
                 },
+
+                // Quest active, player has a seed → deliver
                 {
-                    "value": "seafarer:dialogue-potatoking-have-potato",
-                    "jumpTo": "potato-deliver",
+                    "value": "seafarer:dialogue-potatoking-have-seed",
+                    "jumpTo": "lastpotato-deliver",
                     "conditions": [
-                        { "variable": "entity.letter-received", "isValue": "true" },
-                        { "variable": "entity.contract-given", "isNotValue": "true" },
-                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:vegetable-potato', stacksize: 1}" }
+                        { "variable": "global.quest-seafarer-potatoking-lastpotato-status", "isValue": "active" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'seafarer:seeds-potato', stacksize: 1}" }
                     ]
                 },
+
+                // Quest active, no seed → reminder (with lost-map handling)
                 {
                     "value": "seafarer:dialogue-potatoking-remind",
-                    "jumpTo": "potato-reminder",
+                    "jumpTo": "lastpotato-reminder",
                     "conditions": [
-                        { "variable": "entity.letter-received", "isValue": "true" },
-                        { "variable": "entity.contract-given", "isNotValue": "true" }
+                        { "variable": "global.quest-seafarer-potatoking-lastpotato-status", "isValue": "active" }
                     ]
                 }
             ]
@@ -68,27 +74,31 @@
             "jumpTo": "main"
         },
 
-        // === Letter from Morgan ===
+        // === Letter delivery → quest start (implicit accept) ===
         {
-            "code": "letter-received",
+            "code": "lastpotato-letter-received",
             "owner": "potatoking",
             "type": "talk",
-            "setVariables": { "entity.letter-received": "true" },
-            "text": [{ "value": "seafarer:dialogue-potatoking-letter-response" }],
             "trigger": "takefrominventory",
             "triggerdata": {
                 "type": "item",
                 "code": "seafarer:letter-morgan"
             },
-            "jumpTo": "potato-quest-start"
+            "text": [{ "value": "seafarer:dialogue-potatoking-letter-response" }],
+            "jumpTo": "lastpotato-start"
         },
-
-        // Potato King gives map to the dungeon
         {
-            "code": "potato-quest-start",
+            "code": "lastpotato-start",
             "owner": "potatoking",
             "type": "talk",
-            "text": [{ "value": "seafarer:dialogue-potatoking-potato-quest" }],
+            "trigger": "questStart",
+            "triggerdata": { "code": "potatoking-lastpotato" },
+            "text": [{ "value": "seafarer:dialogue-potatoking-quest-start" }],
+            "jumpTo": "lastpotato-give-map"
+        },
+        {
+            "code": "lastpotato-give-map",
+            "owner": "potatoking",
             "trigger": "giveitemstack",
             "triggerdata": {
                 "type": "item",
@@ -98,33 +108,45 @@
             "jumpTo": "main"
         },
 
-        // Reminder about the potato quest
+        // === Reminder / lost-map replacement (mirrors Celeste pattern) ===
         {
-            "code": "potato-reminder",
+            "code": "lastpotato-reminder",
+            "owner": "potatoking",
+            "type": "condition",
+            "variable": "player.inventory",
+            "isValue": "{type: 'item', code: 'seafarer:map-potato', stacksize: 1}",
+            "thenJumpTo": "lastpotato-reminder-hasmap",
+            "elseJumpTo": "lastpotato-reminder-givemap"
+        },
+        {
+            "code": "lastpotato-reminder-hasmap",
             "owner": "potatoking",
             "type": "talk",
-            "text": [{ "value": "seafarer:dialogue-potatoking-potato-reminder" }],
+            "text": [{ "value": "seafarer:dialogue-potatoking-quest-reminder" }],
             "jumpTo": "main"
         },
-
-        // === Potato Delivery: Give signed contract ===
         {
-            "code": "potato-deliver",
+            "code": "lastpotato-reminder-givemap",
             "owner": "potatoking",
             "type": "talk",
-            "text": [{ "value": "seafarer:dialogue-potatoking-potato-received" }],
-            "trigger": "takefrominventory",
-            "triggerdata": {
-                "type": "item",
-                "code": "game:vegetable-potato"
-            },
-            "jumpTo": "give-contract"
+            "text": [{ "value": "seafarer:dialogue-potatoking-lostmap" }],
+            "jumpTo": "lastpotato-give-map"
+        },
+
+        // === Seed delivery → contract handoff ===
+        {
+            "code": "lastpotato-deliver",
+            "owner": "potatoking",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "potatoking-lastpotato", "objective": "seed" },
+            "text": [{ "value": "seafarer:dialogue-potatoking-seed-received" }],
+            "jumpTo": "lastpotato-give-contract"
         },
         {
-            "code": "give-contract",
+            "code": "lastpotato-give-contract",
             "owner": "potatoking",
             "type": "talk",
-            "setVariables": { "entity.contract-given": "true" },
             "text": [{ "value": "seafarer:dialogue-potatoking-give-contract" }],
             "trigger": "giveitemstack",
             "triggerdata": {

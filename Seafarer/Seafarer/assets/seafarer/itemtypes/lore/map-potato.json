@@ -1,6 +1,6 @@
 {
     "code": "map-potato",
-    "class": "ItemLocatorMap",
+    "class": "ItemOceanLocatorMap",
     "maxstacksize": 1,
     "attributes": {
         "displaycaseable": true,
@@ -8,12 +8,15 @@
         "readable": true,
         "editable": false,
         "maxPageCount": 1,
+        "searchRange": 2000,
         "locatorPropsbyType": {
             "*": {
-                "schematiccode": "potatoking",
+                "schematiccode": "abandoned-farm",
                 "waypointtext": "location-potato",
                 "waypointicon": "x",
-                "waypointcolor": [0.6, 0.4, 0.1, 1]
+                "waypointcolor": [0.6, 0.4, 0.1, 1],
+                "randomX": 8,
+                "randomZ": 8
             }
         }
     },
