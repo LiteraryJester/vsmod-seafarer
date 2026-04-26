@@ -41,8 +41,9 @@
         },
         creaturecarrier: {
             seats: [
-                { apName: "ForeSeatAP", controllable: true, mountOffset: { x: 0, z:  1.4 }, bodyYawLimit: 0.4, eyeHeight: 1 },
-                { apName: "AftSeatAP",  controllable: true, mountOffset: { x: 0, z: -1.4 }, bodyYawLimit: 0.4, eyeHeight: 1 }
+                { apName: "AftSeat",   controllable: true,  bodyYawLimit: 0.4, eyeHeight: 1 },
+                { apName: "ForeSeat1", controllable: false, bodyYawLimit: 0.4, eyeHeight: 1 },
+                { apName: "ForeSeat2", controllable: false, bodyYawLimit: 0.4, eyeHeight: 1 }
             ]
         },
         rideableaccessories: {
@@ -71,13 +72,14 @@
                     attachmentPointCode: "CargoAftAP",
                     stepParentTo: { "": { elementName: "CargoAft" } }
                 },
-                { code: "ForeSeatAP", forCategoryCodes: [] },
-                { code: "AftSeatAP",  forCategoryCodes: [] }
+                { code: "AftSeat",   forCategoryCodes: [] },
+                { code: "ForeSeat1", forCategoryCodes: [] },
+                { code: "ForeSeat2", forCategoryCodes: [] }
             ]
         },
         selectionboxes: {
             selectionBoxes: [
-                "ForeSeatAP", "AftSeatAP", "OarAP", "SailExtraStorageAP",
+                "AftSeat", "ForeSeat1", "ForeSeat2", "OarAP", "SailExtraStorageAP",
                 "MastLanternAP", "CargoForeAP", "CargoMidAP", "CargoAftAP"
             ]
         }
