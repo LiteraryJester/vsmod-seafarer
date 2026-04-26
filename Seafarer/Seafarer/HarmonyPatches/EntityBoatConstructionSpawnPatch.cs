@@ -29,7 +29,13 @@ public static class EntityBoatConstructionSpawnPatch
         if (boatType == "sailed") return true; // let the original run unchanged
 
         var rcc = rccRef(__instance);
-        if (!rcc.StoredWildCards.TryGetValue("wood", out string wood)) return false;
+        if (!rcc.StoredWildCards.TryGetValue("wood", out string wood))
+        {
+            __instance.Api.Logger.Warning(
+                "[seafarer] EntityBoatConstructionSpawnPatch: no wood wildcard on {0} — boat not spawned.",
+                __instance.Code);
+            return false;
+        }
 
         // Replicate getCenterPos (private) inline.
         Vec3f nowOff = null;
@@ -49,9 +55,9 @@ public static class EntityBoatConstructionSpawnPatch
         if (type == null)
         {
             __instance.Api.Logger.Warning(
-                "[seafarer] EntityBoatConstructionSpawnPatch: entity {0} not found, falling back to base Spawn.",
+                "[seafarer] EntityBoatConstructionSpawnPatch: entity {0} not found — no boat spawned. Check that the boat-outrigger entity JSON is loaded.",
                 entityCode);
-            return true; // fall through to original (will spawn boat-sailed-{wood})
+            return false; // skip original to avoid spawning the wrong boat type
         }
 
         var entity = __instance.World.ClassRegistry.CreateEntity(type);
