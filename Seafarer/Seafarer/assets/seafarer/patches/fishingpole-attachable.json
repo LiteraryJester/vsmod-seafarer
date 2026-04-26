@@ -1,0 +1,13 @@
+[
+    // Make game:fishingpole mountable on boat slots that accept the
+    // "fishingrod" wearable category (Seafarer outrigger uses this).
+    // Base game does not declare attachableToEntity on fishingpole, so
+    // without this patch the outrigger's "Fishing Rod" slot would never
+    // accept anything.
+    {
+        "op": "add",
+        "path": "/attributes/attachableToEntity",
+        "value": { "categoryCode": "fishingrod" },
+        "file": "game:itemtypes/tool/fishingpole.json"
+    }
+]

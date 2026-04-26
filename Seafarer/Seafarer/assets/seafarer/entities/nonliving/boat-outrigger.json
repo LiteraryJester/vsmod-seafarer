@@ -1,124 +1,213 @@
 {
-    code: "boat",
-    class: "EntityOutriggerBoat",
-    tags: ["inanimate", "vehicle"],
-    weight: 800,
-    variantgroups: [
-        { code: "type", states: ["outrigger"] },
-        { code: "material", states: ["seasoned", "varnished"], loadFromProperties: "block/wood" }
+  "code": "boat",
+  "class": "EntityOutriggerBoat",
+  "tags": ["inanimate", "vehicle"],
+  "weight": 800,
+  "variantgroups": [
+    { "code": "type", "states": ["outrigger"] },
+    {
+      "code": "material",
+      "states": ["seasoned", "varnished"],
+      "loadFromProperties": "block/wood"
+    }
+  ],
+  "skipVariants": ["*-aged", "*-veryaged", "*-rotten", "*-veryrotten"],
+  "attributes": {
+    "disabledweatherVaneAnimCode": "weathervane",
+    "deconstructible": true,
+    "deconstructDrops": [
+      { "type": "item", "code": "game:plank-{material}", "quantity": 32 },
+      {
+        "type": "block",
+        "code": "game:supportbeam-{material}",
+        "quantity": 24
+      },
+      { "type": "item", "code": "game:rope", "quantity": 12 },
+      { "type": "block", "code": "game:linen-normal-down", "quantity": 8 }
     ],
-    skipVariants: ["*-aged", "*-veryaged", "*-rotten", "*-veryrotten"],
-    attributes: {
-        disabledweatherVaneAnimCode: "weathervane",
-        deconstructible: true,
-        deconstructDrops: [
-            { type: "item",  code: "game:plank-{material}",      quantity: 32 },
-            { type: "block", code: "game:supportbeam-{material}", quantity: 24 },
-            { type: "item",  code: "game:rope",                   quantity: 12 },
-            { type: "block", code: "game:linen-normal-down",      quantity: 8 }
-        ],
-        shouldSwivelFromMotion: false,
-        speedMultiplier: 1.4,
-        swimmingOffsetY: 0.7,
-        unfurlSails: true,
-        mountAnimations: { idle: "sitboatidle", ready: "", forwards: "", backwards: "" }
+    "shouldSwivelFromMotion": false,
+    "speedMultiplier": 1.4,
+    "swimmingOffsetY": 0.7,
+    "unfurlSails": true,
+    "mountAnimations": {
+      "idle": "sitboatidle",
+      "ready": "",
+      "forwards": "",
+      "backwards": ""
+    }
+  },
+  "hitboxSize": { "x": 4, "y": 1.0, "z": 3 },
+  "behaviorConfigs": {
+    "ellipsoidalrepulseagents": {
+      "offset": { "x": 0, "z": 0 },
+      "radius": { "x": 2.5, "y": 1.5, "z": 3.0 }
     },
-    hitboxSize: { x: 4, y: 1.0, z: 3 },
-    behaviorConfigs: {
-        ellipsoidalrepulseagents: {
-            offset: { x: 0, z: 0 },
-            radius: { x: 2.5, y: 1.5, z: 3.0 }
+    "passivephysicsmultibox": {
+      "collisionBoxes": [
+        { "x1": -0.5, "y1": 0, "z1": -2.5, "x2": 0.5, "y2": 1.0, "z2": 2.5 },
+        { "x1": -2.0, "y1": 0, "z1": -1.5, "x2": -1.4, "y2": 0.4, "z2": 1.5 },
+        { "x1": 1.4, "y1": 0, "z1": -1.5, "x2": 2.0, "y2": 0.4, "z2": 1.5 }
+      ],
+      "groundDragFactor": 1,
+      "airDragFallingFactor": 0.5,
+      "gravityFactor": 1.0
+    },
+    "creaturecarrier": {
+      "seats": [
+        {
+          "apName": "AftSeat",
+          "controllable": true,
+          "bodyYawLimit": 0.4,
+          "eyeHeight": 1
         },
-        passivephysicsmultibox: {
-            collisionBoxes: [
-                { x1: -0.5, y1: 0, z1: -2.5, x2:  0.5, y2: 1.0, z2:  2.5 },
-                { x1: -2.0, y1: 0, z1: -1.5, x2: -1.4, y2: 0.4, z2:  1.5 },
-                { x1:  1.4, y1: 0, z1: -1.5, x2:  2.0, y2: 0.4, z2:  1.5 }
-            ],
-            groundDragFactor: 1,
-            airDragFallingFactor: 0.5,
-            gravityFactor: 1.0
+        {
+          "apName": "ForeSeat1",
+          "controllable": false,
+          "bodyYawLimit": 0.4,
+          "eyeHeight": 1
         },
-        creaturecarrier: {
-            seats: [
-                { apName: "AftSeat",   controllable: true,  bodyYawLimit: 0.4, eyeHeight: 1 },
-                { apName: "ForeSeat1", controllable: false, bodyYawLimit: 0.4, eyeHeight: 1 },
-                { apName: "ForeSeat2", controllable: false, bodyYawLimit: 0.4, eyeHeight: 1 }
-            ]
-        },
-        rideableaccessories: {
-            dropContentsOnDeath: true,
-            wearableSlots: [
-                { code: "Oar Storage",   forCategoryCodes: ["oar"],         attachmentPointCode: "OarAP",         stepParentTo: { "": { elementName: "OarStorage" } } },
-                { code: "Sail Recolor",  forCategoryCodes: ["sailrecolor"], attachmentPointCode: "SailExtraStorageAP" },
-                { code: "Mast Lantern",  forCategoryCodes: ["lantern"],     attachmentPointCode: "MastLanternAP", stepParentTo: { "": { elementName: "MastLantern" } } },
-                {
-                    code: "Cargo Fore",
-                    forCategoryCodes: ["chest", "basket", "storagevessel", "crate"],
-                    attachmentPointCode: "CargoForeAP",
-                    behindSlots: ["Cargo Mid"],
-                    stepParentTo: { "": { elementName: "CargoFore" } }
-                },
-                {
-                    code: "Cargo Mid",
-                    forCategoryCodes: ["chest", "basket", "storagevessel", "crate"],
-                    attachmentPointCode: "CargoMidAP",
-                    behindSlots: ["Cargo Aft"],
-                    stepParentTo: { "": { elementName: "CargoMid" } }
-                },
-                {
-                    code: "Cargo Aft",
-                    forCategoryCodes: ["chest", "basket", "storagevessel", "crate"],
-                    attachmentPointCode: "CargoAftAP",
-                    stepParentTo: { "": { elementName: "CargoAft" } }
-                },
-                { code: "AftSeat",   forCategoryCodes: [] },
-                { code: "ForeSeat1", forCategoryCodes: [] },
-                { code: "ForeSeat2", forCategoryCodes: [] }
-            ]
-        },
-        selectionboxes: {
-            selectionBoxes: [
-                "AftSeat", "ForeSeat1", "ForeSeat2", "OarAP", "SailExtraStorageAP",
-                "MastLanternAP", "CargoForeAP", "CargoMidAP", "CargoAftAP"
-            ]
+        {
+          "apName": "ForeSeat2",
+          "controllable": false,
+          "bodyYawLimit": 0.4,
+          "eyeHeight": 1
         }
+      ]
     },
-    client: {
-        size: 1,
-        renderer: "Shape",
-        shape: { base: "entity/nonliving/boat/boat-outrigger", ignoreElements: ["hideWater"] },
-        animations: [
-            { code: "turnLeft",  animation: "turnLeft",  animationSpeed: 1, easeInSpeed: 2, easeOutSpeed: 2 },
-            { code: "turnRight", animation: "turnRight", animationSpeed: 1, easeInSpeed: 2, easeOutSpeed: 2 },
-            { code: "weathervane", animation: "weathervane", animationSpeed: 0, weight: 1, blendMode: "AddAverage" }
-        ],
-        textures: {
-            "material":    { base: "game:block/wood/debarked/{material}" },
-            "wood":        { base: "game:block/wood/debarked/{material}" },
-            "planks":      { base: "game:block/wood/planks/{material}1" },
-            "plain":       { base: "game:block/cloth/linen/plain" },
-            "rope":        { base: "game:item/resource/rope" },
-            "transparent": { base: "game:block/transparent" }
+    "rideableaccessories": {
+      "dropContentsOnDeath": true,
+      "wearableSlots": [
+        {
+          "code": "Oar Storage",
+          "forCategoryCodes": ["oar"],
+          "attachmentPointCode": "OarStorage",
+          "stepParentTo": { "": { "elementName": "OarStorage" } }
         },
-        behaviors: [
-            { code: "ellipsoidalrepulseagents" },
-            { code: "passivephysicsmultibox" },
-            { code: "interpolateposition" },
-            { code: "hidewatersurface", hideWaterElement: "ORIGIN/hideWater/*" },
-            { code: "selectionboxes" },
-            { code: "rideableaccessories" },
-            { code: "creaturecarrier" }
-        ]
+        {
+          "code": "Fishing Rod",
+          "forCategoryCodes": ["fishingrod"],
+          "attachmentPointCode": "FishingrodStorage",
+          "stepParentTo": { "": { "elementName": "FishingrodStorage" } }
+        },
+        {
+          "code": "Sail Recolor",
+          "forCategoryCodes": ["sailrecolor"],
+          "attachmentPointCode": "SailExtraStorageAP"
+        },
+        {
+          "code": "Fore Lantern",
+          "forCategoryCodes": ["lantern"],
+          "attachmentPointCode": "LanternFor",
+          "stepParentTo": { "": { "elementName": "LanternFor" } }
+        },
+        {
+          "code": "Aft Lantern",
+          "forCategoryCodes": ["lantern"],
+          "attachmentPointCode": "LanternAft",
+          "stepParentTo": { "": { "elementName": "LanternAft" } }
+        },
+        {
+          "code": "Platform Storage 1",
+          "forCategoryCodes": ["chest", "basket", "storagevessel", "lantern", "growpot", "barrel"],
+          "attachmentPointCode": "PlatformStorage1",
+          "stepParentTo": { "": { "elementName": "PlatformStorage1" } }
+        },
+        {
+          "code": "Platform Storage 2",
+          "forCategoryCodes": ["chest", "basket", "storagevessel", "lantern", "growpot", "barrel"],
+          "attachmentPointCode": "PlatformStorage2",
+          "stepParentTo": { "": { "elementName": "PlatformStorage2" } }
+        },
+        {
+          "code": "Cargo Fore 1",
+          "forCategoryCodes": ["chest", "basket", "storagevessel", "lantern", "growpot", "barrel", "ropetiepost"],
+          "attachmentPointCode": "CargoFore1",
+          "stepParentTo": { "": { "elementName": "CargoFor1" } }
+        },
+        {
+          "code": "Cargo Fore 2",
+          "forCategoryCodes": ["chest", "basket", "storagevessel", "lantern", "growpot", "barrel", "ropetiepost"],
+          "attachmentPointCode": "CargoFore2",
+          "stepParentTo": { "": { "elementName": "CargoFore2" } }
+        },
+        { "code": "AftSeat", "forCategoryCodes": [] },
+        { "code": "ForeSeat1", "forCategoryCodes": [] },
+        { "code": "ForeSeat2", "forCategoryCodes": [] }
+      ]
     },
-    server: {
-        behaviors: [
-            { code: "ellipsoidalrepulseagents" },
-            { code: "passivephysicsmultibox" },
-            { code: "selectionboxes" },
-            { code: "rideableaccessories" },
-            { code: "creaturecarrier" }
-        ]
+    "selectionboxes": {
+      "selectionBoxes": [
+        "AftSeat",
+        "ForeSeat1",
+        "ForeSeat2",
+        "OarStorage",
+        "FishingrodStorage",
+        "SailExtraStorageAP",
+        "LanternFor",
+        "LanternAft",
+        "PlatformStorage1",
+        "PlatformStorage2",
+        "CargoFore1",
+        "CargoFore2"
+      ]
+    }
+  },
+  "client": {
+    "size": 1,
+    "renderer": "Shape",
+    "shape": {
+      "base": "entity/nonliving/boat/boat-outrigger",
+      "ignoreElements": ["hideWater"]
     },
-    sounds: {}
+    "animations": [
+      {
+        "code": "turnLeft",
+        "animation": "turnLeft",
+        "animationSpeed": 1,
+        "easeInSpeed": 2,
+        "easeOutSpeed": 2
+      },
+      {
+        "code": "turnRight",
+        "animation": "turnRight",
+        "animationSpeed": 1,
+        "easeInSpeed": 2,
+        "easeOutSpeed": 2
+      },
+      {
+        "code": "weathervane",
+        "animation": "weathervane",
+        "animationSpeed": 0,
+        "weight": 1,
+        "blendMode": "AddAverage"
+      }
+    ],
+    "textures": {
+      "material": { "base": "game:block/wood/debarked/{material}" },
+      "wood": { "base": "game:block/wood/debarked/{material}" },
+      "planks": { "base": "game:block/wood/planks/{material}1" },
+      "plain": { "base": "game:block/cloth/linen/plain" },
+      "rope": { "base": "game:item/resource/rope" },
+      "transparent": { "base": "game:block/transparent" }
+    },
+    "behaviors": [
+      { "code": "ellipsoidalrepulseagents" },
+      { "code": "passivephysicsmultibox" },
+      { "code": "interpolateposition" },
+      { "code": "hidewatersurface", "hideWaterElement": "ORIGIN/hideWater/*" },
+      { "code": "selectionboxes" },
+      { "code": "rideableaccessories" },
+      { "code": "creaturecarrier" }
+    ]
+  },
+  "server": {
+    "behaviors": [
+      { "code": "ellipsoidalrepulseagents" },
+      { "code": "passivephysicsmultibox" },
+      { "code": "selectionboxes" },
+      { "code": "rideableaccessories" },
+      { "code": "creaturecarrier" }
+    ]
+  },
+  "sounds": {}
 }

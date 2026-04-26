@@ -1305,10 +1305,13 @@ Need to portage? Strip off all storage and accessories first, then <hk>Shift</hk
 	"creature-seafarer:boat-outrigger-*-selectionbox-AftSeat": "Helmsman seat",
 	"creature-seafarer:boat-outrigger-*-selectionbox-ForeSeat1": "Forward seat",
 	"creature-seafarer:boat-outrigger-*-selectionbox-ForeSeat2": "Middle seat",
-	"creature-seafarer:boat-outrigger-*-selectionbox-OarAP": "Oar rest",
+	"creature-seafarer:boat-outrigger-*-selectionbox-OarStorage": "Oar rest",
+	"creature-seafarer:boat-outrigger-*-selectionbox-FishingrodStorage": "Fishing rod rest",
 	"creature-seafarer:boat-outrigger-*-selectionbox-SailExtraStorageAP": "Sail mount",
-	"creature-seafarer:boat-outrigger-*-selectionbox-MastLanternAP": "Mast lantern",
-	"creature-seafarer:boat-outrigger-*-selectionbox-CargoForeAP": "Fore cargo",
-	"creature-seafarer:boat-outrigger-*-selectionbox-CargoMidAP": "Mid cargo",
-	"creature-seafarer:boat-outrigger-*-selectionbox-CargoAftAP": "Aft cargo"
+	"creature-seafarer:boat-outrigger-*-selectionbox-LanternFor": "Forward lantern",
+	"creature-seafarer:boat-outrigger-*-selectionbox-LanternAft": "Rear lantern",
+	"creature-seafarer:boat-outrigger-*-selectionbox-PlatformStorage1": "Platform storage (port)",
+	"creature-seafarer:boat-outrigger-*-selectionbox-PlatformStorage2": "Platform storage (starboard)",
+	"creature-seafarer:boat-outrigger-*-selectionbox-CargoFore1": "Fore cargo / fence post",
+	"creature-seafarer:boat-outrigger-*-selectionbox-CargoFore2": "Fore cargo / animal tie"
 }
