@@ -2,7 +2,8 @@
   "schematicYOffsets": {
     "story/seafarer:potato-king-house": 0,
     "story/seafarer:tortuga": 14,
-    "story/seafarer:wreck-crimson-rose": 0
+    "story/seafarer:wreck-crimson-rose": 0,
+    "story/seafarer:abandoned-farm": -10
   },
   "rocktypeRemapGroups": {},
   "structures": [
@@ -79,6 +80,26 @@
       "skipGenerationCategories": {
         "structures": 80, "trees": 50, "shrubs": 50,
         "hotsprings": 100, "patches": 30
+      }
+    },
+    {
+      "code": "abandoned-farm",
+      "group": "seafarerstructure",
+      "name": "Abandoned Farm",
+      "schematics": ["surface/abandoned-farm"],
+      "placement": "Coastal",
+      "storyStructure": true,
+      "useWorldgenHeight": true,
+      "disableSurfaceTerrainBlending": false,
+      "dependsOnStructure": "spawn",
+      "minSpawnDistX": -2000, "maxSpawnDistX": 2000,
+      "minSpawnDistZ": -2000, "maxSpawnDistZ": 2000,
+      "requireLandform": "veryflat",
+      "landformRadius": 30,
+      "generateGrass": true,
+      "skipGenerationCategories": {
+        "structures": 60, "trees": 40, "shrubs": 30,
+        "hotsprings": 80, "patches": 20
       }
     },
     {
