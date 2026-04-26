@@ -131,6 +131,12 @@
           "attachmentPointCode": "CargoFore2",
           "stepParentTo": { "": { "elementName": "CargoFore2" } }
         },
+        {
+          "code": "Lower Mast Storage",
+          "forCategoryCodes": ["rope"],
+          "attachmentPointCode": "LowerMastAP",
+          "stepParentTo": { "": { "elementName": "LowerMastStorage" } }
+        },
         { "code": "AftSeat", "forCategoryCodes": [] },
         { "code": "ForeSeat1", "forCategoryCodes": [] },
         { "code": "ForeSeat2", "forCategoryCodes": [] }
@@ -149,7 +155,8 @@
         "PlatformStorage1",
         "PlatformStorage2",
         "CargoFore1",
-        "CargoFore2"
+        "CargoFore2",
+        "LowerMastAP"
       ]
     }
   },
