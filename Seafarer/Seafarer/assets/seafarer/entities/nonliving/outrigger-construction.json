@@ -1,0 +1,95 @@
+{
+    code: "outrigger-construction",
+    class: "EntityBoatConstruction",
+    tags: ["inanimate", "structure"],
+    variantgroups: [
+        { code: "material", states: ["seasoned", "varnished"], loadFromProperties: "block/wood" }
+    ],
+    skipVariants: ["*-aged", "*-veryaged", "*-rotten", "*-veryrotten"],
+    attributes: {
+        boatprefix: "seafarer:boat",
+        boattype: "outrigger",
+        relayRopeInteractions: true,
+        stages: [
+            { addElements: ["ORIGIN/ORIGIN0rollers"] },
+            {
+                requireStacks: [
+                    { type: "item", code: "game:firewood", quantity: 8 },
+                    { type: "item", code: "game:plank-*", name: "seafarer-outrigger-ingredient-planks", quantity: 12, storeWildCard: "wood" }
+                ],
+                addElements: ["ORIGIN/ORIGINBoat/ORIGIN1Keel", "ORIGIN/ORIGIN1props"]
+            },
+            {
+                requireStacks: [{ type: "block", code: "game:supportbeam-{wood}", quantity: 10 }],
+                addElements: ["ORIGIN/ORIGINBoat/ORIGIN2Ribs"]
+            },
+            {
+                requireStacks: [{ type: "item", code: "game:plank-{wood}", quantity: 16 }],
+                addElements: ["ORIGIN/ORIGINBoat/ORIGIN3HullLower"]
+            },
+            {
+                requireStacks: [{ type: "item", code: "game:plank-{wood}", quantity: 16 }],
+                addElements: ["ORIGIN/ORIGINBoat/ORIGIN4HullUpper"]
+            },
+            {
+                requireStacks: [{ type: "block", code: "game:supportbeam-{wood}", quantity: 12 }],
+                addElements: ["ORIGIN/ORIGINBoat/ORIGIN5Floats"]
+            },
+            {
+                requireStacks: [
+                    { type: "block", code: "game:supportbeam-{wood}", quantity: 8 },
+                    { type: "item", code: "game:rope", quantity: 6 }
+                ],
+                addElements: ["ORIGIN/ORIGINBoat/ORIGIN6Crossbeams"]
+            },
+            {
+                requireStacks: [{ type: "block", code: "game:supportbeam-{wood}", quantity: 8 }],
+                addElements: ["ORIGIN/ORIGINBoat/ORIGIN7Mast"]
+            },
+            {
+                requireStacks: [{ type: "item", code: "game:rope", quantity: 12 }],
+                addElements: ["ORIGIN/ORIGINBoat/ORIGIN8Rigging"]
+            },
+            {
+                requireStacks: [
+                    { type: "block", code: "game:linen-normal-down", quantity: 16 },
+                    { type: "item", code: "game:rope", quantity: 4 }
+                ],
+                addElements: ["ORIGIN/ORIGINBoat/ORIGIN9Sail"]
+            },
+            { requireStacks: [], actionLangCode: "outrigger-launch" },
+            { removeElements: ["ORIGIN/ORIGIN1props"] }
+        ]
+    },
+    behaviorConfigs: {
+        selectionboxes: { selectionBoxes: ["SeleAP"] }
+    },
+    client: {
+        size: 1,
+        renderer: "Shape",
+        shape: { base: "entity/nonliving/boat/outrigger-construction" },
+        textures: {
+            "material": { base: "game:block/wood/debarked/{material}" },
+            "wood":     { base: "game:block/wood/debarked/{material}" },
+            "planks":   { base: "game:block/wood/planks/{material}1" },
+            "plain":    { base: "game:block/cloth/linen/plain" },
+            "rope":     { base: "game:item/resource/rope" },
+            "firewood": { base: "game:block/wood/firewood/north" }
+        },
+        animations: [
+            { code: "launch", animation: "launch", animationSpeed: 1, weight: 10, blendMode: "AddAverage" }
+        ],
+        behaviors: [
+            { code: "interpolateposition" },
+            { code: "selectionboxes" },
+            { code: "floatupwhenstuck" }
+        ]
+    },
+    server: {
+        behaviors: [
+            { code: "selectionboxes" },
+            { code: "floatupwhenstuck" }
+        ]
+    },
+    sounds: {}
+}
