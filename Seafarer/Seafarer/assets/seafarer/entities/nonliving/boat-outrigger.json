@@ -122,11 +122,12 @@
           "code": "Cargo Fore 1",
           "forCategoryCodes": ["chest", "basket", "storagevessel", "lantern", "growpot", "barrel", "ropetiepost"],
           "attachmentPointCode": "CargoFore1",
+          "behindSlots": ["Cargo Fore 2"],
           "stepParentTo": { "": { "elementName": "CargoFor1" } }
         },
         {
           "code": "Cargo Fore 2",
-          "forCategoryCodes": ["chest", "basket", "storagevessel", "lantern", "growpot", "barrel", "ropetiepost"],
+          "forCategoryCodes": ["chest", "basket", "storagevessel", "lantern", "growpot", "barrel"],
           "attachmentPointCode": "CargoFore2",
           "stepParentTo": { "": { "elementName": "CargoFore2" } }
         },

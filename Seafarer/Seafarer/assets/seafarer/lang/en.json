@@ -1312,6 +1312,6 @@ Need to portage? Strip off all storage and accessories first, then <hk>Shift</hk
 	"creature-seafarer:boat-outrigger-*-selectionbox-LanternAft": "Rear lantern",
 	"creature-seafarer:boat-outrigger-*-selectionbox-PlatformStorage1": "Platform storage (port)",
 	"creature-seafarer:boat-outrigger-*-selectionbox-PlatformStorage2": "Platform storage (starboard)",
-	"creature-seafarer:boat-outrigger-*-selectionbox-CargoFore1": "Fore cargo / fence post",
-	"creature-seafarer:boat-outrigger-*-selectionbox-CargoFore2": "Fore cargo / animal tie"
+	"creature-seafarer:boat-outrigger-*-selectionbox-CargoFore1": "Fore cargo (rope tie post)",
+	"creature-seafarer:boat-outrigger-*-selectionbox-CargoFore2": "Fore cargo (rear)"
 }
