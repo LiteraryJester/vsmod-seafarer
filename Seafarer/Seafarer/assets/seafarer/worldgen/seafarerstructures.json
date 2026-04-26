@@ -87,7 +87,7 @@
       "group": "seafarerstructure",
       "name": "Abandoned Farm",
       "schematics": ["surface/abandoned-farm"],
-      "placement": "Coastal",
+      "placement": "SurfaceRuin",
       "storyStructure": true,
       "useWorldgenHeight": true,
       "disableSurfaceTerrainBlending": false,
