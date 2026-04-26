@@ -26,7 +26,7 @@
       { "type": "block", "code": "game:linen-normal-down", "quantity": 8 }
     ],
     "shouldSwivelFromMotion": false,
-    "speedMultiplier": 1.4,
+    "speedMultiplier": 2,
     "swimmingOffsetY": 0.7,
     "unfurlSails": true,
     "mountAnimations": {
@@ -36,17 +36,17 @@
       "backwards": ""
     }
   },
-  "hitboxSize": { "x": 4, "y": 1.0, "z": 3 },
+  "hitboxSize": { "x": 6, "y": 1.0, "z": 5 },
   "behaviorConfigs": {
     "ellipsoidalrepulseagents": {
       "offset": { "x": 0, "z": 0 },
-      "radius": { "x": 2.5, "y": 1.5, "z": 3.0 }
+      "radius": { "x": 3.75, "y": 1.5, "z": 4.5 }
     },
     "passivephysicsmultibox": {
       "collisionBoxes": [
-        { "x1": -0.5, "y1": 0, "z1": -2.5, "x2": 0.5, "y2": 1.0, "z2": 2.5 },
-        { "x1": -2.0, "y1": 0, "z1": -1.5, "x2": -1.4, "y2": 0.4, "z2": 1.5 },
-        { "x1": 1.4, "y1": 0, "z1": -1.5, "x2": 2.0, "y2": 0.4, "z2": 1.5 }
+        { "x1": -0.75, "y1": 0, "z1": -3.75, "x2": 0.75, "y2": 1.0, "z2": 3.75 },
+        { "x1": -3.0, "y1": 0, "z1": -2.25, "x2": -2.1, "y2": 0.4, "z2": 2.25 },
+        { "x1": 2.1, "y1": 0, "z1": -2.25, "x2": 3.0, "y2": 0.4, "z2": 2.25 }
       ],
       "groundDragFactor": 1,
       "airDragFallingFactor": 0.5,
@@ -154,7 +154,7 @@
     }
   },
   "client": {
-    "size": 1,
+    "size": 1.5,
     "renderer": "Shape",
     "shape": {
       "base": "entity/nonliving/boat/boat-outrigger",
