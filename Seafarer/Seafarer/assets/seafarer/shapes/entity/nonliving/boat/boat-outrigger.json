@@ -74,27 +74,25 @@
     ],
     "animations": [
         {
-            "name": "turnLeft",  "code": "turnLeft",
-            "quantityframes": 20, "onActivityStopped": "Stop", "onAnimationEnd": "Stop",
+            "name": "turnLeft", "code": "turnLeft",
+            "quantityframes": 3, "onActivityStopped": "EaseOut", "onAnimationEnd": "Hold",
             "keyframes": [
-                { "frame": 0,  "elements": { "ORIGIN": { "rotationZ":  0 } } },
-                { "frame": 19, "elements": { "ORIGIN": { "rotationZ": 10 } } }
+                { "frame": 0, "elements": { "ORIGIN": { "rotationX": 0, "rotationY": 0, "rotationZ": 10 } } }
             ]
         },
         {
             "name": "turnRight", "code": "turnRight",
-            "quantityframes": 20, "onActivityStopped": "Stop", "onAnimationEnd": "Stop",
+            "quantityframes": 3, "onActivityStopped": "EaseOut", "onAnimationEnd": "Hold",
             "keyframes": [
-                { "frame": 0,  "elements": { "ORIGIN": { "rotationZ":   0 } } },
-                { "frame": 19, "elements": { "ORIGIN": { "rotationZ": -10 } } }
+                { "frame": 0, "elements": { "ORIGIN": { "rotationX": 0, "rotationY": 0, "rotationZ": -10 } } }
             ]
         },
         {
             "name": "weathervane", "code": "weathervane",
-            "quantityframes": 360,
+            "quantityframes": 36, "onActivityStopped": "Rewind", "onAnimationEnd": "Repeat",
             "keyframes": [
-                { "frame": 0,   "elements": { "Sail": { "rotationY":   0 } } },
-                { "frame": 359, "elements": { "Sail": { "rotationY": 359 } } }
+                { "frame": 0,  "elements": { "Sail": { "rotationX": 0, "rotationY": -180, "rotationZ": 0 } } },
+                { "frame": 35, "elements": { "Sail": { "rotationX": 0, "rotationY":  180, "rotationZ": 0 } } }
             ]
         }
     ]

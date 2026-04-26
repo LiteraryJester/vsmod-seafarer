@@ -83,8 +83,8 @@
             "onActivityStopped": "Stop",
             "onAnimationEnd": "Stop",
             "keyframes": [
-                { "frame": 0, "elements": {} },
-                { "frame": 29, "elements": { "ORIGIN": { "offsetZ": -10 } } }
+                { "frame": 0,  "elements": { "ORIGIN": { "offsetX": 0, "offsetY": 0, "offsetZ":   0 } } },
+                { "frame": 29, "elements": { "ORIGIN": { "offsetX": 0, "offsetY": 0, "offsetZ": -10 } } }
             ]
         }
     ]
