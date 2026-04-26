@@ -987,7 +987,15 @@ Find the last existing `"key": "value"` line in the file (no trailing comma). Ap
     "outrigger-stage-8": "Rig the lines",
     "outrigger-stage-9": "Hoist the sail",
     "seafarer-outrigger-ingredient-planks": "outrigger planks (any wood)",
-    "handbook-seafarer-outrigger-craftinfo": "The outrigger schematic is a quest reward from Drake (deliver 160 seasoned planks). Drake also resells the schematic. Craft the schematic with rope and firewood to get rollers, then place the rollers near water to begin construction."
+    "handbook-seafarer-outrigger-craftinfo": "The outrigger schematic is a quest reward from Drake (deliver 160 seasoned planks). Drake also resells the schematic. Craft the schematic with rope and firewood to get rollers, then place the rollers near water to begin construction.",
+    "creature-seafarer:boat-outrigger-*-selectionbox-ForeSeatAP": "Front seat",
+    "creature-seafarer:boat-outrigger-*-selectionbox-AftSeatAP": "Rear seat",
+    "creature-seafarer:boat-outrigger-*-selectionbox-OarAP": "Oar rest",
+    "creature-seafarer:boat-outrigger-*-selectionbox-SailExtraStorageAP": "Sail mount",
+    "creature-seafarer:boat-outrigger-*-selectionbox-MastLanternAP": "Mast lantern",
+    "creature-seafarer:boat-outrigger-*-selectionbox-CargoForeAP": "Fore cargo",
+    "creature-seafarer:boat-outrigger-*-selectionbox-CargoMidAP": "Mid cargo",
+    "creature-seafarer:boat-outrigger-*-selectionbox-CargoAftAP": "Aft cargo"
 ```
 
 - [ ] **Step 3: Validate assets**
@@ -1002,10 +1010,11 @@ git add Seafarer/Seafarer/assets/seafarer/lang/en.json
 git commit -m "$(cat <<'EOF'
 feat(outrigger): English language entries for outrigger items and stages
 
-Adds 18 entries: item/entity display names, item descriptions, the
+Adds 26 entries: item/entity display names, item descriptions, the
 launch action label, per-stage build instructions, the keel-stage
-plank ingredient label, and the handbook craftinfo blurb pointing
-to Drake's quest.
+plank ingredient label, the handbook craftinfo blurb pointing
+to Drake's quest, and 8 selection-box tooltip strings for the
+launched boat's interactable points.
 
 Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
 EOF
@@ -1431,7 +1440,7 @@ EOF
 
 ## Follow-up (out of scope for this plan)
 
-- **Real outrigger shape art**: replace the placeholder shapes in `outrigger-construction.json` and `boat-outrigger.json` with proper VS-Modeler geometry. The element name contract (stage names, attachment-point names, container names listed in this plan and the spec) must be preserved.
+- **Real outrigger shape art**: replace the placeholder shapes in `outrigger-construction.json` and `boat-outrigger.json` with proper VS-Modeler geometry. The element name contract (stage names, attachment-point names, container names listed in this plan and the spec) must be preserved. When creating the real construction shape, also add a `Selebox` root element with `code: "SeleAP"` so the construction's `behaviorConfigs.selectionboxes.selectionBoxes: ["SeleAP"]` resolves to a precise interaction box (currently silently ignored — players click the entity's hitbox).
 - **Seafarer-specific deconstruct refund**: a second Harmony patch on `EntityBoatConstruction.OnInteract` could refund `boat-outrigger-rollers` instead of base game `roller`s when the player deconstructs at stage 0. The spec flags this as a deferred follow-up.
 - **Sail-recolor pattern asset**: ship a Seafarer-themed `sailrecolor` pattern that fits the Asian-fishing-village aesthetic (painted sail). Currently the slot accepts any base-game `sailrecolor` item.
 - **Handbook image**: add an outrigger picture to the handbook entry once the real shape exists.
