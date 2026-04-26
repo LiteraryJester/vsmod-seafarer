@@ -1301,5 +1301,13 @@ Need to portage? Strip off all storage and accessories first, then <hk>Shift</hk
 	"outrigger-stage-8": "Rig the lines",
 	"outrigger-stage-9": "Hoist the sail",
 	"seafarer-outrigger-ingredient-planks": "outrigger planks (any wood)",
-	"handbook-seafarer-outrigger-craftinfo": "The outrigger schematic is a quest reward from Drake (deliver 160 seasoned planks). Drake also resells the schematic. Craft the schematic with rope and firewood to get rollers, then place the rollers near water to begin construction."
+	"handbook-seafarer-outrigger-craftinfo": "The outrigger schematic is a quest reward from Drake (deliver 160 seasoned planks). Drake also resells the schematic. Craft the schematic with rope and firewood to get rollers, then place the rollers near water to begin construction.",
+	"creature-seafarer:boat-outrigger-*-selectionbox-ForeSeatAP": "Front seat",
+	"creature-seafarer:boat-outrigger-*-selectionbox-AftSeatAP": "Rear seat",
+	"creature-seafarer:boat-outrigger-*-selectionbox-OarAP": "Oar rest",
+	"creature-seafarer:boat-outrigger-*-selectionbox-SailExtraStorageAP": "Sail mount",
+	"creature-seafarer:boat-outrigger-*-selectionbox-MastLanternAP": "Mast lantern",
+	"creature-seafarer:boat-outrigger-*-selectionbox-CargoForeAP": "Fore cargo",
+	"creature-seafarer:boat-outrigger-*-selectionbox-CargoMidAP": "Mid cargo",
+	"creature-seafarer:boat-outrigger-*-selectionbox-CargoAftAP": "Aft cargo"
 }

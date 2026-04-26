@@ -7,7 +7,6 @@
     ],
     skipVariants: ["*-aged", "*-veryaged", "*-rotten", "*-veryrotten"],
     attributes: {
-        boatprefix: "seafarer:boat",
         boattype: "outrigger",
         relayRopeInteractions: true,
         stages: [
