@@ -53,6 +53,9 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             api.RegisterEntityBehaviorClass("seafarer:exposure", typeof(EntityBehaviorExposure));
             api.RegisterEntity("EntityProjectileBarbed", typeof(EntityProjectileBarbed));
             api.RegisterItemClass("ItemOceanLocatorMap", typeof(ItemOceanLocatorMap));
+            api.RegisterEntity("EntityOutriggerBoat", typeof(EntityOutriggerBoat));
+            api.RegisterItemClass("ItemOutriggerBoat", typeof(ItemOutriggerBoat));
+            api.RegisterItemClass("ItemOutriggerRollers", typeof(ItemOutriggerRollers));
 
             harmony = new Harmony(HarmonyId);
             harmony.PatchAll(typeof(SeafarerModSystem).Assembly);
