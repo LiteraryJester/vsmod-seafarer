@@ -36,9 +36,6 @@ public class ItemOutriggerRollers : ItemRoller
             return;
         }
 
-        slot.TakeOut(5);
-        slot.MarkDirty();
-
         const string defaultMaterial = "oak";
         int orient = GetOrient(player);
 
@@ -49,6 +46,10 @@ public class ItemOutriggerRollers : ItemRoller
             api.Logger.Error("[seafarer] outrigger-construction-{0} entity type not found.", defaultMaterial);
             return;
         }
+
+        slot.TakeOut(5);
+        slot.MarkDirty();
+
         var entity = byEntity.World.ClassRegistry.CreateEntity(type);
         entity.Pos.SetPos(blockSel.Position.ToVec3d().AddCopy(0.5, 1, 0.5));
         entity.Pos.Yaw = -GameMath.PIHALF + orient * GameMath.PIHALF;
