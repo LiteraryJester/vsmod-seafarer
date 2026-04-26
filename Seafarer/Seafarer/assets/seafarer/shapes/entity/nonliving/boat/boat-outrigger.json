@@ -1,0 +1,101 @@
+{
+    "textureWidth": 16,
+    "textureHeight": 16,
+    "textures": {
+        "material": "game:block/wood/debarked/oak",
+        "planks": "game:block/wood/planks/oak1",
+        "plain": "game:block/cloth/linen/plain",
+        "rope": "game:item/resource/rope",
+        "transparent": "game:block/transparent"
+    },
+    "elements": [
+        {
+            "name": "ORIGIN",
+            "from": [0, 0, 0], "to": [0, 0, 0],
+            "rotationOrigin": [0, 0, 0],
+            "faces": {
+                "north": {"texture": "#planks", "uv": [0, 0, 1, 1]},
+                "east":  {"texture": "#planks", "uv": [0, 0, 1, 1]},
+                "south": {"texture": "#planks", "uv": [0, 0, 1, 1]},
+                "west":  {"texture": "#planks", "uv": [0, 0, 1, 1]},
+                "up":    {"texture": "#planks", "uv": [0, 0, 1, 1]},
+                "down":  {"texture": "#planks", "uv": [0, 0, 1, 1]}
+            },
+            "attachmentpoints": [
+                { "code": "ForeSeatAP",         "posX":   0, "posY": 6,  "posZ":  18, "rotationX": 0, "rotationY":   0, "rotationZ": 0 },
+                { "code": "AftSeatAP",          "posX":   0, "posY": 6,  "posZ": -18, "rotationX": 0, "rotationY": 180, "rotationZ": 0 },
+                { "code": "OarAP",              "posX":   8, "posY": 8,  "posZ":   0, "rotationX": 0, "rotationY":   0, "rotationZ": 0 },
+                { "code": "SailExtraStorageAP", "posX":   0, "posY": 24, "posZ":   0, "rotationX": 0, "rotationY":   0, "rotationZ": 0 },
+                { "code": "MastLanternAP",      "posX":   0, "posY": 30, "posZ":   0, "rotationX": 0, "rotationY":   0, "rotationZ": 0 },
+                { "code": "CargoForeAP",        "posX":   0, "posY": 6,  "posZ":  10, "rotationX": 0, "rotationY":   0, "rotationZ": 0 },
+                { "code": "CargoMidAP",         "posX":   0, "posY": 6,  "posZ":   0, "rotationX": 0, "rotationY":   0, "rotationZ": 0 },
+                { "code": "CargoAftAP",         "posX":   0, "posY": 6,  "posZ": -10, "rotationX": 0, "rotationY":   0, "rotationZ": 0 }
+            ],
+            "children": [
+                { "name": "MainHull",   "from": [-4,  2, -20], "to": [ 4,  6, 20], "faces": { "north": {"texture": "#planks","uv":[0,0,2,1]}, "east":{"texture":"#planks","uv":[0,0,4,1]}, "south":{"texture":"#planks","uv":[0,0,2,1]}, "west":{"texture":"#planks","uv":[0,0,4,1]}, "up":{"texture":"#planks","uv":[0,0,2,4]}, "down":{"texture":"#planks","uv":[0,0,2,4]} } },
+                { "name": "PortFloat",  "from": [-16, 2, -12], "to": [-12, 4,  12], "faces": { "north": {"texture": "#material","uv":[0,0,1,1]}, "east":{"texture":"#material","uv":[0,0,3,1]}, "south":{"texture":"#material","uv":[0,0,1,1]}, "west":{"texture":"#material","uv":[0,0,3,1]}, "up":{"texture":"#material","uv":[0,0,1,3]}, "down":{"texture":"#material","uv":[0,0,1,3]} } },
+                { "name": "StarFloat",  "from": [12,  2, -12], "to": [16,  4,  12], "faces": { "north": {"texture": "#material","uv":[0,0,1,1]}, "east":{"texture":"#material","uv":[0,0,3,1]}, "south":{"texture":"#material","uv":[0,0,1,1]}, "west":{"texture":"#material","uv":[0,0,3,1]}, "up":{"texture":"#material","uv":[0,0,1,3]}, "down":{"texture":"#material","uv":[0,0,1,3]} } },
+                { "name": "Crossbeams", "from": [-16, 6,  -8], "to": [ 16, 7,   8], "faces": { "north": {"texture": "#material","uv":[0,0,4,1]}, "east":{"texture":"#material","uv":[0,0,2,1]}, "south":{"texture":"#material","uv":[0,0,4,1]}, "west":{"texture":"#material","uv":[0,0,2,1]}, "up":{"texture":"#material","uv":[0,0,4,2]}, "down":{"texture":"#material","uv":[0,0,4,2]} } },
+                { "name": "Mast",       "from": [-1,  6,  -1], "to": [  1, 30,  1], "faces": { "north": {"texture": "#material","uv":[0,0,1,3]}, "east":{"texture":"#material","uv":[0,0,1,3]}, "south":{"texture":"#material","uv":[0,0,1,3]}, "west":{"texture":"#material","uv":[0,0,1,3]}, "up":{"texture":"#material","uv":[0,0,1,1]}, "down":{"texture":"#material","uv":[0,0,1,1]} } },
+                { "name": "Sail",       "from": [-12, 12, -1], "to": [ 12, 28,  0], "faces": { "north": {"texture": "#plain",   "uv":[0,0,4,4]}, "east":{"texture":"#plain","uv":[0,0,1,4]}, "south":{"texture":"#plain","uv":[0,0,4,4]}, "west":{"texture":"#plain","uv":[0,0,1,4]}, "up":{"texture":"#plain","uv":[0,0,4,1]}, "down":{"texture":"#plain","uv":[0,0,4,1]} } },
+                { "name": "OarStorage",  "from": [ 4,  6,  -2], "to": [  6,  7,  2], "faces": { "north": {"texture": "#material","uv":[0,0,1,1]}, "east":{"texture":"#material","uv":[0,0,1,1]}, "south":{"texture":"#material","uv":[0,0,1,1]}, "west":{"texture":"#material","uv":[0,0,1,1]}, "up":{"texture":"#material","uv":[0,0,1,1]}, "down":{"texture":"#material","uv":[0,0,1,1]} } },
+                { "name": "MastLantern", "from": [-1, 28,  -1], "to": [  1, 30,  1], "faces": { "north": {"texture": "#material","uv":[0,0,1,1]}, "east":{"texture":"#material","uv":[0,0,1,1]}, "south":{"texture":"#material","uv":[0,0,1,1]}, "west":{"texture":"#material","uv":[0,0,1,1]}, "up":{"texture":"#material","uv":[0,0,1,1]}, "down":{"texture":"#material","uv":[0,0,1,1]} } },
+                { "name": "CargoFore",   "from": [-3,  6,   8], "to": [  3,  8, 12], "faces": { "north": {"texture": "#planks","uv":[0,0,1,1]}, "east":{"texture":"#planks","uv":[0,0,1,1]}, "south":{"texture":"#planks","uv":[0,0,1,1]}, "west":{"texture":"#planks","uv":[0,0,1,1]}, "up":{"texture":"#planks","uv":[0,0,1,1]}, "down":{"texture":"#planks","uv":[0,0,1,1]} } },
+                { "name": "CargoMid",    "from": [-3,  6,  -2], "to": [  3,  8,  2], "faces": { "north": {"texture": "#planks","uv":[0,0,1,1]}, "east":{"texture":"#planks","uv":[0,0,1,1]}, "south":{"texture":"#planks","uv":[0,0,1,1]}, "west":{"texture":"#planks","uv":[0,0,1,1]}, "up":{"texture":"#planks","uv":[0,0,1,1]}, "down":{"texture":"#planks","uv":[0,0,1,1]} } },
+                { "name": "CargoAft",    "from": [-3,  6, -12], "to": [  3,  8, -8], "faces": { "north": {"texture": "#planks","uv":[0,0,1,1]}, "east":{"texture":"#planks","uv":[0,0,1,1]}, "south":{"texture":"#planks","uv":[0,0,1,1]}, "west":{"texture":"#planks","uv":[0,0,1,1]}, "up":{"texture":"#planks","uv":[0,0,1,1]}, "down":{"texture":"#planks","uv":[0,0,1,1]} } },
+                {
+                    "name": "hideWater",
+                    "from": [0, 0, 0], "to": [0, 0, 0],
+                    "faces": {
+                        "north": {"texture": "#transparent","uv":[0,0,1,1]},
+                        "east":  {"texture": "#transparent","uv":[0,0,1,1]},
+                        "south": {"texture": "#transparent","uv":[0,0,1,1]},
+                        "west":  {"texture": "#transparent","uv":[0,0,1,1]},
+                        "up":    {"texture": "#transparent","uv":[0,0,1,1]},
+                        "down":  {"texture": "#transparent","uv":[0,0,1,1]}
+                    },
+                    "children": [
+                        {
+                            "name": "water1",
+                            "from": [-18, 1, -22], "to": [18, 3, 22],
+                            "faces": {
+                                "north": {"texture": "#transparent","uv":[0,0,1,1]},
+                                "east":  {"texture": "#transparent","uv":[0,0,1,1]},
+                                "south": {"texture": "#transparent","uv":[0,0,1,1]},
+                                "west":  {"texture": "#transparent","uv":[0,0,1,1]},
+                                "up":    {"texture": "#transparent","uv":[0,0,1,1]},
+                                "down":  {"texture": "#transparent","uv":[0,0,1,1]}
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "animations": [
+        {
+            "name": "turnLeft",  "code": "turnLeft",
+            "quantityframes": 20, "onActivityStopped": "Stop", "onAnimationEnd": "Stop",
+            "keyframes": [
+                { "frame": 0,  "elements": { "ORIGIN": { "rotationZ":  0 } } },
+                { "frame": 19, "elements": { "ORIGIN": { "rotationZ": 10 } } }
+            ]
+        },
+        {
+            "name": "turnRight", "code": "turnRight",
+            "quantityframes": 20, "onActivityStopped": "Stop", "onAnimationEnd": "Stop",
+            "keyframes": [
+                { "frame": 0,  "elements": { "ORIGIN": { "rotationZ":   0 } } },
+                { "frame": 19, "elements": { "ORIGIN": { "rotationZ": -10 } } }
+            ]
+        },
+        {
+            "name": "weathervane", "code": "weathervane",
+            "quantityframes": 360,
+            "keyframes": [
+                { "frame": 0,   "elements": { "Sail": { "rotationY":   0 } } },
+                { "frame": 359, "elements": { "Sail": { "rotationY": 359 } } }
+            ]
+        }
+    ]
+}
