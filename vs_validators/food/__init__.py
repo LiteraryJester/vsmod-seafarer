@@ -25,6 +25,22 @@ RULES = {
     "food.lang_category": "category-driven lang",
 }
 
+# Food codes whose warnings are intentionally suppressed because their design
+# diverges from the general patterns (errors are still reported).
+WARNING_EXCLUSIONS: set[str] = {
+    "saltrubbedmeat",
+    "coconut",
+    "coconutmeat",
+    "coconutpressedmash",
+    "corn",
+    "driedcoconut",
+    "driedsaltedmeat",
+    "flatbread",
+    "liveclam",
+    "driedcorn",
+    "nixtamal",
+}
+
 
 def _active_rules(args: Namespace) -> set[str]:
     all_ids = set(RULES.keys())
@@ -67,8 +83,7 @@ def validate_food(result: ValidationResult, ctx: ValidationContext, args: Namesp
         if not _matches_file_filter(profile.source_file.name, args.file):
             continue
 
-        before_errors = len(result.errors)
-        before_warnings = len(result.warnings)
+        before_count = len(result.findings)
 
         if "food.schema" in active:
             check_food_schema(profile, ctx.schema_baseline, ctx.schema_overrides, result)
@@ -87,20 +102,20 @@ def validate_food(result: ValidationResult, ctx: ValidationContext, args: Namesp
         if "food.lang_category" in active:
             check_category_driven_lang(profile, ctx, result)
 
-        added_errors = len(result.errors) - before_errors
-        added_warnings = len(result.warnings) - before_warnings
+        if code in WARNING_EXCLUSIONS:
+            result.findings[before_count:] = [
+                f for f in result.findings[before_count:] if f.severity != "warning"
+            ]
 
-        # Print findings for this item
-        new_count = added_errors + added_warnings
-        if new_count > 0:
-            for finding in result.findings[-new_count:]:
-                tag = f"{C.DIM}[{finding.rule_id}]{C.RESET} " if finding.rule_id else ""
-                if finding.severity == "error":
-                    print(err(f"{tag}{finding.message}"))
-                else:
-                    print(warn(f"{tag}{finding.message}"))
+        new_findings = result.findings[before_count:]
+        for finding in new_findings:
+            tag = f"{C.DIM}[{finding.rule_id}]{C.RESET} " if finding.rule_id else ""
+            if finding.severity == "error":
+                print(err(f"{tag}{finding.message}"))
+            else:
+                print(warn(f"{tag}{finding.message}"))
 
-        if added_errors == 0 and added_warnings == 0:
+        if not new_findings:
             result.ok()
             if getattr(args, "verbose", False):
                 print(f"  {C.GREEN}OK{C.RESET} {code}")

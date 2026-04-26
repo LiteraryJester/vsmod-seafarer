@@ -29,8 +29,11 @@ def _check_capability(
     *,
     attr_base: str,
     rule_id: str,
+    skip_token: str,
 ) -> None:
     if profile.foodcategory not in CATEGORIES_WITH_PIE_BURRITO:
+        return
+    if skip_token in profile.validation_skip():
         return
 
     by_type = f"{attr_base}ByType"
@@ -49,8 +52,8 @@ def _check_capability(
 
 
 def check_pie_support(profile: FoodProfile, ctx: ValidationContext, result: ValidationResult) -> None:
-    _check_capability(profile, ctx, result, attr_base="inPieProperties", rule_id="food.pie")
+    _check_capability(profile, ctx, result, attr_base="inPieProperties", rule_id="food.pie", skip_token="pie")
 
 
 def check_burrito_support(profile: FoodProfile, ctx: ValidationContext, result: ValidationResult) -> None:
-    _check_capability(profile, ctx, result, attr_base="inBurritoProperties", rule_id="food.burrito")
+    _check_capability(profile, ctx, result, attr_base="inBurritoProperties", rule_id="food.burrito", skip_token="burrito")

@@ -65,6 +65,9 @@
         "partType": "Filling"
       }
     },
+    "inBurritoPropertiesByType": {
+      "@*-(whole|cut)": { "partType": "Filling" }
+    },
     "nutritionPropsWhenInMealByType": {
       "@*-bushmeat-(whole|cut)": { "satiety": 200, "foodcategory": "Protein" },
       "@*-redmeat-(whole|cut)": { "satiety": 400, "foodcategory": "Protein" },

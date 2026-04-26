@@ -88,6 +88,16 @@ class FoodProfile:
         """Check attributes.<name>."""
         return self.has_field(f"attributes.{name}")
 
+    def validation_skip(self) -> set[str]:
+        """Tokens listed in attributes.validationSkip — see vs_validators/food/README for vocabulary."""
+        attrs = self.raw.get("attributes")
+        if not isinstance(attrs, dict):
+            return set()
+        skip = attrs.get("validationSkip")
+        if not isinstance(skip, list):
+            return set()
+        return {str(s) for s in skip}
+
     def source_file_key(self) -> str:
         """Return 'seafarer:itemtypes/food/chili.json' for patch target lookup."""
         parts = self.source_file.parts

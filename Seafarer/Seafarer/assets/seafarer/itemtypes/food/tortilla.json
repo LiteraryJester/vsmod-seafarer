@@ -16,7 +16,8 @@
             "shelf": {
                 "size": { "width": 3.5, "height": 2, "length": 5 }
             }
-        }
+        },
+        "validationSkip": ["schema:textures", "ef_coverage", "inporridge", "inalcohol"]
     },
     "materialDensity": 200,
     "nutritionProps": { "satiety": 240, "foodcategory": "Grain", "health": 1 },

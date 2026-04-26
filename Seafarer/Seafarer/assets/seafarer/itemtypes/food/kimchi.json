@@ -14,7 +14,14 @@
     "foodTags": ["vegetable", "fermented"],
     "displaycaseable": true,
     "shelvable": true,
-    "inContainerTexture": { "base": "game:block/wood/barrel/pickled-cabbage" }
+    "inContainerTexture": { "base": "game:block/wood/barrel/pickled-cabbage" },
+    "inPieProperties": {
+      "texture": "game:block/food/pie/fill-cabbage",
+      "partType": "Filling",
+      "mixingCodes": ["potpie"]
+    },
+    "inBurritoProperties": { "partType": "Filling" },
+    "validationSkip": ["ef_coverage"]
   },
   "shape": { "base": "game:item/food/pickledvegetable/sauerkraut" },
   "creativeinventory": {

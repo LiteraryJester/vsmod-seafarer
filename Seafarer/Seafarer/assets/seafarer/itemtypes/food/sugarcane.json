@@ -24,7 +24,8 @@
       "litresPerItem": 0.15625,
       "liquidStack": { "type": "item", "code": "seafarer:canejuiceportion", "stacksize": 1 },
       "pressedStack": { "type": "item", "code": "seafarer:canemush", "stacksize": 1 }
-    }
+    },
+    "validationSkip": ["schema:attributes.inPieProperties", "schema:attributes.inBurritoProperties", "pie", "burrito", "ef_coverage", "instew", "insoup", "inbrine", "infermented"]
   },
   "creativeinventory": { "general": ["*"], "items": ["*"], "seafarer": ["*"] },
   "nutritionProps": {

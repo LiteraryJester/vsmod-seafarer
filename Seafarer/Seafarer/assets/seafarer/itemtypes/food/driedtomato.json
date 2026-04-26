@@ -23,7 +23,8 @@
         "inPieProperties": {
             "texture": "seafarer:item/food/fruit/tomato",
             "partType": "Filling"
-        }
+        },
+        "inBurritoProperties": { "partType": "Filling" }
     },
     "nutritionProps": { "satiety": 80, "foodcategory": "Vegetable", "health": 0 },
     "nutritionPropsWhenInMeal": { "satiety": 100, "foodcategory": "Vegetable" },

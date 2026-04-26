@@ -51,7 +51,6 @@
         "validStacks": [
           { "type": "item", "code": "game:oilportion-flax" },
           { "type": "item", "code": "game:oilportion-olive" },
-          { "type": "item", "code": "game:oilportion-fat" },
           { "type": "item", "code": "seafarer:oilportion-coconut" }
         ],
         "minQuantity": 1,

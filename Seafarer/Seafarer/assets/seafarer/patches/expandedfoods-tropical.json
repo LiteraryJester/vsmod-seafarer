@@ -759,5 +759,81 @@
 			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 1 }
 		],
 		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Potato / masa → stuffed pepper filling slots
+	// Same simpler recipe variants (0, 3, 5, 8) at ingredient 1
+	// ==========================================
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:potato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:masa", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/3/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:potato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:masa", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/5/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:potato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:masa", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/8/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:potato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:masa", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Potato / masa → dumpling filling slots
+	// Recipes 1 (with filling) and 3 (filling + salt) at ingredient 1
+	// ==========================================
+	{
+		"file": "expandedfoods:recipes/kneading/dumpling.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:potato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:masa", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/dumpling.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/3/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:potato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:masa", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
 	}
 ]

@@ -38,7 +38,8 @@
     "inPieProperties": {
       "texture": "seafarer:item/food/vegetable/chili",
       "partType": "Filling"
-    }
+    },
+    "inBurritoProperties": { "partType": "Filling" }
   },
   "creativeinventory": { "general": ["*"], "items": ["*"], "seafarer": ["*"] },
   "nutritionProps": {

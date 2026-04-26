@@ -13,7 +13,12 @@
   "attributes": {
     "foodTags": ["vegetable", "spice"],
     "displaycaseable": true,
-    "shelvable": true
+    "shelvable": true,
+    "inPieProperties": {
+      "texture": "seafarer:item/food/vegetable/driedchili",
+      "partType": "Filling"
+    },
+    "inBurritoProperties": { "partType": "Filling" }
   },
   "shape": { "base": "seafarer:item/food/vegetable/chili" },
   "textures": {

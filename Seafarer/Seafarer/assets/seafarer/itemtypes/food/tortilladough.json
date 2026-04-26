@@ -16,7 +16,8 @@
 		"nutritionPropsWhenInMeal": {
 			"satiety": 200,
 			"foodcategory": "Grain"
-		}
+		},
+		"validationSkip": ["ef_coverage"]
 	},
 	"materialDensity": 200,
 	"transitionableProps": [{

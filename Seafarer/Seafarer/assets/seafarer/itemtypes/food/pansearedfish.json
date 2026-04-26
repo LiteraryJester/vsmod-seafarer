@@ -16,7 +16,12 @@
     },
     "creativeinventory": { "general": ["*"], "seafarer": ["*"] },
     "attributes": {
-        "foodTags": ["meat", "protein", "fish"]
+        "foodTags": ["meat", "protein", "fish"],
+        "inPieProperties": {
+            "texture": "game:item/food/meat/fish-cooked",
+            "partType": "Filling"
+        },
+        "inBurritoProperties": { "partType": "Filling" }
     },
     "nutritionProps": { "satiety": 180, "foodcategory": "Protein", "health": 0 },
     "transitionableProps": [{

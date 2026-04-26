@@ -18,6 +18,9 @@
     "displaycaseable": true,
     "shelvable": true,
     "inContainerTexture": { "base": "game:block/wood/barrel/cured-{type}" },
+    "inPieProperties": { "texture": "game:block/food/pie/fill-{type}", "partType": "Filling" },
+    "inBurritoProperties": { "partType": "Filling" },
+    "validationSkip": ["incured", "insmoked"],
     "displayable": {
       "shelf": {
         "size": { "width": 6, "height": 1, "length": 4 },

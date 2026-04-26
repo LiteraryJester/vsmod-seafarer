@@ -50,6 +50,8 @@ def check_ef_protein_variants(
         return
     if ctx.ef_assets is None:
         return
+    if "ef_protein" in profile.validation_skip():
+        return
     # Skip cooked/preserved forms — EF variants are for raw ingredients only
     code_lower = profile.code.lower()
     if any(code_lower.startswith(prefix) for prefix in _COOKED_PREFIXES):
@@ -83,11 +85,15 @@ def check_ef_protein_variants(
         )
 
 
+def _code_needles(code: str) -> tuple[str, ...]:
+    return (f'"{code}"', f':{code}"', f":{code}-", f":{code}_")
+
+
 def _scan_ef_patches_for_code(code: str, ef_assets: Path) -> bool:
     """Return True if the item code appears anywhere in EF patch JSON text."""
     if not ef_assets.exists():
         return False
-    needles = (f'"{code}"', f':{code}"', f":{code}-", f":{code}_")
+    needles = _code_needles(code)
     for root in (ef_assets / "expandedfoods" / "patches", ef_assets / "game" / "patches"):
         if not root.exists():
             continue
@@ -106,16 +112,23 @@ def check_ef_recipe_coverage(
 ) -> None:
     if ctx.ef_assets is None:
         return
+    if "ef_coverage" in profile.validation_skip():
+        return
+    # Skip cooked/preserved forms — EF coverage tracks raw ingredients
+    code_lower = profile.code.lower()
+    if any(code_lower.startswith(prefix) for prefix in _COOKED_PREFIXES):
+        return
     if _scan_ef_patches_for_code(profile.code, ctx.ef_assets):
         return
     mod_ef_dir = ctx.seafarer / "patches"
     if mod_ef_dir.exists():
+        needles = _code_needles(profile.code)
         for f in mod_ef_dir.glob("expandedfoods-*.json"):
             try:
                 text = f.read_text(encoding="utf-8-sig")
             except OSError:
                 continue
-            if f'"{profile.code}"' in text or f':{profile.code}"' in text:
+            if any(n in text for n in needles):
                 return
     result.warning(
         profile.source_file,

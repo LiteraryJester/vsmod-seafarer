@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Seafarer.WorldGen;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
@@ -11,15 +12,17 @@ namespace Seafarer
 {
     public class ItemOceanLocatorMap : Item
     {
-        private ModSystemStructureLocator strucLocSys;
-        private LocatorProps props;
+        private ModSystemStructureLocator strucLocSys = null!;
+        private GenSeafarerStructures? seafarerStructures;
+        private LocatorProps props = null!;
         private int searchRange;
 
         public override void OnLoaded(ICoreAPI api)
         {
             base.OnLoaded(api);
             strucLocSys = api.ModLoader.GetModSystem<ModSystemStructureLocator>();
-            props = Attributes["locatorProps"].AsObject<LocatorProps>();
+            seafarerStructures = api.ModLoader.GetModSystem<GenSeafarerStructures>();
+            props = Attributes["locatorProps"].AsObject<LocatorProps>()!;
             searchRange = Attributes["searchRange"].AsInt(2000);
         }
 
@@ -36,9 +39,19 @@ namespace Seafarer
                 .MapLayers.FirstOrDefault(ml => ml is WaypointMapLayer) as WaypointMapLayer;
 
             var attr = slot.Itemstack.Attributes;
-            Vec3d pos = null;
+            Vec3d? pos = null;
 
-            if (attr.HasAttribute("position"))
+            // Seafarer story structures have deterministic locations determined at worldgen
+            // init, so resolve by code — this works regardless of whether the structure's
+            // region is currently loaded (which the base-game locator scan requires).
+            var storyLoc = seafarerStructures?.GetLocation(props.SchematicCode);
+            if (storyLoc != null)
+            {
+                var c = storyLoc.Location.Center;
+                pos = new Vec3d(c.X + 0.5, c.Y + 0.5, c.Z + 0.5);
+            }
+
+            if (pos == null && attr.HasAttribute("position"))
             {
                 var struc = strucLocSys.GetStructure(new StructureLocation()
                 {
@@ -103,7 +116,7 @@ namespace Seafarer
                 return;
             }
 
-            var puid = (byEntity as EntityPlayer).PlayerUID;
+            var puid = player.PlayerUID;
             if (wml.Waypoints.Where(wp => wp.OwningPlayerUid == puid).FirstOrDefault(wp => wp.Position == pos) != null)
             {
                 player.SendMessage(GlobalConstants.GeneralChatGroup, Lang.Get("Location already marked on your map"), EnumChatType.Notification);

@@ -65,21 +65,28 @@ def merge_tiers(
     return out
 
 
-_BYTYPE_ALTERNATIVES: dict[str, str] = {
-    "nutritionProps": "nutritionPropsByType",
-    "nutritionProps.satiety": "nutritionPropsByType",
-    "nutritionProps.foodcategory": "nutritionPropsByType",
-    "transitionableProps": "transitionablePropsByType",
-    "creativeinventory": "creativeinventoryByType",
+_BYTYPE_ALTERNATIVES: dict[str, tuple[str, ...]] = {
+    "nutritionProps": ("nutritionPropsByType",),
+    "nutritionProps.satiety": ("nutritionPropsByType",),
+    "nutritionProps.foodcategory": ("nutritionPropsByType",),
+    "transitionableProps": ("transitionablePropsByType",),
+    "creativeinventory": ("creativeinventoryByType",),
+    "attributes.inPieProperties": ("attributes.inPiePropertiesByType",),
+    "attributes.inBurritoProperties": ("attributes.inBurritoPropertiesByType",),
+    "shape": ("shapeByType", "shapebytype"),
+    "texture": ("textureByType", "textures", "texturesByType"),
+    "textures": ("texturesByType", "textureByType", "texture"),
 }
 
 
 def _has_field_or_bytype(profile: FoodProfile, field: str) -> bool:
-    """Check field, falling back to its ByType alternative if one exists."""
+    """Check field, falling back to any ByType/singular/plural alternatives."""
     if profile.has_field(field):
         return True
-    alt = _BYTYPE_ALTERNATIVES.get(field)
-    return alt is not None and profile.has_field(alt)
+    for alt in _BYTYPE_ALTERNATIVES.get(field, ()):
+        if profile.has_field(alt):
+            return True
+    return False
 
 
 def check_food_schema(
@@ -94,8 +101,13 @@ def check_food_schema(
 
     effective = merge_tiers(category_baseline, category_override)
 
+    skip = profile.validation_skip()
+    skip_all_schema = "schema" in skip
+
     for field, tier in effective.items():
         if _has_field_or_bytype(profile, field):
+            continue
+        if skip_all_schema or f"schema:{field}" in skip:
             continue
         msg = f"[{profile.code}] {category} missing {tier} field: {field}"
         if tier == "required":

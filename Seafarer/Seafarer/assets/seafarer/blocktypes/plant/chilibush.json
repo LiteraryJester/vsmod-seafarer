@@ -49,36 +49,97 @@
             { type: "item", code: "seafarer:chili", quantity: { avg: 4 } }
         ],
         textureMapping: {
-            "leavescenter1": "seafarer:block/plant/berrybush/chili/leaves/leavescenter{variant}",
-            "leavescenter2": "seafarer:block/plant/berrybush/chili/leaves/leavescenter{variant}",
-            "leavescenter3": "seafarer:block/plant/berrybush/chili/leaves/leavescenter{variant}",
-            "leavescenter4": "seafarer:block/plant/berrybush/chili/leaves/leavescenter{variant}",
-            "leavescenter5": "seafarer:block/plant/berrybush/chili/leaves/leavescenter{variant}",
-            "leavesinside1": "seafarer:block/plant/berrybush/chili/leaves/leavesinside{variant}",
-            "leavesinside2": "seafarer:block/plant/berrybush/chili/leaves/leavesinside{variant}",
-            "leavesinside3": "seafarer:block/plant/berrybush/chili/leaves/leavesinside{variant}",
-            "leavesinside4": "seafarer:block/plant/berrybush/chili/leaves/leavesinside{variant}",
-            "leavesinside5": "seafarer:block/plant/berrybush/chili/leaves/leavesinside{variant}",
-            "steminside1": "seafarer:block/plant/berrybush/chili/stem/steminside{variant}",
-            "steminside2": "seafarer:block/plant/berrybush/chili/stem/steminside{variant}",
-            "steminside3": "seafarer:block/plant/berrybush/chili/stem/steminside{variant}",
-            "steminside4": "seafarer:block/plant/berrybush/chili/stem/steminside{variant}",
-            "steminside5": "seafarer:block/plant/berrybush/chili/stem/steminside{variant}",
-            "stemcenter1": "seafarer:block/plant/berrybush/chili/stem/stemcenter{variant}",
-            "stemcenter2": "seafarer:block/plant/berrybush/chili/stem/stemcenter{variant}",
-            "stemcenter3": "seafarer:block/plant/berrybush/chili/stem/stemcenter{variant}",
-            "stemcenter4": "seafarer:block/plant/berrybush/chili/stem/stemcenter{variant}",
-            "stemcenter5": "seafarer:block/plant/berrybush/chili/stem/stemcenter{variant}",
-            "flowerberryinside1": "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}inside{variant}",
-            "flowerberryinside2": "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}inside{variant}",
-            "flowerberryinside3": "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}inside{variant}",
-            "flowerberryinside4": "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}inside{variant}",
-            "flowerberryinside5": "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}inside{variant}",
-            "flowerberrycenter1": "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center{variant}",
-            "flowerberrycenter2": "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center{variant}",
-            "flowerberrycenter3": "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center{variant}",
-            "flowerberrycenter4": "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center{variant}",
-            "flowerberrycenter5": "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center{variant}"
+            "leavescenter1": {
+                base: "seafarer:block/plant/berrybush/chili/leaves/leavescenter1",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/leaves/leavescenter2" },
+                    { base: "seafarer:block/plant/berrybush/chili/leaves/leavescenter3" }
+                ]
+            },
+            "leavescenter2": {
+                base: "seafarer:block/plant/berrybush/chili/leaves/leavescenter2",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/leaves/leavescenter3" },
+                    { base: "seafarer:block/plant/berrybush/chili/leaves/leavescenter1" }
+                ]
+            },
+            "leavescenter3": {
+                base: "seafarer:block/plant/berrybush/chili/leaves/leavescenter3",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/leaves/leavescenter1" },
+                    { base: "seafarer:block/plant/berrybush/chili/leaves/leavescenter2" }
+                ]
+            },
+            "steminside1": {
+                base: "seafarer:block/plant/berrybush/chili/stem/steminside1",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/stem/steminside2" },
+                    { base: "seafarer:block/plant/berrybush/chili/stem/steminside3" }
+                ]
+            },
+            "steminside2": {
+                base: "seafarer:block/plant/berrybush/chili/stem/steminside2",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/stem/steminside3" },
+                    { base: "seafarer:block/plant/berrybush/chili/stem/steminside1" }
+                ]
+            },
+            "steminside3": {
+                base: "seafarer:block/plant/berrybush/chili/stem/steminside3",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/stem/steminside1" },
+                    { base: "seafarer:block/plant/berrybush/chili/stem/steminside2" }
+                ]
+            },
+            "stemcenter1": {
+                base: "seafarer:block/plant/berrybush/chili/stem/stemcenter1",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/stem/stemcenter2" },
+                    { base: "seafarer:block/plant/berrybush/chili/stem/stemcenter3" }
+                ]
+            },
+            "stemcenter2": {
+                base: "seafarer:block/plant/berrybush/chili/stem/stemcenter2",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/stem/stemcenter3" },
+                    { base: "seafarer:block/plant/berrybush/chili/stem/stemcenter1" }
+                ]
+            },
+            "stemcenter3": {
+                base: "seafarer:block/plant/berrybush/chili/stem/stemcenter3",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/stem/stemcenter1" },
+                    { base: "seafarer:block/plant/berrybush/chili/stem/stemcenter2" }
+                ]
+            },
+            "flowerberrycenter1": {
+                base: "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center1",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center2" },
+                    { base: "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center3" }
+                ]
+            },
+            "flowerberrycenter2": {
+                base: "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center2",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center3" },
+                    { base: "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center1" }
+                ]
+            },
+            "flowerberrycenter3": {
+                base: "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center3",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center1" },
+                    { base: "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center2" }
+                ]
+            }
+        },
+        youngShape: { base: "game:block/plant/flower/1patch-cross-16x16" },
+        youngTextureMapping: {
+            north1: { base: "game:block/plant/berrybush/young/blueberry-stem1" },
+            south1: { base: "game:block/plant/berrybush/young/blueberry-stem2" },
+            northTinted1: { base: "game:block/plant/berrybush/young/blueberry-leaves1" },
+            southTinted1: { base: "game:block/plant/berrybush/young/blueberry-leaves2" }
         },
         reinforcable: true,
         overrideRandomDrawOffset: 14,

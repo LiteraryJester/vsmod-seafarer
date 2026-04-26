@@ -16,7 +16,8 @@
     },
     "creativeinventory": { "general": ["*"], "seafarer": ["*"] },
     "attributes": {
-        "foodTags": ["meat", "protein", "fish"]
+        "foodTags": ["meat", "protein", "fish"],
+        "validationSkip": ["schema:attributes.inPieProperties", "schema:attributes.inBurritoProperties", "pie", "burrito", "instew", "insoup", "incured", "insmoked"]
     },
     "nutritionProps": { "satiety": 160, "foodcategory": "Protein", "health": 0 },
     "transitionableProps": [{

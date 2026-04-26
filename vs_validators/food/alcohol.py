@@ -16,6 +16,8 @@ def check_brewing_coverage(
 ) -> None:
     if profile.foodcategory not in ALCOHOL_CATEGORIES:
         return
+    if "alcohol" in profile.validation_skip():
+        return
     # Skip processed forms — only raw grain/fruit should have brewing
     code_lower = profile.code.lower()
     if any(code_lower.startswith(prefix) for prefix in _PROCESSED_FOOD_PREFIXES):

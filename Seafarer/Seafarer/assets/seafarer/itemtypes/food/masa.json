@@ -30,7 +30,8 @@
     "groundStorageTransform": {
       "translation": { "x": 0, "y": -0.06, "z": 0 },
       "scale": 0.89
-    }
+    },
+    "validationSkip": ["inporridge", "inalcohol"]
   },
   "creativeinventory": { "general": ["*"], "seafarer": ["*"] },
   "nutritionProps": {

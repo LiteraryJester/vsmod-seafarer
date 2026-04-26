@@ -18,7 +18,8 @@
 		foodTags: ["coconut", "fruit"],
 		handbook: {
 			groupBy: ["seafarer:coconut*"]
-		}
+		},
+		validationSkip: ["schema:attributes.inPieProperties", "schema:attributes.inBurritoProperties", "pie", "burrito", "incandied", "inbrine", "inalcohol"]
 	},
 	creativeinventory: { "general": ["*"], "items": ["*"], "seafarer": ["*"] },
 	nutritionProps: {

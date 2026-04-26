@@ -33,11 +33,15 @@
 		inPiePropertiesByType: {
 			"*-raw": { texture: "game:block/food/pie/fill-fish", partType: 'Filling', mixingCodes: ["potpie"] }
 		},
+		inBurritoPropertiesByType: {
+			"*-raw": { partType: "Filling" }
+		},
 		foodTags: ["meat"],
 		saltRubbedOutput: "seafarer:saltrubbedmeat-premiumfish",
 		handbook: {
 			groupBy: ["premiumfish-*"]
-		}
+		},
+		validationSkip: ["ef_protein", "ef_coverage", "instew", "insoup"]
 	},
 	variantgroups: [
 		{ code: "type", states: ["raw", "cooked", "cured", "smoked", "cured-smoked"] }

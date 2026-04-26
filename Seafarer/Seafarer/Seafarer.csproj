@@ -48,7 +48,7 @@
       <HintPath>$(VINTAGE_STORY)/Lib/Microsoft.Data.Sqlite.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <ProjectReference Include="/mnt/d/Development/vs/vsmod-progression-framework/ProgressionFramework/ProgressionFramework/ProgressionFramework.csproj">
+    <ProjectReference Include="..\..\..\vsmod-progression-framework\ProgressionFramework\ProgressionFramework\ProgressionFramework.csproj">
       <Private>false</Private>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
     </ProjectReference>

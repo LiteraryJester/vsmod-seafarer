@@ -24,7 +24,8 @@
     "creativeinventory": { "general": ["*"], "seafarer": ["*"] },
     "attributes": {
         "foodTags": ["meat", "protein"],
-        "handbook": { "groupBy": ["searedmeat-*"] }
+        "handbook": { "groupBy": ["searedmeat-*"] },
+        "validationSkip": ["schema:attributes.inPieProperties", "schema:attributes.inBurritoProperties", "pie", "burrito", "instew", "insoup", "incured", "insmoked"]
     },
     "nutritionPropsByType": {
         "*-redmeat": { "satiety": 200, "foodcategory": "Protein", "health": 0 },

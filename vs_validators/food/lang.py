@@ -34,14 +34,6 @@ CATEGORY_SUGGESTED_CONTEXTS = {
 }
 
 
-def _opt_outs(profile: FoodProfile) -> set[str]:
-    attrs = profile.raw.get("attributes") or {}
-    skip = attrs.get("validationSkip") if isinstance(attrs, dict) else None
-    if isinstance(skip, list):
-        return {str(s) for s in skip}
-    return set()
-
-
 def check_recipe_driven_lang(
     profile: FoodProfile, ctx: ValidationContext, result: ValidationResult,
 ) -> None:
@@ -63,7 +55,7 @@ def check_category_driven_lang(
     profile: FoodProfile, ctx: ValidationContext, result: ValidationResult,
 ) -> None:
     suggested = CATEGORY_SUGGESTED_CONTEXTS.get(profile.foodcategory, [])
-    opt_out = _opt_outs(profile)
+    opt_out = profile.validation_skip()
     for ctx_tag in suggested:
         if ctx_tag in opt_out:
             continue

@@ -34,7 +34,8 @@
 		displaycaseable: true,
 		handbook: {
 			groupBy: ["seafarer:candiedfruit-*"]
-		}
+		},
+		validationSkip: ["schema:attributes.inBurritoProperties", "burrito", "ef_coverage", "inbrine", "inalcohol"]
 	},
 	creativeinventory: { "general": ["*"], "seafarer": ["*"] },
 	nutritionProps: {

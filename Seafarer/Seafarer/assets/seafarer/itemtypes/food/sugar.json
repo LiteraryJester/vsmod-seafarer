@@ -25,7 +25,8 @@
     "displaycaseable": true,
     "handbook": {
       "groupBy": ["seafarer:sugarcane*"]
-    }
+    },
+    "validationSkip": ["schema:textures", "schema:attributes.inPieProperties", "schema:attributes.inBurritoProperties", "pie", "burrito", "ef_coverage", "alcohol", "incandied", "inbrine", "inalcohol"]
   },
   "creativeinventory": { "general": ["*"], "seafarer": ["*"] },
   "nutritionProps": {

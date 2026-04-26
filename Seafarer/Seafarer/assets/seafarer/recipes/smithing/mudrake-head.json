@@ -1,4 +1,5 @@
 {
+  "code": "seafarer:mudrake-head-{metal}",
   "ingredient": {
     "type": "item",
     "code": "game:ingot-*",

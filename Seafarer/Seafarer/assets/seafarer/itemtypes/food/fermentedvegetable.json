@@ -17,7 +17,10 @@
     },
     "displaycaseable": true,
     "shelvable": true,
-    "inContainerTexture": { "base": "game:block/wood/barrel/pickled-{type}" }
+    "inContainerTexture": { "base": "game:block/wood/barrel/pickled-{type}" },
+    "inPieProperties": { "texture": "game:block/food/pie/fill-{type}", "partType": "Filling" },
+    "inBurritoProperties": { "partType": "Filling" },
+    "validationSkip": ["inbrine", "infermented"]
   },
   "variantgroups": [
     { "code": "type", "states": ["carrot", "turnip", "onion", "parsnip", "pumpkin", "bellpepper"] }
