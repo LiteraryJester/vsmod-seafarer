@@ -1,0 +1,18 @@
+[
+    // Saw + 2 seasoned planks -> 1 seasoned support beam.
+    // Mirrors base game's saw + 1 debarked log -> 3 beams. Planks carry
+    // less wood per item than a log, hence the 2:1 ratio (vs the base's
+    // implicit ~1:3) — total wood economy stays roughly comparable when
+    // accounting for the ~4 planks you can mill from a single log.
+    {
+        "ingredientPattern": "HL_,_L_",
+        "ingredients": {
+            "H": { "type": "item", "tags": ["tool-saw"], "isTool": true },
+            "L": { "type": "item", "code": "game:plank-seasoned" }
+        },
+        "width": 3,
+        "height": 2,
+        "shapeless": true,
+        "output": { "type": "block", "code": "game:supportbeam-seasoned", "quantity": 1 }
+    }
+]
