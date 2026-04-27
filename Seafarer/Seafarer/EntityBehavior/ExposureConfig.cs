@@ -14,16 +14,16 @@ public class ExposureConfig
     /// <summary>Set to false to disable frostbite while keeping heatstroke active.</summary>
     public bool FrostbiteEnabled { get; set; } = true;
 
-    /// <summary>Ambient temperature (C) above which heat exposure accumulates when unsheltered.</summary>
+    /// <summary>Ambient temperature (C) at or above which heat exposure accumulates.</summary>
     public float HeatThreshold { get; set; } = 33f;
 
-    /// <summary>Ambient temperature (C) below which cold exposure accumulates when unsheltered.</summary>
+    /// <summary>Ambient temperature (C) at or below which cold exposure accumulates.</summary>
     public float ColdThreshold { get; set; } = 0f;
 
     /// <summary>Base exposure gain per game hour when at the threshold boundary. Scales with severity.</summary>
     public float AccumulationRatePerHour { get; set; } = 0.01f;
 
-    /// <summary>Base exposure loss per game hour when sheltered.</summary>
+    /// <summary>Base exposure loss per game hour when temperature is between the cold and heat thresholds.</summary>
     public float DecayRatePerHour { get; set; } = 0.004f;
 
     /// <summary>Multiplier on accumulation rate from wind speed (0 = wind ignored).</summary>
