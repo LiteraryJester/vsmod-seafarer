@@ -4,6 +4,7 @@
     entityclass: "BlockEntityAmphoraStorage",
 
     behaviors: [
+        { name: "BoatableGenericTypedContainer" },
         { name: "Lockable" },
         { name: "Container" },
         { name: "UnstableFalling" }
