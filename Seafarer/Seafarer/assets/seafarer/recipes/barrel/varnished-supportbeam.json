@@ -14,6 +14,6 @@
             },
             { "type": "block", "code": "game:supportbeam-seasoned", "quantity": 4 }
         ],
-        "output": { "type": "block", "code": "game:supportbeam-varnished", "stackSize": 4 }
+        "output": { "type": "item", "code": "game:supportbeam-varnished", "stackSize": 4 }
     }
 ]
