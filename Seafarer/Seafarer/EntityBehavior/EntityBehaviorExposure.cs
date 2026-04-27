@@ -12,11 +12,8 @@ public class EntityBehaviorExposure : EntityBehavior
     private ITreeAttribute expTree = null!;
 
     private float accum;        // 1-second tick for climate reads
-    private float slowAccum;    // 3-second tick for shelter checks
     private float damageAccum;  // 10-second tick for periodic effects
 
-    private bool inEnclosedRoom;
-    private bool exposedToSky;
     private BlockPos plrpos = new BlockPos(0);
     private bool hodInstalled;
 
@@ -90,19 +87,7 @@ public class EntityBehaviorExposure : EntityBehavior
         if (!Config.Enabled) return;
 
         accum += deltaTime;
-        slowAccum += deltaTime;
         damageAccum += deltaTime;
-
-        // Use player's eye-level position to avoid checking inside thin blocks (snow layers, slabs)
-        plrpos.Set((int)entity.Pos.X, (int)(entity.Pos.Y + entity.LocalEyePos.Y * 0.5), (int)entity.Pos.Z);
-        plrpos.SetDimension(entity.Pos.Dimension);
-
-        // Shelter check every 3 seconds (server only)
-        if (slowAccum > 3 && api.Side == EnumAppSide.Server)
-        {
-            UpdateShelterState();
-            slowAccum = 0;
-        }
 
         // Climate read and accumulation every 1 second (server only)
         if (accum > 1 && api.Side == EnumAppSide.Server)
@@ -119,14 +104,6 @@ public class EntityBehaviorExposure : EntityBehavior
         }
     }
 
-    private void UpdateShelterState()
-    {
-        var roomRegistry = api.ModLoader.GetModSystem<Vintagestory.GameContent.RoomRegistry>();
-        var room = roomRegistry.GetRoomForPosition(plrpos);
-        inEnclosedRoom = room != null && (room.ExitCount == 0 || room.SkylightCount < room.NonSkylightCount);
-        exposedToSky = api.World.BlockAccessor.GetRainMapHeightAt(plrpos) <= plrpos.Y;
-    }
-
     private void UpdateExposure()
     {
         var eplr = entity as EntityPlayer;
@@ -138,6 +115,9 @@ public class EntityBehaviorExposure : EntityBehavior
             ClearAllEffects();
             return;
         }
+
+        plrpos.Set((int)entity.Pos.X, (int)(entity.Pos.Y + entity.LocalEyePos.Y * 0.5), (int)entity.Pos.Z);
+        plrpos.SetDimension(entity.Pos.Dimension);
 
         double currentHours = api.World.Calendar.TotalHours;
         float hoursPassed = (float)(currentHours - LastUpdateTotalHours);
@@ -161,32 +141,22 @@ public class EntityBehaviorExposure : EntityBehavior
         float windSpeed = (float)windVec.Length();
         float windMultiplier = 1f + windSpeed * Config.WindAccumulationMultiplier;
 
-        bool isSheltered = inEnclosedRoom || !exposedToSky;
+        float exposureChange;
 
-        float exposureChange = 0f;
-
-        if (!isSheltered)
+        if (Config.HeatstrokeEnabled && temp >= Config.HeatThreshold)
         {
-            if (Config.HeatstrokeEnabled && temp >= Config.HeatThreshold)
-            {
-                float severity = (temp - Config.HeatThreshold) / 10f;
-                exposureChange = Config.AccumulationRatePerHour * (1f + severity) * windMultiplier * hoursPassed;
-                ActiveCondition = ExposureCondition.Heatstroke;
-            }
-            else if (Config.FrostbiteEnabled && temp <= Config.ColdThreshold)
-            {
-                float severity = (Config.ColdThreshold - temp) / 10f;
-                exposureChange = Config.AccumulationRatePerHour * (1f + severity) * windMultiplier * hoursPassed;
-                ActiveCondition = ExposureCondition.Frostbite;
-            }
+            float severity = (temp - Config.HeatThreshold) / 10f;
+            exposureChange = Config.AccumulationRatePerHour * (1f + severity) * windMultiplier * hoursPassed;
+            ActiveCondition = ExposureCondition.Heatstroke;
         }
-        else if (ExposureLevel > 0)
+        else if (Config.FrostbiteEnabled && temp <= Config.ColdThreshold)
         {
-            exposureChange = -Config.DecayRatePerHour * hoursPassed;
+            float severity = (Config.ColdThreshold - temp) / 10f;
+            exposureChange = Config.AccumulationRatePerHour * (1f + severity) * windMultiplier * hoursPassed;
+            ActiveCondition = ExposureCondition.Frostbite;
         }
         else
         {
-            // Sheltered — decay
             exposureChange = -Config.DecayRatePerHour * hoursPassed;
         }
 
@@ -195,8 +165,8 @@ public class EntityBehaviorExposure : EntityBehavior
         if (exposureChange != 0 && damageAccum > 9.5f)
         {
             api.Logger.Debug(
-                "[Exposure] temp={0:F1} sheltered={1} frostEn={2} coldThresh={3} heatThresh={4} change={5:F6} level={6:F4}→{7:F4} cond={8}",
-                temp, isSheltered, Config.FrostbiteEnabled, Config.ColdThreshold, Config.HeatThreshold,
+                "[Exposure] temp={0:F1} frostEn={1} coldThresh={2} heatThresh={3} change={4:F6} level={5:F4}→{6:F4} cond={7}",
+                temp, Config.FrostbiteEnabled, Config.ColdThreshold, Config.HeatThreshold,
                 exposureChange, ExposureLevel, newLevel, ActiveCondition);
         }
 
