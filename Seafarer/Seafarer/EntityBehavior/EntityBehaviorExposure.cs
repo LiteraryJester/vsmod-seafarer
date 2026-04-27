@@ -11,7 +11,7 @@ public class EntityBehaviorExposure : EntityBehavior
     private ICoreAPI api = null!;
     private ITreeAttribute expTree = null!;
 
-    private float accum;        // 1-second tick for climate reads
+    private float accum;        // climate-read tick (see AccumulationIntervalSeconds)
     private float damageAccum;  // 10-second tick for periodic effects
 
     private BlockPos plrpos = new BlockPos(0);
