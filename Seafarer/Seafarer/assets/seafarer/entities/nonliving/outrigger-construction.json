@@ -16,48 +16,62 @@
                     { type: "item", code: "game:firewood", quantity: 8 },
                     { type: "item", code: "game:plank-*", name: "seafarer-outrigger-ingredient-planks", quantity: 12, storeWildCard: "wood" }
                 ],
-                addElements: ["ORIGIN/ORIGINBoat/ORIGIN1Keel", "ORIGIN/ORIGIN1props"]
+                addElements: ["ORIGIN/ORIGIN2MainHull/ORIGIN1props"]
             },
             {
                 requireStacks: [{ type: "block", code: "game:supportbeam-{wood}", quantity: 10 }],
-                addElements: ["ORIGIN/ORIGINBoat/ORIGIN2Ribs"]
+                addElements: ["ORIGIN/ORIGIN2MainHull"]
             },
             {
                 requireStacks: [{ type: "item", code: "game:plank-{wood}", quantity: 16 }],
-                addElements: ["ORIGIN/ORIGINBoat/ORIGIN3HullLower"]
+                addElements: [
+                    "ORIGIN/ORIGIN2MainHull/ORIGIN3Cube6",
+                    "ORIGIN/ORIGIN2MainHull/ORIGIN3Cube9"
+                ]
             },
             {
                 requireStacks: [{ type: "item", code: "game:plank-{wood}", quantity: 16 }],
-                addElements: ["ORIGIN/ORIGINBoat/ORIGIN4HullUpper"]
+                addElements: [
+                    "ORIGIN/ORIGIN2MainHull/ORIGIN4",
+                    "ORIGIN/ORIGIN2MainHull/ORIGIN4Cube15",
+                    "ORIGIN/ORIGIN2MainHull/platform",
+                    "ORIGIN/ORIGIN2MainHull/RearPlatform",
+                    "ORIGIN/OarStorage",
+                    "ORIGIN/CargoFor1",
+                    "ORIGIN/FishingrodStorage"
+                ]
             },
             {
                 requireStacks: [{ type: "block", code: "game:supportbeam-{wood}", quantity: 12 }],
-                addElements: ["ORIGIN/ORIGINBoat/ORIGIN5Floats"]
+                addElements: ["ORIGIN/ORIGIN5PortFloat"]
             },
             {
                 requireStacks: [
                     { type: "block", code: "game:supportbeam-{wood}", quantity: 8 },
                     { type: "item", code: "game:rope", quantity: 6 }
                 ],
-                addElements: ["ORIGIN/ORIGINBoat/ORIGIN6Crossbeams"]
+                addElements: [
+                    "ORIGIN/ORIGIN6Crossbeams",
+                    "ORIGIN/ORIGIN6Crossbeams2"
+                ]
             },
             {
                 requireStacks: [{ type: "block", code: "game:supportbeam-{wood}", quantity: 8 }],
-                addElements: ["ORIGIN/ORIGINBoat/ORIGIN7Mast"]
+                addElements: ["ORIGIN/ORIGIN7Mast"]
             },
             {
                 requireStacks: [{ type: "item", code: "game:rope", quantity: 12 }],
-                addElements: ["ORIGIN/ORIGINBoat/ORIGIN8Rigging"]
+                addElements: ["ORIGIN/ORIGIN7Mast/ORIGIN8"]
             },
             {
                 requireStacks: [
                     { type: "block", code: "game:linen-normal-down", quantity: 16 },
                     { type: "item", code: "game:rope", quantity: 4 }
                 ],
-                addElements: ["ORIGIN/ORIGINBoat/ORIGIN9Sail"]
+                addElements: ["ORIGIN/ORIGIN7Mast/SailFurled"]
             },
             { requireStacks: [], actionLangCode: "outrigger-launch" },
-            { removeElements: ["ORIGIN/ORIGIN1props"] }
+            { removeElements: ["ORIGIN/ORIGIN2MainHull/ORIGIN1props"] }
         ]
     },
     behaviorConfigs: {
