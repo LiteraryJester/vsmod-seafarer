@@ -36,7 +36,7 @@
       "backwards": ""
     }
   },
-  "hitboxSize": { "x": 6, "y": 1.0, "z": 5 },
+  "hitboxSize": { "x": 3, "y": 1.0, "z": 5 },
   "behaviorConfigs": {
     "ellipsoidalrepulseagents": {
       "offset": { "x": 0, "z": 0 },
