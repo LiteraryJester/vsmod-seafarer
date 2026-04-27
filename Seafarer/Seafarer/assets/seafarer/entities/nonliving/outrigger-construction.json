@@ -68,12 +68,13 @@
         renderer: "Shape",
         shape: { base: "entity/nonliving/boat/outrigger-construction" },
         textures: {
-            "material": { base: "game:block/wood/debarked/{material}" },
-            "wood":     { base: "game:block/wood/debarked/{material}" },
-            "planks":   { base: "game:block/wood/planks/{material}1" },
-            "plain":    { base: "game:block/cloth/linen/plain" },
-            "rope":     { base: "game:item/resource/rope" },
-            "firewood": { base: "game:block/wood/firewood/north" }
+            "material":  { base: "game:block/wood/debarked/{material}" },
+            "wood":      { base: "game:block/wood/debarked/{material}" },
+            "planks":    { base: "game:block/wood/planks/{material}1" },
+            "seasoned1": { base: "game:block/wood/planks/{material}1" },
+            "plain":     { base: "game:block/cloth/linen/plain" },
+            "rope":      { base: "game:item/resource/rope" },
+            "firewood":  { base: "game:block/wood/firewood/north" }
         },
         animations: [
             { code: "launch", animation: "launch", animationSpeed: 1, weight: 10, blendMode: "AddAverage" }

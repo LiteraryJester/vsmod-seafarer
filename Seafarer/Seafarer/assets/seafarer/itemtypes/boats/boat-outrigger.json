@@ -21,6 +21,7 @@
       "material": { "base": "game:block/wood/debarked/{material}" },
       "wood": { "base": "game:block/wood/debarked/{material}" },
       "planks": { "base": "game:block/wood/planks/{material}1" },
+      "seasoned1": { "base": "game:block/wood/planks/{material}1" },
       "plain": { "base": "game:block/cloth/linen/plain" },
       "rope": { "base": "game:item/resource/rope" },
       "transparent": { "base": "game:block/transparent" }
