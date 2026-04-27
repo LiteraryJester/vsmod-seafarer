@@ -2,6 +2,8 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
+**Status:** Implemented 2026-04-26.
+
 **Goal:** Add a buildable, sailable outrigger canoe to the Seafarer mod, gated behind the existing Drake-quest outrigger schematic, using the base game's `EntityBoatConstruction` system via a Harmony patch on its private `Spawn` method.
 
 **Architecture:** One Harmony prefix patch on `EntityBoatConstruction.Spawn` reads a `boattype` discriminator from the construction entity's JSON `attributes` and spawns `boat-{boattype}-{wood}` instead of the hardcoded `boat-sailed-{wood}`. The construction entity itself uses the base game class with `attributes.boattype: "outrigger"`. A `ItemOutriggerRollers : ItemRoller` subclass overrides `OnHeldInteractStart` so the seafarer rollers item summons the outrigger construction. Two stub classes (`EntityOutriggerBoat`, `ItemOutriggerBoat`) reserve namespaces for future fishing-tuned behavior.
