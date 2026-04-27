@@ -17,6 +17,8 @@ public class EntityBehaviorExposure : EntityBehavior
     private BlockPos plrpos = new BlockPos(0);
     private bool hodInstalled;
 
+    private const float AccumulationIntervalSeconds = 300f;
+
     private ExposureConfig Config => SeafarerModSystem.ExposureConfig;
 
     // --- Persisted state via WatchedAttributes ---
@@ -89,8 +91,8 @@ public class EntityBehaviorExposure : EntityBehavior
         accum += deltaTime;
         damageAccum += deltaTime;
 
-        // Climate read and accumulation every 1 second (server only)
-        if (accum > 1 && api.Side == EnumAppSide.Server)
+        // Climate sample and accumulation every 5 real minutes (server only)
+        if (accum > AccumulationIntervalSeconds && api.Side == EnumAppSide.Server)
         {
             UpdateExposure();
             accum = 0;
@@ -129,8 +131,10 @@ public class EntityBehaviorExposure : EntityBehavior
             return;
         }
         if (hoursPassed < 0.001f) return;
-        // Cap to prevent huge jumps after loading/reconnecting — max 1 game hour per tick
-        if (hoursPassed > 1f) hoursPassed = 1f;
+        // Cap to prevent huge jumps after loading/reconnecting — max 24 game hours per tick.
+        // 5 real minutes is ~13 game-hours at default day length, so 24 leaves headroom for
+        // longer day-length configs while still capping the first tick after a long offline.
+        if (hoursPassed > 24f) hoursPassed = 24f;
         LastUpdateTotalHours = currentHours;
 
         var conds = api.World.BlockAccessor.GetClimateAt(plrpos, EnumGetClimateMode.NowValues);
@@ -162,7 +166,7 @@ public class EntityBehaviorExposure : EntityBehavior
 
         float newLevel = GameMath.Clamp(ExposureLevel + exposureChange, 0f, 1f);
 
-        if (exposureChange != 0 && damageAccum > 9.5f)
+        if (exposureChange != 0)
         {
             api.Logger.Debug(
                 "[Exposure] temp={0:F1} frostEn={1} coldThresh={2} heatThresh={3} change={4:F6} level={5:F4}→{6:F4} cond={7}",
