@@ -47,6 +47,7 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             api.RegisterBlockClass("BlockGrowPot", typeof(BlockGrowPot));
             api.RegisterCollectibleBehaviorClass("PlaceBurrito", typeof(BehaviorPlaceBurrito));
             api.RegisterCollectibleBehaviorClass("CoconutCrack", typeof(BehaviorCoconutCrack));
+            api.RegisterCollectibleBehaviorClass("boatrepair", typeof(BehaviorBoatRepair));
             api.RegisterItemClass("ItemMudRake", typeof(ItemMudRake));
             api.RegisterCollectibleBehaviorClass("ClamShuck", typeof(BehaviorClamShuck));
             api.RegisterCollectibleBehaviorClass("ShellCrush", typeof(BehaviorShellCrush));
