@@ -48,6 +48,10 @@
       <HintPath>$(VINTAGE_STORY)/Lib/Microsoft.Data.Sqlite.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="configlib">
+      <HintPath>$(MSBuildThisFileDirectory)..\..\..\shared\configlib_1.10.14\configlib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <ProjectReference Include="..\..\..\vsmod-progression-framework\ProgressionFramework\ProgressionFramework\ProgressionFramework.csproj">
       <Private>false</Private>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>

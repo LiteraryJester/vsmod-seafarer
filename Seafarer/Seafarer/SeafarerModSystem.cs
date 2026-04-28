@@ -77,16 +77,27 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             if (api is ICoreServerAPI sapi)
             {
                 LoadConfigs(sapi, log: true);
-                // Re-read configs periodically so ConfigLib mid-session changes take effect.
-                sapi.Event.Timer(() => LoadConfigs(sapi, log: false), 10);
+                if (sapi.ModLoader.IsModEnabled("configlib"))
+                {
+                    HookConfigLib(sapi);
+                }
             }
+        }
+
+        // Gated by IsModEnabled("configlib") — ConfigLib types are only resolved
+        // when this method is JITted, so the mod still loads if ConfigLib is absent.
+        private void HookConfigLib(ICoreServerAPI api)
+        {
+            var provider = api.ModLoader.GetModSystem<ConfigLib.ConfigLibModSystem>();
+            if (provider == null) return;
+            provider.SettingChanged += (domain, _, _) =>
+            {
+                if (domain == "seafarer") LoadConfigs(api, log: false);
+            };
         }
 
         private void LoadConfigs(ICoreServerAPI api, bool log = true)
         {
-            // Load asset defaults (patched by ConfigLib if installed).
-            // These are always authoritative — ConfigLib modifies the asset,
-            // so we read fresh values every startup and periodically at runtime.
             var defaults = LoadAssetDefaults(api);
 
             Config = new DryingFrameConfig();

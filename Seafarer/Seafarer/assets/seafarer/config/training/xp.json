@@ -6,6 +6,24 @@
         xp: 1
     },
     {
+        type: "craft",
+        training: "shipwright",
+        recipe: "game:rope",
+        xp: 2
+    },
+    {
+        type: "craft",
+        training: "shipwright",
+        recipe: "game:boat-raft-*",
+        xp: 25
+    },
+    {
+        type: "craft",
+        training: "shipwright",
+        recipe: "seafarer:boat-logbarge-*",
+        xp: 25
+    },
+    {
         type: "book",
         training: "shipwright",
         item: "seafarer:trainingbook-shipwright",

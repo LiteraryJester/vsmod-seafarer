@@ -1,8 +1,10 @@
 using HarmonyLib;
+using ProgressionFramework.Training;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.MathTools;
+using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 
 namespace Seafarer;
@@ -80,6 +82,28 @@ public static class EntityBoatConstructionSpawnPatch
         }
 
         __instance.World.SpawnEntity(entity);
+        AwardShipwrightXp(__instance);
         return false; // skip original
+    }
+
+    // Sailed boats spawn via the original Spawn; award shipwright XP here.
+    // Outrigger spawns are handled inside the prefix after SpawnEntity, gated below.
+    [HarmonyPostfix]
+    public static void Postfix(EntityBoatConstruction __instance)
+    {
+        var boatType = __instance.Properties.Attributes?["boattype"]?.AsString("sailed") ?? "sailed";
+        if (boatType != "sailed") return;
+        AwardShipwrightXp(__instance);
+    }
+
+    private const float ShipwrightBoatXp = 50f;
+
+    private static void AwardShipwrightXp(EntityBoatConstruction __instance)
+    {
+        var launching = launchingEntityRef(__instance);
+        if (launching is not EntityPlayer ep) return;
+        if (ep.Player is not IServerPlayer sp) return;
+        var ts = __instance.Api.ModLoader.GetModSystem<TrainingSystem>();
+        ts?.AwardXP(sp, "shipwright", ShipwrightBoatXp);
     }
 }

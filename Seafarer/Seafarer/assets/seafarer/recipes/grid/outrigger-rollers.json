@@ -10,5 +10,17 @@
         height: 3,
         shapeless: true,
         output: { type: "item", code: "seafarer:boat-outrigger-rollers", quantity: 5 }
+    },
+    {
+        requiresTrait: "shipwright",
+        ingredientPattern: "F,R",
+        ingredients: {
+            "F": { type: "item", code: "game:firewood", quantity: 5 },
+            "R": { type: "item", code: "game:rope",     quantity: 4 }
+        },
+        width: 1,
+        height: 2,
+        shapeless: true,
+        output: { type: "item", code: "seafarer:boat-outrigger-rollers", quantity: 5 }
     }
 ]
