@@ -128,14 +128,14 @@ public class EntityBehaviorShipMechanics : EntityBehavior
 
         float damage = stormDamagePerSecond * intervalSeconds;
         entity.ReceiveDamage(
-            new DamageSource { Source = EnumDamageSource.Void, Type = EnumDamageType.Gravity },
+            new DamageSource { Source = EnumDamageSource.Weather, Type = EnumDamageType.Gravity },
             damage);
     }
 
     private bool IsOverDeepWater(BlockPos boatPos)
     {
-        // Sample three blocks below the boat. All must be liquid for "deep water".
-        var probe = boatPos.Copy();
+        // Probe the three blocks beneath the boat. All must be liquid for "deep water".
+        var probe = boatPos.DownCopy();
         for (int i = 0; i < 3; i++)
         {
             var block = api.World.BlockAccessor.GetBlock(probe);
