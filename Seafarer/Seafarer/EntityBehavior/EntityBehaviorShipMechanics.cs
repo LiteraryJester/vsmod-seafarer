@@ -76,7 +76,7 @@ public class EntityBehaviorShipMechanics : EntityBehavior
         // Sample current horizontal speed every frame so we can detect
         // the impact tick. Storing prevSpeed lets us deal damage based on
         // the speed *before* the wall stopped us.
-        var v = entity.SidedPos.Motion;
+        var v = entity.Pos.Motion;
         double horizSpeed = Math.Sqrt(v.X * v.X + v.Z * v.Z);
 
         if (entity.CollidedHorizontally
