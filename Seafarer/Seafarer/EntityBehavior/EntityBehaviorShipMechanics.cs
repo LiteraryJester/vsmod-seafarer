@@ -25,6 +25,10 @@ public class EntityBehaviorShipMechanics : EntityBehavior
     private float collisionDamagePerSpeedUnit = 8.0f;
     private float collisionCooldownSeconds = 1.0f;
 
+    private float stormMinWindSpeed = 0.65f;
+    private float stormDamagePerSecond = 0.4f;
+    private bool stormRequiresDeepWater = true;
+
     public EntityBehaviorShipMechanics(Entity entity) : base(entity) { }
 
     public override string PropertyName() => Code;
@@ -40,6 +44,14 @@ public class EntityBehaviorShipMechanics : EntityBehavior
             collisionMinSpeed = c["minSpeed"].AsFloat(collisionMinSpeed);
             collisionDamagePerSpeedUnit = c["damagePerSpeedUnit"].AsFloat(collisionDamagePerSpeedUnit);
             collisionCooldownSeconds = c["cooldownSeconds"].AsFloat(collisionCooldownSeconds);
+        }
+
+        if (cfg != null && cfg.KeyExists("storm"))
+        {
+            var s = cfg["storm"];
+            stormMinWindSpeed = s["minWindSpeed"].AsFloat(stormMinWindSpeed);
+            stormDamagePerSecond = s["damagePerSecond"].AsFloat(stormDamagePerSecond);
+            stormRequiresDeepWater = s["requiresDeepWater"].AsBool(stormRequiresDeepWater);
         }
     }
 
@@ -95,9 +107,41 @@ public class EntityBehaviorShipMechanics : EntityBehavior
 
         prevSpeed = horizSpeed;
 
-        // Periodic (storm) work goes here in Task 4 — leave the accumulator wired up.
         tickAccum += deltaTime;
         if (tickAccum < TickIntervalSeconds) return;
+        float stormDelta = tickAccum;
         tickAccum = 0f;
+
+        ApplyStormDamage(stormDelta);
+    }
+
+    private void ApplyStormDamage(float intervalSeconds)
+    {
+        if (stormDamagePerSecond <= 0f || stormMinWindSpeed > 1f) return;
+
+        var pos = entity.Pos.AsBlockPos;
+        var wind = api.World.BlockAccessor.GetWindSpeedAt(pos);
+        double windMag = Math.Sqrt(wind.X * wind.X + wind.Y * wind.Y + wind.Z * wind.Z);
+        if (windMag < stormMinWindSpeed) return;
+
+        if (stormRequiresDeepWater && !IsOverDeepWater(pos)) return;
+
+        float damage = stormDamagePerSecond * intervalSeconds;
+        entity.ReceiveDamage(
+            new DamageSource { Source = EnumDamageSource.Void, Type = EnumDamageType.Gravity },
+            damage);
+    }
+
+    private bool IsOverDeepWater(BlockPos boatPos)
+    {
+        // Sample three blocks below the boat. All must be liquid for "deep water".
+        var probe = boatPos.Copy();
+        for (int i = 0; i < 3; i++)
+        {
+            var block = api.World.BlockAccessor.GetBlock(probe);
+            if (block.LiquidCode == null) return false;
+            probe.Y--;
+        }
+        return true;
     }
 }
