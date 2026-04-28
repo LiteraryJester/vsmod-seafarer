@@ -1,0 +1,10 @@
+[
+  {
+    "op": "addmerge",
+    "path": "/behaviors",
+    "value": [
+      { "code": "boatrepair", "hpPerLitre": 20.0, "litresPerUse": 0.25 }
+    ],
+    "file": "game:itemtypes/liquid/glueportion"
+  }
+]

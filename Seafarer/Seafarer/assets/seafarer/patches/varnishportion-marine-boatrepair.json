@@ -1,0 +1,10 @@
+[
+  {
+    "op": "addmerge",
+    "path": "/behaviors",
+    "value": [
+      { "code": "boatrepair", "hpPerLitre": 50.0, "litresPerUse": 0.25 }
+    ],
+    "file": "seafarer:itemtypes/liquid/varnishportion-marine"
+  }
+]
