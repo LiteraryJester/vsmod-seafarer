@@ -34,6 +34,12 @@
       "ready": "crudeOarReady",
       "forwards": "crudeOarForward",
       "backwards": "crudeOarBackward"
+    },
+    "extendShipMechanics": {
+      "health": 100,
+      "collision": { "minSpeed": 0.30, "damagePerSpeedUnit": 8.0, "cooldownSeconds": 1.0 },
+      "storm": { "minWindSpeed": 0.65, "damagePerSecond": 0.4, "requiresDeepWater": true },
+      "wreckage": { "dropFraction": 0.5, "dropFloating": true }
     }
   },
   "hitboxSize": { "x": 5, "y": 0.6, "z": 5 },
@@ -261,7 +267,9 @@
       { "code": "interpolateposition" },
       { "code": "selectionboxes" },
       { "code": "rideableaccessories" },
-      { "code": "creaturecarrier" }
+      { "code": "creaturecarrier" },
+      { "code": "health" },
+      { "code": "shipmechanics" }
     ]
   },
   "server": {
@@ -270,7 +278,9 @@
       { "code": "passivephysicsmultibox" },
       { "code": "selectionboxes" },
       { "code": "rideableaccessories" },
-      { "code": "creaturecarrier" }
+      { "code": "creaturecarrier" },
+      { "code": "health" },
+      { "code": "shipmechanics" }
     ]
   },
   "sounds": {}
