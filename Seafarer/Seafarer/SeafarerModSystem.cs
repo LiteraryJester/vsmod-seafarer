@@ -51,6 +51,7 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             api.RegisterCollectibleBehaviorClass("ClamShuck", typeof(BehaviorClamShuck));
             api.RegisterCollectibleBehaviorClass("ShellCrush", typeof(BehaviorShellCrush));
             api.RegisterEntityBehaviorClass("seafarer:exposure", typeof(EntityBehaviorExposure));
+            api.RegisterEntityBehaviorClass("shipmechanics", typeof(EntityBehaviorShipMechanics));
             api.RegisterEntity("EntityProjectileBarbed", typeof(EntityProjectileBarbed));
             api.RegisterItemClass("ItemOceanLocatorMap", typeof(ItemOceanLocatorMap));
             api.RegisterEntity("EntityOutriggerBoat", typeof(EntityOutriggerBoat));
