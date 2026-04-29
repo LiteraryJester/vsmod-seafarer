@@ -154,7 +154,8 @@ public class EntityBehaviorShipMechanics : EntityBehavior
 
         // Bypass ReceiveDamage so the boat doesn't hurt-flash every tick;
         // storm wear-and-tear is environmental, not a "hit".
-        float damage = stormDamagePerSecond * intervalSeconds;
+        float damage = stormDamagePerSecond * intervalSeconds * stormDamageMultiplier;
+        if (damage <= 0f) return;
         healthBh.Health -= damage;
         entity.WatchedAttributes.MarkPathDirty("health");
 
