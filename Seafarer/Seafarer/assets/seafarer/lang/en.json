@@ -1386,5 +1386,25 @@ Need to portage? Strip off all storage and accessories first, then <hk>Shift</hk
 	"creature-seafarer:boat-outrigger-*-selectionbox-LowerMastAP": "Mast halyard (right-click to unfurl sail)",
 	"creature-seafarer:outrigger-construction-*-selectionbox-SeleAP": "Outrigger (under construction)",
 	"seafarer:boatrepair-fullhp": "This boat is already in perfect condition.",
-	"seafarer:boat-hull": "Hull: {0}/{1} {2}"
+	"seafarer:boat-hull": "Hull: {0}/{1} {2}",
+	"seafarer:boat-no-sail-slot": "This boat can't use a sail.",
+	"seafarer:sail-applied": "New sail rigged.",
+
+	"seafarer:trait-canvas-sail": "Canvas Sail",
+	"seafarer:trait-oiled-sail": "Oiled Sail",
+	"seafarer:trait-waxed-sail": "Waxed Sail",
+	"seafarer:trait-seasoned-hull": "Seasoned Hull",
+	"seafarer:trait-varnished-hull": "Varnished Hull",
+
+	"seafarer:rarity-common": "Common",
+	"seafarer:rarity-uncommon": "Uncommon",
+	"seafarer:rarity-rare": "Rare",
+	"seafarer:rarity-epic": "Epic",
+	"seafarer:rarity-legendary": "Legendary",
+
+	"seafarer:trait-line-common": "<font color=\"#9D9D9D\">■ {0} ({1})</font>",
+	"seafarer:trait-line-uncommon": "<font color=\"#1EFF00\">■ {0} ({1})</font>",
+	"seafarer:trait-line-rare": "<font color=\"#0070FF\">■ {0} ({1})</font>",
+	"seafarer:trait-line-epic": "<font color=\"#A335EE\">■ {0} ({1})</font>",
+	"seafarer:trait-line-legendary": "<font color=\"#FF8000\">■ {0} ({1})</font>"
 }
