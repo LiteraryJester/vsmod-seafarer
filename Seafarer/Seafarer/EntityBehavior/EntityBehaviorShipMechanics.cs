@@ -136,10 +136,20 @@ public class EntityBehaviorShipMechanics : EntityBehavior
 
         if (stormRequiresDeepWater && !IsOverDeepWater(pos)) return;
 
+        var healthBh = entity.GetBehavior<EntityBehaviorHealth>();
+        if (healthBh == null) return;
+
+        // Bypass ReceiveDamage so the boat doesn't hurt-flash every tick;
+        // storm wear-and-tear is environmental, not a "hit".
         float damage = stormDamagePerSecond * intervalSeconds;
-        entity.ReceiveDamage(
-            new DamageSource { Source = EnumDamageSource.Weather, Type = EnumDamageType.Gravity },
-            damage);
+        healthBh.Health -= damage;
+        entity.WatchedAttributes.MarkPathDirty("health");
+
+        if (healthBh.Health <= 0f)
+        {
+            entity.Die(EnumDespawnReason.Death,
+                new DamageSource { Source = EnumDamageSource.Weather, Type = EnumDamageType.Gravity });
+        }
     }
 
     private bool IsOverDeepWater(BlockPos boatPos)
