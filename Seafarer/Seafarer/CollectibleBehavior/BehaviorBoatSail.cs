@@ -27,6 +27,10 @@ public class BehaviorBoatSail : CollectibleBehavior
     {
         if (entitySel?.Entity == null) return;
 
+        // Ctrl+right-click to apply a sail; bare right-click belongs to vanilla
+        // boat interactions (mount, accessories, etc).
+        if (!byEntity.Controls.CtrlKey) return;
+
         var ship = entitySel.Entity.GetBehavior<EntityBehaviorShipMechanics>();
         if (ship == null) return;
 
