@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
@@ -323,7 +324,6 @@ public class EntityBehaviorShipMechanics : EntityBehavior
             float baseHp = cfg?["health"].AsFloat(healthBh.BaseMaxHealth) ?? healthBh.BaseMaxHealth;
             float bonus = 0f;
             foreach (var t in traits) bonus += t.HealthBonus;
-            float oldMax = healthBh.MaxHealth;
             healthBh.BaseMaxHealth = baseHp + bonus;
             healthBh.UpdateMaxHealth();
             // Clamp current HP to the new max if we lost capacity (e.g., sail downgrade).
@@ -348,9 +348,9 @@ public class EntityBehaviorShipMechanics : EntityBehavior
         stormDamageMultiplier = scale;
     }
 
-    private System.Collections.Generic.List<BoatTrait> ActiveTraits()
+    private List<BoatTrait> ActiveTraits()
     {
-        var list = new System.Collections.Generic.List<BoatTrait>();
+        var list = new List<BoatTrait>();
         foreach (var source in new[] { "material", "sail" })
         {
             var code = GetTraitCode(source);
@@ -369,7 +369,7 @@ public class EntityBehaviorShipMechanics : EntityBehavior
         RecomputeTraitEffects();
         if (healthBh != null && healthBh.MaxHealth > oldMax)
         {
-            healthBh.Health = System.Math.Min(healthBh.Health + (healthBh.MaxHealth - oldMax), healthBh.MaxHealth);
+            healthBh.Health = Math.Min(healthBh.Health + (healthBh.MaxHealth - oldMax), healthBh.MaxHealth);
         }
     }
 }
