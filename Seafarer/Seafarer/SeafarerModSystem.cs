@@ -76,6 +76,7 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
         public override void AssetsFinalize(ICoreAPI api)
         {
             base.AssetsFinalize(api);
+            BoatTraitRegistry.Load(api);
             if (api is ICoreServerAPI sapi)
             {
                 LoadConfigs(sapi, log: true);
