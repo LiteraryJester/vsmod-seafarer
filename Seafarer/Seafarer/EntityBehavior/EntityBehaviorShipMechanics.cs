@@ -195,6 +195,14 @@ public class EntityBehaviorShipMechanics : EntityBehavior
         infotext.AppendLine(Lang.Get("seafarer:boat-hull",
             (int)Math.Ceiling(health), (int)maxHealth,
             new string('█', filled) + new string('░', barWidth - filled)));
+
+        var traits = ActiveTraits();
+        foreach (var t in traits)
+        {
+            string name = Lang.Get("seafarer:trait-" + t.Code);
+            string rarity = Lang.Get("seafarer:rarity-" + t.Rarity.LangKey());
+            infotext.AppendLine(Lang.Get("seafarer:trait-line-" + t.Rarity.LangKey(), name, rarity));
+        }
     }
 
     public override void OnEntityDeath(DamageSource damageSourceForDeath)
