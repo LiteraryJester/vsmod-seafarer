@@ -87,6 +87,9 @@ public class EntityBehaviorShipMechanics : EntityBehavior
         {
             healthBh.Health = healthBh.MaxHealth;
         }
+
+        // Boats don't heal themselves — only player repair.
+        entity.WatchedAttributes.SetFloat("regenSpeed", 0f);
     }
 
     public override void OnGameTick(float deltaTime)
