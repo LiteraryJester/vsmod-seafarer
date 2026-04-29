@@ -5,6 +5,6 @@
     "value": [
       { "name": "boatrepair", "hpPerLitre": 20.0, "litresPerUse": 0.25 }
     ],
-    "file": "survival:itemtypes/liquid/glueportion.json"
+    "file": "game:itemtypes/liquid/glueportion.json"
   }
 ]
