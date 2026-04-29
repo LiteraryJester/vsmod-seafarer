@@ -34,24 +34,6 @@
       "ready": "",
       "forwards": "",
       "backwards": ""
-    },
-    "extendShipMechanicsByType": {
-      "*-varnished": {
-        "health": 280,
-        "hasSailSlot": true,
-        "materialTraits": { "varnished": "varnished-hull" },
-        "collision": { "minSpeed": 0.30, "damagePerSpeedUnit": 8.0, "cooldownSeconds": 1.0 },
-        "storm": { "minWindSpeed": 0.65, "damagePerSecond": 0.4, "requiresDeepWater": true },
-        "wreckage": { "dropFraction": 0.4, "dropFloating": true }
-      },
-      "*-seasoned": {
-        "health": 200,
-        "hasSailSlot": true,
-        "materialTraits": { "seasoned": "seasoned-hull" },
-        "collision": { "minSpeed": 0.30, "damagePerSpeedUnit": 8.0, "cooldownSeconds": 1.0 },
-        "storm": { "minWindSpeed": 0.65, "damagePerSecond": 0.4, "requiresDeepWater": true },
-        "wreckage": { "dropFraction": 0.4, "dropFloating": true }
-      }
     }
   },
   "hitboxSize": { "x": 3, "y": 1.0, "z": 5 },
@@ -224,9 +206,7 @@
       { "code": "hidewatersurface", "hideWaterElement": "ORIGIN/hideWater/*" },
       { "code": "selectionboxes" },
       { "code": "rideableaccessories" },
-      { "code": "creaturecarrier" },
-      { "code": "health" },
-      { "code": "shipmechanics" }
+      { "code": "creaturecarrier" }
     ]
   },
   "server": {
@@ -235,9 +215,7 @@
       { "code": "passivephysicsmultibox" },
       { "code": "selectionboxes" },
       { "code": "rideableaccessories" },
-      { "code": "creaturecarrier" },
-      { "code": "health" },
-      { "code": "shipmechanics" }
+      { "code": "creaturecarrier" }
     ]
   },
   "sounds": {}
