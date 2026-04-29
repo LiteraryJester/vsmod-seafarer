@@ -1,0 +1,10 @@
+[
+  {
+    "op": "addmerge",
+    "path": "/behaviors",
+    "value": [
+      { "name": "boatsail", "trait": "oiled-sail" }
+    ],
+    "file": "seafarer:itemtypes/resource/oiled-canvas-sail.json"
+  }
+]
