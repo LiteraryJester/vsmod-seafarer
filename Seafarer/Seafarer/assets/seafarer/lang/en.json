@@ -1385,5 +1385,6 @@ Need to portage? Strip off all storage and accessories first, then <hk>Shift</hk
 	"creature-seafarer:boat-outrigger-*-selectionbox-CargoFore2": "Fore cargo (rear)",
 	"creature-seafarer:boat-outrigger-*-selectionbox-LowerMastAP": "Mast halyard (right-click to unfurl sail)",
 	"creature-seafarer:outrigger-construction-*-selectionbox-SeleAP": "Outrigger (under construction)",
-	"seafarer:boatrepair-fullhp": "This boat is already in perfect condition."
+	"seafarer:boatrepair-fullhp": "This boat is already in perfect condition.",
+	"seafarer:boat-hull": "Hull: {0}/{1} {2}"
 }

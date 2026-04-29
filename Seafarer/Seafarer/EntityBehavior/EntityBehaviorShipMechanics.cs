@@ -1,6 +1,8 @@
 using System;
+using System.Text;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
+using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
@@ -166,6 +168,24 @@ public class EntityBehaviorShipMechanics : EntityBehavior
             probe.Y--;
         }
         return true;
+    }
+
+    public override void GetInfoText(StringBuilder infotext)
+    {
+        var healthBh = entity.GetBehavior<EntityBehaviorHealth>();
+        if (healthBh == null) return;
+
+        float health = Math.Max(healthBh.Health, 0f);
+        float maxHealth = healthBh.MaxHealth;
+        if (maxHealth <= 0f) return;
+
+        const int barWidth = 16;
+        int filled = (int)Math.Round(barWidth * health / maxHealth);
+        filled = GameMath.Clamp(filled, 0, barWidth);
+
+        infotext.AppendLine(Lang.Get("seafarer:boat-hull",
+            (int)Math.Ceiling(health), (int)maxHealth,
+            new string('█', filled) + new string('░', barWidth - filled)));
     }
 
     public override void OnEntityDeath(DamageSource damageSourceForDeath)
