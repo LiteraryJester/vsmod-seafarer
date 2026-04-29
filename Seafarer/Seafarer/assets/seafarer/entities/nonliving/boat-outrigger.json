@@ -38,12 +38,16 @@
     "extendShipMechanicsByType": {
       "*-varnished": {
         "health": 280,
+        "hasSailSlot": true,
+        "materialTraits": { "varnished": "varnished-hull" },
         "collision": { "minSpeed": 0.30, "damagePerSpeedUnit": 8.0, "cooldownSeconds": 1.0 },
         "storm": { "minWindSpeed": 0.65, "damagePerSecond": 0.4, "requiresDeepWater": true },
         "wreckage": { "dropFraction": 0.4, "dropFloating": true }
       },
       "*-seasoned": {
         "health": 200,
+        "hasSailSlot": true,
+        "materialTraits": { "seasoned": "seasoned-hull" },
         "collision": { "minSpeed": 0.30, "damagePerSpeedUnit": 8.0, "cooldownSeconds": 1.0 },
         "storm": { "minWindSpeed": 0.65, "damagePerSecond": 0.4, "requiresDeepWater": true },
         "wreckage": { "dropFraction": 0.4, "dropFloating": true }

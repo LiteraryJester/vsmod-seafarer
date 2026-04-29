@@ -28,6 +28,7 @@
     "path": "/attributes/extendShipMechanics",
     "value": {
       "health": 120,
+      "hasSailSlot": true,
       "collision": { "minSpeed": 0.30, "damagePerSpeedUnit": 8.0, "cooldownSeconds": 1.0 },
       "storm": { "minWindSpeed": 0.65, "damagePerSecond": 0.4, "requiresDeepWater": true },
       "wreckage": { "dropFraction": 0.4, "dropFloating": true }
