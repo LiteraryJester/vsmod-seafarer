@@ -97,6 +97,9 @@ public class EntityBehaviorShipMechanics : EntityBehavior
 
         // Boats don't heal themselves — only player repair.
         entity.WatchedAttributes.SetFloat("regenSpeed", 0f);
+
+        if (onFirstSpawn) ResolveMaterialTrait();
+        RecomputeTraitEffects();
     }
 
     public override void OnGameTick(float deltaTime)
@@ -370,6 +373,26 @@ public class EntityBehaviorShipMechanics : EntityBehavior
         if (healthBh != null && healthBh.MaxHealth > oldMax)
         {
             healthBh.Health = Math.Min(healthBh.Health + (healthBh.MaxHealth - oldMax), healthBh.MaxHealth);
+        }
+    }
+
+    private void ResolveMaterialTrait()
+    {
+        if (cfg == null || !cfg.KeyExists("materialTraits")) return;
+        var map = cfg["materialTraits"].Token as Newtonsoft.Json.Linq.JObject;
+        if (map == null) return;
+
+        string code = entity.Code.ToString();
+        foreach (var prop in map.Properties())
+        {
+            // The key is a material identifier (e.g., "seasoned", "varnished").
+            // Match if the entity code contains it as a hyphen-delimited segment.
+            string segment = "-" + prop.Name;
+            if (code.EndsWith(segment) || code.Contains(segment + "-"))
+            {
+                ApplyTrait("material", prop.Value.ToString());
+                return;
+            }
         }
     }
 }
