@@ -34,6 +34,10 @@ public class EntityBehaviorShipMechanics : EntityBehavior
     private float wreckageDropFraction = 0.4f;
     private bool wreckageDropFloating = true;
 
+    private float stormDamageMultiplier = 1f;
+
+    public bool HasSailSlot => cfg?["hasSailSlot"].AsBool(false) ?? false;
+
     public EntityBehaviorShipMechanics(Entity entity) : base(entity) { }
 
     public override string PropertyName() => Code;
@@ -268,5 +272,104 @@ public class EntityBehaviorShipMechanics : EntityBehavior
         }
         var item = api.World.GetItem(loc);
         return item == null ? null : new ItemStack(item, quantity);
+    }
+
+    private TreeAttribute GetOrCreateTraitTree()
+    {
+        var tree = entity.WatchedAttributes.GetTreeAttribute("shipTraits") as TreeAttribute;
+        if (tree == null)
+        {
+            tree = new TreeAttribute();
+            entity.WatchedAttributes.SetAttribute("shipTraits", tree);
+        }
+        return tree;
+    }
+
+    private string? GetTraitCode(string source)
+    {
+        var tree = entity.WatchedAttributes.GetTreeAttribute("shipTraits");
+        var sub = tree?.GetTreeAttribute(source);
+        return sub?.GetString("code");
+    }
+
+    public void ApplyTrait(string source, string code)
+    {
+        var tree = GetOrCreateTraitTree();
+        var sub = new TreeAttribute();
+        sub.SetString("code", code);
+        tree.SetAttribute(source, sub);
+        entity.WatchedAttributes.MarkPathDirty("shipTraits");
+    }
+
+    public string? RemoveTrait(string source)
+    {
+        var tree = entity.WatchedAttributes.GetTreeAttribute("shipTraits");
+        if (tree == null) return null;
+        var sub = tree.GetTreeAttribute(source);
+        if (sub == null) return null;
+        var code = sub.GetString("code");
+        tree.RemoveAttribute(source);
+        entity.WatchedAttributes.MarkPathDirty("shipTraits");
+        return code;
+    }
+
+    public void RecomputeTraitEffects()
+    {
+        var traits = ActiveTraits();
+
+        var healthBh = entity.GetBehavior<EntityBehaviorHealth>();
+        if (healthBh != null)
+        {
+            float baseHp = cfg?["health"].AsFloat(healthBh.BaseMaxHealth) ?? healthBh.BaseMaxHealth;
+            float bonus = 0f;
+            foreach (var t in traits) bonus += t.HealthBonus;
+            float oldMax = healthBh.MaxHealth;
+            healthBh.BaseMaxHealth = baseHp + bonus;
+            healthBh.UpdateMaxHealth();
+            // Clamp current HP to the new max if we lost capacity (e.g., sail downgrade).
+            if (healthBh.Health > healthBh.MaxHealth) healthBh.Health = healthBh.MaxHealth;
+            // If MaxHP grew, keep current HP unchanged (player feels the buffer); the apply
+            // path bumps current Health by the delta separately (see ApplyAndCreditDelta).
+        }
+
+        float speedBonus = 0f;
+        foreach (var t in traits) speedBonus += t.SpeedBonus;
+        if (speedBonus > 0f)
+        {
+            entity.Stats.Set("walkspeed", "shipTraits", 1f + speedBonus, persistent: true);
+        }
+        else
+        {
+            entity.Stats.Remove("walkspeed", "shipTraits");
+        }
+
+        float scale = 1f;
+        foreach (var t in traits) scale *= t.StormDamageScale;
+        stormDamageMultiplier = scale;
+    }
+
+    private System.Collections.Generic.List<BoatTrait> ActiveTraits()
+    {
+        var list = new System.Collections.Generic.List<BoatTrait>();
+        foreach (var source in new[] { "material", "sail" })
+        {
+            var code = GetTraitCode(source);
+            if (code == null) continue;
+            var t = BoatTraitRegistry.Get(code);
+            if (t != null) list.Add(t);
+        }
+        return list;
+    }
+
+    public void ApplyAndCreditDelta(string source, string newCode)
+    {
+        var healthBh = entity.GetBehavior<EntityBehaviorHealth>();
+        float oldMax = healthBh?.MaxHealth ?? 0f;
+        ApplyTrait(source, newCode);
+        RecomputeTraitEffects();
+        if (healthBh != null && healthBh.MaxHealth > oldMax)
+        {
+            healthBh.Health = System.Math.Min(healthBh.Health + (healthBh.MaxHealth - oldMax), healthBh.MaxHealth);
+        }
     }
 }
