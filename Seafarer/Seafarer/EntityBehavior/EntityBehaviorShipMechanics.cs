@@ -248,7 +248,7 @@ public class EntityBehaviorShipMechanics : EntityBehavior
 
         foreach (var drop in drops)
         {
-            string code = drop["code"].AsString();
+            string? code = drop["code"].AsString();
             string type = drop["type"].AsString("item");
             int quantity = drop["quantity"].AsInt(1);
             if (string.IsNullOrEmpty(code) || quantity <= 0) continue;

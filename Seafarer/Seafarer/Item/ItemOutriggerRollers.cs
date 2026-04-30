@@ -21,6 +21,7 @@ public class ItemOutriggerRollers : ItemRoller
     {
         if (blockSel == null) return;
         var player = (byEntity as EntityPlayer)?.Player;
+        if (player == null) return;
 
         if (slot.StackSize < 5)
         {

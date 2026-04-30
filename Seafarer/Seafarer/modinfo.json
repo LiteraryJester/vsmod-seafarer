@@ -10,7 +10,7 @@
     ],
     "version": "0.5.0",
     "dependencies": {
-        "game": "1.22.0-rc.7",
+        "game": "1.22.0",
         "progressionframework": "1.0.0"
     }
 }

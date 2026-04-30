@@ -10,7 +10,7 @@
 		{ code: "color", states: ["blue", "fire", "red"] },
 		{ code: "state", states: ["raw"] }
 	],
-	shape: { base: "game:block/clay/planter/raw" },
+	shape: { base: "seafarer:block/clay/grow-pot/growpot-raw" },
 	textures: { all: { base: "game:block/clay/{color}clay" } },
 	attributes: {
 		tempGlowMode: 1,

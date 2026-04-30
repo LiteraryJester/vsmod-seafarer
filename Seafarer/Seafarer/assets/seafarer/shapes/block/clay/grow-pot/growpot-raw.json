@@ -1,0 +1,68 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textures": {
+		"ceramic": "block/clay/ceramic",
+		"sides": "block/clay/planter/amber",
+		"soil": "block/clay/planter/soil"
+	},
+	"elements": [
+		{
+			"name": "bottom",
+			"from": [ 3.0, 0.0, 3.0 ],
+			"to": [ 13.0, 1.0, 13.0 ],
+			"faces": {
+				"up": { "texture": "#ceramic", "uv": [ 3.0, 3.0, 13.0, 13.0 ] },
+				"down": { "texture": "#ceramic", "uv": [ 2.0, 3.0, 12.0, 13.0 ] }
+			}
+		},
+		{
+			"name": "N",
+			"from": [ 2.0, 0.0, 2.0 ],
+			"to": [ 14.0, 16.0, 3.0 ],
+			"faces": {
+				"north": { "texture": "#sides", "uv": [ 2.0, 0.0, 14.0, 16.0 ] },
+				"south": { "texture": "#ceramic", "uv": [ 2.0, 0.0, 14.0, 16.0 ] },
+				"up":    { "texture": "#sides", "uv": [ 2.0, 6.0, 14.0, 7.0 ], "rotation": 180 },
+				"down":  { "texture": "#ceramic", "uv": [ 0.0, 0.0, 12.0, 1.0 ] }
+			}
+		},
+		{
+			"name": "S",
+			"from": [ 2.0, 0.0, 13.0 ],
+			"to": [ 14.0, 16.0, 14.0 ],
+			"faces": {
+				"north": { "texture": "#ceramic", "uv": [ 2.0, 0.0, 14.0, 16.0 ] },
+				"south": { "texture": "#sides", "uv": [ 2.0, 0.0, 14.0, 16.0 ] },
+				"up":    { "texture": "#sides", "uv": [ 2.0, 6.0, 14.0, 7.0 ] },
+				"down":  { "texture": "#ceramic", "uv": [ 0.0, 0.0, 12.0, 1.0 ] }
+			}
+		},
+		{
+			"name": "W",
+			"from": [ 2.0, 0.0, 2.0 ],
+			"to": [ 3.0, 16.0, 14.0 ],
+			"faces": {
+				"east":  { "texture": "#ceramic", "uv": [ 0.0, 0.0, 12.0, 16.0 ] },
+				"west":  { "texture": "#sides", "uv": [ 2.0, 0.0, 14.0, 16.0 ] },
+				"up":    { "texture": "#sides", "uv": [ 3.0, 6.0, 13.0, 7.0 ], "rotation": 90 },
+				"down":  { "texture": "#ceramic", "uv": [ 0.0, 0.0, 1.0, 10.0 ] }
+			}
+		},
+		{
+			"name": "E",
+			"from": [ 13.0, 0.0, 2.0 ],
+			"to": [ 14.0, 16.0, 14.0 ],
+			"faces": {
+				"east":  { "texture": "#sides", "uv": [ 2.0, 0.0, 14.0, 16.0 ] },
+				"west":  { "texture": "#ceramic", "uv": [ 3.0, 0.0, 15.0, 16.0 ] },
+				"up":    { "texture": "#sides", "uv": [ 3.0, 6.0, 13.0, 7.0 ], "rotation": 270 },
+				"down":  { "texture": "#ceramic", "uv": [ 0.0, 0.0, 1.0, 10.0 ] }
+			}
+		}
+	]
+}

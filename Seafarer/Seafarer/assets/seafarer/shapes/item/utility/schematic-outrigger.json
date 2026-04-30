@@ -8,8 +8,8 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"map-blank": "item/utility/map-blank",
-		"schematic": "item/utility/schematic-glider"
+		"map-blank": "game:item/utility/map-blank",
+		"schematic": "game:item/utility/schematic-glider"
 	},
 	"elements": [
 		{

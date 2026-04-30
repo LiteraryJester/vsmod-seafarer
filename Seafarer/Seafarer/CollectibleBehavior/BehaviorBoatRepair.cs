@@ -124,7 +124,7 @@ public class BehaviorBoatRepair : CollectibleBehavior
         content.StackSize -= needed;
         if (content.StackSize <= 0)
         {
-            container.SetContent(stack, null);
+            container.SetContent(stack, null!);
         }
         else
         {

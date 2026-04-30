@@ -31,7 +31,7 @@ public static class EntityBoatConstructionSpawnPatch
         if (boatType == "sailed") return true; // let the original run unchanged
 
         var rcc = rccRef(__instance);
-        if (!rcc.StoredWildCards.TryGetValue("wood", out string wood))
+        if (!rcc.StoredWildCards.TryGetValue("wood", out string? wood))
         {
             __instance.Api.Logger.Warning(
                 "[seafarer] EntityBoatConstructionSpawnPatch: no wood wildcard on {0} — boat not spawned.",
@@ -40,7 +40,7 @@ public static class EntityBoatConstructionSpawnPatch
         }
 
         // Replicate getCenterPos (private) inline.
-        Vec3f nowOff = null;
+        Vec3f? nowOff = null;
         var apap = __instance.AnimManager.Animator?.GetAttachmentPointPose("Center");
         if (apap != null)
         {
