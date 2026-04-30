@@ -1,0 +1,222 @@
+{
+  "code": "boat",
+  "class": "EntityOutriggerBoat",
+  "tags": ["inanimate", "vehicle"],
+  "weight": 800,
+  "variantgroups": [
+    { "code": "type", "states": ["outrigger"] },
+    {
+      "code": "material",
+      "states": ["seasoned", "varnished"],
+      "loadFromProperties": "block/wood"
+    }
+  ],
+  "skipVariants": ["*-aged", "*-veryaged", "*-rotten", "*-veryrotten"],
+  "attributes": {
+    "disabledweatherVaneAnimCode": "weathervane",
+    "deconstructible": true,
+    "deconstructDrops": [
+      { "type": "item", "code": "game:plank-{material}", "quantity": 32 },
+      {
+        "type": "block",
+        "code": "game:supportbeam-{material}",
+        "quantity": 24
+      },
+      { "type": "item", "code": "game:rope", "quantity": 12 },
+      { "type": "block", "code": "game:linen-normal-down", "quantity": 8 }
+    ],
+    "shouldSwivelFromMotion": false,
+    "speedMultiplier": 2,
+    "swimmingOffsetY": 0.7,
+    "unfurlSails": true,
+    "mountAnimations": {
+      "idle": "sitboatidle",
+      "ready": "",
+      "forwards": "",
+      "backwards": ""
+    }
+  },
+  "hitboxSize": { "x": 3, "y": 1.0, "z": 5 },
+  "behaviorConfigs": {
+    "ellipsoidalrepulseagents": {
+      "offset": { "x": 0, "z": 0 },
+      "radius": { "x": 3.75, "y": 1.5, "z": 4.5 }
+    },
+    "passivephysicsmultibox": {
+      "collisionBoxes": [
+        { "x1": -0.75, "y1": 0, "z1": -3.75, "x2": 0.75, "y2": 1.0, "z2": 3.75 },
+        { "x1": -3.0, "y1": 0, "z1": -2.25, "x2": -2.1, "y2": 0.4, "z2": 2.25 },
+        { "x1": 2.1, "y1": 0, "z1": -2.25, "x2": 3.0, "y2": 0.4, "z2": 2.25 }
+      ],
+      "groundDragFactor": 1,
+      "airDragFallingFactor": 0.5,
+      "gravityFactor": 1.0
+    },
+    "creaturecarrier": {
+      "seats": [
+        {
+          "apName": "AftSeat",
+          "controllable": true,
+          "bodyYawLimit": 0.4,
+          "eyeHeight": 1
+        },
+        {
+          "apName": "ForeSeat1",
+          "controllable": false,
+          "bodyYawLimit": 0.4,
+          "eyeHeight": 1
+        },
+        {
+          "apName": "ForeSeat2",
+          "controllable": false,
+          "bodyYawLimit": 0.4,
+          "eyeHeight": 1
+        }
+      ]
+    },
+    "rideableaccessories": {
+      "dropContentsOnDeath": true,
+      "wearableSlots": [
+        {
+          "code": "Oar Storage",
+          "forCategoryCodes": ["oar"],
+          "attachmentPointCode": "OarStorage",
+          "stepParentTo": { "": { "elementName": "OarStorage" } }
+        },
+        {
+          "code": "Fishing Rod",
+          "forCategoryCodes": ["fishingrod"],
+          "attachmentPointCode": "FishingrodStorage",
+          "stepParentTo": { "": { "elementName": "FishingrodStorage" } }
+        },
+        {
+          "code": "Sail Recolor",
+          "forCategoryCodes": ["sailrecolor"],
+          "attachmentPointCode": "SailExtraStorageAP"
+        },
+        {
+          "code": "Fore Lantern",
+          "forCategoryCodes": ["lantern"],
+          "attachmentPointCode": "LanternFor",
+          "stepParentTo": { "": { "elementName": "LanternFor" } }
+        },
+        {
+          "code": "Aft Lantern",
+          "forCategoryCodes": ["lantern"],
+          "attachmentPointCode": "LanternAft",
+          "stepParentTo": { "": { "elementName": "LanternAft" } }
+        },
+        {
+          "code": "Platform Storage 1",
+          "forCategoryCodes": ["chest", "basket", "storagevessel", "lantern", "growpot", "barrel"],
+          "attachmentPointCode": "PlatformStorage1",
+          "stepParentTo": { "": { "elementName": "PlatformStorage1" } }
+        },
+        {
+          "code": "Platform Storage 2",
+          "forCategoryCodes": ["chest", "basket", "storagevessel", "lantern", "growpot", "barrel"],
+          "attachmentPointCode": "PlatformStorage2",
+          "stepParentTo": { "": { "elementName": "PlatformStorage2" } }
+        },
+        {
+          "code": "Cargo Fore 1",
+          "forCategoryCodes": ["chest", "basket", "storagevessel", "lantern", "growpot", "barrel", "ropetiepost"],
+          "attachmentPointCode": "CargoFore1",
+          "behindSlots": ["Cargo Fore 2"],
+          "stepParentTo": { "": { "elementName": "CargoFor1" } }
+        },
+        {
+          "code": "Cargo Fore 2",
+          "forCategoryCodes": ["chest", "basket", "storagevessel", "lantern", "growpot", "barrel"],
+          "attachmentPointCode": "CargoFore2",
+          "stepParentTo": { "": { "elementName": "CargoFore2" } }
+        },
+        {
+          "code": "Lower Mast Storage",
+          "forCategoryCodes": ["rope"],
+          "attachmentPointCode": "LowerMastAP",
+          "stepParentTo": { "": { "elementName": "LowerMastStorage" } }
+        },
+        { "code": "AftSeat", "forCategoryCodes": [] },
+        { "code": "ForeSeat1", "forCategoryCodes": [] },
+        { "code": "ForeSeat2", "forCategoryCodes": [] }
+      ]
+    },
+    "selectionboxes": {
+      "selectionBoxes": [
+        "AftSeat",
+        "ForeSeat1",
+        "ForeSeat2",
+        "OarStorage",
+        "FishingrodStorage",
+        "SailExtraStorageAP",
+        "LanternFor",
+        "LanternAft",
+        "PlatformStorage1",
+        "PlatformStorage2",
+        "CargoFore1",
+        "CargoFore2",
+        "LowerMastAP"
+      ]
+    }
+  },
+  "client": {
+    "size": 1,
+    "renderer": "Shape",
+    "shape": {
+      "base": "entity/nonliving/boat/boat-outrigger",
+      "ignoreElements": ["hideWater"]
+    },
+    "animations": [
+      {
+        "code": "turnLeft",
+        "animation": "turnLeft",
+        "animationSpeed": 1,
+        "easeInSpeed": 2,
+        "easeOutSpeed": 2
+      },
+      {
+        "code": "turnRight",
+        "animation": "turnRight",
+        "animationSpeed": 1,
+        "easeInSpeed": 2,
+        "easeOutSpeed": 2
+      },
+      {
+        "code": "weathervane",
+        "animation": "weathervane",
+        "animationSpeed": 0,
+        "weight": 1,
+        "blendMode": "AddAverage"
+      }
+    ],
+    "textures": {
+      "material": { "base": "game:block/wood/debarked/{material}" },
+      "wood": { "base": "game:block/wood/debarked/{material}" },
+      "planks": { "base": "game:block/wood/planks/{material}1" },
+      "seasoned1": { "base": "game:block/wood/planks/{material}1" },
+      "plain": { "base": "game:block/cloth/linen/plain" },
+      "rope": { "base": "game:item/resource/rope" },
+      "transparent": { "base": "game:block/transparent" }
+    },
+    "behaviors": [
+      { "code": "ellipsoidalrepulseagents" },
+      { "code": "passivephysicsmultibox" },
+      { "code": "interpolateposition" },
+      { "code": "hidewatersurface", "hideWaterElement": "ORIGIN/hideWater/*" },
+      { "code": "selectionboxes" },
+      { "code": "rideableaccessories" },
+      { "code": "creaturecarrier" }
+    ]
+  },
+  "server": {
+    "behaviors": [
+      { "code": "ellipsoidalrepulseagents" },
+      { "code": "passivephysicsmultibox" },
+      { "code": "selectionboxes" },
+      { "code": "rideableaccessories" },
+      { "code": "creaturecarrier" }
+    ]
+  },
+  "sounds": {}
+}

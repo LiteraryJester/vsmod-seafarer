@@ -1,0 +1,202 @@
+{
+  "code": "dawnmarie-plantation",
+  "npc": "dawnmarie",
+  "scope": "server",
+  "groupLangKey": "quest-group-rebuilding-tortuga",
+  "titleLangKey": "quest-dawnmarie-plantation-title",
+  "descriptionLangKey": "quest-dawnmarie-plantation-desc",
+  "autoEnable": true,
+  "requiredObjectiveCount": 6,
+  "objectives": [
+    {
+      "code": "rice",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-rice", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-rice", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
+    },
+    {
+      "code": "soybean",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-soybean", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-soybean", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
+    },
+    {
+      "code": "amaranth",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-amaranth", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-amaranth", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
+    },
+    {
+      "code": "cassava",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-cassava", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-cassava", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
+    },
+    {
+      "code": "peanut",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-peanut", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-peanut", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
+    },
+    {
+      "code": "pineapple",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-pineapple", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-pineapple", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
+    },
+    {
+      "code": "sunflower",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-sunflower", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-sunflower", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
+    },
+    {
+      "code": "rye",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-rye", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-rye", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
+    },
+    {
+      "code": "parsnip",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-parsnip", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-parsnip", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
+    },
+    {
+      "code": "turnip",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-turnip", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-turnip", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
+    },
+    {
+      "code": "spelt",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-spelt", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-spelt", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
+    },
+    {
+      "code": "onion",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-onion", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-onion", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
+    },
+    {
+      "code": "flax",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-flax", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-flax", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
+    },
+    {
+      "code": "carrot",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-carrot", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-carrot", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
+    },
+    {
+      "code": "cabbage",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-cabbage", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-cabbage", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
+    },
+    {
+      "code": "pumpkin",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-pumpkin", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-pumpkin", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
+    },
+    {
+      "code": "licorice",
+      "type": "delivery",
+      "items": [{ "item": "game:seeds-licorice", "quantity": 10 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 10 },
+        { "type": "addSellingItem", "itemCode": "game:seeds-licorice", "itemType": "item", "stacksize": 4, "stockAvg": 8, "stockVar": 2, "priceAvg": 2, "priceVar": 1 }
+      ]
+    }
+  ],
+  "rewards": [
+    {
+      "type": "addSellingItem",
+      "itemCode": "seafarer:trainingbook-gardener",
+      "itemType": "item",
+      "stacksize": 1,
+      "stockAvg": 1,
+      "stockVar": 0,
+      "priceAvg": 40,
+      "priceVar": 5
+    },
+    {
+      "type": "incrementEntityVariable",
+      "variableName": "rebuilding-tier",
+      "variableScope": "global",
+      "amount": 1,
+      "thresholdValue": 4,
+      "thresholdVariable": "global.rebuilding-complete"
+    }
+  ]
+}

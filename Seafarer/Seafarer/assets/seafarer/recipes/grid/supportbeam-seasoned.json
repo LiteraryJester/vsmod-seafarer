@@ -1,0 +1,13 @@
+[
+    {
+        ingredientPattern: "HL",
+        ingredients: {
+            "H": { type: "item", tags: ["tool-saw"], isTool: true },
+            "L": { type: "item", code: "game:plank-seasoned", quantity: 2 }
+        },
+        width: 2,
+        height: 1,
+        shapeless: true,
+        output: { type: "block", code: "game:supportbeam-seasoned", quantity: 1 }
+    }
+]

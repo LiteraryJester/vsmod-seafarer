@@ -1,0 +1,152 @@
+{
+  "code": "dawnmarie-orchard",
+  "npc": "dawnmarie",
+  "scope": "server",
+  "groupLangKey": "quest-group-rebuilding-tortuga",
+  "titleLangKey": "quest-dawnmarie-orchard-title",
+  "descriptionLangKey": "quest-dawnmarie-orchard-desc",
+  "autoEnable": true,
+  "requiredObjectiveCount": 6,
+  "objectives": [
+    {
+      "code": "pinkapple",
+      "type": "delivery",
+      "items": [{ "item": "game:fruittree-cutting", "quantity": 1 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 20 },
+        { "type": "addSellingItem", "itemCode": "game:fruittree-cutting", "itemType": "block", "stacksize": 1, "stockAvg": 2, "stockVar": 1, "priceAvg": 8, "priceVar": 2, "attributes": { "type": "pinkapple" } }
+      ]
+    },
+    {
+      "code": "redapple",
+      "type": "delivery",
+      "items": [{ "item": "game:fruittree-cutting", "quantity": 1 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 20 },
+        { "type": "addSellingItem", "itemCode": "game:fruittree-cutting", "itemType": "block", "stacksize": 1, "stockAvg": 2, "stockVar": 1, "priceAvg": 8, "priceVar": 2, "attributes": { "type": "redapple" } }
+      ]
+    },
+    {
+      "code": "yellowapple",
+      "type": "delivery",
+      "items": [{ "item": "game:fruittree-cutting", "quantity": 1 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 20 },
+        { "type": "addSellingItem", "itemCode": "game:fruittree-cutting", "itemType": "block", "stacksize": 1, "stockAvg": 2, "stockVar": 1, "priceAvg": 8, "priceVar": 2, "attributes": { "type": "yellowapple" } }
+      ]
+    },
+    {
+      "code": "cherry",
+      "type": "delivery",
+      "items": [{ "item": "game:fruittree-cutting", "quantity": 1 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 20 },
+        { "type": "addSellingItem", "itemCode": "game:fruittree-cutting", "itemType": "block", "stacksize": 1, "stockAvg": 2, "stockVar": 1, "priceAvg": 8, "priceVar": 2, "attributes": { "type": "cherry" } }
+      ]
+    },
+    {
+      "code": "peach",
+      "type": "delivery",
+      "items": [{ "item": "game:fruittree-cutting", "quantity": 1 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 20 },
+        { "type": "addSellingItem", "itemCode": "game:fruittree-cutting", "itemType": "block", "stacksize": 1, "stockAvg": 2, "stockVar": 1, "priceAvg": 8, "priceVar": 2, "attributes": { "type": "peach" } }
+      ]
+    },
+    {
+      "code": "pear",
+      "type": "delivery",
+      "items": [{ "item": "game:fruittree-cutting", "quantity": 1 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 20 },
+        { "type": "addSellingItem", "itemCode": "game:fruittree-cutting", "itemType": "block", "stacksize": 1, "stockAvg": 2, "stockVar": 1, "priceAvg": 8, "priceVar": 2, "attributes": { "type": "pear" } }
+      ]
+    },
+    {
+      "code": "orange",
+      "type": "delivery",
+      "items": [{ "item": "game:fruittree-cutting", "quantity": 1 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 20 },
+        { "type": "addSellingItem", "itemCode": "game:fruittree-cutting", "itemType": "block", "stacksize": 1, "stockAvg": 2, "stockVar": 1, "priceAvg": 8, "priceVar": 2, "attributes": { "type": "orange" } }
+      ]
+    },
+    {
+      "code": "mango",
+      "type": "delivery",
+      "items": [{ "item": "game:fruittree-cutting", "quantity": 1 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 20 },
+        { "type": "addSellingItem", "itemCode": "game:fruittree-cutting", "itemType": "block", "stacksize": 1, "stockAvg": 2, "stockVar": 1, "priceAvg": 8, "priceVar": 2, "attributes": { "type": "mango" } }
+      ]
+    },
+    {
+      "code": "breadfruit",
+      "type": "delivery",
+      "items": [{ "item": "game:fruittree-cutting", "quantity": 1 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 20 },
+        { "type": "addSellingItem", "itemCode": "game:fruittree-cutting", "itemType": "block", "stacksize": 1, "stockAvg": 2, "stockVar": 1, "priceAvg": 8, "priceVar": 2, "attributes": { "type": "breadfruit" } }
+      ]
+    },
+    {
+      "code": "lychee",
+      "type": "delivery",
+      "items": [{ "item": "game:fruittree-cutting", "quantity": 1 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 20 },
+        { "type": "addSellingItem", "itemCode": "game:fruittree-cutting", "itemType": "block", "stacksize": 1, "stockAvg": 2, "stockVar": 1, "priceAvg": 8, "priceVar": 2, "attributes": { "type": "lychee" } }
+      ]
+    },
+    {
+      "code": "pomegranate",
+      "type": "delivery",
+      "items": [{ "item": "game:fruittree-cutting", "quantity": 1 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 20 },
+        { "type": "addSellingItem", "itemCode": "game:fruittree-cutting", "itemType": "block", "stacksize": 1, "stockAvg": 2, "stockVar": 1, "priceAvg": 8, "priceVar": 2, "attributes": { "type": "pomegranate" } }
+      ]
+    },
+    {
+      "code": "coconut",
+      "type": "delivery",
+      "items": [{ "item": "game:fruittree-cutting", "quantity": 1 }],
+      "required": 1,
+      "rewards": [
+        { "type": "awardTrainingXP", "training": "gardener", "xp": 20 },
+        { "type": "addSellingItem", "itemCode": "game:fruittree-cutting", "itemType": "block", "stacksize": 1, "stockAvg": 2, "stockVar": 1, "priceAvg": 8, "priceVar": 2, "attributes": { "type": "coconut" } }
+      ]
+    }
+  ],
+  "rewards": [
+    {
+      "type": "addSellingItem",
+      "itemCode": "seafarer:grow-pot-brown-fired",
+      "itemType": "block",
+      "stacksize": 1,
+      "stockAvg": 2,
+      "stockVar": 1,
+      "priceAvg": 20,
+      "priceVar": 4
+    },
+    {
+      "type": "incrementEntityVariable",
+      "variableName": "rebuilding-tier",
+      "variableScope": "global",
+      "amount": 1,
+      "thresholdValue": 4,
+      "thresholdVariable": "global.rebuilding-complete"
+    }
+  ]
+}

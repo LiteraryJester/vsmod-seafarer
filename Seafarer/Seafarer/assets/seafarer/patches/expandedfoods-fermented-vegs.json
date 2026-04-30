@@ -1,0 +1,43 @@
+[
+	// ==========================================
+	// Au Gratin - fermented vegetables (idx 2-3)
+	// ==========================================
+	{
+		"op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "expandedfoods:recipes/cooking/augratin.json",
+		"value": { "type": "item", "code": "seafarer:fermentedvegetable-*", "shapeElement": "bowl/vegetable 1/*" },
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "expandedfoods:recipes/cooking/augratin.json",
+		"value": { "type": "item", "code": "seafarer:fermentedvegetable-*", "shapeElement": "bowl/vegetable 2/*" },
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Hot Pasta - fermented vegetables (idx 2-3)
+	// ==========================================
+	{
+		"op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "expandedfoods:recipes/cooking/pastahot.json",
+		"value": { "type": "item", "code": "seafarer:fermentedvegetable-*", "shapeElement": "bowl/vegetable 1/*" },
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "expandedfoods:recipes/cooking/pastahot.json",
+		"value": { "type": "item", "code": "seafarer:fermentedvegetable-*", "shapeElement": "bowl/vegetable 2/*" },
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Rice and Beans - fermented vegetables (idx 2-3)
+	// ==========================================
+	{
+		"op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "expandedfoods:recipes/cooking/riceandbeans.json",
+		"value": { "type": "item", "code": "seafarer:fermentedvegetable-*", "shapeElement": "bowl/vegetable 1/*" },
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "expandedfoods:recipes/cooking/riceandbeans.json",
+		"value": { "type": "item", "code": "seafarer:fermentedvegetable-*", "shapeElement": "bowl/vegetable 2/*" },
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	}
+]

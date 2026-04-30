@@ -1,0 +1,81 @@
+[
+	// =====================================================================
+	// Add corn and coconut variants to base game cider portion
+	// =====================================================================
+	{ "op": "add", "path": "/variantGroups/0/states/-",
+	  "file": "game:itemtypes/liquid/cider.json",
+	  "value": "corn" },
+
+	{ "op": "add", "path": "/variantGroups/0/states/-",
+	  "file": "game:itemtypes/liquid/cider.json",
+	  "value": "coconut" },
+
+	// Distillation props for new ciders
+	{ "op": "addmerge", "path": "/attributes/distillationPropsbytype",
+	  "file": "game:itemtypes/liquid/cider.json",
+	  "value": {
+		"ciderportion-corn": {
+			"distilledStack": { "type": "item", "code": "spiritportion-corn" },
+			"ratio": 0.05
+		},
+		"ciderportion-coconut": {
+			"distilledStack": { "type": "item", "code": "spiritportion-coconut" },
+			"ratio": 0.1
+		}
+	  } },
+
+	// Cider container textures — remove wildcard, add ours, re-add wildcard so ours match first
+	{ "op": "remove", "path": "/attributes/waterTightContainerProps/texturebytype/*",
+	  "file": "game:itemtypes/liquid/cider.json" },
+	{ "op": "addmerge", "path": "/attributes/waterTightContainerProps/texturebytype",
+	  "file": "game:itemtypes/liquid/cider.json",
+	  "value": {
+		"*-corn": { "base": "game:block/food/pie/fill-pumpkin", "alpha": 180 },
+		"*-coconut": { "base": "seafarer:block/liquid/coconutwater", "alpha": 180 },
+		"*": { "base": "game:block/food/pie/fill-{fruit}", "alpha": 180 }
+	  } },
+
+	// Cider item textures — same pattern
+	{ "op": "remove", "path": "/texturebytype/*",
+	  "file": "game:itemtypes/liquid/cider.json" },
+	{ "op": "addmerge", "path": "/texturebytype",
+	  "file": "game:itemtypes/liquid/cider.json",
+	  "value": {
+		"*-corn": { "base": "game:block/food/pie/fill-pumpkin", "alpha": 180 },
+		"*-coconut": { "base": "seafarer:block/liquid/coconutwater", "alpha": 180 },
+		"*": { "base": "game:block/food/pie/fill-{fruit}", "alpha": 180 }
+	  } },
+
+	// =====================================================================
+	// Add corn and coconut variants to base game spirit portion
+	// =====================================================================
+	{ "op": "add", "path": "/variantGroups/0/states/-",
+	  "file": "game:itemtypes/liquid/spirit.json",
+	  "value": "corn" },
+
+	{ "op": "add", "path": "/variantGroups/0/states/-",
+	  "file": "game:itemtypes/liquid/spirit.json",
+	  "value": "coconut" },
+
+	// Spirit container textures
+	{ "op": "remove", "path": "/attributes/waterTightContainerProps/texturebytype/*",
+	  "file": "game:itemtypes/liquid/spirit.json" },
+	{ "op": "addmerge", "path": "/attributes/waterTightContainerProps/texturebytype",
+	  "file": "game:itemtypes/liquid/spirit.json",
+	  "value": {
+		"*-corn": { "base": "game:block/food/pie/fill-pumpkin", "alpha": 100 },
+		"*-coconut": { "base": "seafarer:block/liquid/coconutwater", "alpha": 100 },
+		"*": { "base": "game:block/food/pie/fill-{fruit}", "alpha": 100 }
+	  } },
+
+	// Spirit item textures
+	{ "op": "remove", "path": "/texturebytype/*",
+	  "file": "game:itemtypes/liquid/spirit.json" },
+	{ "op": "addmerge", "path": "/texturebytype",
+	  "file": "game:itemtypes/liquid/spirit.json",
+	  "value": {
+		"*-corn": { "base": "game:block/food/pie/fill-pumpkin", "alpha": 100 },
+		"*-coconut": { "base": "seafarer:block/liquid/coconutwater", "alpha": 100 },
+		"*": { "base": "game:block/food/pie/fill-{fruit}", "alpha": 100 }
+	  } }
+]

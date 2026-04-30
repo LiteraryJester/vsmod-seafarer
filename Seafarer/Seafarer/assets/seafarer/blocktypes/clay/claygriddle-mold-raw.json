@@ -1,0 +1,71 @@
+{
+  "code": "claygriddle-mold",
+  "class": "Block",
+  "behaviors": [
+    { "name": "GroundStorable", "properties": { "layout": "SingleCenter" } },
+    { "name": "Unplaceable" },
+    { "name": "RightClickPickup" }
+  ],
+  "variantgroups": [
+    { "code": "color", "states": ["blue", "fire", "red"] },
+    { "code": "materialtype", "states": ["raw"] }
+  ],
+
+  "shape": { "base": "seafarer:block/clay/claygriddle-mold" },
+  "textures": { "surface": { "base": "game:block/clay/{color}clay" } },
+  "drawtype": "JSON",
+
+  "combustiblePropsByType": {
+    "claygriddle-mold-fire-raw": {
+      "meltingPoint": 600,
+      "meltingDuration": 30,
+      "smeltedRatio": 1,
+      "smeltingType": "fire",
+      "smeltedStack": { "type": "block", "code": "seafarer:claygriddle-mold-fire-fired" },
+      "requiresContainer": false
+    },
+    "claygriddle-mold-blue-raw": {
+      "meltingPoint": 600,
+      "meltingDuration": 30,
+      "smeltedRatio": 1,
+      "smeltingType": "fire",
+      "smeltedStack": { "type": "block", "code": "seafarer:claygriddle-mold-blue-fired" },
+      "requiresContainer": false
+    },
+    "claygriddle-mold-red-raw": {
+      "meltingPoint": 600,
+      "meltingDuration": 30,
+      "smeltedRatio": 1,
+      "smeltingType": "fire",
+      "smeltedStack": { "type": "block", "code": "seafarer:claygriddle-mold-red-fired" },
+      "requiresContainer": false
+    }
+  },
+
+  "creativeinventory": { "general": ["*"], "seafarer": ["*"] },
+  "blockmaterial": "Ceramic",
+  "replaceable": 700,
+  "resistance": 1.5,
+  "maxStackSize": 8,
+  "lightAbsorption": 0,
+  "sidesolid": { "all": false },
+  "sideopaque": { "all": false },
+
+  "collisionbox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.1875, "z2": 1 },
+  "selectionbox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.1875, "z2": 1 },
+
+  "sounds": {
+    "place": "game:block/ceramics",
+    "break": "game:block/ceramics",
+    "hit": "game:block/ceramics"
+  },
+
+  "guiTransform": {
+    "origin": { "x": 0.5, "y": 0.1, "z": 0.5 },
+    "scale": 3
+  },
+  "groundTransform": {
+    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+    "scale": 3
+  }
+}

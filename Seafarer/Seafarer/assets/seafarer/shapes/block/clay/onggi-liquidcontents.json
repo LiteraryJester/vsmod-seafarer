@@ -1,0 +1,29 @@
+{
+	"editor": {
+		"collapsedPaths": "Root/Origin lid/origin handle,Root/origin lower ring,Root/origin barrel/Origin lid,Root/Origin lid/Cube14",
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+	},
+	"elements": [
+		{
+			"name": "food",
+			"from": [ 3.25, 1.0, 3.75 ],
+			"to": [ 12.75, 2.0, 13.25 ],
+			"renderPass": 4,
+			"rotationOrigin": [ 1.2, 0.0, 1.7 ],
+			"faces": {
+				"north": { "texture": "#null", "uv": [ 0.0, 0.0, 9.5, 1.0 ], "enabled": false },
+				"east": { "texture": "#null", "uv": [ 0.0, 0.0, 9.5, 1.0 ], "enabled": false },
+				"south": { "texture": "#null", "uv": [ 0.0, 0.0, 9.5, 1.0 ], "enabled": false },
+				"west": { "texture": "#null", "uv": [ 0.0, 0.0, 9.5, 1.0 ], "enabled": false },
+				"up": { "texture": "#raw-onion", "uv": [ 1.5, 0.0, 11.0, 9.5 ] },
+				"down": { "texture": "#null", "uv": [ 0.0, 0.0, 9.5, 9.5 ], "enabled": false }
+			}
+		}
+	]}

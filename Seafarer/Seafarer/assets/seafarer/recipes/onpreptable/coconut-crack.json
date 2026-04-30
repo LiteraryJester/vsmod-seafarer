@@ -1,0 +1,7 @@
+{
+	"code": "coconut-crack",
+	"input": { "code": "seafarer:coconut", "quantity": 1 },
+	"toolSlotRequires": "game:knife-*",
+	"output": { "type": "block", "code": "seafarer:opencoconut", "quantity": 1, "liquidFill": { "code": "seafarer:coconutwaterportion", "litres": 1.0 } },
+	"sound": "game:sounds/block/chop1"
+}

@@ -1,0 +1,19 @@
+[
+	// Jam: add syrup and molasses as alternative sweeteners alongside honey
+	{ "op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/jam.json",
+	  "value": { "type": "item", "code": "seafarer:syrupportion", "shapeElement": "bowl/honey", "cookedStack": { "type": "item", "code": "game:jamhoneyportion" } } },
+	{ "op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/jam.json",
+	  "value": { "type": "item", "code": "seafarer:molassesportion", "shapeElement": "bowl/honey", "cookedStack": { "type": "item", "code": "game:jamhoneyportion" } } },
+
+	// Porridge: add syrup and molasses as alternative toppings alongside honey
+	{ "op": "addmerge", "path": "/ingredients/5/validStacks/-", "file": "game:recipes/cooking/porridge.json",
+	  "value": { "type": "item", "code": "seafarer:syrupportion", "shapeElement": "bowl/topping/*", "cookedStack": { "type": "item", "code": "game:jamhoneyportion" } } },
+	{ "op": "addmerge", "path": "/ingredients/5/validStacks/-", "file": "game:recipes/cooking/porridge.json",
+	  "value": { "type": "item", "code": "seafarer:molassesportion", "shapeElement": "bowl/topping/*", "cookedStack": { "type": "item", "code": "game:jamhoneyportion" } } },
+
+	// Meaty stew: add syrup and molasses as alternative toppings alongside honey
+	{ "op": "addmerge", "path": "/ingredients/8/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:syrupportion", "shapeElement": "bowl/topping/*", "cookedStack": { "type": "item", "code": "game:jamhoneyportion" } } },
+	{ "op": "addmerge", "path": "/ingredients/8/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:molassesportion", "shapeElement": "bowl/topping/*", "cookedStack": { "type": "item", "code": "game:jamhoneyportion" } } }
+]

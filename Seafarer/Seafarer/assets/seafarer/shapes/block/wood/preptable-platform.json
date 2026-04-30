@@ -1,0 +1,88 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {},
+	"textures": {},
+	"elements": [
+		{
+			"name": "PlatformTop",
+			"from": [ 2.0, 2.0, 2.0 ],
+			"to": [ 14.0, 4.0, 14.0 ],
+			"faces": {
+				"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 12.0, 1.0 ] },
+				"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 12.0, 1.0 ] },
+				"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 12.0, 1.0 ] },
+				"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 12.0, 1.0 ] },
+				"up": { "texture": "#planks", "uv": [ 0.0, 0.0, 12.0, 12.0 ] },
+				"down": { "texture": "#planks", "uv": [ 0.0, 0.0, 12.0, 12.0 ] }
+			}
+		},
+		{
+			"name": "PlatformLegFL",
+			"from": [ 2.0, 0.0, 12.0 ],
+			"to": [ 4.0, 2.0, 14.0 ],
+			"faces": {
+				"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+			}
+		},
+		{
+			"name": "PlatformLegFR",
+			"from": [ 12.0, 0.0, 12.0 ],
+			"to": [ 14.0, 2.0, 14.0 ],
+			"faces": {
+				"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+			}
+		},
+		{
+			"name": "PlatformLegBL",
+			"from": [ 2.0, 0.0, 2.0 ],
+			"to": [ 4.0, 2.0, 4.0 ],
+			"faces": {
+				"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+			}
+		},
+		{
+			"name": "PlatformLegBR",
+			"from": [ 12.0, 0.0, 2.0 ],
+			"to": [ 14.0, 2.0, 4.0 ],
+			"faces": {
+				"north": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"east": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"south": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"west": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] },
+				"down": { "texture": "#wood", "uv": [ 0.0, 0.0, 1.0, 1.0 ] }
+			}
+		},
+		{
+			"name": "BarrelAP",
+			"from": [ 8.0, 4.0, 8.0 ],
+			"to": [ 8.0, 4.0, 8.0 ],
+			"faces": {
+				"north": { "texture": "#wood", "uv": [ 0, 0, 0, 0 ], "enabled": false }
+			},
+			"attachmentpoints": [
+				{
+					"code": "BarrelAP",
+					"posX": "0.0","posY": "0.0","posZ": "0.0",
+					"rotationX": "0.0","rotationY": "0.0","rotationZ": "0.0"
+				}
+			]
+		}
+	]
+}

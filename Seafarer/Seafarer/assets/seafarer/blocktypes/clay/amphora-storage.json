@@ -1,0 +1,100 @@
+{
+    code: "amphora-storage",
+    class: "BlockAmphoraStorage",
+    entityclass: "BlockEntityAmphoraStorage",
+
+    behaviors: [
+        { name: "BoatableGenericTypedContainer" },
+        { name: "Lockable" },
+        { name: "Container" },
+        { name: "UnstableFalling" }
+    ],
+
+    shape: { base: "seafarer:block/clay/amphora" },
+
+    textures: {
+        "ceramic": { base: "game:block/clay/hardened/blue" },
+        "interior": { base: "game:block/clay/hardened/blue" },
+        "normal-ceramic": { base: "game:block/clay/hardened/blue" },
+        "normal-interior": { base: "game:block/clay/hardened/blue" }
+    },
+
+    drawtype: "JSON",
+    renderPass: "OpaqueNoCull",
+
+    attributes: {
+        shelvable: true,
+        inventoryClassName: "chest",
+        defaultType: "normal",
+        types: ["normal"],
+        drop: {
+            "normal": true
+        },
+        quantitySlots: {
+            "normal": 8
+        },
+        dialogTitleLangCode: {
+            "normal": "seafarer:amphora-storage-contents"
+        },
+        storageType: {
+            "normal": 32
+        },
+        retrieveOnly: {
+            "normal": false
+        },
+        spoilSpeedMulByFoodCat: {
+            "normal": {
+                "vegetable": 0.75,
+                "grain": 0.5
+            }
+        },
+        shape: {
+            "normal": "seafarer:block/clay/amphora"
+        },
+        openSound: "sounds/block/vesselopen",
+        closeSound: "sounds/block/vesselclose",
+        attachableToEntity: {
+            categoryCode: "storagevessel",
+            attachedShape: { base: "seafarer:block/clay/amphora" }
+        }
+    },
+
+    creativeinventoryStacks: [
+        {
+            tabs: ["general", "seafarer"],
+            stacks: [
+                { type: "block", code: "amphora-storage", attributes: { type: "normal" } }
+            ]
+        }
+    ],
+
+    blockmaterial: "Ceramic",
+    maxStackSize: 1,
+    replaceable: 300,
+    resistance: 1.5,
+    lightAbsorption: 0,
+    sidesolid: { all: false },
+    sideopaque: { all: false },
+
+    collisionSelectionBox: { x1: 0.25, y1: 0, z1: 0.25, x2: 0.75, y2: 1, z2: 0.75 },
+
+    sounds: {
+        place: "game:block/ceramics",
+        break: "game:block/ceramics"
+    },
+
+    guiTransform: {
+        origin: { x: 0.5, y: 0.5, z: 0.5 },
+        scale: 2.5
+    },
+    tpHandTransform: {
+        translation: { x: -0.5, y: -0.3, z: -0.5 },
+        rotation: { x: 0, y: 0, z: 0 },
+        origin: { x: 0.5, y: 0, z: 0.5 },
+        scale: 1
+    },
+    groundTransform: {
+        origin: { x: 0.5, y: 0, z: 0.5 },
+        scale: 2.5
+    }
+}

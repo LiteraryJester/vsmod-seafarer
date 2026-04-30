@@ -1,0 +1,30 @@
+[
+	// Add opencoconut (with water) as a valid water container for all dough recipes
+	{
+		"op": "add", "path": "/-", "file": "game:recipes/grid/dough.json",
+		"value": {
+			"ingredientPattern": "WF",
+			"ingredients": {
+				"W": {
+					"type": "block",
+					"code": "seafarer:opencoconut",
+					"recipeAttributes": {
+						"requiresContent": { "type": "item", "code": "game:waterportion" },
+						"requiresLitres": 1
+					}
+				},
+				"F": {
+					"type": "item",
+					"code": "flour-*",
+					"allowedVariants": ["flax", "millet", "rice", "rye", "spelt", "cassava", "amaranth", "sunflower"],
+					"name": "type"
+				}
+			},
+			"width": 2,
+			"height": 1,
+			"name": "dough",
+			"shapeless": true,
+			"output": { "type": "item", "code": "dough-{type}" }
+		}
+	}
+]

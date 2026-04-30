@@ -1,0 +1,575 @@
+{
+    // ─────────────────────────────────────────────────────────────────────────────
+    // Drake dialog. Quest state lives in the QuestSystem (see
+    // assets/seafarer/config/quests/drake-*.json) and is mirrored to flat
+    // player attributes:
+    //   player.quest-<code>-status       = unavailable|active|completed
+    //   player.quest-<code>-<obj>-status = pending|completed
+    //   player.quest-<code>-<obj>-progress = integer (for status text substitution)
+    //
+    // Triggers used here:
+    //   questStart  { code }                 – moves quest to Active
+    //   questDeliver { code, objective }     – one turn-in; takes items, fires rewards
+    // ─────────────────────────────────────────────────────────────────────────────
+    "components": [
+        // === First Meeting ===
+        {
+            "code": "testhasmet",
+            "owner": "drake",
+            "type": "condition",
+            "variable": "player.hasmetdrake",
+            "isNotValue": "true",
+            "thenJumpTo": "firstmeet",
+            "elseJumpTo": "welcomeback"
+        },
+        {
+            "code": "firstmeet",
+            "owner": "drake",
+            "type": "talk",
+            "setVariables": { "player.hasmetdrake": "true" },
+            "text": [{ "value": "seafarer:dialogue-drake-welcome" }],
+            "jumpTo": "check-blackbronze-milestone"
+        },
+        {
+            "code": "welcomeback",
+            "owner": "drake",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-drake-welcomeback" }],
+            "jumpTo": "check-blackbronze-milestone"
+        },
+
+        // === Tier-4 milestone: once the trade ship is built AND Tortuga has hit
+        // rebuilding tier 4, Drake unlocks the black bronze tool line. One-shot,
+        // guarded by entity.drake-blackbronze-unlocked.
+        {
+            "code": "check-blackbronze-milestone",
+            "owner": "drake",
+            "type": "condition",
+            "variable": "entity.drake-blackbronze-unlocked",
+            "isValue": "true",
+            "thenJumpTo": "main",
+            "elseJumpTo": "check-blackbronze-rebuilding"
+        },
+        {
+            "code": "check-blackbronze-rebuilding",
+            "owner": "drake",
+            "type": "condition",
+            "variable": "global.rebuilding-complete",
+            "isValue": "true",
+            "thenJumpTo": "check-blackbronze-tradeship",
+            "elseJumpTo": "main"
+        },
+        {
+            "code": "check-blackbronze-tradeship",
+            "owner": "drake",
+            "type": "condition",
+            "variable": "global.quest-seafarer-drake-tradeship-status",
+            "isValue": "completed",
+            "thenJumpTo": "blackbronze-announce",
+            "elseJumpTo": "main"
+        },
+        {
+            "code": "blackbronze-announce",
+            "owner": "drake",
+            "type": "talk",
+            "setVariables": { "entity.drake-blackbronze-unlocked": "true" },
+            "text": [{ "value": "seafarer:dialogue-drake-blackbronze-unlock" }],
+            "jumpTo": "blackbronze-add-chisel"
+        },
+        {
+            "code": "blackbronze-add-chisel",
+            "owner": "drake",
+            "trigger": "addSellingItem",
+            "triggerdata": {
+                "code": "game:chisel-blackbronze", "type": "item", "stacksize": 1,
+                "stock": { "avg": 1, "var": 1 }, "price": { "avg": 15, "var": 3 }
+            },
+            "jumpTo": "blackbronze-add-hammer"
+        },
+        {
+            "code": "blackbronze-add-hammer",
+            "owner": "drake",
+            "trigger": "addSellingItem",
+            "triggerdata": {
+                "code": "game:hammer-blackbronze", "type": "item", "stacksize": 1,
+                "stock": { "avg": 1, "var": 1 }, "price": { "avg": 15, "var": 3 }
+            },
+            "jumpTo": "blackbronze-add-saw"
+        },
+        {
+            "code": "blackbronze-add-saw",
+            "owner": "drake",
+            "trigger": "addSellingItem",
+            "triggerdata": {
+                "code": "game:saw-blackbronze", "type": "item", "stacksize": 1,
+                "stock": { "avg": 1, "var": 1 }, "price": { "avg": 15, "var": 3 }
+            },
+            "jumpTo": "blackbronze-add-shears"
+        },
+        {
+            "code": "blackbronze-add-shears",
+            "owner": "drake",
+            "trigger": "addSellingItem",
+            "triggerdata": {
+                "code": "game:shears-blackbronze", "type": "item", "stacksize": 1,
+                "stock": { "avg": 1, "var": 1 }, "price": { "avg": 15, "var": 3 }
+            },
+            "jumpTo": "blackbronze-add-pickaxe"
+        },
+        {
+            "code": "blackbronze-add-pickaxe",
+            "owner": "drake",
+            "trigger": "addSellingItem",
+            "triggerdata": {
+                "code": "game:pickaxe-blackbronze", "type": "item", "stacksize": 1,
+                "stock": { "avg": 1, "var": 1 }, "price": { "avg": 18, "var": 3 }
+            },
+            "jumpTo": "blackbronze-add-prospecting"
+        },
+        {
+            "code": "blackbronze-add-prospecting",
+            "owner": "drake",
+            "trigger": "addSellingItem",
+            "triggerdata": {
+                "code": "game:prospectingpick-blackbronze", "type": "item", "stacksize": 1,
+                "stock": { "avg": 1, "var": 1 }, "price": { "avg": 18, "var": 3 }
+            },
+            "jumpTo": "main"
+        },
+
+        // === Main Menu ===
+        {
+            "code": "main",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                { "value": "dialogue-name", "jumpTo": "name" },
+                { "value": "dialogue-profession", "jumpTo": "profession" },
+                { "value": "dialogue-trade", "jumpTo": "trade" },
+
+                // Tradeship: not yet active/completed → intro + offer
+                {
+                    "value": "seafarer:dialogue-drake-ask-tradeship",
+                    "jumpTo": "tradeship-intro",
+                    "conditions": [
+                        { "variable": "global.quest-seafarer-drake-tradeship-status", "isNotValue": "active" },
+                        { "variable": "global.quest-seafarer-drake-tradeship-status", "isNotValue": "completed" }
+                    ]
+                },
+                // Tradeship: active → go straight to progress menu
+                {
+                    "value": "seafarer:dialogue-drake-ask-tradeship-active",
+                    "jumpTo": "tradeship-progress",
+                    "conditions": [
+                        { "variable": "global.quest-seafarer-drake-tradeship-status", "isValue": "active" }
+                    ]
+                },
+
+                // Tricks path A: rebuilding hit tier 4 (cross-NPC counter)
+                {
+                    "value": "seafarer:dialogue-drake-ask-tricks",
+                    "jumpTo": "tricks-gate",
+                    "conditions": [
+                        { "variable": "global.rebuilding-complete", "isValue": "true" }
+                    ]
+                },
+                // Tricks path B: tradeship completed but rebuilding not yet at 4
+                {
+                    "value": "seafarer:dialogue-drake-ask-tricks",
+                    "jumpTo": "tricks-gate",
+                    "conditions": [
+                        { "variable": "global.rebuilding-complete", "isNotValue": "true" },
+                        { "variable": "global.quest-seafarer-drake-tradeship-status", "isValue": "completed" }
+                    ]
+                }
+            ]
+        },
+        {
+            "code": "name",
+            "owner": "drake",
+            "type": "talk",
+            "trigger": "revealname",
+            "text": [{ "value": "seafarer:dialogue-drake-name" }],
+            "jumpTo": "main"
+        },
+        {
+            "code": "profession",
+            "owner": "drake",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-drake-profession" }],
+            "jumpTo": "main"
+        },
+        {
+            "code": "trade",
+            "owner": "drake",
+            "trigger": "opentrade"
+        },
+
+        // =============================================================
+        // Quest: New Trade Ship (drake-tradeship)
+        // =============================================================
+        {
+            "code": "tradeship-intro",
+            "owner": "drake",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-drake-tradeship-intro" }],
+            "jumpTo": "tradeship-offer"
+        },
+        {
+            "code": "tradeship-offer",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                { "value": "seafarer:dialogue-drake-accept-tradeship", "jumpTo": "tradeship-start" },
+                { "value": "seafarer:dialogue-morgan-not-yet", "jumpTo": "main" }
+            ]
+        },
+        {
+            "code": "tradeship-start",
+            "owner": "drake",
+            "type": "talk",
+            "trigger": "questStart",
+            "triggerdata": { "code": "drake-tradeship" },
+            "text": [{ "value": "seafarer:dialogue-drake-tradeship-start" }],
+            "jumpTo": "main"
+        },
+
+        // Delivery menu — each option guarded by objective status + inventory.
+        {
+            "code": "tradeship-progress",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                {
+                    "value": "seafarer:dialogue-drake-deliver-boards",
+                    "jumpTo": "deliver-boards",
+                    "conditions": [
+                        { "variable": "global.quest-seafarer-drake-tradeship-boards-status", "isNotValue": "completed" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:plank-birch', stacksize: 1}" }
+                    ]
+                },
+                {
+                    "value": "seafarer:dialogue-drake-deliver-rope",
+                    "jumpTo": "deliver-rope",
+                    "conditions": [
+                        { "variable": "global.quest-seafarer-drake-tradeship-rope-status", "isNotValue": "completed" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:rope', stacksize: 1}" }
+                    ]
+                },
+                {
+                    "value": "seafarer:dialogue-drake-deliver-linen",
+                    "jumpTo": "deliver-linen",
+                    "conditions": [
+                        { "variable": "global.quest-seafarer-drake-tradeship-linen-status", "isNotValue": "completed" },
+                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:linen-normal-down', stacksize: 1}" }
+                    ]
+                },
+                { "value": "seafarer:dialogue-drake-tradeship-status", "jumpTo": "tradeship-statusreport" }
+            ]
+        },
+
+        // Deliveries — a single trigger handles take-items / increment / reward
+        {
+            "code": "deliver-boards",
+            "owner": "drake",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "drake-tradeship", "objective": "boards" },
+            "text": [{ "value": "seafarer:dialogue-drake-boards-thanks" }],
+            "jumpTo": "check-boards-status"
+        },
+        {
+            "code": "check-boards-status",
+            "owner": "drake",
+            "type": "condition",
+            "variable": "global.quest-seafarer-drake-tradeship-boards-status",
+            "isValue": "completed",
+            "thenJumpTo": "boards-complete-line",
+            "elseJumpTo": "boards-status-line"
+        },
+        {
+            "code": "boards-status-line",
+            "owner": "drake",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-drake-boards-status" }],
+            "jumpTo": "tradeship-progress"
+        },
+        {
+            "code": "boards-complete-line",
+            "owner": "drake",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-drake-boards-complete" }],
+            "jumpTo": "tradeship-progress"
+        },
+
+        {
+            "code": "deliver-rope",
+            "owner": "drake",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "drake-tradeship", "objective": "rope" },
+            "text": [{ "value": "seafarer:dialogue-drake-rope-thanks" }],
+            "jumpTo": "check-rope-status"
+        },
+        {
+            "code": "check-rope-status",
+            "owner": "drake",
+            "type": "condition",
+            "variable": "global.quest-seafarer-drake-tradeship-rope-status",
+            "isValue": "completed",
+            "thenJumpTo": "rope-complete-line",
+            "elseJumpTo": "rope-status-line"
+        },
+        {
+            "code": "rope-status-line",
+            "owner": "drake",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-drake-rope-status" }],
+            "jumpTo": "tradeship-progress"
+        },
+        {
+            "code": "rope-complete-line",
+            "owner": "drake",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-drake-rope-complete" }],
+            "jumpTo": "tradeship-progress"
+        },
+
+        {
+            "code": "deliver-linen",
+            "owner": "drake",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "drake-tradeship", "objective": "linen" },
+            "text": [{ "value": "seafarer:dialogue-drake-linen-thanks" }],
+            "jumpTo": "check-linen-status"
+        },
+        {
+            "code": "check-linen-status",
+            "owner": "drake",
+            "type": "condition",
+            "variable": "global.quest-seafarer-drake-tradeship-linen-status",
+            "isValue": "completed",
+            "thenJumpTo": "linen-complete-line",
+            "elseJumpTo": "linen-status-line"
+        },
+        {
+            "code": "linen-status-line",
+            "owner": "drake",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-drake-linen-status" }],
+            "jumpTo": "tradeship-progress"
+        },
+        {
+            "code": "linen-complete-line",
+            "owner": "drake",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-drake-linen-complete" }],
+            "jumpTo": "tradeship-progress"
+        },
+
+        // Player asks "how's the ship coming along?"
+        {
+            "code": "tradeship-statusreport",
+            "owner": "drake",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-drake-tradeship-statusreport" }],
+            "jumpTo": "tradeship-progress"
+        },
+
+        // Post-quest greeting
+        {
+            "code": "tradeship-done",
+            "owner": "drake",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-drake-tradeship-already-done" }],
+            "jumpTo": "main"
+        },
+
+        // =============================================================
+        // Quest: Tricks of the Trade (drake-tricks)
+        // =============================================================
+        {
+            "code": "tricks-gate",
+            "owner": "drake",
+            "type": "condition",
+            "variable": "player.quest-seafarer-drake-tricks-status",
+            "isValue": "active",
+            "thenJumpTo": "tricks-menu",
+            "elseJumpTo": "tricks-gate-completed"
+        },
+        {
+            "code": "tricks-gate-completed",
+            "owner": "drake",
+            "type": "condition",
+            "variable": "player.quest-seafarer-drake-tricks-status",
+            "isValue": "completed",
+            "thenJumpTo": "tricks-menu",
+            "elseJumpTo": "tricks-intro"
+        },
+
+        // First-time intro lessons
+        {
+            "code": "tricks-intro",
+            "owner": "drake",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-drake-tricks-intro" }],
+            "jumpTo": "tricks-lesson1"
+        },
+        {
+            "code": "tricks-lesson1",
+            "owner": "drake",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-drake-tricks-lesson1" }],
+            "jumpTo": "tricks-lesson2"
+        },
+        {
+            "code": "tricks-lesson2",
+            "owner": "drake",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-drake-tricks-lesson2" }],
+            "jumpTo": "tricks-lesson3"
+        },
+        {
+            "code": "tricks-lesson3",
+            "owner": "drake",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-drake-tricks-lesson3" }],
+            "jumpTo": "tricks-tasks"
+        },
+        {
+            "code": "tricks-tasks",
+            "owner": "drake",
+            "type": "talk",
+            "trigger": "questStart",
+            "triggerdata": { "code": "drake-tricks" },
+            "text": [
+                { "value": "seafarer:dialogue-drake-tricks-varnish-task" },
+                { "value": "seafarer:dialogue-drake-tricks-canvas-task" }
+            ],
+            "jumpTo": "tricks-menu"
+        },
+
+        // Menu of available lesson deliveries
+        {
+            "code": "tricks-menu",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                {
+                    "value": "seafarer:dialogue-drake-deliver-varnish",
+                    "jumpTo": "deliver-varnish",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-drake-tricks-varnish-status", "isNotValue": "completed" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:resin', stacksize: 18}" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:fat', stacksize: 6}" }
+                    ]
+                },
+                {
+                    "value": "seafarer:dialogue-drake-ask-canvas",
+                    "jumpTo": "deliver-canvas",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-drake-tricks-canvas-status", "isNotValue": "completed" },
+                        { "variable": "player.inventory", "isValue": "{type: 'block', code: 'game:linen-normal-down', stacksize: 20}" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:fat', stacksize: 6}" }
+                    ]
+                },
+                {
+                    "value": "seafarer:dialogue-drake-show-sail",
+                    "jumpTo": "deliver-sail",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-drake-tricks-canvas-status", "isValue": "completed" },
+                        { "variable": "player.quest-seafarer-drake-tricks-sail-review-status", "isNotValue": "completed" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'seafarer:oiled-canvas-sail', stacksize: 1}" }
+                    ]
+                },
+
+                // Seasoned quest (drake-seasoned) is gated on tricks completion via its
+                // own prerequisites. We expose it here once tricks is completed.
+                {
+                    "value": "seafarer:dialogue-drake-ask-seasoned",
+                    "jumpTo": "seasoned-intro",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-drake-tricks-status", "isValue": "completed" },
+                        { "variable": "player.quest-seafarer-drake-seasoned-status", "isNotValue": "active" },
+                        { "variable": "player.quest-seafarer-drake-seasoned-status", "isNotValue": "completed" }
+                    ]
+                },
+                {
+                    "value": "seafarer:dialogue-drake-deliver-seasoned",
+                    "jumpTo": "deliver-seasoned",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-drake-seasoned-status", "isValue": "active" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:plank-seasoned', stacksize: 160}" }
+                    ]
+                }
+            ]
+        },
+
+        // Varnish lesson
+        {
+            "code": "deliver-varnish",
+            "owner": "drake",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "drake-tricks", "objective": "varnish" },
+            "text": [
+                { "value": "seafarer:dialogue-drake-varnish-complete1" },
+                { "value": "seafarer:dialogue-drake-varnish-complete2" },
+                { "value": "seafarer:dialogue-drake-varnish-complete3" }
+            ],
+            "jumpTo": "tricks-menu"
+        },
+
+        // Canvas lesson
+        {
+            "code": "deliver-canvas",
+            "owner": "drake",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "drake-tricks", "objective": "canvas" },
+            "text": [
+                { "value": "seafarer:dialogue-drake-canvas-complete1" },
+                { "value": "seafarer:dialogue-drake-canvas-complete2" },
+                { "value": "seafarer:dialogue-drake-canvas-complete3" }
+            ],
+            "jumpTo": "tricks-menu"
+        },
+
+        // Sail review
+        {
+            "code": "deliver-sail",
+            "owner": "drake",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "drake-tricks", "objective": "sail-review" },
+            "text": [{ "value": "seafarer:dialogue-drake-sail-review" }],
+            "jumpTo": "tricks-menu"
+        },
+
+        // =============================================================
+        // Quest: Seasoned Wood (drake-seasoned)
+        // =============================================================
+        {
+            "code": "seasoned-intro",
+            "owner": "drake",
+            "type": "talk",
+            "trigger": "questStart",
+            "triggerdata": { "code": "drake-seasoned" },
+            "text": [
+                { "value": "seafarer:dialogue-drake-seasoned-task1" },
+                { "value": "seafarer:dialogue-drake-seasoned-task2" }
+            ],
+            "jumpTo": "tricks-menu"
+        },
+        {
+            "code": "deliver-seasoned",
+            "owner": "drake",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "drake-seasoned", "objective": "seasoned" },
+            "text": [{ "value": "seafarer:dialogue-drake-seasoned-complete" }],
+            "jumpTo": "main"
+        }
+    ]
+}

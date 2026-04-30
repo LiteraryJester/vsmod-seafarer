@@ -1,0 +1,172 @@
+[
+	// ==========================================
+	// Claypot textureMapping - fermented vegetables
+	// Maps to same texture groups as raw/preserved counterparts
+	// ==========================================
+	{
+		"op": "addmerge", "path": "/attributesByType/claypot-blue-cooked/textureMapping/fermentedvegetable-carrot",
+		"file": "game:blocktypes/clay/fired/pot.json",
+		"value": ["vegetable", "group1"]
+	},
+	{
+		"op": "addmerge", "path": "/attributesByType/claypot-blue-cooked/textureMapping/fermentedvegetable-parsnip",
+		"file": "game:blocktypes/clay/fired/pot.json",
+		"value": ["vegetable", "group4"]
+	},
+	{
+		"op": "addmerge", "path": "/attributesByType/claypot-blue-cooked/textureMapping/fermentedvegetable-turnip",
+		"file": "game:blocktypes/clay/fired/pot.json",
+		"value": ["vegetable", "group5"]
+	},
+	{
+		"op": "addmerge", "path": "/attributesByType/claypot-blue-cooked/textureMapping/fermentedvegetable-onion",
+		"file": "game:blocktypes/clay/fired/pot.json",
+		"value": ["vegetable", "group6"]
+	},
+	{
+		"op": "addmerge", "path": "/attributesByType/claypot-blue-cooked/textureMapping/fermentedvegetable-bellpepper",
+		"file": "game:blocktypes/clay/fired/pot.json",
+		"value": ["fruit", "group8"]
+	},
+	{
+		"op": "addmerge", "path": "/attributesByType/claypot-blue-cooked/textureMapping/fermentedvegetable-pumpkin",
+		"file": "game:blocktypes/clay/fired/pot.json",
+		"value": ["vegetable", "group8"]
+	},
+
+	// ==========================================
+	// Meaty Stew - protein-base (idx 0): fermented meats
+	// ==========================================
+	{
+		"op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+		"value": { "type": "item", "code": "seafarer:fermentedmeat-redmeat", "shapeElement": "bowl/meat stew/*", "textureMapping": ["meat", "group2"] }
+	},
+	{
+		"op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+		"value": { "type": "item", "code": "seafarer:fermentedmeat-bushmeat", "shapeElement": "bowl/meat stew/*", "textureMapping": ["meat", "group6"] }
+	},
+	{
+		"op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+		"value": { "type": "item", "code": "seafarer:fermentedmeat-poultry", "shapeElement": "bowl/meat stew/*", "textureMapping": ["meat", "group5"] }
+	},
+
+	// ==========================================
+	// Meaty Stew - meat-extra (idx 3): fermented meats
+	// ==========================================
+	{
+		"op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+		"value": { "type": "item", "code": "seafarer:fermentedmeat-redmeat", "shapeElement": "bowl/red meat/*", "textureMapping": ["meat", "group2"] }
+	},
+	{
+		"op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+		"value": { "type": "item", "code": "seafarer:fermentedmeat-bushmeat", "shapeElement": "bowl/red meat/*", "textureMapping": ["meat", "group6"] }
+	},
+	{
+		"op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+		"value": { "type": "item", "code": "seafarer:fermentedmeat-poultry", "shapeElement": "bowl/poultry/*", "textureMapping": ["meat", "group3"] }
+	},
+
+	// ==========================================
+	// Meaty Stew - meat-extra2 (idx 4): fermented meats
+	// ==========================================
+	{
+		"op": "addmerge", "path": "/ingredients/4/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+		"value": { "type": "item", "code": "seafarer:fermentedmeat-redmeat", "shapeElement": "bowl/red meat 2/*", "textureMapping": ["meat", "group2"] }
+	},
+	{
+		"op": "addmerge", "path": "/ingredients/4/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+		"value": { "type": "item", "code": "seafarer:fermentedmeat-bushmeat", "shapeElement": "bowl/red meat 2/*", "textureMapping": ["meat", "group6"] }
+	},
+	{
+		"op": "addmerge", "path": "/ingredients/4/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+		"value": { "type": "item", "code": "seafarer:fermentedmeat-poultry", "shapeElement": "bowl/poultry 2/*", "textureMapping": ["meat", "group3"] }
+	},
+
+	// ==========================================
+	// Soup - protein-extra (idx 4): fermented meats
+	// ==========================================
+	{
+		"op": "addmerge", "path": "/ingredients/4/validStacks/-", "file": "game:recipes/cooking/soup.json",
+		"value": { "type": "item", "code": "seafarer:fermentedmeat-redmeat", "shapeElement": "bowl/meat/*", "textureMapping": ["meat", "group2"] }
+	},
+	{
+		"op": "addmerge", "path": "/ingredients/4/validStacks/-", "file": "game:recipes/cooking/soup.json",
+		"value": { "type": "item", "code": "seafarer:fermentedmeat-bushmeat", "shapeElement": "bowl/meat/*", "textureMapping": ["meat", "group6"] }
+	},
+	{
+		"op": "addmerge", "path": "/ingredients/4/validStacks/-", "file": "game:recipes/cooking/soup.json",
+		"value": { "type": "item", "code": "seafarer:fermentedmeat-poultry", "shapeElement": "bowl/meat/*", "textureMapping": ["meat", "group3"] }
+	},
+
+	// ==========================================
+	// Vegetable Stew - fermented vegetables (idx 0-3)
+	// ==========================================
+	{
+		"op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+		"value": { "type": "item", "code": "seafarer:fermentedvegetable-*", "shapeElement": "bowl/vegetable 1/*" }
+	},
+	{
+		"op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+		"value": { "type": "item", "code": "seafarer:fermentedvegetable-*", "shapeElement": "bowl/vegetable 2/*" }
+	},
+	{
+		"op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+		"value": { "type": "item", "code": "seafarer:fermentedvegetable-*", "shapeElement": "bowl/vegetable 3/*" }
+	},
+	{
+		"op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+		"value": { "type": "item", "code": "seafarer:fermentedvegetable-*", "shapeElement": "bowl/vegetable 4/*" }
+	},
+
+	// ==========================================
+	// Meaty Stew - fermented vegetables (idx 5-6)
+	// ==========================================
+	{
+		"op": "addmerge", "path": "/ingredients/5/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+		"value": { "type": "item", "code": "seafarer:fermentedvegetable-*", "shapeElement": "bowl/vegetable 1/*" }
+	},
+	{
+		"op": "addmerge", "path": "/ingredients/6/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+		"value": { "type": "item", "code": "seafarer:fermentedvegetable-*", "shapeElement": "bowl/vegetable 2/*" }
+	},
+
+	// ==========================================
+	// Soup - fermented vegetables (idx 1-3)
+	// ==========================================
+	{
+		"op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/soup.json",
+		"value": { "type": "item", "code": "seafarer:fermentedvegetable-*", "shapeElement": "bowl/vegetable base 1/*" }
+	},
+	{
+		"op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/soup.json",
+		"value": { "type": "item", "code": "seafarer:fermentedvegetable-*", "shapeElement": "bowl/vegetable base 2/*" }
+	},
+	{
+		"op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/soup.json",
+		"value": { "type": "item", "code": "seafarer:fermentedvegetable-*", "shapeElement": "bowl/vegetable base 3/*" }
+	},
+
+	// ==========================================
+	// Porridge - fermented vegetables (idx 3-4)
+	// ==========================================
+	{
+		"op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/porridge.json",
+		"value": { "type": "item", "code": "seafarer:fermentedvegetable-*", "shapeElement": "bowl/vegetable 1/*" }
+	},
+	{
+		"op": "addmerge", "path": "/ingredients/4/validStacks/-", "file": "game:recipes/cooking/porridge.json",
+		"value": { "type": "item", "code": "seafarer:fermentedvegetable-*", "shapeElement": "bowl/vegetable 2/*" }
+	},
+
+	// ==========================================
+	// Scrambled Eggs - fermented vegetables (idx 5-6)
+	// ==========================================
+	{
+		"op": "addmerge", "path": "/ingredients/5/validStacks/-", "file": "game:recipes/cooking/scrambledeggs.json",
+		"value": { "type": "item", "code": "seafarer:fermentedvegetable-*", "shapeElement": "bowl/vegetable2/*" }
+	},
+	{
+		"op": "addmerge", "path": "/ingredients/6/validStacks/-", "file": "game:recipes/cooking/scrambledeggs.json",
+		"value": { "type": "item", "code": "seafarer:fermentedvegetable-*", "shapeElement": "bowl/vegetable3/*" }
+	}
+]

@@ -1,0 +1,37 @@
+{
+  "code": "drake-seasoned",
+  "npc": "drake",
+  "groupLangKey": "quest-group-helping-residents",
+  "titleLangKey": "quest-drake-seasoned-title",
+  "descriptionLangKey": "quest-drake-seasoned-desc",
+  "autoEnable": true,
+  "prerequisites": ["drake-tricks"],
+  "objectives": [
+    {
+      "code": "seasoned",
+      "type": "delivery",
+      "items": [{ "item": "game:plank-seasoned", "quantity": 160 }],
+      "required": 1,
+      "rewards": [
+        {
+          "type": "giveItem",
+          "itemType": "item",
+          "itemCode": "seafarer:schematic-outrigger",
+          "stacksize": 1
+        }
+      ]
+    }
+  ],
+  "rewards": [
+    {
+      "type": "addSellingItem",
+      "itemCode": "seafarer:schematic-outrigger",
+      "itemType": "item",
+      "stacksize": 1,
+      "stockAvg": 1,
+      "stockVar": 0,
+      "priceAvg": 15,
+      "priceVar": 3
+    }
+  ]
+}

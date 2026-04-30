@@ -1,0 +1,65 @@
+_defaults:
+  ignore:
+    - variantgroups
+    - attributes.handbook
+    - materialDensity
+    - nutritionPropsByType
+    - transitionablePropsByType
+    - combustiblePropsByType
+    - guiTransformByType
+    - tpHandTransformByType
+    - groundTransformByType
+    - texturesByType
+    - attributes.onDisplayTransformByType
+    - attributes.displaycaseable
+    - attributes.shelvable
+    - class
+    - attributes.renderIngredientsByType
+    - attributes.satMultByType
+    - attributes.bakingPropertiesByType
+    - attributes.onDisplayTransform
+
+Vegetable:
+  require:
+    - nutritionProps.satiety
+    - nutritionProps.foodcategory
+    - attributes.foodTags
+  recommend:
+    - attributes.inPieProperties
+    - attributes.inBurritoProperties
+  ignore:
+    - fpHandTransform
+    - groundTransform
+
+Protein:
+  require:
+    - nutritionProps.satiety
+    - nutritionProps.foodcategory
+    - transitionableProps
+  recommend:
+    - attributes.inPieProperties
+    - attributes.inBurritoProperties
+    - variantgroups
+
+Fruit:
+  require:
+    - nutritionProps.satiety
+    - nutritionProps.foodcategory
+  recommend:
+    - attributes.inPieProperties
+    - attributes.inBurritoProperties
+
+Dairy:
+  require:
+    - nutritionProps.satiety
+  recommend:
+    - attributes.inPieProperties
+    - attributes.inBurritoProperties
+
+Grain:
+  require:
+    - nutritionProps.satiety
+
+NoNutrition:
+  require:
+    - code

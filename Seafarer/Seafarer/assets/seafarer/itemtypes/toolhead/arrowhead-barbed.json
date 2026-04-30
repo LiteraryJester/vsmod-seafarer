@@ -1,0 +1,63 @@
+{
+	code: "arrowhead-barbed",
+	variantgroups: [
+		{ code: "metal", states: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "iron", "meteoriciron", "steel"] }
+	],
+	behaviors: [
+		{ name: "GroundStorable", properties: { layout: 'Quadrants', collisionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.125, z2: 1 } } }
+	],
+	shape: { base: "game:item/tool/arrowhead-copper" },
+	textures: {
+		material: { base: "game:block/metal/ingot/{metal}" }
+	},
+	attributes: {
+		displaycaseable: true,
+		shelvable: true,
+		onTongTransform: {
+			translation: { x: -0.6, y: -0.625, z: -0.59 },
+			rotation: { x: 93, y: 15, z: 99 }
+		},
+		onMetalTongTransform: {
+			translation: { x: -0.49, y: -0.51, z: -0.62 },
+			rotation: { x: 80, y: 15, z: 89 }
+		},
+		handbook: {
+			groupBy: ["arrowhead-barbed-*"]
+		},
+		groundStorageTransform: {
+			rotation: { x: 0, y: 34, z: 0 }
+		},
+		displayable: {
+			shelf: {
+				size: { width: 3, height: 1, length: 3 }
+			}
+		},
+		forgable: true,
+		inForgeTransform: {
+			translation: { x: -0.28, y: -0.08, z: -0.2 },
+			rotation: { x: 0, y: 70, z: 0 },
+			origin: { x: 0.9, y: 0.5, z: 0.5 },
+			scale: 0.8
+		}
+	},
+	creativeinventory: { "general": ["*"], "items": ["*"], "seafarer": ["*"] },
+	heldTpUseAnimation: "interactstatic",
+	maxstacksize: 64,
+	guiTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: -55, y: 27, z: 0 },
+		origin: { x: 0.54, y: 0.06, z: 0.48 },
+		scale: 4.2
+	},
+	tpHandTransform: {
+		translation: { x: -0.67, y: -0.7, z: -0.15 },
+		rotation: { x: 90, y: 21, z: 0 },
+		scale: 0.77
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 19, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 4
+	}
+}

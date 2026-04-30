@@ -1,0 +1,42 @@
+[
+	{
+		"code": "syrup1",
+		"ingredients": [
+			{ "type": "item", "code": "game:waterportion", "litres": 10, "consumeLitres": 10 },
+			{ "type": "item", "code": "seafarer:sugar", "quantity": 1 }
+		],
+		"output": { "type": "item", "code": "seafarer:syrupportion", "litres": 10 }
+	},
+	{
+		"code": "syrup2",
+		"ingredients": [
+			{ "type": "item", "code": "game:waterportion", "litres": 20, "consumeLitres": 20 },
+			{ "type": "item", "code": "seafarer:sugar", "quantity": 2 }
+		],
+		"output": { "type": "item", "code": "seafarer:syrupportion", "litres": 20 }
+	},
+	{
+		"code": "syrup3",
+		"ingredients": [
+			{ "type": "item", "code": "game:waterportion", "litres": 30, "consumeLitres": 30 },
+			{ "type": "item", "code": "seafarer:sugar", "quantity": 3 }
+		],
+		"output": { "type": "item", "code": "seafarer:syrupportion", "litres": 30 }
+	},
+	{
+		"code": "syrup4",
+		"ingredients": [
+			{ "type": "item", "code": "game:waterportion", "litres": 40, "consumeLitres": 40 },
+			{ "type": "item", "code": "seafarer:sugar", "quantity": 4 }
+		],
+		"output": { "type": "item", "code": "seafarer:syrupportion", "litres": 40 }
+	},
+	{
+		"code": "syrup5",
+		"ingredients": [
+			{ "type": "item", "code": "game:waterportion", "litres": 50, "consumeLitres": 50 },
+			{ "type": "item", "code": "seafarer:sugar", "quantity": 5 }
+		],
+		"output": { "type": "item", "code": "seafarer:syrupportion", "litres": 50 }
+	}
+]

@@ -1,0 +1,132 @@
+[
+	// =====================================================================
+	// Expanded Foods — burrito fillings (only applied when EF is installed)
+	// =====================================================================
+
+	// Chopped & cooked vegetables
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/choppedvegetable.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/cookedchoppedvegetable.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/cookedvegetable.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	// Chopped & cooked mushrooms
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/choppedmushroom.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/cookedchoppedmushroom.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/cookedmushroom.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	// Meat & fish nuggets
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/meatnugget.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/fishnugget.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	// Aged & fermented proteins
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/agedmeat.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/fermentedfish.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	// Sausages
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/mixing/sausage.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/mixing/sausagefish.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	// Pemmican
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/mixing/pemmican.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/mixing/pemmicanfish.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	// Breaded items
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/mixing/breadedmeatnugget.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/mixing/breadedfishnugget.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/mixing/breadedvegetable.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/mixing/breadedmushroom.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	// Stuffed pepper
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/mixing/stuffedpepper.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	// Dried seaweed
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/driedseaweed.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	// Soy prep (tofu)
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/soyprep.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	// Peanuts
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/peanut.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	// Preserved egg
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "expandedfoods:itemtypes/food/limeegg.json",
+	  "value": { "partType": "Filling" },
+	  "dependsOn": [{ "modid": "expandedfoods" }] }
+]

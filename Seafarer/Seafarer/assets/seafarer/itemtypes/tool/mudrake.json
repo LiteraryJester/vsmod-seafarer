@@ -1,0 +1,120 @@
+{
+	"code": "mudrake",
+	"class": "ItemMudRake",
+	"behaviors": [
+		{
+			"name": "GroundStorable",
+			"properties": {
+				"layout": "WallHalves",
+				"wallOffY": 2,
+				"ctrlKey": true,
+				"selectionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.1, "z2": 1 },
+				"collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0 }
+			}
+		}
+	],
+	"maxStackSize": 1,
+	"attributes": {
+		"handbook": {
+			"groupBy": ["mudrake-*"]
+		}
+	},
+	"attributesByType": {
+		"*-wooden": { "dropRateMultiplier": 1.0 },
+		"*-copper": { "dropRateMultiplier": 1.1 },
+		"*-tinbronze": { "dropRateMultiplier": 1.2 },
+		"*-bismuthbronze": { "dropRateMultiplier": 1.2 },
+		"*-blackbronze": { "dropRateMultiplier": 1.3 },
+		"*-iron": { "dropRateMultiplier": 1.5 },
+		"*-meteoriciron": { "dropRateMultiplier": 1.5 },
+		"*-steel": { "dropRateMultiplier": 1.8 }
+	},
+	"variantgroups": [
+		{
+			"code": "material",
+			"states": [
+				"wooden",
+				"copper",
+				"tinbronze",
+				"bismuthbronze",
+				"blackbronze",
+				"iron",
+				"meteoriciron",
+				"steel"
+			]
+		}
+	],
+	"shape": { "base": "seafarer:block/tool/mudrake/mudrake" },
+	"textures": {
+		"wood": { "base": "game:block/wood/debarked/oak" }
+	},
+	"texturesByType": {
+		"*-wooden": {
+			"head": { "base": "game:block/wood/debarked/oak" }
+		},
+		"*-copper": {
+			"head": { "base": "game:block/metal/ingot/copper" }
+		},
+		"*-tinbronze": {
+			"head": { "base": "game:block/metal/ingot/tinbronze" }
+		},
+		"*-bismuthbronze": {
+			"head": { "base": "game:block/metal/ingot/bismuthbronze" }
+		},
+		"*-blackbronze": {
+			"head": { "base": "game:block/metal/ingot/blackbronze" }
+		},
+		"*-iron": {
+			"head": { "base": "game:block/metal/ingot/iron" }
+		},
+		"*-meteoriciron": {
+			"head": { "base": "game:block/metal/ingot/meteoriciron" }
+		},
+		"*-steel": {
+			"head": { "base": "game:block/metal/ingot/steel" }
+		}
+	},
+	"durabilityByType": {
+		"*-wooden": 50,
+		"*-copper": 100,
+		"*-tinbronze": 150,
+		"*-bismuthbronze": 150,
+		"*-blackbronze": 200,
+		"*-iron": 300,
+		"*-meteoriciron": 300,
+		"*-steel": 500
+	},
+	"tool": "shovel",
+	"damagedby": ["blockbreaking"],
+	"miningSpeedByType": {
+		"*-wooden": { "Soil": 2.0, "Gravel": 1.5 },
+		"*-copper": { "Soil": 3.5, "Gravel": 2.2 },
+		"*-tinbronze": { "Soil": 4.5, "Gravel": 3.0 },
+		"*-bismuthbronze": { "Soil": 4.2, "Gravel": 2.8 },
+		"*-blackbronze": { "Soil": 4.8, "Gravel": 3.2 },
+		"*-iron": { "Soil": 5.5, "Gravel": 3.8 },
+		"*-meteoriciron": { "Soil": 6.0, "Gravel": 4.0 },
+		"*-steel": { "Soil": 6.5, "Gravel": 4.2 }
+	},
+	"heldTpIdleAnimation": "shovelidle",
+	"heldRightReadyAnimation": "shovelready",
+	"heldTpHitAnimation": "shoveldig",
+	"heldTpUseAnimation": "interactStaticLong",
+	"creativeinventory": { "general": ["*"], "items": ["*"], "tools": ["*"], "seafarer": ["*"] },
+	"guiTransform": {
+		"rotation": { "x": -115, "y": -28, "z": 139 },
+		"origin": { "x": 0.7, "y": 0, "z": 0.55 },
+		"scale": 3.5
+	},
+	"groundTransform": {
+		"translation": { "x": 0, "y": 0, "z": 0 },
+		"rotation": { "x": 0, "y": 0, "z": 0 },
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 3.6
+	},
+	"tpHandTransform": {
+		"translation": { "x": -1.69, "y": -0.29, "z": -0.6 },
+		"rotation": { "x": 0, "y": 0, "z": -10 },
+		"scale": 0.8
+	}
+}

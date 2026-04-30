@@ -1,0 +1,77 @@
+{
+  "code": "morgan-tradegoods",
+  "npc": "morgan",
+  "scope": "server",
+  "groupLangKey": "quest-group-rebuilding-tortuga",
+  "titleLangKey": "quest-morgan-tradegoods-title",
+  "descriptionLangKey": "quest-morgan-tradegoods-desc",
+  "autoEnable": true,
+  "objectives": [
+    {
+      "code": "salt",
+      "type": "delivery",
+      "items": [{ "item": "game:salt", "quantity": 1 }],
+      "required": 64,
+      "rewards": [
+        {
+          "type": "addSellingItem",
+          "itemCode": "game:knife-copper",
+          "itemType": "item",
+          "stacksize": 1,
+          "stockAvg": 2,
+          "stockVar": 1,
+          "priceAvg": 4,
+          "priceVar": 1
+        },
+        {
+          "type": "addSellingItem",
+          "itemCode": "game:cleaver-copper",
+          "itemType": "item",
+          "stacksize": 1,
+          "stockAvg": 2,
+          "stockVar": 1,
+          "priceAvg": 5,
+          "priceVar": 1
+        }
+      ]
+    },
+    {
+      "code": "sugar",
+      "type": "delivery",
+      "items": [{ "item": "seafarer:sugar", "quantity": 1 }],
+      "required": 64,
+      "rewards": [
+        {
+          "type": "addSellingItem",
+          "itemCode": "game:hoe-copper",
+          "itemType": "item",
+          "stacksize": 1,
+          "stockAvg": 2,
+          "stockVar": 1,
+          "priceAvg": 4,
+          "priceVar": 1
+        },
+        {
+          "type": "addSellingItem",
+          "itemCode": "game:scythe-copper",
+          "itemType": "item",
+          "stacksize": 1,
+          "stockAvg": 2,
+          "stockVar": 1,
+          "priceAvg": 5,
+          "priceVar": 1
+        }
+      ]
+    }
+  ],
+  "rewards": [
+    {
+      "type": "incrementEntityVariable",
+      "variableName": "rebuilding-tier",
+      "variableScope": "global",
+      "amount": 1,
+      "thresholdValue": 4,
+      "thresholdVariable": "global.rebuilding-complete"
+    }
+  ]
+}

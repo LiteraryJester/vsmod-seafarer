@@ -1,0 +1,15 @@
+[
+	{
+		"op": "addmerge",
+		"path": "/attributes",
+		"side": "server",
+		"value": {
+			"attachableToEntity": {
+				"categoryCodeByType": {
+					"*-up": "oillamp"
+				}
+			}
+		},
+		"file": "game:blocktypes/clay/fired/oillamp.json"
+	}
+]

@@ -1,0 +1,200 @@
+{
+    code: "chilibush",
+    class: "BlockRequireFertileGround",
+    behaviors: [
+        { name: "FruitingBush" },
+        { name: "BlockEntityInteract" },
+        { name: "Unstable" }
+    ],
+    entityClassByType: {
+        "chilibush-wild-*": "WildFruitingBush",
+        "*": "Generic"
+    },
+    entityBehaviors: [
+        { name: "FruitingBush" },
+        { name: "FruitingBushMesh" }
+    ],
+    variantgroups: [
+        { code: "state", states: ["wild", "grown"] },
+        { code: "cover", states: ["free", "snow"] }
+    ],
+    attributes: {
+        foodTags: ["chiliBush"],
+        forageStatAffectedByType: {
+            "*-wild-*": true,
+            "*": false
+        },
+        textureVariants: 3,
+        cuttingBlockCode: "seafarer:chilibushcutting-free",
+        growthProperties: {
+            pauseGrowthBelowTemperature: 8,
+            pauseGrowthAboveTemperature: 38,
+            resetGrowthBelowTemperature: 0,
+            resetGrowthAboveTemperature: 42,
+            goDormantBelowTemperature: -2,
+            leaveDormantAboveTemperature: 15,
+            nutrientUseByHealthState: {
+                "bountiful": { n: 8, p: 8, k: 8 },
+                "healthy": { n: 5, p: 5, k: 5 },
+                "struggling": { n: 3, p: 3, k: 3 },
+                "barren": { n: 1, p: 1, k: 1 }
+            },
+            youngStageMonths: { avg: 2, var: 0.5 },
+            emptyStageMonths: { avg: 0.5, var: 0.1 },
+            floweringStageMonths: { avg: 0.5, var: 0.1 },
+            ripeningStageMonths: { avg: 0.5, var: 0.1 },
+            ripeStageMonths: { avg: 0.5, var: 0.1 }
+        },
+        harvestedStacks: [
+            { type: "item", code: "seafarer:chili", quantity: { avg: 4 } }
+        ],
+        textureMapping: {
+            "leavescenter1": {
+                base: "seafarer:block/plant/berrybush/chili/leaves/leavescenter1",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/leaves/leavescenter2" },
+                    { base: "seafarer:block/plant/berrybush/chili/leaves/leavescenter3" }
+                ]
+            },
+            "leavescenter2": {
+                base: "seafarer:block/plant/berrybush/chili/leaves/leavescenter2",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/leaves/leavescenter3" },
+                    { base: "seafarer:block/plant/berrybush/chili/leaves/leavescenter1" }
+                ]
+            },
+            "leavescenter3": {
+                base: "seafarer:block/plant/berrybush/chili/leaves/leavescenter3",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/leaves/leavescenter1" },
+                    { base: "seafarer:block/plant/berrybush/chili/leaves/leavescenter2" }
+                ]
+            },
+            "steminside1": {
+                base: "seafarer:block/plant/berrybush/chili/stem/steminside1",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/stem/steminside2" },
+                    { base: "seafarer:block/plant/berrybush/chili/stem/steminside3" }
+                ]
+            },
+            "steminside2": {
+                base: "seafarer:block/plant/berrybush/chili/stem/steminside2",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/stem/steminside3" },
+                    { base: "seafarer:block/plant/berrybush/chili/stem/steminside1" }
+                ]
+            },
+            "steminside3": {
+                base: "seafarer:block/plant/berrybush/chili/stem/steminside3",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/stem/steminside1" },
+                    { base: "seafarer:block/plant/berrybush/chili/stem/steminside2" }
+                ]
+            },
+            "stemcenter1": {
+                base: "seafarer:block/plant/berrybush/chili/stem/stemcenter1",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/stem/stemcenter2" },
+                    { base: "seafarer:block/plant/berrybush/chili/stem/stemcenter3" }
+                ]
+            },
+            "stemcenter2": {
+                base: "seafarer:block/plant/berrybush/chili/stem/stemcenter2",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/stem/stemcenter3" },
+                    { base: "seafarer:block/plant/berrybush/chili/stem/stemcenter1" }
+                ]
+            },
+            "stemcenter3": {
+                base: "seafarer:block/plant/berrybush/chili/stem/stemcenter3",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/stem/stemcenter1" },
+                    { base: "seafarer:block/plant/berrybush/chili/stem/stemcenter2" }
+                ]
+            },
+            "flowerberrycenter1": {
+                base: "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center1",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center2" },
+                    { base: "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center3" }
+                ]
+            },
+            "flowerberrycenter2": {
+                base: "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center2",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center3" },
+                    { base: "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center1" }
+                ]
+            },
+            "flowerberrycenter3": {
+                base: "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center3",
+                alternates: [
+                    { base: "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center1" },
+                    { base: "seafarer:block/plant/berrybush/chili/berries/{healthstate}/{berrystage}center2" }
+                ]
+            }
+        },
+        youngShape: { base: "game:block/plant/flower/1patch-cross-16x16" },
+        youngTextureMapping: {
+            north1: { base: "game:block/plant/berrybush/young/blueberry-stem1" },
+            south1: { base: "game:block/plant/berrybush/young/blueberry-stem2" },
+            northTinted1: { base: "game:block/plant/berrybush/young/blueberry-leaves1" },
+            southTinted1: { base: "game:block/plant/berrybush/young/blueberry-leaves2" }
+        },
+        reinforcable: true,
+        overrideRandomDrawOffset: 14,
+        allowOverlays: false
+    },
+    shape: {
+        base: "game:block/plant/berrybush/berrybush-medium*"
+    },
+    textures: {
+        "particle": { base: "seafarer:block/plant/berrybush/chili/leaves/leavescenter1" }
+    },
+    drawtypeByType: {
+        "*-snow": "JSONAndSnowLayer",
+        "*": "JSON"
+    },
+    blockmaterialByType: {
+        "*-free": "Plant",
+        "*": "Snow"
+    },
+    faceCullModeByType: {
+        "*-free": "Default",
+        "*": "MergeSnowLayer"
+    },
+    climateColorMap: "climatePlantTint",
+    seasonColorMap: "seasonalBirch",
+    particlesTextureCode: "particle",
+    creativeinventory: { "general": ["*-free"], "seafarer": ["*-free"] },
+    randomizeRotations: true,
+    renderpass: "OpaqueNoCull",
+    renderAlphaTest: 0.4,
+    blockmaterial: "Plant",
+    sideopaqueByType: {
+        "*-snow": { all: false, down: true },
+        "*": { all: false }
+    },
+    sidesolid: { "all": false },
+    replaceable: 3000,
+    lightAbsorption: 0,
+    resistance: 0.5,
+    collisionbox: null,
+    selectionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 },
+    sounds: {
+        place: "block/plant",
+        break: "block/plant",
+        hit: "block/plant",
+        inside: "walk/inside/leafy/bushrustle*"
+    },
+    rainPermeable: false,
+    drops: [
+        { type: "item", code: "game:plantdebris-leafy", quantity: { avg: 3 } }
+    ],
+    materialDensity: 200,
+    frostable: true,
+    combustibleProps: {
+        burnTemperature: 600,
+        burnDuration: 10
+    }
+}

@@ -1,0 +1,8 @@
+[
+    {
+        "op": "add",
+        "path": "/attributes/panningDrops/@(sand|gravel|sandwavy)-.*/-",
+        "file": "game:blocktypes/wood/pan.json",
+        "value": { "type": "item", "code": "seafarer:map-tortuga", "chance": { "avg": 0.0015, "var": 0 }, "manMade": true }
+    }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Raft Sail",
+    "ingredientPattern": "_S_,SCS,RRR",
+    "ingredients": {
+      "S": { "type": "item", "code": "game:stick", "quantity": 2 },
+      "C": { "type": "block", "code": "game:linen-*", "quantity": 3 },
+      "R": { "type": "item", "code": "game:rope", "quantity": 2 }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "item", "code": "seafarer:raftsail" }
+  }
+]

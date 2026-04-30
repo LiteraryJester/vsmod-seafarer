@@ -1,0 +1,59 @@
+{
+  code: "misoportion",
+  class: "ItemLiquidPortion",
+  matterState: "liquid",
+  attributes: {
+    handbook: { ignoreCreativeInvStacks: true },
+    inBowlShape: { base: "game:block/meal/liquid" },
+    waterTightContainerProps: {
+      containable: true,
+      itemsPerLitre: 100,
+      texture: { base: "seafarer:block/liquid/miso", alpha: 220 },
+      allowSpill: true,
+      whenSpilled: {
+        action: "DropContents",
+        stack: { type: "item", code: "seafarer:misoportion" }
+      },
+      nutritionPropsPerLitre: {
+        satiety: 0,
+        foodcategory: "NoNutrition"
+      },
+      nutritionPropsPerLitreWhenInMeal: {
+        satiety: 250,
+        health: 1,
+        foodcategory: "Protein"
+      }
+    }
+  },
+  shape: { base: "game:item/liquid" },
+  texture: { base: "seafarer:block/liquid/miso", alpha: 220 },
+  creativeinventoryStacks: [
+    {
+      tabs: ["general", "liquids", "seafarer"],
+      stacks: [
+        {
+          type: "block", code: "game:woodbucket",
+          attributes: { ucontents: [{ type: "item", code: "seafarer:misoportion", makefull: true }] }
+        }
+      ]
+    }
+  ],
+  transitionableProps: [{
+    type: "Perish",
+    freshHours: { avg: 17520 },
+    transitionHours: { avg: 17520 },
+    transitionedStack: { type: "item", code: "game:rot" },
+    transitionRatio: 0.002
+  }],
+  maxstacksize: 5000,
+  materialDensity: 300,
+  guiTransform: {
+    translation: { x: 0, y: 1, z: 0 },
+    rotation: { x: 123, y: -33, z: -13 },
+    origin: { x: 0.5, y: 0, z: 0.5 },
+    scale: 1.4
+  },
+  tpHandTransform: {
+    translation: { x: -1.5, y: -1, z: -1.4 }
+  }
+}

@@ -1,0 +1,98 @@
+[
+    {
+        code: "carpentry",
+        color: "#8B5E3C",
+        trainings: [
+            {
+                code: "shipwright",
+                levels: [
+                    {
+                        level: 1,
+                        xp: 100,
+                        title: "Apprentice Shipwright",
+                        trait: "shipwright"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        code: "hunting",
+        color: "#6E4F2E",
+        trainings: [
+            {
+                code: "bearhunter",
+                levels: [
+                    {
+                        level: 1,
+                        xp: 100,
+                        title: "Bear Hunter",
+                        trait: "bearhunter"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        code: "combat",
+        color: "#8B1A1A",
+        trainings: [
+            {
+                code: "buccaneer",
+                levels: [
+                    {
+                        level: 1,
+                        xp: 100,
+                        title: "Buccaneer",
+                        trait: "buccaneer"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        code: "gardening",
+        color: "#4F7F3C",
+        trainings: [
+            {
+                code: "gardener",
+                levels: [
+                    {
+                        level: 1,
+                        xp: 100,
+                        title: "Gardener",
+                        trait: "gardener"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        code: "cooking",
+        color: "#C47D2E",
+        trainings: [
+            {
+                code: "brewer",
+                levels: [
+                    {
+                        level: 1,
+                        xp: 100,
+                        title: "Brewer",
+                        trait: "brewer"
+                    }
+                ]
+            },
+            {
+                code: "piemaster",
+                levels: [
+                    {
+                        level: 1,
+                        xp: 100,
+                        title: "Pie Master",
+                        trait: "piemaster"
+                    }
+                ]
+            }
+        ]
+    }
+]

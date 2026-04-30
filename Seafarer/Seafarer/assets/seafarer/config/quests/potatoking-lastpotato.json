@@ -1,0 +1,18 @@
+{
+  "code": "potatoking-lastpotato",
+  "npc": "potatoking",
+  "scope": "server",
+  "groupLangKey": "quest-group-rebuilding-tortuga",
+  "titleLangKey": "quest-potatoking-lastpotato-title",
+  "descriptionLangKey": "quest-potatoking-lastpotato-desc",
+  "autoEnable": true,
+  "objectives": [
+    {
+      "code": "seed",
+      "type": "delivery",
+      "items": [{ "item": "seafarer:seeds-potato", "quantity": 1 }],
+      "required": 1
+    }
+  ],
+  "rewards": []
+}

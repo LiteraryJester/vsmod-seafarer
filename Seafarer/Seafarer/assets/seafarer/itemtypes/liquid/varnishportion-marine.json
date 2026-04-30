@@ -1,0 +1,47 @@
+{
+    code: "varnishportion",
+    variantgroups: [
+        { code: "type", states: ["marine"] }
+    ],
+    class: "ItemLiquidPortion",
+    matterState: "liquid",
+    attributes: {
+        handbook: {
+            ignoreCreativeInvStacks: true
+        },
+        waterTightContainerProps: {
+            containable: true,
+            itemsPerLitre: 100,
+            texture: { base: "seafarer:block/liquid/marinevarnish" },
+            allowSpill: true,
+            whenSpilled: {
+                action: "DropContents",
+                stack: { type: "item", code: "seafarer:varnishportion-{type}" }
+            }
+        }
+    },
+    shape: { base: "game:item/liquid" },
+    texture: { base: "seafarer:block/liquid/marinevarnish" },
+    creativeinventoryStacks: [
+        {
+            tabs: ["general", "liquids", "seafarer"],
+            stacks: [
+                {
+                    type: "block", code: "game:woodbucket",
+                    attributes: { ucontents: [{ type: "item", code: "seafarer:varnishportion-{type}", makefull: true }] }
+                }
+            ]
+        }
+    ],
+    maxstacksize: 5000,
+    materialDensity: 300,
+    guiTransform: {
+        translation: { x: 0, y: 1, z: 0 },
+        rotation: { x: 123, y: -33, z: -13 },
+        origin: { x: 0.5, y: 0, z: 0.5 },
+        scale: 1.4
+    },
+    tpHandTransform: {
+        translation: { x: -1.5, y: -1, z: -1.4 }
+    }
+}

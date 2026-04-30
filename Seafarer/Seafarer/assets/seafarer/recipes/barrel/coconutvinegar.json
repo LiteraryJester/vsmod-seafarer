@@ -1,0 +1,8 @@
+{
+	"code": "coconutvinegar",
+	"sealHours": 168,
+	"ingredients": [
+		{ "type": "item", "code": "seafarer:coconutwaterportion", "litres": 2 }
+	],
+	"output": { "type": "item", "code": "game:vinegarportion", "litres": 2 }
+}

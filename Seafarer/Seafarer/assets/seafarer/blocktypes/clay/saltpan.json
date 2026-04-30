@@ -1,0 +1,75 @@
+{
+    code: "saltpan",
+    class: "BlockSaltPan",
+    entityClass: "BlockEntitySaltPan",
+
+    variantgroups: [
+        { code: "color", states: ["blue", "fire", "red"] },
+        { code: "contents", states: ["empty", "water", "salt"] }
+    ],
+
+    shape: { base: "seafarer:block/clay/saltpan" },
+
+    texturesByType: {
+        "*-empty": {
+            "clay": { base: "game:block/clay/hardened/{color}" },
+            "interior": { base: "game:block/clay/hardened/{color}" }
+        },
+        "*-water": {
+            "clay": { base: "game:block/clay/hardened/{color}" },
+            "interior": { base: "game:block/liquid/waterportion" }
+        },
+        "*-salt": {
+            "clay": { base: "game:block/clay/hardened/{color}" },
+            "interior": { base: "game:block/wood/barrel/salt" }
+        }
+    },
+
+    drawtype: "JSON",
+    renderPass: "OpaqueNoCull",
+
+    creativeinventory: {
+        "general": ["*-empty"],
+        "seafarer": ["*-empty"]
+    },
+
+    collisionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.125, z2: 1 },
+    selectionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.125, z2: 1 },
+
+    sounds: {
+        place: "game:block/ceramics",
+        break: "game:block/ceramics",
+        hit: "game:block/ceramics"
+    },
+
+    resistance: 1.5,
+    lightAbsorption: 0,
+    blockmaterial: "Ceramic",
+    sidesolid: { all: false },
+    sideopaque: { all: false },
+
+    drops: [
+        { type: "block", code: "seafarer:saltpan-{color}-empty" }
+    ],
+
+    attributes: {
+        handbook: {
+            groupBy: ["saltpan-*-{contents}"]
+        }
+    },
+
+    guiTransform: {
+        origin: { x: 0.5, y: 0.0625, z: 0.5 },
+        scale: 3
+    },
+    tpHandTransform: {
+        translation: { x: -0.75, y: -0.5, z: -0.675 },
+        rotation: { x: 0, y: 0, z: 0 },
+        scale: 0.5
+    },
+    groundTransform: {
+        translation: { x: 0, y: 0, z: 0 },
+        origin: { x: 0.5, y: 0, z: 0.5 },
+        scale: 3
+    }
+}

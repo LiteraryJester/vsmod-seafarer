@@ -1,0 +1,20 @@
+[
+  {
+    "code": "candiedfruit",
+    "sealHours": 336,
+    "ingredients": [
+      {
+        "type": "item",
+        "code": "seafarer:syrupportion",
+        "litres": 1,
+        "consumeLitres": 1
+      },
+      { "type": "item", "code": "game:fruit-*", "name": "fruit", "quantity": 4, "skipVariants": ["blackberry", "lychee", "whitecurrant"] }
+    ],
+    "output": {
+      "type": "item",
+      "code": "seafarer:candiedfruit-{fruit}",
+      "stackSize": 4
+    }
+  }
+]

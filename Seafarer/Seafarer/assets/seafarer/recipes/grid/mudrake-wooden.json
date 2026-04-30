@@ -1,0 +1,11 @@
+[
+  {
+    "ingredientPattern": "SSS,_S_,_S_",
+    "ingredients": {
+      "S": { "type": "item", "code": "game:stick" }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "item", "code": "seafarer:mudrake-wooden" }
+  }
+]

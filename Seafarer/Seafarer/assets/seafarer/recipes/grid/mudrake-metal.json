@@ -1,0 +1,14 @@
+{
+  "ingredientPattern": "T	S",
+  "ingredients": {
+    "T": { "type": "item", "code": "seafarer:mudrake-head-*", "name": "metal" },
+    "S": { "type": "item", "code": "game:stick" }
+  },
+  "width": 1,
+  "height": 2,
+  "output": {
+    "type": "item",
+    "code": "seafarer:mudrake-{metal}",
+    "quantity": 1
+  }
+}

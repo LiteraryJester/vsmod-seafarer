@@ -1,0 +1,80 @@
+{
+    code: "waterskin",
+    class: "BlockLiquidContainerTopOpened",
+
+    behaviors: [
+        { name: "GroundStorable", properties: { layout: "Quadrants", collisionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.75, z2: 1 } } },
+        { name: "Unplaceable" },
+        { name: "RightClickPickup" }
+    ],
+
+    shape: { base: "seafarer:block/leather/waterskin" },
+
+    textures: {
+        "leather": { base: "game:block/cloth/pelt" },
+        "strap":   { base: "game:block/leather/plain" },
+        "opening": { base: "game:block/leather/plain" }
+    },
+
+    drawtype: "JSON",
+    renderPass: "OpaqueNoCull",
+
+    attributes: {
+        shelvable: true,
+        liquidContainerProps: {
+            capacityLitres: 4,
+            transferSizeLitres: 0.25,
+            emptyShapeLoc: "seafarer:shapes/block/leather/waterskin",
+            opaqueContentShapeLoc: "shapes/block/basic/nothing",
+            liquidContentShapeLoc: "shapes/block/basic/nothing",
+            liquidMaxYTranslate: 0.05
+        },
+        groundStorageTransform: {
+            translation: { x: 0, y: 0, z: 0 },
+            scale: 0.85
+        },
+        onDisplayTransform: {
+            translation: { x: 0, y: 0, z: 0 },
+            scale: 0.85
+        }
+    },
+
+    creativeinventory: { "general": ["*"], "seafarer": ["*"] },
+    blockmaterial: "Cloth",
+    maxStackSize: 4,
+    liquidSelectable: 1,
+    replaceable: 900,
+    resistance: 0.5,
+    lightAbsorption: 0,
+    sidesolid: { all: false },
+    sideopaque: { all: false },
+
+    collisionbox: { x1: 0.1875, y1: 0, z1: 0.3125, x2: 0.8125, y2: 0.75, z2: 0.6875 },
+    selectionbox: { x1: 0.1875, y1: 0, z1: 0.3125, x2: 0.8125, y2: 0.8125, z2: 0.6875 },
+
+    sounds: {
+        place: "game:block/leather",
+        break: "game:block/leather"
+    },
+
+    guiTransform: {
+        origin: { x: 0.5, y: 0.3, z: 0.5 },
+        scale: 3.5
+    },
+    fpHandTransform: {
+        translation: { x: 0, y: 0.2, z: 0 },
+        rotation: { x: 0, y: 0, z: 0 },
+        origin: { x: 0.5, y: 0, z: 0.5 },
+        scale: 2
+    },
+    tpHandTransform: {
+        translation: { x: -0.5, y: -0.2, z: -0.5 },
+        rotation: { x: 0, y: 0, z: 0 },
+        origin: { x: 0.5, y: 0, z: 0.5 },
+        scale: 1.2
+    },
+    groundTransform: {
+        origin: { x: 0.5, y: 0, z: 0.5 },
+        scale: 3
+    }
+}

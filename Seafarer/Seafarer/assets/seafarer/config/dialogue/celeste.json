@@ -1,0 +1,680 @@
+{
+    "components": [
+        // === First Meeting ===
+        {
+            "code": "testhasmet",
+            "owner": "celeste",
+            "type": "condition",
+            "variable": "player.hasmetceleste",
+            "isNotValue": "true",
+            "thenJumpTo": "firstmeet",
+            "elseJumpTo": "welcomeback"
+        },
+        {
+            "code": "firstmeet",
+            "owner": "celeste",
+            "type": "talk",
+            "setVariables": { "player.hasmetceleste": "true" },
+            "text": [{ "value": "seafarer:dialogue-celeste-welcome" }],
+            "jumpTo": "check-blackbronze-milestone"
+        },
+        {
+            "code": "welcomeback",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-welcomeback" }],
+            "jumpTo": "check-blackbronze-milestone"
+        },
+
+        // === Tier-4 milestone: once Tortuga's global rebuilding counter hits
+        // 4, Celeste unlocks blackbronze cutlass + shovel stock. One-shot,
+        // guarded by entity.celeste-blackbronze-unlocked.
+        {
+            "code": "check-blackbronze-milestone",
+            "owner": "celeste",
+            "type": "condition",
+            "variable": "entity.celeste-blackbronze-unlocked",
+            "isValue": "true",
+            "thenJumpTo": "main",
+            "elseJumpTo": "check-blackbronze-rebuilding"
+        },
+        {
+            "code": "check-blackbronze-rebuilding",
+            "owner": "celeste",
+            "type": "condition",
+            "variable": "global.rebuilding-complete",
+            "isValue": "true",
+            "thenJumpTo": "blackbronze-announce",
+            "elseJumpTo": "main"
+        },
+        {
+            "code": "blackbronze-announce",
+            "owner": "celeste",
+            "type": "talk",
+            "setVariables": { "entity.celeste-blackbronze-unlocked": "true" },
+            "text": [{ "value": "seafarer:dialogue-celeste-blackbronze-unlock" }],
+            "jumpTo": "blackbronze-add-cutlass"
+        },
+        {
+            "code": "blackbronze-add-cutlass",
+            "owner": "celeste",
+            "trigger": "addSellingItem",
+            "triggerdata": {
+                "code": "seafarer:cutlass-blackbronze", "type": "item", "stacksize": 1,
+                "stock": { "avg": 1, "var": 1 }, "price": { "avg": 14, "var": 3 }
+            },
+            "jumpTo": "blackbronze-add-shovel"
+        },
+        {
+            "code": "blackbronze-add-shovel",
+            "owner": "celeste",
+            "trigger": "addSellingItem",
+            "triggerdata": {
+                "code": "game:shovel-blackbronze", "type": "item", "stacksize": 1,
+                "stock": { "avg": 1, "var": 1 }, "price": { "avg": 15, "var": 3 }
+            },
+            "jumpTo": "main"
+        },
+
+        // === Main Menu ===
+        {
+            "code": "main",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                { "value": "dialogue-name", "jumpTo": "name" },
+                { "value": "dialogue-profession", "jumpTo": "profession" },
+                { "value": "dialogue-trade", "jumpTo": "trade" },
+                { "value": "seafarer:dialogue-celeste-maps", "jumpTo": "maps" },
+                // Crimson Rose: not yet started
+                {
+                    "value": "seafarer:dialogue-celeste-ask-crimsonrose",
+                    "jumpTo": "crimsonrose-intro",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-celeste-crimsonrose-status", "isNotValue": "active" },
+                        { "variable": "player.quest-seafarer-celeste-crimsonrose-status", "isNotValue": "completed" }
+                    ]
+                },
+                // Crimson Rose: active
+                {
+                    "value": "seafarer:dialogue-celeste-ask-crimsonrose-active",
+                    "jumpTo": "crimsonrose-inprogress",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-celeste-crimsonrose-status", "isValue": "active" }
+                    ]
+                },
+
+                // Rum-for-map trade (unlocked after Crimson Rose; player must have rum portion)
+                {
+                    "value": "seafarer:dialogue-celeste-offer-rum-whiterum",
+                    "jumpTo": "rumtrade-whiterum",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-celeste-crimsonrose-status", "isValue": "completed" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'seafarer:spiritportion-whiterum', stacksize: 100}" }
+                    ]
+                },
+                {
+                    "value": "seafarer:dialogue-celeste-offer-rum-darkrum",
+                    "jumpTo": "rumtrade-darkrum",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-celeste-crimsonrose-status", "isValue": "completed" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'seafarer:spiritportion-darkrum', stacksize: 100}" }
+                    ]
+                },
+
+                // Pirate Tales (friendship-building dialog, gated on Crimson Rose + rum)
+                {
+                    "value": "seafarer:dialogue-celeste-ask-pirate-tales",
+                    "jumpTo": "piratetales-take-whiterum",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-celeste-crimsonrose-status", "isValue": "completed" },
+                        { "variable": "entity.celeste-piratetales-told", "isNotValue": "true" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'seafarer:spiritportion-whiterum', stacksize: 100}" }
+                    ]
+                },
+                {
+                    "value": "seafarer:dialogue-celeste-ask-pirate-tales",
+                    "jumpTo": "piratetales-take-darkrum",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-celeste-crimsonrose-status", "isValue": "completed" },
+                        { "variable": "entity.celeste-piratetales-told", "isNotValue": "true" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'seafarer:spiritportion-darkrum', stacksize: 100}" }
+                    ]
+                },
+
+                // Rust Hunter: not yet started
+                {
+                    "value": "seafarer:dialogue-celeste-ask-rusthunter",
+                    "jumpTo": "rusthunter-intro",
+                    "conditions": [
+                        { "variable": "entity.celeste-friendly", "isValue": "true" },
+                        { "variable": "player.quest-seafarer-celeste-rusthunter-status", "isNotValue": "active" },
+                        { "variable": "player.quest-seafarer-celeste-rusthunter-status", "isNotValue": "completed" }
+                    ]
+                },
+                // Rust Hunter: active
+                {
+                    "value": "seafarer:dialogue-celeste-ask-rusthunter-active",
+                    "jumpTo": "rusthunter-inprogress",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-celeste-rusthunter-status", "isValue": "active" }
+                    ]
+                },
+
+                // Bear Hunter: not yet started
+                {
+                    "value": "seafarer:dialogue-celeste-ask-bearhunter",
+                    "jumpTo": "bearhunter-intro",
+                    "conditions": [
+                        { "variable": "entity.celeste-friendly", "isValue": "true" },
+                        { "variable": "player.quest-seafarer-celeste-bearhunter-status", "isNotValue": "active" },
+                        { "variable": "player.quest-seafarer-celeste-bearhunter-status", "isNotValue": "completed" }
+                    ]
+                },
+                // Bear Hunter: active
+                {
+                    "value": "seafarer:dialogue-celeste-ask-bearhunter-active",
+                    "jumpTo": "bearhunter-inprogress",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-celeste-bearhunter-status", "isValue": "active" }
+                    ]
+                },
+                // Bear Hunter: past partial-completion threshold — player can keep
+                // turning in remaining pelts for their per-objective XP rewards.
+                {
+                    "value": "seafarer:dialogue-celeste-ask-bearhunter-active",
+                    "jumpTo": "bearhunter-inprogress",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-celeste-bearhunter-status", "isValue": "completed" }
+                    ]
+                }
+            ]
+        },
+        {
+            "code": "name",
+            "owner": "celeste",
+            "type": "talk",
+            "trigger": "revealname",
+            "text": [{ "value": "seafarer:dialogue-celeste-name" }],
+            "jumpTo": "main"
+        },
+        {
+            "code": "profession",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-profession" }],
+            "jumpTo": "main"
+        },
+        {
+            "code": "trade",
+            "owner": "celeste",
+            "trigger": "opentrade"
+        },
+        {
+            "code": "maps",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-maps-info" }],
+            "jumpTo": "main"
+        },
+
+        // =============================================================
+        // Quest: The Crimson Rose
+        // =============================================================
+        {
+            "code": "crimsonrose-intro",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-crimsonrose-intro" }],
+            "jumpTo": "crimsonrose-offer"
+        },
+
+        // Quest Not Started
+        {
+            "code": "crimsonrose-offer",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                { "value": "seafarer:dialogue-celeste-accept-crimsonrose", "jumpTo": "crimsonrose-start" },
+                { "value": "seafarer:dialogue-morgan-not-yet", "jumpTo": "main" }
+            ]
+        },
+        {
+            "code": "crimsonrose-start",
+            "owner": "celeste",
+            "type": "talk",
+            "trigger": "questStart",
+            "triggerdata": { "code": "celeste-crimsonrose" },
+            "text": [{ "value": "seafarer:dialogue-celeste-crimsonrose-start" }],
+            "jumpTo": "crimsonrose-give-map"
+        },
+        {
+            "code": "crimsonrose-give-map",
+            "owner": "celeste",
+            "trigger": "giveitemstack",
+            "triggerdata": {
+                "type": "item",
+                "code": "seafarer:map-crimsonrose",
+                "stacksize": 1
+            },
+            "jumpTo": "main"
+        },
+
+        // Quest In Progress
+        {
+            "code": "crimsonrose-inprogress",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                {
+                    "value": "seafarer:dialogue-celeste-have-chest",
+                    "jumpTo": "crimsonrose-deliver",
+                    "conditions": [
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'seafarer:sealed-chest', stacksize: 1}" }
+                    ]
+                },
+                { "value": "seafarer:dialogue-celeste-remind-quest", "jumpTo": "crimsonrose-reminder" }
+            ]
+        },
+        {
+            "code": "crimsonrose-reminder",
+            "owner": "celeste",
+            "type": "condition",
+            "variable": "player.inventory",
+            "isValue": "{type: 'item', code: 'seafarer:map-crimsonrose', stacksize: 1}",
+            "thenJumpTo": "crimsonrose-reminder-hasmap",
+            "elseJumpTo": "crimsonrose-reminder-givemap"
+        },
+        {
+            "code": "crimsonrose-reminder-hasmap",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-crimsonrose-reminder" }],
+            "jumpTo": "main"
+        },
+        {
+            "code": "crimsonrose-reminder-givemap",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-crimsonrose-lostmap" }],
+            "jumpTo": "crimsonrose-give-map"
+        },
+
+        // Quest Completion
+        {
+            "code": "crimsonrose-deliver",
+            "owner": "celeste",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "celeste-crimsonrose", "objective": "chest" },
+            "text": [{ "value": "seafarer:dialogue-celeste-crimsonrose-received" }],
+            "jumpTo": "main"
+        },
+
+        // =============================================================
+        // Friendship: Pirate Tales (rum → +1 friendship, one-shot)
+        // =============================================================
+        {
+            "code": "piratetales-take-whiterum",
+            "owner": "celeste",
+            "trigger": "takefrominventory",
+            "triggerdata": { "type": "item", "code": "seafarer:spiritportion-whiterum", "quantity": 100 },
+            "jumpTo": "piratetales-line1"
+        },
+        {
+            "code": "piratetales-take-darkrum",
+            "owner": "celeste",
+            "trigger": "takefrominventory",
+            "triggerdata": { "type": "item", "code": "seafarer:spiritportion-darkrum", "quantity": 100 },
+            "jumpTo": "piratetales-line1"
+        },
+        {
+            "code": "piratetales-line1",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-piratetales-pour" }],
+            "jumpTo": "piratetales-line2"
+        },
+        {
+            "code": "piratetales-line2",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-piratetales-mate" }],
+            "jumpTo": "piratetales-prompt1"
+        },
+        {
+            "code": "piratetales-prompt1",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                { "value": "seafarer:dialogue-celeste-piratetales-why", "jumpTo": "piratetales-line3" }
+            ]
+        },
+        {
+            "code": "piratetales-line3",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-piratetales-wheel" }],
+            "jumpTo": "piratetales-prompt2"
+        },
+        {
+            "code": "piratetales-prompt2",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                { "value": "seafarer:dialogue-celeste-piratetales-terrible", "jumpTo": "piratetales-line4" }
+            ]
+        },
+        {
+            "code": "piratetales-line4",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-piratetales-booty" }],
+            "jumpTo": "piratetales-prompt3"
+        },
+        {
+            "code": "piratetales-prompt3",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                { "value": "seafarer:dialogue-celeste-piratetales-notexpecting", "jumpTo": "piratetales-line5" }
+            ]
+        },
+        {
+            "code": "piratetales-line5",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-piratetales-hooked" }],
+            "jumpTo": "piratetales-prompt4"
+        },
+        {
+            "code": "piratetales-prompt4",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                { "value": "seafarer:dialogue-celeste-piratetales-stop", "jumpTo": "piratetales-line6" }
+            ]
+        },
+        {
+            "code": "piratetales-line6",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-piratetales-arrrated" }],
+            "jumpTo": "piratetales-prompt5"
+        },
+        {
+            "code": "piratetales-prompt5",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                { "value": "seafarer:dialogue-celeste-piratetales-plank", "jumpTo": "piratetales-line7" }
+            ]
+        },
+        {
+            "code": "piratetales-line7",
+            "owner": "celeste",
+            "type": "talk",
+            "setVariables": { "entity.celeste-piratetales-told": "true" },
+            "text": [{ "value": "seafarer:dialogue-celeste-piratetales-octopi" }],
+            "jumpTo": "piratetales-grant-friendship"
+        },
+        {
+            "code": "piratetales-grant-friendship",
+            "owner": "celeste",
+            "trigger": "incrementVariable",
+            "triggerdata": {
+                "scope": "entity",
+                "name": "celeste-friendship",
+                "amount": 1,
+                "thresholdValue": 1,
+                "thresholdVariable": "entity.celeste-friendly"
+            },
+            "jumpTo": "main"
+        },
+
+        // =============================================================
+        // Rum-for-map trade (one amphora of rum → one treasure map)
+        // =============================================================
+        {
+            "code": "rumtrade-whiterum",
+            "owner": "celeste",
+            "trigger": "takefrominventory",
+            "triggerdata": { "type": "item", "code": "seafarer:spiritportion-whiterum", "quantity": 100 },
+            "jumpTo": "rumtrade-give-map"
+        },
+        {
+            "code": "rumtrade-darkrum",
+            "owner": "celeste",
+            "trigger": "takefrominventory",
+            "triggerdata": { "type": "item", "code": "seafarer:spiritportion-darkrum", "quantity": 100 },
+            "jumpTo": "rumtrade-give-map"
+        },
+        {
+            "code": "rumtrade-give-map",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-rumtrade-thanks" }],
+            "trigger": "giveitemstack",
+            "triggerdata": {
+                "type": "item",
+                "code": "game:locatormap-treasures",
+                "stacksize": 1
+            },
+            "jumpTo": "main"
+        },
+
+        // =============================================================
+        // Quest: Rust Hunter
+        // =============================================================
+        {
+            "code": "rusthunter-intro",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-rusthunter-intro" }],
+            "jumpTo": "rusthunter-offer"
+        },
+        {
+            "code": "rusthunter-offer",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                { "value": "seafarer:dialogue-celeste-accept-rusthunter", "jumpTo": "rusthunter-start" },
+                { "value": "seafarer:dialogue-morgan-not-yet", "jumpTo": "main" }
+            ]
+        },
+        {
+            "code": "rusthunter-start",
+            "owner": "celeste",
+            "type": "talk",
+            "trigger": "questStart",
+            "triggerdata": { "code": "celeste-rusthunter" },
+            "text": [{ "value": "seafarer:dialogue-celeste-rusthunter-start" }],
+            "jumpTo": "main"
+        },
+        {
+            "code": "rusthunter-inprogress",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                { "value": "seafarer:dialogue-celeste-rusthunter-status", "jumpTo": "rusthunter-check" }
+            ]
+        },
+        {
+            "code": "rusthunter-check",
+            "owner": "celeste",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "celeste-rusthunter", "objective": "kills" },
+            "text": [{ "value": "seafarer:dialogue-celeste-rusthunter-progress" }],
+            "jumpTo": "check-rusthunter-complete"
+        },
+        {
+            "code": "check-rusthunter-complete",
+            "owner": "celeste",
+            "type": "condition",
+            "variable": "player.quest-seafarer-celeste-rusthunter-status",
+            "isValue": "completed",
+            "thenJumpTo": "rusthunter-reward-line",
+            "elseJumpTo": "rusthunter-status-line"
+        },
+        {
+            "code": "rusthunter-status-line",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-rusthunter-statusreport" }],
+            "jumpTo": "main"
+        },
+        {
+            "code": "rusthunter-reward-line",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-rusthunter-reward" }],
+            "jumpTo": "main"
+        },
+
+        // =============================================================
+        // Quest: Bear Hunter
+        // =============================================================
+        {
+            "code": "bearhunter-intro",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-intro" }],
+            "jumpTo": "bearhunter-offer"
+        },
+        {
+            "code": "bearhunter-offer",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                { "value": "seafarer:dialogue-celeste-accept-bearhunter", "jumpTo": "bearhunter-start" },
+                { "value": "seafarer:dialogue-morgan-not-yet", "jumpTo": "main" }
+            ]
+        },
+        {
+            "code": "bearhunter-start",
+            "owner": "celeste",
+            "type": "talk",
+            "trigger": "questStart",
+            "triggerdata": { "code": "celeste-bearhunter" },
+            "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-start" }],
+            "jumpTo": "main"
+        },
+        {
+            "code": "bearhunter-inprogress",
+            "owner": "player",
+            "type": "talk",
+            "text": [
+                {
+                    "value": "seafarer:dialogue-celeste-deliver-pelt-polar",
+                    "jumpTo": "bearhunter-deliver-polar",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-celeste-bearhunter-polar-status", "isNotValue": "completed" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:hide-pelt-bear-polar-complete', stacksize: 1}" }
+                    ]
+                },
+                {
+                    "value": "seafarer:dialogue-celeste-deliver-pelt-brown",
+                    "jumpTo": "bearhunter-deliver-brown",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-celeste-bearhunter-brown-status", "isNotValue": "completed" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:hide-pelt-bear-brown-complete', stacksize: 1}" }
+                    ]
+                },
+                {
+                    "value": "seafarer:dialogue-celeste-deliver-pelt-black",
+                    "jumpTo": "bearhunter-deliver-black",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-celeste-bearhunter-black-status", "isNotValue": "completed" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:hide-pelt-bear-black-complete', stacksize: 1}" }
+                    ]
+                },
+                {
+                    "value": "seafarer:dialogue-celeste-deliver-pelt-panda",
+                    "jumpTo": "bearhunter-deliver-panda",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-celeste-bearhunter-panda-status", "isNotValue": "completed" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:hide-pelt-bear-panda-complete', stacksize: 1}" }
+                    ]
+                },
+                {
+                    "value": "seafarer:dialogue-celeste-deliver-pelt-sun",
+                    "jumpTo": "bearhunter-deliver-sun",
+                    "conditions": [
+                        { "variable": "player.quest-seafarer-celeste-bearhunter-sun-status", "isNotValue": "completed" },
+                        { "variable": "player.inventory", "isValue": "{type: 'item', code: 'game:hide-pelt-bear-sun-complete', stacksize: 1}" }
+                    ]
+                },
+                { "value": "seafarer:dialogue-celeste-bearhunter-status", "jumpTo": "bearhunter-statusreport" }
+            ]
+        },
+        {
+            "code": "bearhunter-statusreport",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-statusreport" }],
+            "jumpTo": "main"
+        },
+        {
+            "code": "bearhunter-deliver-polar",
+            "owner": "celeste",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "celeste-bearhunter", "objective": "polar" },
+            "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-pelt-thanks" }],
+            "jumpTo": "check-bearhunter-complete"
+        },
+        {
+            "code": "bearhunter-deliver-brown",
+            "owner": "celeste",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "celeste-bearhunter", "objective": "brown" },
+            "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-pelt-thanks" }],
+            "jumpTo": "check-bearhunter-complete"
+        },
+        {
+            "code": "bearhunter-deliver-black",
+            "owner": "celeste",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "celeste-bearhunter", "objective": "black" },
+            "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-pelt-thanks" }],
+            "jumpTo": "check-bearhunter-complete"
+        },
+        {
+            "code": "bearhunter-deliver-panda",
+            "owner": "celeste",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "celeste-bearhunter", "objective": "panda" },
+            "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-pelt-thanks" }],
+            "jumpTo": "check-bearhunter-complete"
+        },
+        {
+            "code": "bearhunter-deliver-sun",
+            "owner": "celeste",
+            "type": "talk",
+            "trigger": "questDeliver",
+            "triggerdata": { "code": "celeste-bearhunter", "objective": "sun" },
+            "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-pelt-thanks" }],
+            "jumpTo": "check-bearhunter-complete"
+        },
+        {
+            "code": "check-bearhunter-complete",
+            "owner": "celeste",
+            "type": "condition",
+            "variable": "player.quest-seafarer-celeste-bearhunter-status",
+            "isValue": "completed",
+            "thenJumpTo": "bearhunter-reward-line",
+            "elseJumpTo": "main"
+        },
+        {
+            "code": "bearhunter-reward-line",
+            "owner": "celeste",
+            "type": "talk",
+            "text": [{ "value": "seafarer:dialogue-celeste-bearhunter-reward" }],
+            "jumpTo": "main"
+        }
+    ]
+}

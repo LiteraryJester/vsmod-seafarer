@@ -1,0 +1,16 @@
+[
+  {
+    "file": "game:worldgen/landforms",
+    "op": "add",
+    "path": "/variants/-",
+    "value": {
+      "code": "saltwater",
+      "hexcolor": "#1F6BAA",
+      "weight": 1,
+      "terrainOctaves":          [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "terrainOctaveThresholds": [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      "terrainYKeyPositions":    [0.000, 0.360, 0.365],
+      "terrainYKeyThresholds":   [1.000, 1.000, 0.000]
+    }
+  }
+]

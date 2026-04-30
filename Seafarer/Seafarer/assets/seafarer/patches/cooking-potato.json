@@ -1,0 +1,31 @@
+[
+	// =====================================================================
+	// SOUP — vegetable slots (idx 1-3): seafarer:potato
+	// =====================================================================
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:potato", "shapeElement": "bowl/vegetable base 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:potato", "shapeElement": "bowl/vegetable base 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/soup.json",
+	  "value": { "type": "item", "code": "seafarer:potato", "shapeElement": "bowl/vegetable base 3/*" } },
+
+	// =====================================================================
+	// VEGETABLE STEW — vegetable slots (idx 0-3)
+	// =====================================================================
+	{ "op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:potato", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:potato", "shapeElement": "bowl/vegetable 2/*" } },
+	{ "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:potato", "shapeElement": "bowl/vegetable 3/*" } },
+	{ "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+	  "value": { "type": "item", "code": "seafarer:potato", "shapeElement": "bowl/vegetable 4/*" } },
+
+	// =====================================================================
+	// MEATY STEW — vegetable slots (idx 5=vegetable-base, 6=vegetable-extra)
+	// =====================================================================
+	{ "op": "addmerge", "path": "/ingredients/5/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:potato", "shapeElement": "bowl/vegetable 1/*" } },
+	{ "op": "addmerge", "path": "/ingredients/6/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+	  "value": { "type": "item", "code": "seafarer:potato", "shapeElement": "bowl/vegetable 2/*" } }
+]

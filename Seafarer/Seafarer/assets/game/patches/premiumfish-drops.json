@@ -1,0 +1,119 @@
+[
+	// UNSUPPORTED: These patches do not currently work.
+	// The fishraw GroundStoredProcessable behavior's processedStacksByType
+	// cannot be overridden via JSON patches. A code-based solution (like the
+	// butchering mod's approach of replacing the processing system) will be
+	// needed to make premium fish species drop premium fillets.
+
+	// Saltwater salmon: was grouped at 5 fillets
+	{
+		"file": "game:itemtypes/food/fishraw.json",
+		"op": "add",
+		"path": "/behaviorsByType/*/1/properties/processedStacksByType/fishraw-saltwater-salmon-*-adult",
+		"value": [{ "type": "item", "code": "seafarer:premiumfish-raw", "quantity": { "avg": 5 } }]
+	},
+	{
+		"file": "game:itemtypes/food/fishraw.json",
+		"op": "add",
+		"path": "/behaviorsByType/*/1/properties/processedStacksByType/fishraw-saltwater-salmon-*-juvenile",
+		"value": [{ "type": "item", "code": "seafarer:premiumfish-raw", "quantity": { "avg": 2 } }]
+	},
+
+	// Saltwater tuna: was grouped at 5 fillets
+	{
+		"file": "game:itemtypes/food/fishraw.json",
+		"op": "add",
+		"path": "/behaviorsByType/*/1/properties/processedStacksByType/fishraw-saltwater-tuna-*-adult",
+		"value": [{ "type": "item", "code": "seafarer:premiumfish-raw", "quantity": { "avg": 5 } }]
+	},
+	{
+		"file": "game:itemtypes/food/fishraw.json",
+		"op": "add",
+		"path": "/behaviorsByType/*/1/properties/processedStacksByType/fishraw-saltwater-tuna-*-juvenile",
+		"value": [{ "type": "item", "code": "seafarer:premiumfish-raw", "quantity": { "avg": 2 } }]
+	},
+
+	// Saltwater snapper: was grouped at 5 fillets
+	{
+		"file": "game:itemtypes/food/fishraw.json",
+		"op": "add",
+		"path": "/behaviorsByType/*/1/properties/processedStacksByType/fishraw-saltwater-snapper-*-adult",
+		"value": [{ "type": "item", "code": "seafarer:premiumfish-raw", "quantity": { "avg": 5 } }]
+	},
+	{
+		"file": "game:itemtypes/food/fishraw.json",
+		"op": "add",
+		"path": "/behaviorsByType/*/1/properties/processedStacksByType/fishraw-saltwater-snapper-*-juvenile",
+		"value": [{ "type": "item", "code": "seafarer:premiumfish-raw", "quantity": { "avg": 2 } }]
+	},
+
+	// Saltwater grouper: was 9 fillets
+	{
+		"file": "game:itemtypes/food/fishraw.json",
+		"op": "replace",
+		"path": "/behaviorsByType/*/1/properties/processedStacksByType/fishraw-saltwater-grouper-*-adult",
+		"value": [{ "type": "item", "code": "seafarer:premiumfish-raw", "quantity": { "avg": 9 } }]
+	},
+	{
+		"file": "game:itemtypes/food/fishraw.json",
+		"op": "replace",
+		"path": "/behaviorsByType/*/1/properties/processedStacksByType/fishraw-saltwater-grouper-*-juvenile",
+		"value": [{ "type": "item", "code": "seafarer:premiumfish-raw", "quantity": { "avg": 4 } }]
+	},
+
+	// Saltwater mahi-mahi: was 9 fillets
+	{
+		"file": "game:itemtypes/food/fishraw.json",
+		"op": "replace",
+		"path": "/behaviorsByType/*/1/properties/processedStacksByType/fishraw-saltwater-mahi-mahi-*-adult",
+		"value": [{ "type": "item", "code": "seafarer:premiumfish-raw", "quantity": { "avg": 9 } }]
+	},
+	{
+		"file": "game:itemtypes/food/fishraw.json",
+		"op": "replace",
+		"path": "/behaviorsByType/*/1/properties/processedStacksByType/fishraw-saltwater-mahi-mahi-*-juvenile",
+		"value": [{ "type": "item", "code": "seafarer:premiumfish-raw", "quantity": { "avg": 4 } }]
+	},
+
+	// Saltwater sturgeon: was grouped at 7 fillets with amberjack/barracuda
+	{
+		"file": "game:itemtypes/food/fishraw.json",
+		"op": "add",
+		"path": "/behaviorsByType/*/1/properties/processedStacksByType/fishraw-saltwater-sturgeon-*-adult",
+		"value": [{ "type": "item", "code": "seafarer:premiumfish-raw", "quantity": { "avg": 7 } }]
+	},
+	{
+		"file": "game:itemtypes/food/fishraw.json",
+		"op": "add",
+		"path": "/behaviorsByType/*/1/properties/processedStacksByType/fishraw-saltwater-sturgeon-*-juvenile",
+		"value": [{ "type": "item", "code": "seafarer:premiumfish-raw", "quantity": { "avg": 3 } }]
+	},
+
+	// Freshwater salmon: was grouped at 5 fillets with bass/carp/catfish/etc
+	{
+		"file": "game:itemtypes/food/fishraw.json",
+		"op": "add",
+		"path": "/behaviorsByType/*/1/properties/processedStacksByType/fishraw-freshwater-salmon-*-adult",
+		"value": [{ "type": "item", "code": "seafarer:premiumfish-raw", "quantity": { "avg": 5 } }]
+	},
+	{
+		"file": "game:itemtypes/food/fishraw.json",
+		"op": "add",
+		"path": "/behaviorsByType/*/1/properties/processedStacksByType/fishraw-freshwater-salmon-*-juvenile",
+		"value": [{ "type": "item", "code": "seafarer:premiumfish-raw", "quantity": { "avg": 2 } }]
+	},
+
+	// Freshwater walleye: was grouped at 5 fillets with bass/carp/catfish/etc
+	{
+		"file": "game:itemtypes/food/fishraw.json",
+		"op": "add",
+		"path": "/behaviorsByType/*/1/properties/processedStacksByType/fishraw-freshwater-walleye-*-adult",
+		"value": [{ "type": "item", "code": "seafarer:premiumfish-raw", "quantity": { "avg": 5 } }]
+	},
+	{
+		"file": "game:itemtypes/food/fishraw.json",
+		"op": "add",
+		"path": "/behaviorsByType/*/1/properties/processedStacksByType/fishraw-freshwater-walleye-*-juvenile",
+		"value": [{ "type": "item", "code": "seafarer:premiumfish-raw", "quantity": { "avg": 2 } }]
+	}
+]

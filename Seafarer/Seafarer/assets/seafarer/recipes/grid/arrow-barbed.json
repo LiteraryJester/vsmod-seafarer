@@ -1,0 +1,13 @@
+[
+	{
+		ingredientPattern: "H	S	F",
+		ingredients: {
+			"H": { type: "item", code: "seafarer:arrowhead-barbed-*", name: "metal" },
+			"S": { type: "item", code: "game:stick" },
+			"F": { type: "item", code: "game:feather" }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "seafarer:arrow-barbed-{metal}", quantity: 1 }
+	}
+]

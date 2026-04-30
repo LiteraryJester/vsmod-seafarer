@@ -1,0 +1,74 @@
+[
+	{
+		ingredientPattern: "MW",
+		ingredients: {
+			"M": { type: "item", code: "seafarer:masa", quantity: 1 },
+			"W": {
+				type: "block",
+				code: "game:woodbucket",
+				recipeAttributes: {
+					requiresContent: { type: "item", code: "game:waterportion" },
+					requiresLitres: 1
+				}
+			}
+		},
+		width: 2,
+		height: 1,
+		shapeless: true,
+		output: { type: "item", code: "seafarer:tortilladough", quantity: 2 }
+	},
+	{
+		ingredientPattern: "MW",
+		ingredients: {
+			"M": { type: "item", code: "seafarer:masa", quantity: 1 },
+			"W": {
+				type: "block",
+				code: "game:bowl-*-fired",
+				recipeAttributes: {
+					requiresContent: { type: "item", code: "game:waterportion" },
+					requiresLitres: 1
+				}
+			}
+		},
+		width: 2,
+		height: 1,
+		shapeless: true,
+		output: { type: "item", code: "seafarer:tortilladough", quantity: 2 }
+	},
+	{
+		ingredientPattern: "MW",
+		ingredients: {
+			"M": { type: "item", code: "seafarer:masa", quantity: 1 },
+			"W": {
+				type: "block",
+				code: "game:jug-*-fired",
+				recipeAttributes: {
+					requiresContent: { type: "item", code: "game:waterportion" },
+					requiresLitres: 1
+				}
+			}
+		},
+		width: 2,
+		height: 1,
+		shapeless: true,
+		output: { type: "item", code: "seafarer:tortilladough", quantity: 2 }
+	},
+	{
+		ingredientPattern: "MW",
+		ingredients: {
+			"M": { type: "item", code: "seafarer:masa", quantity: 1 },
+			"W": {
+				type: "block",
+				code: "seafarer:opencoconut",
+				recipeAttributes: {
+					requiresContent: { type: "item", code: "game:waterportion" },
+					requiresLitres: 1
+				}
+			}
+		},
+		width: 2,
+		height: 1,
+		shapeless: true,
+		output: { type: "item", code: "seafarer:tortilladough", quantity: 2 }
+	}
+]

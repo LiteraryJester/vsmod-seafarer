@@ -1,0 +1,9 @@
+{
+    ingredients: [
+        { type: "item", code: "seafarer:tortilladough" }
+    ],
+    output: { type: "item", code: "seafarer:tortilla" },
+    cookingTemp: 150,
+    cookingDuration: 30,
+    minMaterial: "clay"
+}

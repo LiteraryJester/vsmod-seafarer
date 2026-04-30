@@ -1,0 +1,10 @@
+[
+	{
+		code: "coconuttoddy",
+		sealHours: 168,
+		ingredients: [
+			{ type: "item", code: "seafarer:coconutwaterportion", litres: 0.5 }
+		],
+		output: { type: "item", code: "game:ciderportion-coconut", litres: 0.5 }
+	}
+]

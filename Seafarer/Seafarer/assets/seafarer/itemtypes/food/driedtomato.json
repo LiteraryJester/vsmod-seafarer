@@ -1,0 +1,55 @@
+{
+    "code": "driedtomato",
+    "maxstacksize": 64,
+    "behaviors": [
+        {
+            "name": "GroundStorable",
+            "properties": {
+                "layout": "Quadrants",
+                "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.1, "z2": 1 }
+            }
+        }
+    ],
+    "shape": { "base": "seafarer:item/food/driedtomato" },
+    "textures": {
+        "tomato": { "base": "seafarer:item/food/fruit/tomato" }
+    },
+    "creativeinventory": { "general": ["*"], "seafarer": ["*"] },
+    "attributes": {
+        "foodTags": ["driedtomato", "vegetable"],
+        "shelvable": true,
+        "displaycaseable": true,
+        "inContainerTexture": { "base": "seafarer:item/food/fruit/tomato" },
+        "inPieProperties": {
+            "texture": "seafarer:item/food/fruit/tomato",
+            "partType": "Filling"
+        },
+        "inBurritoProperties": { "partType": "Filling" }
+    },
+    "nutritionProps": { "satiety": 80, "foodcategory": "Vegetable", "health": 0 },
+    "nutritionPropsWhenInMeal": { "satiety": 100, "foodcategory": "Vegetable" },
+    "transitionableProps": [{
+        "type": "Perish",
+        "freshHours": { "avg": 8640 },
+        "transitionHours": { "avg": 4320 },
+        "transitionedStack": { "type": "item", "code": "game:rot" },
+        "transitionRatio": 1
+    }],
+    "materialDensity": 300,
+    "guiTransform": {
+        "rotation": { "x": -30, "y": 145, "z": 0 },
+        "origin": { "x": 0.5, "y": 0.1, "z": 0.5 },
+        "scale": 3.5
+    },
+    "tpHandTransform": {
+        "translation": { "x": -0.5, "y": -0.2, "z": -0.35 },
+        "rotation": { "x": 0, "y": 0, "z": 0 },
+        "scale": 0.6
+    },
+    "groundTransform": {
+        "translation": { "x": 0, "y": 0, "z": 0 },
+        "rotation": { "x": 0, "y": 0, "z": 0 },
+        "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+        "scale": 4
+    }
+}

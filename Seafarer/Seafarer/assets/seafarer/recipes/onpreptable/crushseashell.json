@@ -1,0 +1,11 @@
+{
+	"code": "crushseashell",
+	"input": { "code": "game:seashell-*", "quantity": 1 },
+	"toolSlotRequires": "game:hammer-*",
+	"output": {
+		"type": "item",
+		"code": "seafarer:crushedshell",
+		"quantity": 1
+	},
+	"sound": "game:sounds/player/knap1"
+}

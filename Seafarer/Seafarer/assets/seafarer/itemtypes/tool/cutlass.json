@@ -1,0 +1,101 @@
+{
+	code: "cutlass",
+	tags: ["weapon", "weapon-melee", "weapon-sword", "tool-sword"],
+	damagedby: ["blockbreaking", "attacking"],
+	tool: "sword",
+	variantgroups: [
+		{ code: "metal", states: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "gold", "silver", "iron", "meteoriciron", "steel"] }
+	],
+	shape: { base: "game:item/tool/blade/sabre" },
+	textures: {
+		handle: { base: "game:block/wood/debarked/maple" }
+	},
+	texturesByType: {
+		"*-copper":        { blackbronze: { base: "game:block/metal/ingot/copper" } },
+		"*-tinbronze":     { blackbronze: { base: "game:block/metal/ingot/tinbronze" } },
+		"*-bismuthbronze": { blackbronze: { base: "game:block/metal/ingot/bismuthbronze" } },
+		"*-blackbronze":   { blackbronze: { base: "game:block/metal/ingot/blackbronze" } },
+		"*-gold":          { blackbronze: { base: "game:block/metal/ingot/gold" } },
+		"*-silver":        { blackbronze: { base: "game:block/metal/ingot/silver" } },
+		"*-iron":          { blackbronze: { base: "game:block/metal/ingot/iron" } },
+		"*-meteoriciron":  { blackbronze: { base: "game:block/metal/ingot/meteoriciron" } },
+		"*-steel":         { blackbronze: { base: "game:block/metal/ingot/steel" } }
+	},
+	attributes: {
+		heldItemPitchFollow: 0.9,
+		handbook: {
+			groupBy: ["cutlass-*"]
+		},
+		attachableToEntity: { categoryCode: "toolholding" }
+	},
+	behaviors: [
+		{ name: "AnimationAuthoritative" },
+		{ name: "Buffable" },
+		{ name: "Sharpenable" },
+		{
+			name: "GroundStorable",
+			properties: {
+				layout: "WallHalves",
+				wallOffY: 1,
+				ctrlKey: true,
+				selectionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.1, z2: 1 },
+				collisionBox: { x1: 0, y1: 0, z1: 0, x2: 0, y2: 0, z2: 0 }
+			}
+		}
+	],
+	heldTpHitAnimation: "falx",
+	attackRange: 2.5,
+	tooltierbytype: {
+		"*-copper": 2,
+		"*-bismuthbronze": 3,
+		"*-tinbronze": 3,
+		"*-blackbronze": 3,
+		"*-gold": 5,
+		"*-silver": 5,
+		"*-iron": 4,
+		"*-meteoriciron": 4,
+		"*-steel": 5
+	},
+	attackpowerbytype: {
+		"*-copper": 3.75,
+		"*-bismuthbronze": 4.25,
+		"*-tinbronze": 4.5,
+		"*-blackbronze": 4.75,
+		"*-iron": 5,
+		"*-meteoriciron": 5.25,
+		"*-steel": 5.25,
+		"*-gold": 5.25,
+		"*-silver": 5.25
+	},
+	durabilitybytype: {
+		"*-copper": 250,
+		"*-tinbronze": 450,
+		"*-bismuthbronze": 530,
+		"*-blackbronze": 600,
+		"*-iron": 850,
+		"*-meteoriciron": 1100,
+		"*-steel": 2125,
+		"*-gold": 2125,
+		"*-silver": 2125
+	},
+	maxstacksize: 1,
+	creativeinventory: { "general": ["*"], "items": ["*"], "tools": ["*"], "seafarer": ["*"] },
+	guiTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: -37, y: 124, z: -7 },
+		origin: { x: 0.85, y: -0.1, z: 0.57 },
+		scale: 2.06
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 0, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 3.4
+	},
+	tpHandTransform: {
+		translation: { x: -0.98, y: 0.055, z: -0.78 },
+		rotation: { x: 85, y: 0, z: 2 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 0.63
+	}
+}

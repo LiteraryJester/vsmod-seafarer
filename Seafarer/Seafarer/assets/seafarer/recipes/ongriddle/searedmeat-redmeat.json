@@ -1,0 +1,7 @@
+{
+  "ingredients": [{ "type": "item", "code": "game:redmeat-raw" }],
+  "output": { "type": "item", "code": "seafarer:searedmeat-redmeat" },
+  "cookingTemp": 150,
+  "cookingDuration": 45,
+  "minMaterial": "clay"
+}

@@ -1,0 +1,101 @@
+[
+	// =====================================================================
+	// Vanilla vegetables — all variants are burrito fillings
+	// =====================================================================
+	{ "op": "addmerge", "path": "/attributesByType/*/inBurritoProperties",
+	  "file": "game:itemtypes/food/vegetable.json",
+	  "value": { "partType": "Filling" } },
+
+	// Pickled vegetables
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "game:itemtypes/food/pickledvegetable.json",
+	  "value": { "partType": "Filling" } },
+
+	// =====================================================================
+	// Vanilla meats — raw variants are burrito fillings
+	// =====================================================================
+	{ "op": "addmerge", "path": "/attributes/inBurritoPropertiesByType",
+	  "file": "game:itemtypes/food/redmeat.json",
+	  "value": { "*-raw": { "partType": "Filling" } } },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoPropertiesByType",
+	  "file": "game:itemtypes/food/poultry.json",
+	  "value": { "*-raw": { "partType": "Filling" } } },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoPropertiesByType",
+	  "file": "game:itemtypes/food/bushmeat.json",
+	  "value": { "*-raw": { "partType": "Filling" } } },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoPropertiesByType",
+	  "file": "game:itemtypes/food/fishfillet.json",
+	  "value": { "*-raw": { "partType": "Filling" } } },
+
+	// =====================================================================
+	// Cheese — sliced variants are burrito fillings
+	// =====================================================================
+	{ "op": "addmerge", "path": "/attributes/inBurritoPropertiesByType",
+	  "file": "game:itemtypes/food/cheese.json",
+	  "value": {
+		"*-cheddar-1slice": { "partType": "Filling" },
+		"*-blue-1slice": { "partType": "Filling" }
+	  } },
+
+	// =====================================================================
+	// Egg
+	// =====================================================================
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "game:itemtypes/food/egg.json",
+	  "value": { "partType": "Filling" } },
+
+	// =====================================================================
+	// Salt and Sand mod items
+	// =====================================================================
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "seafarer:itemtypes/food/tomato.json",
+	  "value": { "partType": "Filling" } },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "seafarer:itemtypes/food/chili.json",
+	  "value": { "partType": "Filling" } },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "seafarer:itemtypes/food/corn.json",
+	  "value": { "partType": "Filling" } },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "seafarer:itemtypes/food/roastedchili.json",
+	  "value": { "partType": "Filling" } },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "seafarer:itemtypes/food/driedchili.json",
+	  "value": { "partType": "Filling" } },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "seafarer:itemtypes/food/driedtomato.json",
+	  "value": { "partType": "Filling" } },
+
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "seafarer:itemtypes/food/coconutmeat.json",
+	  "value": { "partType": "Filling" } },
+
+	// Slacked meat — whole and cut variants
+	{ "op": "addmerge", "path": "/attributes/inBurritoPropertiesByType",
+	  "file": "seafarer:itemtypes/food/slackedmeat.json",
+	  "value": {
+		"@*-redmeat-(whole|cut)": { "partType": "Filling" },
+		"@*-bushmeat-(whole|cut)": { "partType": "Filling" },
+		"@*-poultry-(whole|cut)": { "partType": "Filling" },
+		"@*-fish-(whole|cut)": { "partType": "Filling" },
+		"@*-premiumfish-(whole|cut)": { "partType": "Filling" }
+	  } },
+
+	// Premium fish
+	{ "op": "addmerge", "path": "/attributes/inBurritoPropertiesByType",
+	  "file": "seafarer:itemtypes/food/premiumfish.json",
+	  "value": { "*-raw": { "partType": "Filling" } } },
+
+	// Candied fruit
+	{ "op": "addmerge", "path": "/attributes/inBurritoProperties",
+	  "file": "seafarer:itemtypes/food/candiedfruit.json",
+	  "value": { "partType": "Filling" } }
+]

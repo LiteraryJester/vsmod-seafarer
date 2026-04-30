@@ -1,0 +1,89 @@
+{
+  "code": "celeste-bearhunter",
+  "npc": "celeste",
+  "groupLangKey": "quest-group-helping-residents",
+  "titleLangKey": "quest-celeste-bearhunter-title",
+  "descriptionLangKey": "quest-celeste-bearhunter-desc",
+  "autoEnable": true,
+  "requiredObjectiveCount": 3,
+  "objectives": [
+    {
+      "code": "polar",
+      "type": "delivery",
+      "items": [{ "item": "game:hide-pelt-bear-polar-complete", "quantity": 1 }],
+      "required": 1,
+      "rewards": [{ "type": "awardTrainingXP", "training": "bearhunter", "xp": 50 }]
+    },
+    {
+      "code": "brown",
+      "type": "delivery",
+      "items": [{ "item": "game:hide-pelt-bear-brown-complete", "quantity": 1 }],
+      "required": 1,
+      "rewards": [{ "type": "awardTrainingXP", "training": "bearhunter", "xp": 50 }]
+    },
+    {
+      "code": "black",
+      "type": "delivery",
+      "items": [{ "item": "game:hide-pelt-bear-black-complete", "quantity": 1 }],
+      "required": 1,
+      "rewards": [{ "type": "awardTrainingXP", "training": "bearhunter", "xp": 50 }]
+    },
+    {
+      "code": "panda",
+      "type": "delivery",
+      "items": [{ "item": "game:hide-pelt-bear-panda-complete", "quantity": 1 }],
+      "required": 1,
+      "rewards": [{ "type": "awardTrainingXP", "training": "bearhunter", "xp": 50 }]
+    },
+    {
+      "code": "sun",
+      "type": "delivery",
+      "items": [{ "item": "game:hide-pelt-bear-sun-complete", "quantity": 1 }],
+      "required": 1,
+      "rewards": [{ "type": "awardTrainingXP", "training": "bearhunter", "xp": 50 }]
+    }
+  ],
+  "rewards": [
+    {
+      "type": "giveItem",
+      "itemCode": "seafarer:arrow-barbed-copper",
+      "itemType": "item",
+      "stacksize": 24
+    },
+    {
+      "type": "addSellingItem",
+      "itemCode": "seafarer:arrow-barbed-copper",
+      "itemType": "item",
+      "stacksize": 4,
+      "stockAvg": 12,
+      "stockVar": 4,
+      "priceAvg": 2,
+      "priceVar": 0.5
+    },
+    {
+      "type": "addSellingItem",
+      "itemCode": "seafarer:trainingbook-bearhunter",
+      "itemType": "item",
+      "stacksize": 1,
+      "stockAvg": 1,
+      "stockVar": 0,
+      "priceAvg": 10,
+      "priceVar": 2
+    },
+    {
+      "type": "incrementEntityVariable",
+      "variableName": "celeste-friendship",
+      "amount": 1,
+      "thresholdValue": 1,
+      "thresholdVariable": "entity.celeste-friendly"
+    },
+    {
+      "type": "incrementEntityVariable",
+      "variableName": "rebuilding-tier",
+      "variableScope": "global",
+      "amount": 1,
+      "thresholdValue": 4,
+      "thresholdVariable": "global.rebuilding-complete"
+    }
+  ]
+}

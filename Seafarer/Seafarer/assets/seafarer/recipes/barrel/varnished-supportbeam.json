@@ -1,0 +1,11 @@
+[
+    {
+        code: "varnishedsupportbeam",
+        sealHours: 24,
+        ingredients: [
+            { type: "item",  code: "seafarer:varnishportion-marine", litres: 1, consumeLitres: 1 },
+            { type: "block", code: "game:supportbeam-seasoned", quantity: 4 }
+        ],
+        output: { type: "block", code: "game:supportbeam-varnished", quantity: 4 }
+    }
+]

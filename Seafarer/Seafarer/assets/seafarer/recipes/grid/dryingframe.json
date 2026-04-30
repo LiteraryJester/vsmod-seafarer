@@ -1,0 +1,15 @@
+[
+  {
+    "ingredientPattern": "S_S,SRS,S_S",
+    "ingredients": {
+      "S": { "type": "item", "code": "game:stick", "quantity": 6 },
+      "R": { "type": "item", "code": "game:rope", "quantity": 2 }
+    },
+    "width": 3,
+    "height": 3,
+    "output": {
+      "type": "block",
+      "code": "seafarer:dryingframe-oak-north"
+    }
+  }
+]

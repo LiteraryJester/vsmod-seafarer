@@ -1,0 +1,83 @@
+{
+    code: "amphora",
+    class: "BlockAmphora",
+
+    behaviors: [
+        { name: "GroundStorable", properties: { layout: "Quadrants", collisionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 1, z2: 1 } } },
+        { name: "Unplaceable" },
+        { name: "RightClickPickup" }
+    ],
+
+    shape: { base: "seafarer:block/clay/amphora" },
+
+    textures: {
+        "ceramic": { base: "game:block/clay/hardened/blue" },
+        "interior": { base: "game:block/clay/hardened/blue" }
+    },
+
+    drawtype: "JSON",
+    renderPass: "OpaqueNoCull",
+
+    attributes: {
+        shelvable: true,
+        liquidContainerProps: {
+            capacityLitres: 10,
+            transferSizeLitres: 0.5,
+            emptyShapeLoc: "seafarer:shapes/block/clay/amphora",
+            opaqueContentShapeLoc: "shapes/block/basic/nothing",
+            liquidContentShapeLoc: "shapes/block/basic/nothing",
+            liquidMaxYTranslate: 0.05
+        },
+        groundStorageTransform: {
+            translation: { x: 0, y: -0.15, z: 0 },
+            scale: 0.7
+        },
+        onDisplayTransform: {
+            translation: { x: 0, y: 0, z: 0 },
+            scale: 0.7
+        },
+        attachableToEntity: {
+            categoryCode: "storagevessel",
+            attachedShape: { base: "seafarer:block/clay/amphora" }
+        }
+    },
+
+    creativeinventory: { "general": ["*"], "seafarer": ["*"] },
+    blockmaterial: "Ceramic",
+    maxStackSize: 1,
+    liquidSelectable: 1,
+    replaceable: 300,
+    resistance: 1.5,
+    lightAbsorption: 0,
+    sidesolid: { all: false },
+    sideopaque: { all: false },
+
+    collisionbox: { x1: 0.25, y1: 0, z1: 0.25, x2: 0.75, y2: 1, z2: 0.75 },
+    selectionbox: { x1: 0.25, y1: 0, z1: 0.25, x2: 0.75, y2: 1, z2: 0.75 },
+
+    sounds: {
+        place: "game:block/ceramics",
+        break: "game:block/ceramics"
+    },
+
+    guiTransform: {
+        origin: { x: 0.5, y: 0.5, z: 0.5 },
+        scale: 2.5
+    },
+    fpHandTransform: {
+        translation: { x: 0, y: 0.1, z: 0 },
+        rotation: { x: 0, y: 0, z: 0 },
+        origin: { x: 0.5, y: 0, z: 0.5 },
+        scale: 1.5
+    },
+    tpHandTransform: {
+        translation: { x: -0.5, y: -0.3, z: -0.5 },
+        rotation: { x: 0, y: 0, z: 0 },
+        origin: { x: 0.5, y: 0, z: 0.5 },
+        scale: 1
+    },
+    groundTransform: {
+        origin: { x: 0.5, y: 0, z: 0.5 },
+        scale: 2.5
+    }
+}

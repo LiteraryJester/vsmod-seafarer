@@ -1,0 +1,59 @@
+{
+  "code": "celeste-rusthunter",
+  "npc": "celeste",
+  "groupLangKey": "quest-group-helping-residents",
+  "titleLangKey": "quest-celeste-rusthunter-title",
+  "descriptionLangKey": "quest-celeste-rusthunter-desc",
+  "autoEnable": true,
+  "objectives": [
+    {
+      "code": "kills",
+      "type": "kill",
+      "pattern": "game:drifter-*",
+      "required": 10
+    }
+  ],
+  "rewards": [
+    {
+      "type": "giveItem",
+      "itemCode": "seafarer:cutlass-blackbronze",
+      "itemType": "item",
+      "stacksize": 1
+    },
+    {
+      "type": "addSellingItem",
+      "itemCode": "seafarer:cutlass-copper",
+      "itemType": "item",
+      "stacksize": 1,
+      "stockAvg": 2,
+      "stockVar": 1,
+      "priceAvg": 8,
+      "priceVar": 2
+    },
+    {
+      "type": "addSellingItem",
+      "itemCode": "seafarer:trainingbook-buccaneer",
+      "itemType": "item",
+      "stacksize": 1,
+      "stockAvg": 1,
+      "stockVar": 0,
+      "priceAvg": 10,
+      "priceVar": 3
+    },
+    {
+      "type": "incrementEntityVariable",
+      "variableName": "celeste-friendship",
+      "amount": 1,
+      "thresholdValue": 1,
+      "thresholdVariable": "entity.celeste-friendly"
+    },
+    {
+      "type": "incrementEntityVariable",
+      "variableName": "rebuilding-tier",
+      "variableScope": "global",
+      "amount": 1,
+      "thresholdValue": 4,
+      "thresholdVariable": "global.rebuilding-complete"
+    }
+  ]
+}

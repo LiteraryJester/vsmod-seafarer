@@ -1,0 +1,109 @@
+{
+    code: "outrigger-construction",
+    class: "EntityBoatConstruction",
+    tags: ["inanimate", "structure"],
+    variantgroups: [
+        { code: "material", states: ["seasoned", "varnished"], loadFromProperties: "block/wood" }
+    ],
+    skipVariants: ["*-aged", "*-veryaged", "*-rotten", "*-veryrotten"],
+    attributes: {
+        boattype: "outrigger",
+        relayRopeInteractions: true,
+        stages: [
+            { addElements: ["ORIGIN/ORIGIN0rollers"] },
+            {
+                requireStacks: [
+                    { type: "item", code: "game:firewood", quantity: 8 },
+                    { type: "item", code: "game:plank-*", name: "seafarer-outrigger-ingredient-planks", quantity: 12, storeWildCard: "wood" }
+                ],
+                addElements: ["ORIGIN/ORIGIN2MainHull/ORIGIN1props"]
+            },
+            {
+                requireStacks: [{ type: "block", code: "game:supportbeam-{wood}", quantity: 10 }],
+                addElements: ["ORIGIN/ORIGIN2MainHull"]
+            },
+            {
+                requireStacks: [{ type: "item", code: "game:plank-{wood}", quantity: 16 }],
+                addElements: [
+                    "ORIGIN/ORIGIN2MainHull/ORIGIN3Cube6",
+                    "ORIGIN/ORIGIN2MainHull/ORIGIN3Cube9"
+                ]
+            },
+            {
+                requireStacks: [{ type: "item", code: "game:plank-{wood}", quantity: 16 }],
+                addElements: [
+                    "ORIGIN/ORIGIN2MainHull/ORIGIN4",
+                    "ORIGIN/ORIGIN2MainHull/ORIGIN4Cube15",
+                    "ORIGIN/ORIGIN2MainHull/platform",
+                    "ORIGIN/ORIGIN2MainHull/RearPlatform",
+                    "ORIGIN/OarStorage",
+                    "ORIGIN/CargoFor1",
+                    "ORIGIN/FishingrodStorage"
+                ]
+            },
+            {
+                requireStacks: [{ type: "block", code: "game:supportbeam-{wood}", quantity: 12 }],
+                addElements: ["ORIGIN/ORIGIN5PortFloat"]
+            },
+            {
+                requireStacks: [
+                    { type: "block", code: "game:supportbeam-{wood}", quantity: 8 },
+                    { type: "item", code: "game:rope", quantity: 6 }
+                ],
+                addElements: [
+                    "ORIGIN/ORIGIN6Crossbeams",
+                    "ORIGIN/ORIGIN6Crossbeams2"
+                ]
+            },
+            {
+                requireStacks: [{ type: "block", code: "game:supportbeam-{wood}", quantity: 8 }],
+                addElements: ["ORIGIN/ORIGIN7Mast"]
+            },
+            {
+                requireStacks: [{ type: "item", code: "game:rope", quantity: 12 }],
+                addElements: ["ORIGIN/ORIGIN7Mast/ORIGIN8"]
+            },
+            {
+                requireStacks: [
+                    { type: "block", code: "game:linen-normal-down", quantity: 16 },
+                    { type: "item", code: "game:rope", quantity: 4 }
+                ],
+                addElements: ["ORIGIN/ORIGIN7Mast/SailFurled"]
+            },
+            { requireStacks: [], actionLangCode: "outrigger-launch" },
+            { removeElements: ["ORIGIN/ORIGIN2MainHull/ORIGIN1props"] }
+        ]
+    },
+    behaviorConfigs: {
+        selectionboxes: { selectionBoxes: ["SeleAP"] }
+    },
+    client: {
+        size: 1,
+        renderer: "Shape",
+        shape: { base: "entity/nonliving/boat/outrigger-construction" },
+        textures: {
+            "material":  { base: "game:block/wood/debarked/{material}" },
+            "wood":      { base: "game:block/wood/debarked/{material}" },
+            "planks":    { base: "game:block/wood/planks/{material}1" },
+            "seasoned1": { base: "game:block/wood/planks/{material}1" },
+            "plain":     { base: "game:block/cloth/linen/plain" },
+            "rope":      { base: "game:item/resource/rope" },
+            "firewood":  { base: "game:block/wood/firewood/north" }
+        },
+        animations: [
+            { code: "launch", animation: "launch", animationSpeed: 1, weight: 10, blendMode: "AddAverage" }
+        ],
+        behaviors: [
+            { code: "interpolateposition" },
+            { code: "selectionboxes" },
+            { code: "floatupwhenstuck" }
+        ]
+    },
+    server: {
+        behaviors: [
+            { code: "selectionboxes" },
+            { code: "floatupwhenstuck" }
+        ]
+    },
+    sounds: {}
+}

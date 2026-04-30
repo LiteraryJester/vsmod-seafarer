@@ -1,0 +1,839 @@
+[
+	// ==========================================
+	// Coconut oil → oil/fat input slots
+	// Breaded items use foodoilportion/lard at ingredient 0
+	// ==========================================
+
+	// Breaded meat nuggets (6 recipes): ingredient 0 = oil/binder
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmeatnugget.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmeatnugget.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmeatnugget.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/2/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmeatnugget.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/3/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmeatnugget.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/4/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmeatnugget.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/5/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// Breaded fish nuggets (2 recipes): ingredient 0 = oil/binder
+	{
+		"file": "expandedfoods:recipes/kneading/breadedfishnugget.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/breadedfishnugget.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// Breaded ball (2 recipes): ingredient 0 = oil/binder
+	{
+		"file": "expandedfoods:recipes/kneading/breadedball.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/breadedball.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// Breaded mushroom (4 recipes): ingredient 0 = oil/binder
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmushroom.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmushroom.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmushroom.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/2/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmushroom.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/3/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// Breaded oiled variants (use foodoilportion/lard at ingredient 0)
+	// breadedmeatnuggetoiled (3 recipes)
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmeatnuggetoiled.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmeatnuggetoiled.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmeatnuggetoiled.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/2/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// breadedfishnuggetoiled (1 recipe)
+	{
+		"file": "expandedfoods:recipes/kneading/breadedfishnuggetoiled.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// breadedballoiled (1 recipe)
+	{
+		"file": "expandedfoods:recipes/kneading/breadedballoiled.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// breadedmushroomoiled (1 recipe)
+	{
+		"file": "expandedfoods:recipes/kneading/breadedmushroomoiled.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// Dressing (recipes 0-3 use foodoilportion at ingredient 1)
+	{
+		"file": "expandedfoods:recipes/kneading/dressing.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/1/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/dressing.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/1/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/dressing.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/2/ingredients/1/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/dressing.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/3/ingredients/1/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// Sausage fat slot (recipes 0-3, ingredient 0 = fat/lard)
+	{
+		"file": "expandedfoods:recipes/kneading/sausage.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/sausage.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/sausage.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/2/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/sausage.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/3/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// Sausage fish fat slot (recipes 0-3, ingredient 0 = fat/lard)
+	{
+		"file": "expandedfoods:recipes/kneading/sausagefish.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/sausagefish.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/sausagefish.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/2/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/sausagefish.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/3/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// Pemmican fat slot (recipes 0-1, ingredient 0 = fat/lard)
+	{
+		"file": "expandedfoods:recipes/kneading/pemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/pemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// Fish pemmican fat slot (recipes 0-1, ingredient 0 = fat/lard)
+	{
+		"file": "expandedfoods:recipes/kneading/fishpemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/fishpemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/0/inputs/-",
+		"value": [{ "type": "item", "code": "seafarer:oilportion-coconut", "quantity": 10 }],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Hot sauce → sushi sauce slot and simmering sauce slots
+	// Sushi oil recipe 2: ingredient 0 = treesyrup/soysauce/fishsauce
+	// ==========================================
+	{
+		"file": "expandedfoods:recipes/kneading/sushioil.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/2/ingredients/0/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:hotsauceportion", "quantity": 10 },
+			{ "type": "item", "code": "seafarer:soysauceportion", "quantity": 10 },
+			{ "type": "item", "code": "seafarer:garumportion", "quantity": 10 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Dried coconut / toasted coconut → dried fruit slots in pemmican
+	// Pemmican recipe 0: ingredients 1-3 = fruit slots
+	// Pemmican recipe 1: ingredients 2-3 = fruit slots
+	// ==========================================
+	{
+		"file": "expandedfoods:recipes/kneading/pemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/pemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/2/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/pemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/3/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/pemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/2/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/pemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/3/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// Fish pemmican fruit slots
+	// Recipe 0: ingredients 1-3 = fruit
+	// Recipe 1: ingredients 2-3 = fruit
+	{
+		"file": "expandedfoods:recipes/kneading/fishpemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/fishpemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/2/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/fishpemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/3/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/fishpemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/2/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/fishpemmican.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/3/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Dried foods → trail mix dried fruit slot
+	// Trail mix (8 recipes): ingredient 2 = dried fruit
+	// ==========================================
+	{
+		"file": "expandedfoods:recipes/kneading/trailmix.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/2/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 3 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/trailmix.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/2/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 3 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/trailmix.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/2/ingredients/2/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 3 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/trailmix.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/3/ingredients/2/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 3 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/trailmix.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/4/ingredients/2/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 3 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/trailmix.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/5/ingredients/2/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 3 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/trailmix.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/6/ingredients/2/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 3 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/trailmix.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/7/ingredients/2/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 3 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 3 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Fruit bar — add dried tropical fruits and candied fruit
+	// Fruit bar (2 recipes): ingredient 1 = fruit/dried fruit slot
+	// ==========================================
+	{
+		"file": "expandedfoods:recipes/kneading/fruitbar.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/fruitbar.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:driedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:toastedcoconut", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:candiedfruit-*", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Molasses/syrup → EF syrup slots in fruit bar and breaded items
+	// Fruit bar (2 recipes): ingredient 3 = syrup/honey slot
+	// ==========================================
+	{
+		"file": "expandedfoods:recipes/kneading/fruitbar.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/3/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:molassesportion", "quantity": 10 },
+			{ "type": "item", "code": "seafarer:syrupportion", "quantity": 10 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/fruitbar.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/3/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:molassesportion", "quantity": 10 },
+			{ "type": "item", "code": "seafarer:syrupportion", "quantity": 10 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Chili / tomato / corn → stuffed pepper filling slots
+	// Adding fresh and dried forms to filling ingredient slots
+	// Only patching the simpler recipe variants (0, 3, 5, 8)
+	// which have a single filling slot at ingredient 1
+	// ==========================================
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:chili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:tomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:corn", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedcorn", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/3/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:chili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:tomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:corn", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedcorn", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/5/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:chili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:tomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:corn", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedcorn", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/8/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:chili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:tomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:corn", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedcorn", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Chili / tomato → dumpling filling slots
+	// Dumplings recipe 1 (with filling) and 3 (filling + salt)
+	// ==========================================
+	{
+		"file": "expandedfoods:recipes/kneading/dumpling.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:chili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:tomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/dumpling.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/3/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:chili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedchili", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:tomato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:driedtomato", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Potato / masa → stuffed pepper filling slots
+	// Same simpler recipe variants (0, 3, 5, 8) at ingredient 1
+	// ==========================================
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/0/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:potato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:masa", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/3/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:potato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:masa", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/5/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:potato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:masa", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/8/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:potato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:masa", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+
+	// ==========================================
+	// Potato / masa → dumpling filling slots
+	// Recipes 1 (with filling) and 3 (filling + salt) at ingredient 1
+	// ==========================================
+	{
+		"file": "expandedfoods:recipes/kneading/dumpling.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/1/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:potato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:masa", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	},
+	{
+		"file": "expandedfoods:recipes/kneading/dumpling.json",
+		"side": "server",
+		"op": "addeach",
+		"path": "/3/ingredients/1/inputs/-",
+		"value": [
+			{ "type": "item", "code": "seafarer:potato", "quantity": 1 },
+			{ "type": "item", "code": "seafarer:masa", "quantity": 1 }
+		],
+		"dependsOn": [{ "modid": "expandedfoods" }]
+	}
+]

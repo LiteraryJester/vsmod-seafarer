@@ -1,0 +1,36 @@
+[
+  {
+    "name": "Large Log Barge (logs)",
+    "ingredientPattern": "LSL,RLR,LSL",
+    "ingredients": {
+      "L": {
+        "type": "block",
+        "code": "game:log-placed-*-ud",
+        "name": "wood",
+        "quantity": 4
+      },
+      "S": { "type": "item", "code": "game:stick", "quantity": 6 },
+      "R": { "type": "item", "code": "game:rope", "quantity": 3 }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "item", "code": "seafarer:boat-logbarge-{wood}" }
+  },
+  {
+    "name": "Large Log Barge (log sections)",
+    "ingredientPattern": "LSL,RLR,LSL",
+    "ingredients": {
+      "L": {
+        "type": "block",
+        "code": "game:logsection-placed-*-ne-ud",
+        "name": "wood",
+        "quantity": 4
+      },
+      "S": { "type": "item", "code": "game:stick", "quantity": 6 },
+      "R": { "type": "item", "code": "game:rope", "quantity": 3 }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "item", "code": "seafarer:boat-logbarge-{wood}" }
+  }
+]

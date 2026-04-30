@@ -1,0 +1,53 @@
+[
+	{
+		"file": "game:blocktypes/plant/fruittreebranch.json",
+		"op": "add",
+		"path": "/attributes/worldgen/-",
+		"value": { "type": "coconut", "mintemp": 25, "maxtemp": 50, "minrain": 0.5, "maxrain": 1 },
+		"side": "server"
+	},
+	{
+		"file": "game:blocktypes/plant/fruittreebranch.json",
+		"op": "add",
+		"path": "/attributes/fruittreeProperties/coconut",
+		"value": {
+			"cycleType": "Evergreen",
+			"floweringDays": { "avg": 4.5, "var": 1.5 },
+			"fruitingDays": { "dist": "strongerinvexp", "avg": 50, "var": 12 },
+			"ripeDays": { "dist": "strongerinvexp", "avg": 10, "var": 10 },
+			"growthStepDays": { "dist": "verynarrowgaussian", "avg": 5, "var": 1 },
+			"fruitStacks": [
+				{ "type": "item", "code": "seafarer:coconut", "quantity": { "dist": "strongerinvexp", "avg": 3, "var": 3 } }
+			],
+			"looseLeavesBelowTemp": { "dist": "strongerinvexp", "avg": 3, "var": -4 },
+			"blossomAtYearRel": { "dist": "strongerinvexp", "avg": 0.2, "var": 0.1 },
+			"dieBelowTemp": { "dist": "strongerinvexp", "avg": 10, "var": -4 },
+			"cuttingRootingChance": 0.4,
+			"cuttingGraftChance": 0.6
+		},
+		"side": "server"
+	},
+	{
+		"file": "game:blocktypes/plant/fruittreebranch.json",
+		"op": "add",
+		"path": "/attributes/shapes/fruit-coconut",
+		"value": { "base": "seafarer:block/plant/fruittree/fruit-coconut" },
+		"side": "server"
+	},
+	{
+		"file": "game:blocktypes/plant/fruittreebranch.json",
+		"op": "add",
+		"path": "/creativeinventoryStacksByType/*-branch/0/stacks/-",
+		"value": { "type": "block", "code": "fruittree-cutting", "attributes": { "type": "coconut" } },
+		"side": "server"
+	},
+	{
+		"file": "game:blocktypes/plant/fruittreefoliage.json",
+		"op": "add",
+		"path": "/attributes/foliageProperties/coconut",
+		"value": {
+			"texturesBasePath": "seafarer:block/plant/fruittree/coconut/"
+		},
+		"side": "server"
+	}
+]

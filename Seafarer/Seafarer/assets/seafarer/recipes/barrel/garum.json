@@ -1,0 +1,13 @@
+{
+  "code": "garum",
+  "sealHours": 480,
+  "ingredients": [
+    { "type": "item", "code": "game:brineportion", "litres": 0.5 },
+    { "type": "item", "code": "seafarer:saltedmeat-fish", "quantity": 4 }
+  ],
+  "output": {
+    "type": "item",
+    "code": "seafarer:garumportion",
+    "litres": 0.5
+  }
+}

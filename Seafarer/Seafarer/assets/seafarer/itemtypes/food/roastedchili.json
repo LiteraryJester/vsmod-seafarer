@@ -1,0 +1,27 @@
+{
+    "code": "roastedchili",
+    "maxstacksize": 64,
+    "variantgroups": [
+        { "code": "type", "states": ["red", "green", "yellow"] }
+    ],
+    "shape": { "base": "game:item/food/vegetable/bellpepper" },
+    "texture": { "base": "game:item/food/vegetable/bellpepper-red" },
+    "creativeinventory": { "general": ["*"], "seafarer": ["*"] },
+    "enabled": false,
+    "attributes": {
+        "foodTags": ["vegetable", "spice"],
+        "inPieProperties": {
+            "texture": "game:item/food/vegetable/bellpepper-red",
+            "partType": "Filling"
+        },
+        "inBurritoProperties": { "partType": "Filling" }
+    },
+    "nutritionProps": { "satiety": 80, "foodcategory": "Vegetable", "health": 0 },
+    "transitionableProps": [{
+        "type": "Perish",
+        "freshHours": { "avg": 300 },
+        "transitionHours": { "avg": 100 },
+        "transitionedStack": { "type": "item", "code": "game:rot" },
+        "transitionRatio": 1
+    }]
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "code": "varnishedplank",
+    "sealHours": 24,
+    "ingredients": [
+      {
+        "type": "item",
+        "code": "seafarer:varnishportion-marine",
+        "litres": 1,
+        "consumeLitres": 1
+      },
+      { "type": "item", "code": "game:plank-seasoned", "quantity": 4 }
+    ],
+    "output": { "type": "item", "code": "game:plank-varnished", "stackSize": 4 }
+  }
+]

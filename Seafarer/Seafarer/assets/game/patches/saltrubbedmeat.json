@@ -1,0 +1,30 @@
+[
+	{
+		"file": "game:itemtypes/food/bushmeat.json",
+		"op": "add",
+		"path": "/attributes/saltRubbedOutput",
+		"value": "seafarer:saltrubbedmeat-bushmeat",
+		"side": "server"
+	},
+	{
+		"file": "game:itemtypes/food/redmeat.json",
+		"op": "add",
+		"path": "/attributes/saltRubbedOutput",
+		"value": "seafarer:saltrubbedmeat-redmeat",
+		"side": "server"
+	},
+	{
+		"file": "game:itemtypes/food/poultry.json",
+		"op": "add",
+		"path": "/attributes/saltRubbedOutput",
+		"value": "seafarer:saltrubbedmeat-poultry",
+		"side": "server"
+	},
+	{
+		"file": "game:itemtypes/food/fishfillet.json",
+		"op": "add",
+		"path": "/attributes/saltRubbedOutput",
+		"value": "seafarer:saltrubbedmeat-fish",
+		"side": "server"
+	}
+]

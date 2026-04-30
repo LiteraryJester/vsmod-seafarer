@@ -1,0 +1,42 @@
+{
+	code: "arrow-barbed",
+	class: "EntityProjectileBarbed",
+	tags: ["inanimate", "projectile"],
+	variantgroups: [
+		{ code: "metal", states: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "iron", "meteoriciron", "steel"] }
+	],
+	attributes: {
+		isProjectile: true,
+		bleedDamage: 1.5,
+		bleedDurationSec: 6.0,
+		bleedTicks: 3
+	},
+	hitboxSize: { x: 0.1, y: 0.1 },
+	behaviorConfigs: {
+		passivephysics: {
+			groundDragFactor: 1,
+			airDragFactor: 0.25,
+			gravityFactor: 0.75
+		}
+	},
+	client: {
+		size: 0.75,
+		renderer: "Shape",
+		shape: { base: "game:entity/nonliving/projectile/arrow/copper" },
+		textures: {
+			material: { base: "game:block/metal/ingot/{metal}" }
+		},
+		behaviors: [
+			{ code: "passivephysics" },
+			{ code: "interpolateposition" }
+		]
+	},
+	server: {
+		behaviors: [
+			{ code: "passivephysics" },
+			{ code: "despawn", minSeconds: 600 },
+			{ code: "entitystatetags" }
+		]
+	},
+	sounds: {}
+}

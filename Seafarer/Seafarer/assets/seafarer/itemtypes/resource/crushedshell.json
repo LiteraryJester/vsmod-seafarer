@@ -1,0 +1,58 @@
+{
+	"code": "crushedshell",
+	"maxstacksize": 64,
+	"behaviors": [
+		{
+			"name": "GroundStorable",
+			"properties": {
+				"layout": "Stacking",
+				"placeRemoveSound": "game:sounds/block/ceramicplace",
+				"stackingModel": "seafarer:block/resource/shellpile",
+				"modelItemsToStackSizeRatio": 1,
+				"upSolid": true,
+				"stackingCapacity": 32,
+				"transferQuantity": 1,
+				"bulkTransferQuantity": 4,
+				"collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.25, "z2": 1 },
+				"cbScaleYByLayer": 0.125,
+				"maxFireable": 32
+			}
+		}
+	],
+	"shape": { "base": "game:block/aquatic/seashell/clam" },
+	"textures": {
+		"color": { "base": "game:block/creature/aquatic/seashell/plain" },
+		"material": { "base": "game:block/creature/aquatic/seashell/plain" }
+	},
+	"combustibleProps": {
+		"meltingPoint": 600,
+		"meltingDuration": 30,
+		"smeltedRatio": 1,
+		"smeltingType": "fire",
+		"requiresContainer": false,
+		"smeltedStack": { "type": "item", "code": "game:lime" }
+	},
+	"attributes": {
+		"displaycaseable": true,
+		"shelvable": true,
+		"handbook": {
+			"groupBy": ["crushedshell"]
+		}
+	},
+	"creativeinventory": { "general": ["*"], "items": ["*"], "seafarer": ["*"] },
+	"guiTransform": {
+		"rotation": { "x": -43, "y": 132, "z": 0 },
+		"origin": { "x": 0.5, "y": 0.1, "z": 0.5 },
+		"scale": 2.7
+	},
+	"tpHandTransform": {
+		"translation": { "x": -0.87, "y": 0.04, "z": -0.8 },
+		"rotation": { "x": 2, "y": 31, "z": -25 },
+		"origin": { "x": 0.5, "y": -0.1, "z": 0.5 },
+		"scale": 0.6
+	},
+	"groundTransform": {
+		"origin": { "x": 0.5, "y": 0, "z": 0.5 },
+		"scale": 3
+	}
+}

@@ -1,0 +1,85 @@
+{
+  "code": "saltrubbedmeat",
+  "maxstacksize": 64,
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "Quadrants",
+        "collisionBox": {
+          "x1": 0,
+          "y1": 0,
+          "z1": 0,
+          "x2": 1,
+          "y2": 0.125,
+          "z2": 1
+        }
+      }
+    }
+  ],
+  "attributes": {
+    "foodTags": ["meat"],
+    "handbook": {
+      "groupBy": ["saltrubbedmeat-*"]
+    },
+    "displaycaseable": true,
+    "shelvable": true
+  },
+  "variantgroups": [
+    { "code": "type", "states": ["bushmeat", "redmeat", "poultry", "fish", "premiumfish"] }
+  ],
+  "shapeByType": {
+    "*-bushmeat": { "base": "game:item/food/meat/bushmeat" },
+    "*-redmeat": { "base": "game:item/food/meat/red" },
+    "*-poultry": { "base": "game:item/food/meat/poultry" },
+    "*-fish": { "base": "game:item/food/meat/fish" },
+    "*-premiumfish": { "base": "game:item/food/meat/fish" }
+  },
+  "textures": {
+    "meat": { "base": "seafarer:item/food/meat/saltrubbed" }
+  },
+  "creativeinventory": {
+    "general": ["*"],
+    "items": ["*"],
+    "seafarer": ["*"]
+  },
+  "transitionableProps": [
+    {
+      "type": "Cure",
+      "freshHours": { "avg": 0 },
+      "transitionHours": { "avg": 12 },
+      "transitionedStack": {
+        "type": "item",
+        "code": "seafarer:saltedmeat-{type}"
+      },
+      "transitionRatio": 1
+    },
+    {
+      "type": "Perish",
+      "freshHours": { "avg": 120 },
+      "transitionHours": { "avg": 12 },
+      "transitionedStack": { "type": "item", "code": "game:rot" },
+      "transitionRatio": 1
+    }
+  ],
+  "materialDensity": 600,
+  "guiTransform": {
+    "rotate": false,
+    "translation": { "x": 0.5, "y": 0, "z": 0 },
+    "rotation": { "x": 171, "y": -122, "z": 28 },
+    "origin": { "x": 0.5, "y": 0.05, "z": 0.53 },
+    "scale": 4.3
+  },
+  "tpHandTransform": {
+    "translation": { "x": -0.04, "y": 0.26, "z": -0.04 },
+    "rotation": { "x": -78, "y": 15, "z": 0 },
+    "origin": { "x": 0.23, "y": 0, "z": 0.13 },
+    "scale": 0.92
+  },
+  "groundTransform": {
+    "translation": { "x": 0, "y": 0, "z": 0 },
+    "rotation": { "x": 180, "y": 33, "z": -180 },
+    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+    "scale": 5
+  }
+}

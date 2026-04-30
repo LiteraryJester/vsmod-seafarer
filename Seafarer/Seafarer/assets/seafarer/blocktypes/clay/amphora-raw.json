@@ -1,0 +1,76 @@
+{
+  "code": "amphora-raw",
+
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "Quadrants",
+        "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 1, "z2": 1 }
+      }
+    },
+    { "name": "Unplaceable" },
+    { "name": "RightClickPickup" }
+  ],
+
+  "variantgroups": [{ "code": "color", "states": ["blue", "fire", "red"] }],
+
+  "shape": { "base": "seafarer:block/clay/amphora" },
+
+  "textures": {
+    "ceramic": { "base": "game:block/clay/{color}clay" },
+    "interior": { "base": "game:block/clay/{color}clay" }
+  },
+
+  "drawtype": "JSON",
+  "renderPass": "OpaqueNoCull",
+
+  "combustibleProps": {
+    "meltingPoint": 600,
+    "meltingDuration": 30,
+    "smeltedRatio": 1,
+    "smeltingType": "fire",
+    "requiresContainer": false,
+    "smeltedStack": { "type": "block", "code": "seafarer:amphora" }
+  },
+
+  "creativeinventory": { "general": ["*"], "seafarer": ["*"] },
+  "blockmaterial": "Ceramic",
+  "replaceable": 300,
+  "resistance": 0.75,
+  "maxStackSize": 4,
+  "lightAbsorption": 0,
+  "sidesolid": { "all": false },
+  "sideopaque": { "all": false },
+
+  "collisionbox": {
+    "x1": 0.25,
+    "y1": 0,
+    "z1": 0.25,
+    "x2": 0.75,
+    "y2": 1,
+    "z2": 0.75
+  },
+  "selectionbox": {
+    "x1": 0.25,
+    "y1": 0,
+    "z1": 0.25,
+    "x2": 0.75,
+    "y2": 1,
+    "z2": 0.75
+  },
+
+  "sounds": {
+    "place": "game:block/ceramics",
+    "break": "game:block/ceramics"
+  },
+
+  "guiTransform": {
+    "origin": { "x": 0.5, "y": 0.5, "z": 0.5 },
+    "scale": 2.5
+  },
+  "groundTransform": {
+    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+    "scale": 2.5
+  }
+}

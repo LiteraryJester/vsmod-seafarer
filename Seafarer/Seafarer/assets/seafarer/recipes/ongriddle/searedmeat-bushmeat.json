@@ -1,0 +1,9 @@
+{
+    ingredients: [
+        { type: "item", code: "game:bushmeat-raw" }
+    ],
+    output: { type: "item", code: "seafarer:searedmeat-bushmeat" },
+    cookingTemp: 150,
+    cookingDuration: 45,
+    minMaterial: "clay"
+}

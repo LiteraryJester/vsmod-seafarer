@@ -1,0 +1,58 @@
+{
+    code: "griddlehearthbase",
+    class: "BlockGriddleHearthBase",
+
+    variantgroups: [
+        { code: "side", loadFromProperties: "abstract/horizontalorientation" }
+    ],
+
+    shapeByType: {
+        "*-north": { base: "seafarer:block/clay/griddlehearth-base", rotateY: 0 },
+        "*-east": { base: "seafarer:block/clay/griddlehearth-base", rotateY: 270 },
+        "*-south": { base: "seafarer:block/clay/griddlehearth-base", rotateY: 180 },
+        "*-west": { base: "seafarer:block/clay/griddlehearth-base", rotateY: 90 }
+    },
+
+    textures: {
+        "stone": { base: "game:block/stone/rock/granite1" },
+        "clay": { base: "game:block/clay/hardened/fire" },
+        "null": { base: "game:block/stone/rock/granite1" }
+    },
+
+    drawtype: "JSON",
+    renderPass: "OpaqueNoCull",
+
+    creativeinventory: {
+        "general": ["*-north"],
+        "seafarer": ["*-north"]
+    },
+
+    behaviors: [
+        { name: "HorizontalOrientable" },
+        { name: "RightClickPickup" }
+    ],
+
+    collisionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.25, z2: 1 },
+    selectionbox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.25, z2: 1 },
+
+    sounds: {
+        place: "game:block/stone",
+        break: "game:block/stone",
+        hit: "game:block/stone"
+    },
+
+    blockmaterial: "Stone",
+    resistance: 3,
+    lightAbsorption: 0,
+    sidesolid: { all: false },
+    sideopaque: { all: false },
+
+    guiTransform: {
+        origin: { x: 0.5, y: 0.125, z: 0.5 },
+        scale: 3
+    },
+    groundTransform: {
+        origin: { x: 0.5, y: 0, z: 0.5 },
+        scale: 3
+    }
+}

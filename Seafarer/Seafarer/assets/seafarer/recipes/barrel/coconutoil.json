@@ -1,0 +1,8 @@
+{
+	"code": "coconutoil",
+	"sealHours": 168,
+	"ingredients": [
+		{ "type": "item", "code": "seafarer:coconutmilkportion", "litres": 2 }
+	],
+	"output": { "type": "item", "code": "seafarer:oilportion-coconut", "litres": 1 }
+}

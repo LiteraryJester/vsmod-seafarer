@@ -1,0 +1,198 @@
+{
+	"code": "trader-potatoking",
+	"class": "EntityEvolvingTrader",
+	"tags": ["humanoid", "trader", "human", "habitat-land"],
+	"weight": 80,
+	"canClimb": true,
+	"hitboxSize": { "x": 0.6, "y": 1.75 },
+	"deadHitboxSize": { "x": 0.75, "y": 0.5 },
+	"behaviorConfigs": {
+		"nametag": {
+			"showtagonlywhentargeted": true
+		}
+	},
+	"client": {
+		"renderer": "Shape",
+		"shape": { "base": "game:entity/humanoid/trader-female" },
+		"texture": { "base": "game:entity/humanoid/villagerbody/skin/normal*" },
+		"behaviors": [
+			{ "code": "nametag", "showtagonlywhentargeted": true },
+			{ "code": "repulseagents" },
+			{ "code": "controlledphysics", "stepHeight": 1.01 },
+			{ "code": "interpolateposition" },
+			{ "code": "conversable", "dialogue": "seafarer:config/dialogue/potatoking" }
+		],
+		"animations": [
+			{ "code": "die", "animation": "die", "animationSpeed": 1.75, "weight": 10, "blendMode": "AddAverage" },
+			{ "code": "hurt", "animation": "hurt", "animationSpeed": 2, "blendMode": "AddAverage" },
+			{ "code": "formal-walk", "animation": "formal-walk", "animationSpeed": 1.5 },
+			{ "code": "rowdywelcome", "animation": "rowdywelcome", "blendMode": "AddAverage" },
+			{ "code": "lazywelcome", "animation": "lazywelcome", "blendMode": "AddAverage" },
+			{ "code": "lazynod", "animation": "lazynod", "blendMode": "AddAverage" }
+		]
+	},
+	"attributes": {
+		"disableElements": ["breasts"],
+		"frostOverlayThreshold": -10,
+		"shouldSwivelFromMotion": false,
+		"outfitConfigFileName": "game:traderaccessories-male",
+		"voiceSounds": [
+			"game:sounds/voice/tuba/",
+			"game:sounds/voice/duduk/"
+		],
+		"outfitversion": 1,
+		"partialRandomOutfitsByType": {
+			"trader-potatoking": {
+				"bodyskin": [
+					{ "Code": "bodyskin-4" },
+					{ "Code": "bodyskin-5" },
+					{ "Code": "bodyskin-6" },
+					{ "Code": "bodyskin-7" }
+				],
+				"skin-face": [
+					{ "Code": "skin-face-oldman1" },
+					{ "Code": "skin-face-oldman2" },
+					{ "Code": "skin-face-oldman3" }
+				],
+				"hair-base": [
+					{ "Code": "hair-bald-none", "Weight": 8.0 },
+					{ "Code": "hair-bald-horseshoe", "Weight": 3.0 },
+					{ "Code": "hair-bald-tonsure", "Weight": 2.0 },
+					{ "Code": "hair-bald-topknot" }
+				],
+				"beard": [
+					{ "Code": "beard-full4", "Weight": 4.0 },
+					{ "Code": "beard-full5", "Weight": 4.0 },
+					{ "Code": "beard-full6", "Weight": 3.0 },
+					{ "Code": "beard-full8", "Weight": 2.0 }
+				],
+				"mustache": [
+					{ "Code": "nothing", "Weight": 10.0 }
+				],
+				"arm": [
+					{ "Code": "nothing", "Weight": 3.0 },
+					{ "Code": "arm-filamentlamp", "Weight": 6.0 },
+					{ "Code": "arm-strings", "Weight": 3.0 },
+					{ "Code": "arm-bonebracer", "Weight": 2.0 }
+				],
+				"emblem": [
+					{ "Code": "emblem-mapscroll", "Weight": 4.0 },
+					{ "Code": "emblem-hideemblem", "Weight": 3.0 }
+				],
+				"face": [
+					{ "Code": "nothing", "Weight": 2.0 },
+					{ "Code": "face-goggles", "Weight": 6.0 }
+				],
+				"foot": [
+					{ "Code": "foot-boots3", "Weight": 3.0 },
+					{ "Code": "foot-boots4", "Weight": 3.0 },
+					{ "Code": "foot-reinforcedboots", "Weight": 3.0 },
+					{ "Code": "foot-furboots1" }
+				],
+				"hand": [
+					{ "Code": "nothing", "Weight": 2.0 },
+					{ "Code": "hand-abacus", "Weight": 4.0 },
+					{ "Code": "hand-gloveswork", "Weight": 4.0 },
+					{ "Code": "hand-glovesreinforced", "Weight": 3.0 },
+					{ "Code": "hand-glovesdirty", "Weight": 2.0 }
+				],
+				"head": [
+					{ "Code": "nothing", "Weight": 2.0 },
+					{ "Code": "head-minerhat", "Weight": 6.0 },
+					{ "Code": "head-crowcrown", "Weight": 4.0 },
+					{ "Code": "head-bonyheadband", "Weight": 3.0 }
+				],
+				"lowerbody": [
+					{ "Code": "nothing", "Weight": 3.0 }
+				],
+				"neck": [
+					{ "Code": "nothing", "Weight": 4.0 },
+					{ "Code": "neck-gearsamulet", "Weight": 6.0 }
+				],
+				"shoulder": [
+					{ "Code": "shoulder-apronleather", "Weight": 5.0 },
+					{ "Code": "shoulder-shortsleeve-coat2", "Weight": 3.0 },
+					{ "Code": "shoulder-bonejacket", "Weight": 2.0 },
+					{ "Code": "shoulder-tiedrope", "Weight": 2.0 }
+				],
+				"upperbody": [
+					{ "Code": "nothing", "Weight": 3.0 }
+				],
+				"upperbodyover": [
+					{ "Code": "nothing", "Weight": 3.0 },
+				],
+				"waist": [
+					{ "Code": "waist-drill", "Weight": 6.0 },
+					{ "Code": "waist-chisel", "Weight": 5.0 },
+					{ "Code": "waist-hammer", "Weight": 4.0 },
+					{ "Code": "waist-handsaw", "Weight": 3.0 },
+					{ "Code": "waist-beltkit", "Weight": 2.0 }
+				]
+			}
+		},
+		"tradeProps": {
+			"money": { "avg": 10, "var": 3 },
+			"selling": {
+				"maxItems": 4,
+				"list": [
+				]
+			},
+			"buying": {
+				"maxItems": 4,
+				"list": [
+					{ "code": "game:vegetable-potato", "type": "item", "stacksize": 4, "stock": { "avg": 16, "var": 4 }, "price": { "avg": 3, "var": 0.5 } }
+				]
+			}
+		}
+	},
+	"server": {
+		"attributes": {
+			"pathfinder": {
+				"minTurnAnglePerSec": 720,
+				"maxTurnAnglePerSec": 1440
+			}
+		},
+		"behaviors": [
+			{ "code": "nametag", "showtagonlywhentargeted": true, "selectFromRandomName": ["Potato King"] },
+			{ "code": "repulseagents" },
+			{ "code": "controlledphysics", "stepHeight": 1.01 },
+			{ "code": "reviveondeath", "minHours": 24, "maxHours": 72 },
+			{ "code": "health", "currenthealth": 25, "maxhealth": 25 },
+			{
+				"code": "emotionstates",
+				"states": [
+					{ "code": "aggressiveondamage", "duration": 8, "chance": 0.9, "slot": 0, "priority": 2, "accumType": "noaccum" }
+				]
+			},
+			{
+				"code": "taskai",
+				"aitasks": [
+					{
+						"code": "meleeattack", "entityCodes": ["player"], "priority": 2,
+						"damage": 6, "mincooldown": 2500, "maxcooldown": 3500,
+						"attackDurationMs": 900, "damagePlayerAtMs": 300,
+						"animation": "Attack", "animationSpeed": 2,
+						"whenInEmotionState": "aggressiveondamage"
+					},
+					{
+						"code": "seekentity", "entityCodes": ["player"], "priority": 1.5,
+						"mincooldown": 1000, "maxcooldown": 1500, "seekingRange": 20,
+						"movespeed": 0.035, "animation": "Run", "animationSpeed": 1.75,
+						"whenInEmotionState": "aggressiveondamage"
+					},
+					{ "code": "idle", "priority": 1.2, "minduration": 2500, "maxduration": 2500, "mincooldown": 2000, "maxcooldown": 10000, "animation": "laugh" },
+					{ "code": "idle", "priority": 1.2, "minduration": 2500, "maxduration": 2500, "mincooldown": 5000, "maxcooldown": 30000, "animation": "idle2" },
+					{
+						"code": "wander", "priority": 1.0, "movespeed": 0.01,
+						"animation": "Walk", "wanderChance": 0.005,
+						"maxDistanceToSpawn": 4, "wanderRangeMin": 1, "wanderRangeMax": 3,
+						"teleportWhenOutOfRange": true, "teleportInGameHours": 1
+					},
+					{ "code": "lookaround", "priority": 0.5 }
+				]
+			},
+			{ "code": "conversable", "dialogue": "seafarer:config/dialogue/potatoking" }
+		]
+	},
+	"sounds": {}
+}

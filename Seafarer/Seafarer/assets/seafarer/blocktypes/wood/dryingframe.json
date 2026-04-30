@@ -1,0 +1,125 @@
+{
+	code: "dryingframe",
+	class: "BlockDryingFrame",
+	entityClass: "BlockEntityDryingFrame",
+
+	behaviors: [
+		{ name: "HorizontalOrientable"
+		}
+	],
+
+	variantgroups: [
+		{ code: "wood", loadFromProperties: "block/wood"
+		},
+		{ code: "side", loadFromProperties: "abstract/horizontalorientation"
+		}
+	],
+
+	shapeInventory: { base: "seafarer:block/wood/dryingframe"
+	},
+
+shapeByType: {
+		"*-north": { base: "seafarer:block/wood/dryingframe", rotateY: 0
+		},
+		"*-east": { base: "seafarer:block/wood/dryingframe", rotateY: 270
+		},
+		"*-south": { base: "seafarer:block/wood/dryingframe", rotateY: 180
+		},
+		"*-west": { base: "seafarer:block/wood/dryingframe", rotateY: 90
+		}
+	},
+
+	textures: {
+		"wood": { base: "game:block/wood/debarked/{wood}"
+		},
+		"rope": { base: "game:item/resource/rope"
+		}
+	},
+
+	drawtype: "JSON",
+	renderPass: "OpaqueNoCull",
+
+	creativeinventory: {
+		"general": [
+			"*-oak-north"
+		],
+		"seafarer": [
+			"*-oak-north"
+		]
+	},
+
+	collisionSelectionBoxesByType: {
+		"@*-(north|south)": [
+			{ x1: 0.2, y1: 1.0, z1: 0.3, x2: 0.35, y2: 1.75, z2: 0.7
+			},
+			{ x1: 0.35, y1: 1.0, z1: 0.3, x2: 0.50, y2: 1.75, z2: 0.7
+			},
+			{ x1: 0.50, y1: 1.0, z1: 0.3, x2: 0.65, y2: 1.75, z2: 0.7
+			},
+			{ x1: 0.65, y1: 1.0, z1: 0.3, x2: 0.8, y2: 1.75, z2: 0.7
+			},
+			{ x1: 0.0, y1: 0.0, z1: 0.0, x2: 1.0, y2: 1.0, z2: 1.0
+			}
+		],
+		"@*-(east|west)": [
+			{ x1: 0.3, y1: 1.0, z1: 0.2, x2: 0.7, y2: 1.75, z2: 0.35
+			},
+			{ x1: 0.3, y1: 1.0, z1: 0.35, x2: 0.7, y2: 1.75, z2: 0.50
+			},
+			{ x1: 0.3, y1: 1.0, z1: 0.50, x2: 0.7, y2: 1.75, z2: 0.65
+			},
+			{ x1: 0.3, y1: 1.0, z1: 0.65, x2: 0.7, y2: 1.75, z2: 0.8
+			},
+			{ x1: 0.0, y1: 0.0, z1: 0.0, x2: 1.0, y2: 1.0, z2: 1.0
+			}
+		]
+	},
+
+	sounds: {
+		place: "game:block/planks",
+		break: "game:block/planks",
+		hit: "game:block/planks"
+	},
+
+	resistance: 3,
+	lightAbsorption: 0,
+	sidesolid: { all: false
+	},
+	sideopaque: { all: false
+	},
+
+	drops: [
+		{ type: "block", code: "seafarer:dryingframe-{wood}-north"
+		}
+	],
+
+	attributes: {
+		handbook: {
+			groupBy: [
+				"dryingframe-*"
+			]
+		}
+	},
+
+	guiTransform: {
+		origin: { x: 0.5, y: 0.4, z: 0.5
+		},
+		scale: 1.5
+	},
+	tpHandTransform: {
+		translation: { x: -0.75, y: -1, z: -0.675
+		},
+		rotation: { x: 12, y: 15, z: -80
+		},
+		scale: 0.5
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0
+		},
+		rotation: { x: 0, y: 0, z: 0
+		},
+		origin: { x: 0.5, y: 0, z: 0.5
+		},
+		scale: 3
+	}
+}

@@ -1,0 +1,13 @@
+{
+  "code": "hotsauce",
+  "sealHours": 168,
+  "ingredients": [
+    { "type": "item", "code": "game:brineportion", "litres": 0.2 },
+    { "type": "item", "code": "seafarer:chili", "quantity": 4 }
+  ],
+  "output": {
+    "type": "item",
+    "code": "seafarer:hotsauceportion",
+    "litres": 0.2
+  }
+}

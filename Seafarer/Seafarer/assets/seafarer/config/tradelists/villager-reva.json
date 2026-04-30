@@ -1,0 +1,21 @@
+{
+    "money": { "avg": 40, "var": 10 },
+    "selling": {
+        "maxItems": 6,
+        "list": [
+            { "code": "tapestry-red", "type": "block", "stacksize": 1, "stock": { "avg": 1, "var": 0.5 }, "price": { "avg": 25, "var": 5 } },
+            { "code": "painting-oil-sunset", "type": "block", "stacksize": 1, "stock": { "avg": 1, "var": 0.5 }, "price": { "avg": 20, "var": 4 } },
+            { "code": "chandelier-candle", "type": "block", "stacksize": 1, "stock": { "avg": 1, "var": 0 }, "price": { "avg": 35, "var": 5 } }
+        ]
+    },
+    "buying": {
+        "maxItems": 8,
+        "list": [
+            { "code": "nugget-nativegold", "type": "item", "stacksize": 1, "stock": { "avg": 8, "var": 2 }, "price": { "avg": 8, "var": 2 } },
+            { "code": "nugget-nativesilver", "type": "item", "stacksize": 1, "stock": { "avg": 8, "var": 2 }, "price": { "avg": 5, "var": 1 } },
+            { "code": "gem-rough-diamond", "type": "item", "stacksize": 1, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 15, "var": 3 } },
+            { "code": "gem-rough-emerald", "type": "item", "stacksize": 1, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 12, "var": 3 } },
+            { "code": "gem-rough-olivine", "type": "item", "stacksize": 1, "stock": { "avg": 3, "var": 1 }, "price": { "avg": 8, "var": 2 } }
+        ]
+    }
+}

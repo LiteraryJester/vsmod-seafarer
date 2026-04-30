@@ -1,0 +1,27 @@
+{
+    "money": { "avg": 15, "var": 3 },
+    "selling": {
+        "maxItems": 10,
+        "list": [
+            { "code": "poultice-linen-horsetail", "type": "item", "stacksize": 2, "stock": { "avg": 6, "var": 2 }, "price": { "avg": 3, "var": 0.5 } },
+            { "code": "bandage-linen-clean", "type": "item", "stacksize": 2, "stock": { "avg": 4, "var": 1 }, "price": { "avg": 4, "var": 0.5 } },
+            { "code": "seafarer:dried-salted-fish", "type": "item", "stacksize": 4, "stock": { "avg": 8, "var": 2 }, "price": { "avg": 2, "var": 0.5 } },
+            { "code": "seafarer:dried-salted-redmeat", "type": "item", "stacksize": 4, "stock": { "avg": 6, "var": 2 }, "price": { "avg": 2, "var": 0.5 } },
+            { "code": "bread-rice-perfect", "type": "item", "stacksize": 4, "stock": { "avg": 6, "var": 2 }, "price": { "avg": 1, "var": 0.25 } },
+            { "code": "pickledvegetable-cabbage", "type": "item", "stacksize": 4, "stock": { "avg": 4, "var": 1 }, "price": { "avg": 2, "var": 0.5 } },
+            { "code": "barrel", "type": "block", "stacksize": 1, "stock": { "avg": 3, "var": 1 }, "price": { "avg": 8, "var": 1 } },
+            { "code": "crate", "type": "block", "stacksize": 1, "stock": { "avg": 3, "var": 1 }, "price": { "avg": 6, "var": 1 } },
+            { "code": "basket-normal", "type": "block", "stacksize": 1, "stock": { "avg": 4, "var": 1 }, "price": { "avg": 4, "var": 1 } },
+            { "code": "storagevessel-burned", "type": "block", "stacksize": 1, "stock": { "avg": 2, "var": 1 }, "price": { "avg": 8, "var": 2 } }
+        ]
+    },
+    "buying": {
+        "maxItems": 8,
+        "list": [
+            { "code": "seafarer:rumportion", "type": "item", "stacksize": 1, "stock": { "avg": 10, "var": 3 }, "price": { "avg": 5, "var": 1 } },
+            { "code": "seafarer:canejuiceportion", "type": "item", "stacksize": 1, "stock": { "avg": 8, "var": 2 }, "price": { "avg": 2, "var": 0.5 } },
+            { "code": "seafarer:molassesportion", "type": "item", "stacksize": 1, "stock": { "avg": 8, "var": 2 }, "price": { "avg": 2, "var": 0.5 } },
+            { "code": "salt", "type": "item", "stacksize": 4, "stock": { "avg": 16, "var": 4 }, "price": { "avg": 1, "var": 0.25 } }
+        ]
+    }
+}

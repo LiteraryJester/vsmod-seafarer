@@ -1,0 +1,62 @@
+[
+    {
+        type: "craft",
+        training: "piemaster",
+        recipe: "game:pie-*",
+        xp: 1
+    },
+    {
+        type: "craft",
+        training: "shipwright",
+        recipe: "game:rope",
+        xp: 2
+    },
+    {
+        type: "craft",
+        training: "shipwright",
+        recipe: "game:boat-raft-*",
+        xp: 25
+    },
+    {
+        type: "craft",
+        training: "shipwright",
+        recipe: "seafarer:boat-logbarge-*",
+        xp: 25
+    },
+    {
+        type: "book",
+        training: "shipwright",
+        item: "seafarer:trainingbook-shipwright",
+        xp: 100
+    },
+    {
+        type: "dialogue",
+        training: "shipwright",
+        trigger: "drake-varnish-lesson",
+        xp: 50
+    },
+    {
+        type: "dialogue",
+        training: "shipwright",
+        trigger: "drake-canvas-lesson",
+        xp: 50
+    },
+    {
+        type: "book",
+        training: "bearhunter",
+        item: "seafarer:trainingbook-bearhunter",
+        xp: 100
+    },
+    {
+        type: "book",
+        training: "buccaneer",
+        item: "seafarer:trainingbook-buccaneer",
+        xp: 100
+    },
+    {
+        type: "book",
+        training: "gardener",
+        item: "seafarer:trainingbook-gardener",
+        xp: 100
+    }
+]

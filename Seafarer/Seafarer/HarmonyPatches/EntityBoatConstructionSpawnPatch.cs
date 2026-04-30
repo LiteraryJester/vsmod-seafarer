@@ -1,0 +1,109 @@
+using HarmonyLib;
+using ProgressionFramework.Training;
+using Vintagestory.API.Client;
+using Vintagestory.API.Common;
+using Vintagestory.API.Common.Entities;
+using Vintagestory.API.MathTools;
+using Vintagestory.API.Server;
+using Vintagestory.GameContent;
+
+namespace Seafarer;
+
+// Prefix on EntityBoatConstruction.Spawn (private). Reads attributes.boattype
+// from the construction entity's JSON; for non-default ("sailed") values,
+// spawns boat-{boattype}-{wood} ourselves and returns false to skip the
+// original. This replaces the base game's hardcoded "boat-sailed-{wood}"
+// spawn name without subclassing (Spawn is private, can't be overridden).
+[HarmonyPatch(typeof(EntityBoatConstruction), "Spawn")]
+public static class EntityBoatConstructionSpawnPatch
+{
+    private static readonly AccessTools.FieldRef<EntityBoatConstruction, RightClickConstruction> rccRef
+        = AccessTools.FieldRefAccess<EntityBoatConstruction, RightClickConstruction>("rcc");
+    private static readonly AccessTools.FieldRef<EntityBoatConstruction, EntityAgent> launchingEntityRef
+        = AccessTools.FieldRefAccess<EntityBoatConstruction, EntityAgent>("launchingEntity");
+    private static readonly AccessTools.FieldRef<EntityBoatConstruction, Vec3f> launchStartPosRef
+        = AccessTools.FieldRefAccess<EntityBoatConstruction, Vec3f>("launchStartPos");
+
+    [HarmonyPrefix]
+    public static bool Prefix(EntityBoatConstruction __instance)
+    {
+        var boatType = __instance.Properties.Attributes?["boattype"]?.AsString("sailed") ?? "sailed";
+        if (boatType == "sailed") return true; // let the original run unchanged
+
+        var rcc = rccRef(__instance);
+        if (!rcc.StoredWildCards.TryGetValue("wood", out string? wood))
+        {
+            __instance.Api.Logger.Warning(
+                "[seafarer] EntityBoatConstructionSpawnPatch: no wood wildcard on {0} — boat not spawned.",
+                __instance.Code);
+            return false;
+        }
+
+        // Replicate getCenterPos (private) inline.
+        Vec3f? nowOff = null;
+        var apap = __instance.AnimManager.Animator?.GetAttachmentPointPose("Center");
+        if (apap != null)
+        {
+            var mat = new Matrixf();
+            mat.RotateY(__instance.Pos.Yaw + GameMath.PIHALF);
+            apap.Mul(mat);
+            nowOff = mat.TransformVector(new Vec4f(0, 0, 0, 1)).XYZ;
+        }
+        var launchStartPos = launchStartPosRef(__instance);
+        Vec3f offset = nowOff == null ? new Vec3f() : nowOff - launchStartPos;
+
+        var entityCode = new AssetLocation("seafarer", $"boat-{boatType}-{wood}");
+        var type = __instance.World.GetEntityType(entityCode);
+        if (type == null)
+        {
+            __instance.Api.Logger.Warning(
+                "[seafarer] EntityBoatConstructionSpawnPatch: entity {0} not found — no boat spawned. Check that the boat-outrigger entity JSON is loaded.",
+                entityCode);
+            return false; // skip original to avoid spawning the wrong boat type
+        }
+
+        var entity = __instance.World.ClassRegistry.CreateEntity(type);
+
+        if ((int)System.Math.Abs(__instance.Pos.Yaw * GameMath.RAD2DEG) == 90
+            || (int)System.Math.Abs(__instance.Pos.Yaw * GameMath.RAD2DEG) == 270)
+        {
+            offset.X *= 1.1f;
+        }
+        offset.Y = 0.5f;
+        entity.Pos.SetFrom(__instance.Pos).Add(offset);
+        entity.Pos.Motion.Add(offset.X / 50.0, 0, offset.Z / 50.0);
+
+        var launchingEntity = launchingEntityRef(__instance);
+        var plr = (launchingEntity as EntityPlayer)?.Player;
+        if (plr != null)
+        {
+            entity.WatchedAttributes.SetString("createdByPlayername", plr.PlayerName);
+            entity.WatchedAttributes.SetString("createdByPlayerUID", plr.PlayerUID);
+        }
+
+        __instance.World.SpawnEntity(entity);
+        AwardShipwrightXp(__instance);
+        return false; // skip original
+    }
+
+    // Sailed boats spawn via the original Spawn; award shipwright XP here.
+    // Outrigger spawns are handled inside the prefix after SpawnEntity, gated below.
+    [HarmonyPostfix]
+    public static void Postfix(EntityBoatConstruction __instance)
+    {
+        var boatType = __instance.Properties.Attributes?["boattype"]?.AsString("sailed") ?? "sailed";
+        if (boatType != "sailed") return;
+        AwardShipwrightXp(__instance);
+    }
+
+    private const float ShipwrightBoatXp = 50f;
+
+    private static void AwardShipwrightXp(EntityBoatConstruction __instance)
+    {
+        var launching = launchingEntityRef(__instance);
+        if (launching is not EntityPlayer ep) return;
+        if (ep.Player is not IServerPlayer sp) return;
+        var ts = __instance.Api.ModLoader.GetModSystem<TrainingSystem>();
+        ts?.AwardXP(sp, "shipwright", ShipwrightBoatXp);
+    }
+}

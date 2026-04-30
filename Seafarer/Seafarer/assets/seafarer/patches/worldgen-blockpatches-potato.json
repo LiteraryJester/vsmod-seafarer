@@ -1,0 +1,22 @@
+[
+	{
+		"file": "game:worldgen/blockpatches/crop.json",
+		"op": "addmerge",
+		"path": "/-",
+		"value": {
+			"comment": "Small patches of wild potatoes",
+			"blockCodes": [
+				"seafarer:crop-potato-2",
+				"seafarer:crop-potato-4",
+				"seafarer:crop-potato-6"
+			],
+			"minTemp": 0,
+			"maxTemp": 35,
+			"minRain": 0.35,
+			"maxRain": 0.75,
+			"maxForest": 0.5,
+			"quantity": { "avg": 5, "var": 5 },
+			"chance": 0.025
+		}
+	}
+]
