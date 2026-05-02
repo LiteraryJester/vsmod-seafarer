@@ -1,0 +1,30 @@
+// Restore the base-game landform variant Seafarer's abandoned-farm story structure
+// depends on. Conquest Landform Overhaul (modid: landformoverhaul) ships a near-empty
+// game:worldgen/landforms.json that wipes the survival mod's defaults and only retains
+// a vestigial "veryflat" stub (weight 0.00001) for story-structure compat — but it
+// does NOT keep "elevatedveryflat", which abandoned-farm requires. Adding it here as a
+// matched stub avoids the missing-landform warning and lets ForceLandformAt do its job.
+//
+// We deliberately do NOT re-add "veryflat" — CLO already provides it, and adding a
+// second entry triggers the duplicate-code check in NoiseLandforms.LoadLandforms which
+// kills the server on startup.
+//
+// "saltwater" (used by Tortuga) is added unconditionally by worldgen-landforms.json
+// and survives CLO's wipe via the patch system, so it's not patched here either.
+[
+  {
+    "file": "game:worldgen/landforms",
+    "dependsOn": [{ "modid": "landformoverhaul" }],
+    "op": "add",
+    "path": "/variants/-",
+    "value": {
+      "code": "elevatedveryflat",
+      "hexcolor": "#79002E",
+      "weight": 0.00001,
+      "terrainOctaves":          [0, 0, 0, 0.2, 0.4, 0.3,  0.5, 0.04, 0.03],
+      "terrainOctaveThresholds": [0, 0, 0,   0,   0, 0,0.4, 0.0, 0],
+      "terrainYKeyPositions":    [0.000, 0.442, 0.510],
+      "terrainYKeyThresholds":   [1.000, 1.000, 0.000]
+    }
+  }
+]

@@ -1,3 +1,16 @@
+// "saltwater" — flat-ish ocean landform used to force the area around Tortuga (and any
+// other OceanSurface story structure) to be a body of water at sea level.
+//
+// Tuning notes:
+//  - terrainYKey* uses a multi-step gradient instead of the prior hard 0.360→0.365 cliff.
+//    The slope from 0.300 (always solid) up to 0.420 (always air, just below sea level
+//    at 0.4314) lets the seafloor undulate naturally and lets adjacent landforms blend
+//    in via the standard landform-map interpolation rather than meeting a perfectly
+//    flat shelf.
+//  - terrainOctaves uses small mid/high-frequency noise so the seafloor has gentle
+//    rolling variation (a few blocks up/down) instead of being a mirror plane. Values
+//    are kept low so the variation never breaches sea level — saltwater stays water.
+//  - All Y positions are normalized to MapSizeY, so the profile scales with world height.
 [
   {
     "file": "game:worldgen/landforms",
@@ -7,10 +20,10 @@
       "code": "saltwater",
       "hexcolor": "#1F6BAA",
       "weight": 1,
-      "terrainOctaves":          [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      "terrainOctaveThresholds": [0, 0, 0, 0, 0, 0, 0, 0, 0],
-      "terrainYKeyPositions":    [0.000, 0.360, 0.365],
-      "terrainYKeyThresholds":   [1.000, 1.000, 0.000]
+      "terrainOctaves":          [0, 0, 0, 0.15, 0.35, 0.10, 0.20, 0.15, 0.10],
+      "terrainOctaveThresholds": [0, 0, 0, 0,    0,    0,    0,    0,    0],
+      "terrainYKeyPositions":    [0.000, 0.300, 0.360, 0.400, 0.420],
+      "terrainYKeyThresholds":   [1.000, 0.950, 0.700, 0.300, 0.000]
     }
   }
 ]

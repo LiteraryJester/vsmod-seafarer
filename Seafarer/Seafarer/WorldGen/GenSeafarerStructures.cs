@@ -80,6 +80,12 @@ namespace Seafarer.WorldGen
 
         [JsonProperty]
         public bool UseWorldgenHeight;
+        // Optional per-structure Y offset added on top of (or replacing) the schematic's
+        // own OffsetY at placement time. Lets config authors tune a structure's height
+        // directly in seafarerstructures.json without editing the schematicYOffsets dict
+        // or the schematic JSON. Null means "use schematicData.OffsetY as-is".
+        [JsonProperty]
+        public int? YOffset;
         [JsonProperty]
         public bool DisableSurfaceTerrainBlending;
         [JsonProperty]
@@ -531,7 +537,7 @@ namespace Seafarer.WorldGen
                 }
 
                 // Surface / OceanSurface: sea level anchored.
-                int y = api.World.SeaLevel + def.schematicData.OffsetY;
+                int y = SeaLevel + EffectiveOffsetY(def);
                 if (loc.Location.Y1 != y)
                 {
                     loc.Location.Y1 = y;
@@ -569,7 +575,7 @@ namespace Seafarer.WorldGen
                 {
                     api.Logger.Warning(
                         "Seafarer story structure '{0}': per-chunk ocean validation failed (waterDepth={1}); dropping reservation.",
-                        def.Code, api.World.SeaLevel - terrainHeight);
+                        def.Code, SeaLevel - terrainHeight);
                     pendingDrops.Add(def.Code);
                     FailedToGenerateLocation = true;
                     LocationsDirty = true;
@@ -587,25 +593,50 @@ namespace Seafarer.WorldGen
             return true;
         }
 
+        // Effective Y offset for a structure: per-structure YOffset wins if set,
+        // otherwise fall back to whatever schematicYOffsets resolved on load.
+        private static int EffectiveOffsetY(SeafarerStructure def)
+        {
+            return def.YOffset ?? def.schematicData.OffsetY;
+        }
+
         private int ResolveYFromTerrain(SeafarerStructure def, int terrainHeight)
         {
+            int offY = EffectiveOffsetY(def);
+
+            // OceanSurface placements float on the water and must anchor to sea level
+            // regardless of UseWorldgenHeight — anchoring to terrain Y here would put
+            // the structure on the seafloor (or in mid-air on land), which is the bug
+            // we hit on non-standard world heights and with landform-overhaul mods that
+            // shift terrain.
+            if (def.Placement == EnumSeafarerPlacement.OceanSurface)
+            {
+                return SeaLevel + offY;
+            }
+
             // UseWorldgenHeight overrides placement-based Y — matches base-game precedence.
             if (def.UseWorldgenHeight)
             {
-                return terrainHeight + def.schematicData.OffsetY;
+                return terrainHeight + offY;
             }
 
             return def.Placement switch
             {
-                EnumSeafarerPlacement.SurfaceRuin  => terrainHeight - def.schematicData.SizeY + def.schematicData.OffsetY,
-                EnumSeafarerPlacement.Coastal      => terrainHeight + def.schematicData.OffsetY,
-                EnumSeafarerPlacement.Underwater   => terrainHeight + def.schematicData.OffsetY,
-                EnumSeafarerPlacement.OceanSurface => api.World.SeaLevel + def.schematicData.OffsetY,
-                _ /* Surface */                    => api.World.SeaLevel + def.schematicData.OffsetY,
+                EnumSeafarerPlacement.SurfaceRuin  => terrainHeight - def.schematicData.SizeY + offY,
+                EnumSeafarerPlacement.Coastal      => terrainHeight + offY,
+                EnumSeafarerPlacement.Underwater   => terrainHeight + offY,
+                EnumSeafarerPlacement.OceanSurface => SeaLevel + offY,
+                _ /* Surface */                    => SeaLevel + offY,
             };
         }
 
         private int RegionChunkSize => api.WorldManager.RegionSize / chunksize;
+
+        // Sea level computed from world height using the standard formula. Mirrors
+        // GenTerra.AssetsFinalize but bypasses its WorldType=="standard" guard, so
+        // structure placement scales correctly on tall/short worlds and on custom
+        // worldtypes where api.World.SeaLevel is never set.
+        private int SeaLevel => (int)(api.WorldManager.MapSizeY * 0.4313725490196078);
 
         private static int StableHash(string s)
         {
@@ -669,7 +700,7 @@ namespace Seafarer.WorldGen
 
             int cx = originX + sizeX / 2;
             int cz = originZ + sizeZ / 2;
-            int seaLevel = api.World.SeaLevel;
+            int seaLevel = SeaLevel;
             int waterDepth = seaLevel - terrainHeight;
 
             if (def.MinWaterDepth > 0 && waterDepth < def.MinWaterDepth) return false;
@@ -989,11 +1020,20 @@ namespace Seafarer.WorldGen
 
         private void ApplyForcedLandform(GenMaps genmaps, SeafarerStructure def, SeafarerStructureLocation location)
         {
+            // Forced-landform radii are written in seafarerstructures.json against the
+            // default 256-block world height. Landform terrain Y-keys are proportional to
+            // MapSizeY, so on tall worlds (e.g. 512) the surrounding terrain stretches
+            // ~2x in absolute blocks while the forced flat patch stays the same size —
+            // visually a much sharper cliff at the boundary. Scaling the radius with
+            // world height keeps the patch proportional and gives forceNoUpheavel
+            // (which uses radius+100) a wider transition zone to soften the join.
+            int scaledRadius = ScaleRadiusForWorldHeight(location.LandformRadius);
+
             if (def.ForceTemperature != null || def.ForceRain != null)
             {
                 genmaps.ForceClimateAt(new ForceClimate
                 {
-                    Radius = location.LandformRadius,
+                    Radius = scaledRadius,
                     CenterPos = location.CenterPos,
                     Climate = (Climate.DescaleTemperature(def.ForceTemperature ?? 0f) << 16)
                               + ((def.ForceRain ?? 0) << 8)
@@ -1002,11 +1042,24 @@ namespace Seafarer.WorldGen
 
             if (def.RequireLandform == null) return;
 
+            // Pre-check: ForceLandformAt throws ArgumentException when the code isn't found,
+            // which spams the error log every time the structure is determined. Third-party
+            // landform overhauls (e.g. Conquest Landform Overhaul) replace the base landform
+            // list, removing codes like "veryflat" / "elevatedveryflat" that our story
+            // structures depend on. Detect that and log once at warning level instead.
+            if (!LandformExists(def.RequireLandform))
+            {
+                api.Logger.Warning(
+                    "Seafarer: required landform '{0}' for structure '{1}' is not registered (likely replaced by another worldgen mod). The structure will still place, but surrounding terrain will not be flattened.",
+                    def.RequireLandform, def.Code);
+                return;
+            }
+
             try
             {
                 genmaps.ForceLandformAt(new ForceLandform
                 {
-                    Radius = location.LandformRadius,
+                    Radius = scaledRadius,
                     CenterPos = location.CenterPos,
                     LandformCode = def.RequireLandform
                 });
@@ -1016,6 +1069,26 @@ namespace Seafarer.WorldGen
                 api.Logger.Error("Seafarer: ForceLandformAt failed for '{0}' with landform '{1}': {2}",
                     def.Code, def.RequireLandform, e.Message);
             }
+        }
+
+        private const int BaseWorldHeight = 256;
+
+        private int ScaleRadiusForWorldHeight(int baseRadius)
+        {
+            int mapSizeY = api.WorldManager.MapSizeY;
+            if (mapSizeY <= BaseWorldHeight) return baseRadius;
+            return (int)(baseRadius * ((double)mapSizeY / BaseWorldHeight));
+        }
+
+        private static bool LandformExists(string code)
+        {
+            var list = NoiseLandforms.landforms?.LandFormsByIndex;
+            if (list == null) return false;
+            for (int i = 0; i < list.Length; i++)
+            {
+                if (list[i].Code.Path == code) return true;
+            }
+            return false;
         }
 
         protected void DetermineSeafarerStoryStructures()
@@ -1099,7 +1172,7 @@ namespace Seafarer.WorldGen
             int px = basePos.X + distanceX * dirX;
             int pz = basePos.Z + distanceZ * dirZ;
             int py = def.Placement == EnumSeafarerPlacement.Surface || def.Placement == EnumSeafarerPlacement.OceanSurface
-                ? api.World.SeaLevel + def.schematicData.OffsetY
+                ? SeaLevel + EffectiveOffsetY(def)
                 : 1;
 
             var pos = new BlockPos(px, py, pz, 0);
