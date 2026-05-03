@@ -358,6 +358,12 @@ public class EntityBehaviorExposure : EntityBehavior
         LastUpdateTotalHours = api.World.Calendar.TotalHours;
     }
 
+    public override void OnEntityLoaded()
+    {
+        if (api.Side != EnumAppSide.Server) return;
+        if (!Config.Enabled) ClearAllEffects();
+    }
+
     public override void OnEntityDespawn(EntityDespawnData despawn)
     {
         RemoveAllStatModifiers();
