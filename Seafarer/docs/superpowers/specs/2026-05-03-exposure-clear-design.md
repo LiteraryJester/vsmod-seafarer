@@ -19,7 +19,7 @@ Two situations leave that state stuck on the player:
 
 Clear exposure state and all derived effects when:
 
-- A player entity loads into the world (join, reconnect) **and**
+- A player entity is loaded from disk (reconnect after a disconnect) **and**
   `Config.Enabled` is false.
 - A player dies, **regardless** of `Config.Enabled`.
 
@@ -48,10 +48,17 @@ no new persisted fields, no new mod-system wiring.
 Override `OnEntityLoaded()`. Server-side only. If `!Config.Enabled`, call
 `ClearAllEffects()`.
 
-`OnEntityLoaded` fires after `Initialize` when the entity is loaded into the
-world — for players this means join and respawn. Initialize is not the right
-hook because `expTree` is being created there for fresh entities; the load
-hook runs once `WatchedAttributes` is fully populated from save.
+`OnEntityLoaded` fires after `Initialize` when a saved entity is loaded from
+disk — for players this means reconnect after a disconnect. It does NOT fire
+on first spawn into a new world (that path is `OnEntitySpawn`), and it does
+NOT fire on in-session death/respawn (that path is `OnEntityRevive`).
+Initialize is not the right hook because `expTree` is being created there for
+fresh entities; the load hook runs once `WatchedAttributes` is fully populated
+from save.
+
+The fresh-spawn gap is harmless: a fresh entity has level 0 and no stat
+modifiers, so there is nothing to clear. The in-session-death gap is covered
+by Trigger 2 below.
 
 ### Trigger 2 — death
 
