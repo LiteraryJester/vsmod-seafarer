@@ -364,6 +364,12 @@ public class EntityBehaviorExposure : EntityBehavior
         if (!Config.Enabled) ClearAllEffects();
     }
 
+    public override void OnEntityDeath(DamageSource damageSourceForDeath)
+    {
+        if (api.Side != EnumAppSide.Server) return;
+        ClearAllEffects();
+    }
+
     public override void OnEntityDespawn(EntityDespawnData despawn)
     {
         RemoveAllStatModifiers();
