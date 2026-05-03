@@ -350,13 +350,12 @@ public class EntityBehaviorExposure : EntityBehavior
 
     private void ClearAllEffects()
     {
-        if (ExposureLevel > 0 || ActiveTier > 0)
-        {
-            RemoveTierEffects(ActiveTier);
-            ExposureLevel = 0f;
-            ActiveCondition = ExposureCondition.None;
-            ActiveTier = 0;
-        }
+        RemoveTierEffects(ActiveTier);
+        ExposureLevel = 0f;
+        ActiveCondition = ExposureCondition.None;
+        ActiveTier = 0;
+        lastAppliedCondition = ExposureCondition.None;
+        LastUpdateTotalHours = api.World.Calendar.TotalHours;
     }
 
     public override void OnEntityDespawn(EntityDespawnData despawn)
