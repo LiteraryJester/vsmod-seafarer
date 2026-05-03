@@ -3,9 +3,12 @@
 	variantgroups: [
 		{ code: "metal", states: ["copper", "tinbronze", "bismuthbronze", "blackbronze", "iron", "meteoriciron", "steel"] },
 	],
-	behaviors: [
-		{ name: "GroundStorable", properties: { layout: "Quadrants", collisionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.125, z2: 1 } } },
-	],
+	behaviorsByType: {
+		"*-iron":         [{ name: "Quenchable" }, { name: "GroundStorable", properties: { layout: "Quadrants", collisionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.125, z2: 1 } } }],
+		"*-meteoriciron": [{ name: "Quenchable" }, { name: "GroundStorable", properties: { layout: "Quadrants", collisionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.125, z2: 1 } } }],
+		"*-steel":        [{ name: "Quenchable" }, { name: "GroundStorable", properties: { layout: "Quadrants", collisionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.125, z2: 1 } } }],
+		"*":              [{ name: "GroundStorable", properties: { layout: "Quadrants", collisionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.125, z2: 1 } } }],
+	},
 	maxstacksize: 4,
 	shape: { base: "seafarer:block/tool/mudrake/mudrake-head" },
 	textures: {
@@ -13,6 +16,7 @@
 	},
 	creativeinventory: { "general": ["*"], "items": ["*"], "seafarer": ["*"] },
 	attributes: {
+		forgable: true,
 		handbook: {
 			groupBy: ["mudrake-head-*"],
 		},

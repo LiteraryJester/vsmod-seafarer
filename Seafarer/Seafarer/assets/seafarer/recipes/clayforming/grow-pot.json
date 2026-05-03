@@ -1,4 +1,5 @@
 {
+  "requiresTrait": "gardener",
   "ingredient": {
     "type": "item",
     "code": "game:clay-*",
