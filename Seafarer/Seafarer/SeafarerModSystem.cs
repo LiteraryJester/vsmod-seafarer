@@ -72,6 +72,12 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
 
         public override void StartServerSide(ICoreServerAPI api)
         {
+            api.Event.PlayerJoin += OnPlayerJoin;
+        }
+
+        private void OnPlayerJoin(IServerPlayer player)
+        {
+            player.Entity?.GetBehavior<EntityBehaviorExposure>()?.OnPlayerJoined();
         }
 
         public override void AssetsFinalize(ICoreAPI api)

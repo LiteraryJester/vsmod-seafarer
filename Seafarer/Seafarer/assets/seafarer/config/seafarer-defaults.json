@@ -28,7 +28,7 @@
 		"cookSpeedSteel": 2.0
 	},
 	"exposure": {
-		"enabled": true,
+		"enabled": false,
 		"heatstrokeEnabled": true,
 		"frostbiteEnabled": true,
 		"heatThreshold": 33.0,

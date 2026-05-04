@@ -350,13 +350,32 @@ public class EntityBehaviorExposure : EntityBehavior
 
     private void ClearAllEffects()
     {
-        if (ExposureLevel > 0 || ActiveTier > 0)
-        {
-            RemoveTierEffects(ActiveTier);
-            ExposureLevel = 0f;
-            ActiveCondition = ExposureCondition.None;
-            ActiveTier = 0;
-        }
+        RemoveTierEffects(ActiveTier);
+        ExposureLevel = 0f;
+        ActiveCondition = ExposureCondition.None;
+        ActiveTier = 0;
+        lastAppliedCondition = ExposureCondition.None;
+        LastUpdateTotalHours = api.World.Calendar.TotalHours;
+    }
+
+    /// <summary>
+    /// Called from <see cref="SeafarerModSystem"/>'s PlayerJoin handler. Wipes
+    /// exposure state and stat penalties when the system is currently disabled,
+    /// so a player can't keep frozen tier penalties across a session where the
+    /// admin/player turned the system off. The base-game OnEntityLoaded hook
+    /// does not reliably fire for player entities, so the mod system drives
+    /// this from the server-side PlayerJoin event instead.
+    /// </summary>
+    public void OnPlayerJoined()
+    {
+        if (api.Side != EnumAppSide.Server) return;
+        if (!Config.Enabled) ClearAllEffects();
+    }
+
+    public override void OnEntityDeath(DamageSource damageSourceForDeath)
+    {
+        if (api.Side != EnumAppSide.Server) return;
+        ClearAllEffects();
     }
 
     public override void OnEntityDespawn(EntityDespawnData despawn)
