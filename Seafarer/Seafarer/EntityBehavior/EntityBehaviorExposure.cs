@@ -358,7 +358,15 @@ public class EntityBehaviorExposure : EntityBehavior
         LastUpdateTotalHours = api.World.Calendar.TotalHours;
     }
 
-    public override void OnEntityLoaded()
+    /// <summary>
+    /// Called from <see cref="SeafarerModSystem"/>'s PlayerJoin handler. Wipes
+    /// exposure state and stat penalties when the system is currently disabled,
+    /// so a player can't keep frozen tier penalties across a session where the
+    /// admin/player turned the system off. The base-game OnEntityLoaded hook
+    /// does not reliably fire for player entities, so the mod system drives
+    /// this from the server-side PlayerJoin event instead.
+    /// </summary>
+    public void OnPlayerJoined()
     {
         if (api.Side != EnumAppSide.Server) return;
         if (!Config.Enabled) ClearAllEffects();
