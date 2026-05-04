@@ -19,8 +19,8 @@ Two situations leave that state stuck on the player:
 
 Clear exposure state and all derived effects when:
 
-- A player entity is loaded from disk (reconnect after a disconnect) **and**
-  `Config.Enabled` is false.
+- A player joins the server (any entry path — first join, SP world load,
+  reconnect) **and** `Config.Enabled` is false.
 - A player dies, **regardless** of `Config.Enabled`.
 
 Together these two triggers cover every reachable state: a cold-loaded player
@@ -43,22 +43,29 @@ death-clear; a player who dies while the system is disabled is covered by both
 All changes are in `EntityBehavior/EntityBehaviorExposure.cs`. No new types,
 no new persisted fields, no new mod-system wiring.
 
-### Trigger 1 — load with system disabled
+### Trigger 1 — player join with system disabled
 
-Override `OnEntityLoaded()`. Server-side only. If `!Config.Enabled`, call
-`ClearAllEffects()`.
+Driven by `api.Event.PlayerJoin` (server-side, in `SeafarerModSystem.StartServerSide`).
+The handler looks up `EntityBehaviorExposure` on the joining player's entity
+and calls a new public method `OnPlayerJoined()` on the behavior, which checks
+`Config.Enabled` and calls `ClearAllEffects()` when disabled.
 
-`OnEntityLoaded` fires after `Initialize` when a saved entity is loaded from
-disk — for players this means reconnect after a disconnect. It does NOT fire
-on first spawn into a new world (that path is `OnEntitySpawn`), and it does
-NOT fire on in-session death/respawn (that path is `OnEntityRevive`).
-Initialize is not the right hook because `expTree` is being created there for
-fresh entities; the load hook runs once `WatchedAttributes` is fully populated
-from save.
+**Why not `OnEntityLoaded`?** The first iteration used an `OnEntityLoaded`
+override on the behavior. Manual testing showed it never fired on the
+disable+relog path, so the clear was effectively dead. Investigation:
 
-The fresh-spawn gap is harmless: a fresh entity has level 0 and no stat
-modifiers, so there is nothing to clear. The in-session-death gap is covered
-by Trigger 2 below.
+- The base game's player behavior `BehaviorBodyTemperature` does not use
+  `OnEntityLoaded` — it uses `OnEntityRevive`.
+- In `vssurvivalmod`, every `OnEntityLoaded` override is on a mob or NPC
+  behavior (deer, cow, mount, villager, devastation flier). None on player
+  behaviors.
+- The doc comment on the hook says "loaded from savegame, not during spawn"
+  but in practice the player-entity load path bypasses it.
+
+`api.Event.PlayerJoin` is the canonical hook used by `BlockReinforcement`,
+`DevastationEffects`, and `Timeswitch` in `vssurvivalmod`. It fires reliably
+in singleplayer ("Load World") and multiplayer (connect/reconnect) for
+both first-time and returning players.
 
 ### Trigger 2 — death
 
@@ -112,10 +119,14 @@ the clear when state is already zero is harmless. Removing it is simpler.
 ## Files touched
 
 - `Seafarer/Seafarer/EntityBehavior/EntityBehaviorExposure.cs`
-  - Add override `OnEntityLoaded()`.
+  - Add public method `OnPlayerJoined()` (called from the mod system's
+    `PlayerJoin` handler).
   - Add override `OnEntityDeath(DamageSource)`.
   - Adjust `ClearAllEffects()` to reset `LastUpdateTotalHours` and
     `lastAppliedCondition`, drop the early-return guard.
+- `Seafarer/Seafarer/SeafarerModSystem.cs`
+  - In `StartServerSide`, subscribe to `api.Event.PlayerJoin` and call
+    `EntityBehaviorExposure.OnPlayerJoined()` on the joining player's entity.
 
 ## Validation
 
