@@ -37,8 +37,8 @@
 				"name": "exposure-enabled",
 				"ingui": "seafarer:configlib-exposure-enabled",
 				"weight": 4.1,
-				"default": true,
-				"comment": "Master toggle for the exposure system"
+				"default": false,
+				"comment": "Master toggle for the exposure system (off by default — opt-in)"
 			},
 			"HEATSTROKE_ENABLED": {
 				"name": "heatstroke-enabled",

@@ -5,8 +5,8 @@ namespace Seafarer;
 /// </summary>
 public class ExposureConfig
 {
-    /// <summary>Master toggle for the entire exposure system.</summary>
-    public bool Enabled { get; set; } = true;
+    /// <summary>Master toggle for the entire exposure system. Off by default — opt-in via ConfigLib.</summary>
+    public bool Enabled { get; set; } = false;
 
     /// <summary>Set to false to disable heatstroke while keeping frostbite active.</summary>
     public bool HeatstrokeEnabled { get; set; } = true;
