@@ -108,11 +108,17 @@ namespace Seafarer.WorldGen
         public string[] PostPlaceDecorators = Array.Empty<string>();
 
         [JsonProperty]
+        public string SeafloorFillBlock;
+
+        [JsonProperty]
         public AssetLocation[] ReplaceWithBlocklayers;
 
         internal BlockSchematicPartial schematicData;
         internal int[] replacewithblocklayersBlockids = Array.Empty<int>();
         internal Dictionary<int, Dictionary<int, int>> resolvedRockTypeRemaps;
+        internal int seafloorFillBlockId;
+        internal bool[,] schematicColumnMask;
+        internal int schematicLowestY;
     }
 
     public class SeafarerStructuresConfig
