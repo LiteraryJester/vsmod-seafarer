@@ -892,6 +892,47 @@ namespace Seafarer.WorldGen
         }
 
         /// <summary>
+        /// Walks the schematic's packed Indices once to build a per-column
+        /// "has any solid block" mask and find the lowest local Y of any solid
+        /// block. Solid here means a real block that isn't air and isn't a fluid
+        /// (waterfalls inside the schematic shouldn't count as "structure
+        /// occupies this column"). The mask drives the seafloor fill silhouette;
+        /// the lowest Y sets the fill ceiling.
+        /// </summary>
+        private void BuildSchematicColumnMask(SeafarerStructure def)
+        {
+            var schem = def.schematicData;
+            if (schem?.Indices == null || schem.BlockIds == null) return;
+
+            int sizeX = schem.SizeX;
+            int sizeZ = schem.SizeZ;
+            var mask = new bool[sizeX, sizeZ];
+            int lowestY = int.MaxValue;
+
+            for (int i = 0; i < schem.Indices.Count; i++)
+            {
+                uint idx = schem.Indices[i];
+                int blockId = schem.BlockIds[i];
+
+                if (!schem.BlockCodes.TryGetValue(blockId, out var blockCode)) continue;
+                Block block = api.World.GetBlock(blockCode);
+                if (block == null || block.Id == 0) continue;
+                if (block.ForFluidsLayer) continue;
+
+                int lx = (int)(idx & 0x3ff);
+                int lz = (int)((idx >> 10) & 0x3ff);
+                int ly = (int)((idx >> 20) & 0x3ff);
+
+                if (lx < 0 || lx >= sizeX || lz < 0 || lz >= sizeZ) continue;
+                mask[lx, lz] = true;
+                if (ly < lowestY) lowestY = ly;
+            }
+
+            def.schematicColumnMask = mask;
+            def.schematicLowestY = lowestY == int.MaxValue ? 0 : lowestY;
+        }
+
+        /// <summary>
         /// Removes duplicate fluid entries from a schematic's packed Indices/BlockIds arrays.
         /// Some schematics (esp. WorldEdit-saved) end up with two entries at the same (x,y,z)
         /// position that both resolve to fluid blocks, which makes BlockSchematicStructure.Init
