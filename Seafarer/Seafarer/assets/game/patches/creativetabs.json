@@ -1,0 +1,8 @@
+[
+    {
+        "op": "add",
+        "path": "/tabConfigs/-",
+        "value": { "code": "seafarer", "listOrder": 0.48 },
+        "file": "game:config/creativetabs.json"
+    }
+]

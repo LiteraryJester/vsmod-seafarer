@@ -5,6 +5,12 @@ namespace Seafarer;
 
 public class BlockGriddleHearth : Block
 {
+    public override void OnLoaded(ICoreAPI api)
+    {
+        base.OnLoaded(api);
+        PlacedPriorityInteract = true;
+    }
+
     public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
     {
         var be = GetBlockEntity<BlockEntityGriddleHearth>(blockSel.Position);
