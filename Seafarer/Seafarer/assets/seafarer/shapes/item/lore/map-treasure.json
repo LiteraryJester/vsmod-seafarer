@@ -8,8 +8,8 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"map-blank": "item/lore/map-blank",
-		"map-treasures": "item/lore/map-treasures"
+		"map-blank": "game:item/lore/map-blank",
+		"map-treasures": "game:item/lore/map-treasures"
 	},
 	"elements": [
 		{

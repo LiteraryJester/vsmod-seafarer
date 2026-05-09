@@ -159,7 +159,7 @@ def load_lang_file(path):
 
 def load_base_game_lang():
     """Load base game lang file."""
-    path = Path("/mnt/d/Development/vs/assets/survival/lang/en.json")
+    path = Path("/mnt/d/Development/vs/assets/game/lang/en.json")
     return load_lang_file(path)
 
 # ── JSON loading ───────────────────────────────────────────────────────────────

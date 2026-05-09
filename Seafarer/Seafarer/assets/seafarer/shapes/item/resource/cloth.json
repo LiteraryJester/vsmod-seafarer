@@ -8,8 +8,8 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"color": "block/cloth/linen/normal1",
-		"oak": "block/wood/oak"
+		"color": "game:block/cloth/linen/normal1",
+		"oak": "game:block/wood/oak"
 	},
 	"elements": [
 		{

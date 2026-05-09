@@ -8,7 +8,7 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"paper": "item/lore/item-paper"
+		"paper": "game:item/lore/item-paper"
 	},
 	"elements": [
 		{

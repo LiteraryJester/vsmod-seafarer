@@ -22,11 +22,12 @@ public class BlockGrowPot : Block
             // cutting placed directly above sits visually on the soil inside
             // the pot with no gap. The pot itself persists as decoration.
             var plantPos = blockSel.Position.UpCopy();
-            var cuttingBlock = world.GetBlock(new AssetLocation("game:fruittree-cutting"));
-            if (cuttingBlock == null) return false;
-            if (!world.BlockAccessor.GetBlock(plantPos).IsReplacableBy(cuttingBlock)) return false;
+            // Use the held cutting's own block — fruittreeProperties are registered
+            // per-block, so cross-mod cuttings (e.g. bdorchard:fruittree-cutting with
+            // type=lemon) must be replanted as their own block, not as game:fruittree-cutting.
+            if (!world.BlockAccessor.GetBlock(plantPos).IsReplacableBy(ftBlock)) return false;
 
-            var dwarfStack = new ItemStack(cuttingBlock);
+            var dwarfStack = new ItemStack(ftBlock);
             dwarfStack.Attributes.SetString("type", treeType);
             dwarfStack.Attributes.SetBool("dwarf", true);
 
@@ -49,7 +50,7 @@ public class BlockGrowPot : Block
             dwarfStack.Attributes.SetFloat("vernalizationHoursDiff", -200f);
             dwarfStack.Attributes.SetFloat("vernalizationTempDiff", 5f);
 
-            world.BlockAccessor.SetBlock(cuttingBlock.BlockId, plantPos, dwarfStack);
+            world.BlockAccessor.SetBlock(ftBlock.BlockId, plantPos, dwarfStack);
 
             slot!.TakeOut(1);
             slot.MarkDirty();

@@ -1,84 +1,57 @@
 {
-    components: [
-        {
-            code: "testhasmet",
-            owner: "jones",
-            type: "condition",
-            variable: "player.hasmetjones",
-            isNotValue: "true",
-            thenJumpTo: "firstmeet",
-            elseJumpTo: "welcomeback"
-        },
-        {
-            code: "firstmeet",
-            owner: "jones",
-            type: "talk",
-            setVariables: { "player.hasmetjones": "true" },
-            text: [
-                { value: "dialogue-jones-welcome" }
-            ]
-        },
-        {
-            code: "main",
-            owner: "player",
-            type: "talk",
-            text: [
-                { value: "dialogue-name", jumpTo: "name" },
-                { value: "dialogue-profession", jumpTo: "profession" },
-                { value: "dialogue-trade", jumpTo: "trade" },
-                { value: "dialogue-jones-world", jumpTo: "world" },
-                { value: "dialogue-goodbye", jumpTo: "goodbye" }
-            ]
-        },
-        {
-            code: "welcomeback",
-            owner: "jones",
-            type: "talk",
-            text: [
-                { value: "dialogue-jones-welcomeback" }
-            ],
-            jumpTo: "main"
-        },
-        {
-            code: "name",
-            owner: "jones",
-            type: "talk",
-            trigger: "revealname",
-            text: [
-                { value: "dialogue-jones-name" }
-            ],
-            jumpTo: "main"
-        },
-        {
-            code: "profession",
-            owner: "jones",
-            type: "talk",
-            text: [
-                { value: "dialogue-jones-profession" }
-            ],
-            jumpTo: "main"
-        },
-        {
-            code: "trade",
-            owner: "jones",
-            trigger: "opentrade"
-        },
-        {
-            code: "world",
-            owner: "jones",
-            type: "talk",
-            text: [
-                { value: "dialogue-jones-world-info" }
-            ],
-            jumpTo: "main"
-        },
-        {
-            code: "goodbye",
-            owner: "jones",
-            type: "talk",
-            text: [
-                { value: "dialogue-jones-goodbye" }
-            ]
-        }
-    ]
+  "components": [
+    {
+      "code": "testhasmet",
+      "owner": "jones",
+      "type": "condition",
+      "variable": "player.hasmetjones",
+      "isNotValue": "true",
+      "thenJumpTo": "firstmeet",
+      "elseJumpTo": "welcomeback"
+    },
+    {
+      "code": "firstmeet",
+      "owner": "jones",
+      "type": "talk",
+      "setVariables": { "player.hasmetjones": "true" },
+      "text": [{ "value": "seafarer:dialogue-jones-welcome" }]
+    },
+    {
+      "code": "main",
+      "owner": "player",
+      "type": "talk",
+      "text": [
+        { "value": "dialogue-name", "jumpTo": "name" },
+        { "value": "dialogue-profession", "jumpTo": "profession" },
+        { "value": "dialogue-trade", "jumpTo": "trade" }
+      ]
+    },
+    {
+      "code": "welcomeback",
+      "owner": "jones",
+      "type": "talk",
+      "text": [{ "value": "seafarer:dialogue-jones-welcomeback" }],
+      "jumpTo": "main"
+    },
+    {
+      "code": "name",
+      "owner": "jones",
+      "type": "talk",
+      "trigger": "revealname",
+      "text": [{ "value": "seafarer:dialogue-jones-name" }],
+      "jumpTo": "main"
+    },
+    {
+      "code": "profession",
+      "owner": "jones",
+      "type": "talk",
+      "text": [{ "value": "seafarer:dialogue-jones-profession" }],
+      "jumpTo": "main"
+    },
+    {
+      "code": "trade",
+      "owner": "jones",
+      "trigger": "opentrade"
+    }
+  ]
 }

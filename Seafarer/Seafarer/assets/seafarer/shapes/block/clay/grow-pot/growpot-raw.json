@@ -6,9 +6,9 @@
 	"textureWidth": 16,
 	"textureHeight": 16,
 	"textures": {
-		"ceramic": "block/clay/ceramic",
-		"sides": "block/clay/planter/amber",
-		"soil": "block/clay/planter/soil"
+		"ceramic": "game:block/clay/ceramic",
+		"sides": "game:block/clay/planter/amber",
+		"soil": "game:block/clay/planter/soil"
 	},
 	"elements": [
 		{

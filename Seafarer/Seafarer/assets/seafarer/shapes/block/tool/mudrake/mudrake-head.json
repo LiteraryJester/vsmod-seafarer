@@ -8,7 +8,7 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"head": "block/metal/ingot/copper"
+		"head": "game:block/metal/ingot/copper"
 	},
 	"elements": [
 		{

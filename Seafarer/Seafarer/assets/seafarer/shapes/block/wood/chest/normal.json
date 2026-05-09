@@ -8,9 +8,9 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"sides2": "block/wood/trunk/sides",
-		"lid": "block/wood/trunk/lid",
-		"accessories": "block/wood/trunk/accessories"
+		"sides2": "game:block/wood/trunk/sides",
+		"lid": "game:block/wood/trunk/lid",
+		"accessories": "game:block/wood/trunk/accessories"
 	},
 	"elements": [
 		{
