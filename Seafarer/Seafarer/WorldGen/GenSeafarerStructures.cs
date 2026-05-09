@@ -332,6 +332,22 @@ namespace Seafarer.WorldGen
                     {
                         def.schematicData.OffsetY = off;
                     }
+
+                    if (!string.IsNullOrEmpty(def.SeafloorFillBlock))
+                    {
+                        var fillBlock = api.World.GetBlock(new AssetLocation(def.SeafloorFillBlock));
+                        if (fillBlock == null)
+                        {
+                            api.Logger.Error(
+                                "Seafarer structure '{0}': seafloorFillBlock '{1}' not found.",
+                                def.Code, def.SeafloorFillBlock);
+                        }
+                        else
+                        {
+                            def.seafloorFillBlockId = fillBlock.Id;
+                            BuildSchematicColumnMask(def);
+                        }
+                    }
                 }
                 catch (Exception e)
                 {
