@@ -1042,6 +1042,78 @@ namespace Seafarer.WorldGen
             }
         }
 
+        /// <summary>
+        /// Raises the seafloor under a chunk slice of an opted-in structure.
+        /// For each XZ column inside the slice that the schematic actually
+        /// occupies (per def.schematicColumnMask), fills from the existing
+        /// terrain Y up to one block below the schematic's lowest solid block
+        /// using def.seafloorFillBlockId. Clears any fluid in the affected
+        /// cells. Caller must guarantee def.seafloorFillBlockId &gt; 0 and
+        /// def.schematicColumnMask != null.
+        /// </summary>
+        private void FillSeafloorBelow(
+            SeafarerStructure def,
+            SeafarerStructureLocation loc,
+            IChunkColumnGenerateRequest request,
+            int chunkX,
+            int chunkZ)
+        {
+            var chunks = request.Chunks;
+            var mapChunk = chunks[0].MapChunk;
+            int mapSizeY = api.WorldManager.MapSizeY;
+
+            int bottomY = loc.Location.Y1 + def.schematicLowestY;
+            int fillTopY = bottomY - 1;
+            if (fillTopY < 0) return;
+            if (fillTopY >= mapSizeY) fillTopY = mapSizeY - 1;
+
+            int chunkMinX = chunkX * chunksize;
+            int chunkMinZ = chunkZ * chunksize;
+            int clipMinX = Math.Max(loc.Location.X1, chunkMinX);
+            int clipMaxX = Math.Min(loc.Location.X2, chunkMinX + chunksize);
+            int clipMinZ = Math.Max(loc.Location.Z1, chunkMinZ);
+            int clipMaxZ = Math.Min(loc.Location.Z2, chunkMinZ + chunksize);
+            if (clipMinX >= clipMaxX || clipMinZ >= clipMaxZ) return;
+
+            int fillId = def.seafloorFillBlockId;
+            var mask = def.schematicColumnMask;
+            int maskW = mask.GetLength(0);
+            int maskD = mask.GetLength(1);
+
+            for (int worldX = clipMinX; worldX < clipMaxX; worldX++)
+            {
+                int localChunkX = worldX - chunkMinX;
+                int localSchemX = worldX - loc.Location.X1;
+                if (localSchemX < 0 || localSchemX >= maskW) continue;
+
+                for (int worldZ = clipMinZ; worldZ < clipMaxZ; worldZ++)
+                {
+                    int localChunkZ = worldZ - chunkMinZ;
+                    int localSchemZ = worldZ - loc.Location.Z1;
+                    if (localSchemZ < 0 || localSchemZ >= maskD) continue;
+
+                    if (!mask[localSchemX, localSchemZ]) continue;
+
+                    int terrainY = mapChunk.WorldGenTerrainHeightMap[localChunkZ * chunksize + localChunkX];
+                    int startY = terrainY + 1;
+                    if (startY > fillTopY) continue;
+
+                    for (int y = startY; y <= fillTopY; y++)
+                    {
+                        int chunkIndex = y / chunksize;
+                        if (chunkIndex < 0 || chunkIndex >= chunks.Length) continue;
+                        int localY = y % chunksize;
+                        var chunk = chunks[chunkIndex];
+                        int blockIndex = (localY * chunksize + localChunkZ) * chunksize + localChunkX;
+                        chunk.Data.SetBlockUnsafe(blockIndex, fillId);
+                        chunk.Data.SetFluid(blockIndex, 0);
+                    }
+                }
+            }
+
+            UpdateHeightmap(request, worldgenBlockAccessor);
+        }
+
         private static EnumStructurePlacement ToBaseGamePlacement(EnumSeafarerPlacement p)
         {
             return p switch
