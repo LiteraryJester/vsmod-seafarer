@@ -144,6 +144,7 @@
       "clearFootprint": false,
       "useWorldgenHeight": true,
       "yOffset": -12,
+      "seafloorFillBlock": "game:muddygravel",
       "disableSurfaceTerrainBlending": false,
       "dependsOnStructure": "spawn",
       "minSpawnDistX": 1000,
