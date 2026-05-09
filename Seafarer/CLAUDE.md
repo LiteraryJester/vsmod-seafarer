@@ -23,7 +23,7 @@ Seafarer/                               # solution root
 │   ├── BlockEntity/                    # block entities for above
 │   ├── CollectibleBehavior/            # ClamShuck, CoconutCrack, PlaceBurrito, ShellCrush
 │   ├── Entity/                         # EntityProjectileBarbed
-│   ├── EntityBehavior/                 # Exposure + helpers (ExposureCondition, ExposureConfig)
+│   ├── EntityBehavior/                 # Ship mechanics, boat traits
 │   ├── Item/                           # ItemMudRake
 │   ├── Recipe/                         # Griddle + PrepTable recipe types + registries
 │   ├── Config/                         # DryingFrame, Griddle, SaltPan, MudRake configs
@@ -93,9 +93,6 @@ Seafarer/                               # solution root
 - **VS API (GitHub)**: https://github.com/anegostudios/vsapi
 - **VS Survival Mod (GitHub)**: https://github.com/anegostudios/vssurvivalmod
 - **VS Essentials Mod (GitHub)**: https://github.com/anegostudios/vsessentialsmod
-
-## Known Bugs
-- **Exposure resets to 0 on world load**: The persisted exposure level, condition, tier, and timestamp are lost when the player reloads the world. The `WatchedAttributes` tree for `"exposure"` appears to not survive save/load despite following the same pattern as the base game's `BehaviorBodyTemperature`. Needs investigation into whether the data is not being saved, or is being overwritten during entity deserialization. See `EntityBehaviorExposure.cs`.
 
 ## Current Features
 - **Log Barge**: Large raft entity with 2 seats, 6 expansion slots (port/starboard x fore/mid/aft), oar storage, sail mount

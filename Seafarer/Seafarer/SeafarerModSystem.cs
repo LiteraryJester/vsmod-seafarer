@@ -1,11 +1,10 @@
-using System.Text;
 using HarmonyLib;
+using Newtonsoft.Json.Linq;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.Server;
-using Vintagestory.GameContent;
 
 namespace Seafarer
 {
@@ -17,8 +16,8 @@ namespace Seafarer
         public static DryingFrameConfig Config { get; private set; } = new();
         public static SaltPanConfig SaltPanConfig { get; private set; } = new();
         public static GriddleConfig GriddleConfig { get; private set; } = new();
-        public static ExposureConfig ExposureConfig { get; private set; } = new();
         public static MudRakeConfig MudRakeConfig { get; private set; } = new();
+        public static BoatConfig BoatConfig { get; private set; } = new();
 
         private Harmony? harmony;
 
@@ -52,7 +51,6 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             api.RegisterItemClass("ItemMudRake", typeof(ItemMudRake));
             api.RegisterCollectibleBehaviorClass("ClamShuck", typeof(BehaviorClamShuck));
             api.RegisterCollectibleBehaviorClass("ShellCrush", typeof(BehaviorShellCrush));
-            api.RegisterEntityBehaviorClass("seafarer:exposure", typeof(EntityBehaviorExposure));
             api.RegisterEntityBehaviorClass("shipmechanics", typeof(EntityBehaviorShipMechanics));
             api.RegisterEntity("EntityProjectileBarbed", typeof(EntityProjectileBarbed));
             api.RegisterItemClass("ItemOceanLocatorMap", typeof(ItemOceanLocatorMap));
@@ -70,16 +68,6 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             base.Dispose();
         }
 
-        public override void StartServerSide(ICoreServerAPI api)
-        {
-            api.Event.PlayerJoin += OnPlayerJoin;
-        }
-
-        private void OnPlayerJoin(IServerPlayer player)
-        {
-            player.Entity?.GetBehavior<EntityBehaviorExposure>()?.OnPlayerJoined();
-        }
-
         public override void AssetsFinalize(ICoreAPI api)
         {
             base.AssetsFinalize(api);
@@ -87,6 +75,7 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             if (api is ICoreServerAPI sapi)
             {
                 LoadConfigs(sapi, log: true);
+                ApplyBoatSpeedOverrides(sapi);
                 if (sapi.ModLoader.IsModEnabled("configlib"))
                 {
                     HookConfigLib(sapi);
@@ -102,7 +91,11 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             if (provider == null) return;
             provider.SettingChanged += (domain, _, _) =>
             {
-                if (domain == "seafarer") LoadConfigs(api, log: false);
+                if (domain == "seafarer")
+                {
+                    LoadConfigs(api, log: false);
+                    ApplyBoatSpeedOverrides(api);
+                }
             };
         }
 
@@ -119,11 +112,11 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             SaltPanConfig = new SaltPanConfig();
             if (defaults != null) ApplySaltPanDefaults(SaltPanConfig, defaults);
 
-            ExposureConfig = new ExposureConfig();
-            if (defaults != null) ApplyExposureDefaults(ExposureConfig, defaults);
-
             MudRakeConfig = new MudRakeConfig();
             if (defaults != null) ApplyMudRakeDefaults(MudRakeConfig, defaults);
+
+            BoatConfig = new BoatConfig();
+            if (defaults != null) ApplyBoatDefaults(BoatConfig, defaults);
 
             if (log)
             {
@@ -131,11 +124,6 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
                     $"Drying frame config: rain={Config.EnableRainRot} (x{Config.RainRotMultiplier}), " +
                     $"wind={Config.EnableWindDrying} (x{Config.WindDryMultiplier}), " +
                     $"interval={Config.WeatherCheckIntervalMs}ms");
-
-                Mod.Logger.Notification(
-                    $"Exposure config: enabled={ExposureConfig.Enabled}, " +
-                    $"heat={ExposureConfig.HeatThreshold}C, cold={ExposureConfig.ColdThreshold}C, " +
-                    $"rate={ExposureConfig.AccumulationRatePerHour}/hr");
             }
         }
 
@@ -196,38 +184,6 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             cfg.MaxTemperatureMultiplier = s["maxTemperatureMultiplier"].AsFloat(cfg.MaxTemperatureMultiplier);
         }
 
-        private static void ApplyExposureDefaults(ExposureConfig cfg, JsonObject d)
-        {
-            var s = d["exposure"];
-            if (!s.Exists) return;
-            cfg.Enabled = s["enabled"].AsBool(cfg.Enabled);
-            cfg.HeatstrokeEnabled = s["heatstrokeEnabled"].AsBool(cfg.HeatstrokeEnabled);
-            cfg.FrostbiteEnabled = s["frostbiteEnabled"].AsBool(cfg.FrostbiteEnabled);
-            cfg.HeatThreshold = s["heatThreshold"].AsFloat(cfg.HeatThreshold);
-            cfg.ColdThreshold = s["coldThreshold"].AsFloat(cfg.ColdThreshold);
-            cfg.AccumulationRatePerHour = s["accumulationRatePerHour"].AsFloat(cfg.AccumulationRatePerHour);
-            cfg.DecayRatePerHour = s["decayRatePerHour"].AsFloat(cfg.DecayRatePerHour);
-            cfg.WindAccumulationMultiplier = s["windAccumulationMultiplier"].AsFloat(cfg.WindAccumulationMultiplier);
-            cfg.HealingExposureReduction = s["healingExposureReduction"].AsFloat(cfg.HealingExposureReduction);
-            cfg.Tier1Threshold = s["tier1Threshold"].AsFloat(cfg.Tier1Threshold);
-            cfg.Tier2Threshold = s["tier2Threshold"].AsFloat(cfg.Tier2Threshold);
-            cfg.Tier3Threshold = s["tier3Threshold"].AsFloat(cfg.Tier3Threshold);
-            cfg.HeatstrokeT1SpeedPenalty = s["heatstrokeT1SpeedPenalty"].AsFloat(cfg.HeatstrokeT1SpeedPenalty);
-            cfg.HeatstrokeT1DamageTakenIncrease = s["heatstrokeT1DamageTakenIncrease"].AsFloat(cfg.HeatstrokeT1DamageTakenIncrease);
-            cfg.HeatstrokeT2HungerRateMultiplier = s["heatstrokeT2HungerRateMultiplier"].AsFloat(cfg.HeatstrokeT2HungerRateMultiplier);
-            cfg.HeatstrokeT2SatietyPenalty = s["heatstrokeT2SatietyPenalty"].AsFloat(cfg.HeatstrokeT2SatietyPenalty);
-            cfg.HeatstrokeT3SpeedPenalty = s["heatstrokeT3SpeedPenalty"].AsFloat(cfg.HeatstrokeT3SpeedPenalty);
-            cfg.HeatstrokeT3DamagePerTick = s["heatstrokeT3DamagePerTick"].AsFloat(cfg.HeatstrokeT3DamagePerTick);
-            cfg.HeatstrokeT3StabilityOffset = s["heatstrokeT3StabilityOffset"].AsDouble(cfg.HeatstrokeT3StabilityOffset);
-            cfg.FrostbiteT1MaxHealthReduction = s["frostbiteT1MaxHealthReduction"].AsFloat(cfg.FrostbiteT1MaxHealthReduction);
-            cfg.FrostbiteT2MaxHealthReduction = s["frostbiteT2MaxHealthReduction"].AsFloat(cfg.FrostbiteT2MaxHealthReduction);
-            cfg.FrostbiteT2ItemDropChance = s["frostbiteT2ItemDropChance"].AsFloat(cfg.FrostbiteT2ItemDropChance);
-            cfg.FrostbiteT3MaxHealthReduction = s["frostbiteT3MaxHealthReduction"].AsFloat(cfg.FrostbiteT3MaxHealthReduction);
-            cfg.FrostbiteT3ItemDropChance = s["frostbiteT3ItemDropChance"].AsFloat(cfg.FrostbiteT3ItemDropChance);
-            cfg.FrostbiteT3DamagePerTick = s["frostbiteT3DamagePerTick"].AsFloat(cfg.FrostbiteT3DamagePerTick);
-            cfg.HodThirstMultiplierPerTier = s["hodThirstMultiplierPerTier"].AsFloat(cfg.HodThirstMultiplierPerTier);
-        }
-
         private static void ApplyMudRakeDefaults(MudRakeConfig cfg, JsonObject d)
         {
             var s = d["mudRake"];
@@ -235,53 +191,37 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             cfg.DropRollsPerBlock = s["dropRollsPerBlock"].AsInt(cfg.DropRollsPerBlock);
         }
 
+        private static void ApplyBoatDefaults(BoatConfig cfg, JsonObject d)
+        {
+            var s = d["boats"];
+            if (!s.Exists) return;
+            cfg.LogbargeSpeedMultiplier = s["logbargeSpeedMultiplier"].AsFloat(cfg.LogbargeSpeedMultiplier);
+            cfg.OutriggerSpeedMultiplier = s["outriggerSpeedMultiplier"].AsFloat(cfg.OutriggerSpeedMultiplier);
+        }
+
+        // Overwrites the speedMultiplier attribute on each boat EntityProperties so
+        // EntityBoat.Initialize picks up the configured value the next time a boat is
+        // spawned or loaded. Already-spawned boats keep their captured value until reload.
+        private static void ApplyBoatSpeedOverrides(ICoreAPI api)
+        {
+            foreach (var props in api.World.EntityTypes)
+            {
+                if (props.Code.Domain != "seafarer") continue;
+                float? newValue = props.Code.Path switch
+                {
+                    var p when p.StartsWith("boat-logbarge") => BoatConfig.LogbargeSpeedMultiplier,
+                    var p when p.StartsWith("boat-outrigger") => BoatConfig.OutriggerSpeedMultiplier,
+                    _ => null
+                };
+                if (newValue == null) continue;
+                if (props.Attributes?.Token is not JObject attrs) continue;
+                attrs["speedMultiplier"] = newValue.Value;
+            }
+        }
+
         public override void StartClientSide(ICoreClientAPI api)
         {
             Mod.Logger.Notification("Hello from template mod client side: " + Lang.Get("seafarer:hello"));
-
-            api.ModLoader.GetModSystem<CharacterExtraDialogs>().OnEnvText += OnExposureEnvText;
-            clientApi = api;
-        }
-
-        private ICoreClientAPI? clientApi;
-
-        private void OnExposureEnvText(StringBuilder sb)
-        {
-            var plr = clientApi?.World?.Player?.Entity;
-            if (plr == null) return;
-
-            var expTree = plr.WatchedAttributes.GetTreeAttribute("exposure");
-            if (expTree == null) return;
-
-            float level = expTree.GetFloat("level");
-            if (level <= 0f) return;
-
-            var condition = (ExposureCondition)expTree.GetInt("condition");
-            int tier = expTree.GetInt("tier");
-
-            string conditionName;
-            if (tier > 0 && condition != ExposureCondition.None)
-            {
-                conditionName = condition switch
-                {
-                    ExposureCondition.Heatstroke => Lang.Get("seafarer:exposure-heatstroke-" + tier),
-                    ExposureCondition.Frostbite => Lang.Get("seafarer:exposure-frostbite-" + tier),
-                    _ => ""
-                };
-            }
-            else
-            {
-                // Exposure building but not yet at tier 1 threshold
-                conditionName = condition switch
-                {
-                    ExposureCondition.Heatstroke => Lang.Get("seafarer:exposure-building-heat"),
-                    ExposureCondition.Frostbite => Lang.Get("seafarer:exposure-building-cold"),
-                    _ => ""
-                };
-            }
-
-            sb.AppendLine();
-            sb.Append(Lang.Get("seafarer:exposure-label", (int)(level * 100), conditionName));
         }
     }
 }

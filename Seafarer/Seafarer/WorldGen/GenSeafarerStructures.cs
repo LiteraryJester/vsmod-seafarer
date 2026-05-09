@@ -107,13 +107,19 @@ namespace Seafarer.WorldGen
         [JsonProperty]
         public string[] PostPlaceDecorators = Array.Empty<string>();
 
+        [JsonProperty]
+        public AssetLocation[] ReplaceWithBlocklayers;
+
         internal BlockSchematicPartial schematicData;
+        internal int[] replacewithblocklayersBlockids = Array.Empty<int>();
+        internal Dictionary<int, Dictionary<int, int>> resolvedRockTypeRemaps;
     }
 
     public class SeafarerStructuresConfig
     {
         public Dictionary<string, int> SchematicYOffsets = new();
         public Dictionary<string, Dictionary<AssetLocation, AssetLocation>> RocktypeRemapGroups = new();
+        public Dictionary<string, Dictionary<int, Dictionary<int, int>>> ResolvedRocktypeRemapGroups = new();
         public SeafarerStructure[] Structures = Array.Empty<SeafarerStructure>();
     }
 
@@ -327,6 +333,8 @@ namespace Seafarer.WorldGen
                 }
             }
 
+            ResolveRockTypeRemapsAndBlockLayers();
+
             // Validate dependsOnStructure ordering: a dep must be "spawn" or refer to a code
             // that appears earlier in the array. DetermineSeafarerStoryStructures iterates in
             // array order and looks up deps in storyLocations, so later-declared deps will
@@ -346,6 +354,124 @@ namespace Seafarer.WorldGen
             }
 
             api.Logger.Notification("Seafarer structures: loaded {0} definitions.", scfg.Structures.Length);
+        }
+
+        // Resolves the JSON-form rocktype remap groups and per-structure remap/blocklayer
+        // declarations into the int-keyed dictionaries that BlockSchematicPartial.PlacePartial
+        // expects. Without this, structures with `rockTypeRemapGroup` (e.g. abandoned-farm)
+        // or `replacewithblocklayers` get null/empty arrays passed to PlacePartial and the
+        // meta replacements never fire — generic rock blocks stay as granite, meta-substitute
+        // blocks stay as the literal placeholder. Mirrors WorldGenStoryStructure.Init.
+        private void ResolveRockTypeRemapsAndBlockLayers()
+        {
+            var rockstrata = blockLayerConfig.RockStrata;
+
+            foreach (var (key, group) in scfg.RocktypeRemapGroups)
+            {
+                scfg.ResolvedRocktypeRemapGroups[key] =
+                    WorldGenStructuresConfigBase.ResolveRockTypeRemaps(group, rockstrata, api);
+            }
+
+            foreach (var def in scfg.Structures)
+            {
+                if (def.RockTypeRemapGroup != null)
+                {
+                    if (scfg.ResolvedRocktypeRemapGroups.TryGetValue(def.RockTypeRemapGroup, out var groupRemap))
+                    {
+                        def.resolvedRockTypeRemaps = groupRemap;
+                    }
+                    else
+                    {
+                        api.Logger.Warning(
+                            "Seafarer structure '{0}': rockTypeRemapGroup '{1}' not found in config.",
+                            def.Code, def.RockTypeRemapGroup);
+                    }
+                }
+
+                if (def.RockTypeRemaps != null)
+                {
+                    var ownRemaps = WorldGenStructuresConfigBase.ResolveRockTypeRemaps(def.RockTypeRemaps, rockstrata, api);
+                    if (def.resolvedRockTypeRemaps != null)
+                    {
+                        foreach (var v in def.resolvedRockTypeRemaps) ownRemaps[v.Key] = v.Value;
+                    }
+                    def.resolvedRockTypeRemaps = ownRemaps;
+                }
+
+                if (def.ReplaceWithBlocklayers != null)
+                {
+                    def.replacewithblocklayersBlockids = new int[def.ReplaceWithBlocklayers.Length];
+                    for (int i = 0; i < def.ReplaceWithBlocklayers.Length; i++)
+                    {
+                        var block = api.World.GetBlock(def.ReplaceWithBlocklayers[i]);
+                        if (block == null)
+                        {
+                            api.Logger.Error(
+                                "Seafarer structure '{0}': replacewithblocklayers block '{1}' not found.",
+                                def.Code, def.ReplaceWithBlocklayers[i]);
+                            continue;
+                        }
+                        def.replacewithblocklayersBlockids[i] = block.Id;
+                    }
+                }
+            }
+        }
+
+        // Samples a stone block from the chunk so PlacePartial / OnPlacementBySchematic can
+        // remap rocktyped blocks to the local stratum. Caches the result on story locations
+        // so repeated chunk slices don't re-scan. Returns null when the structure declares no
+        // rocktype remaps (no work to do) or when no stone is found within ten samples.
+        private Block ResolveRockBlock(SeafarerStructure def, SeafarerStructureLocation loc, IChunkColumnGenerateRequest request, BlockPos startPos)
+        {
+            if (def.resolvedRockTypeRemaps == null) return null;
+
+            if (loc != null && !string.IsNullOrEmpty(loc.RockBlockCode))
+            {
+                return worldgenBlockAccessor.GetBlock(new AssetLocation(loc.RockBlockCode));
+            }
+
+            int chunkX = request.ChunkX;
+            int chunkZ = request.ChunkZ;
+            strucRand.InitPositionSeed(chunkX, chunkZ);
+            int lx = strucRand.NextInt(chunksize);
+            int lz = strucRand.NextInt(chunksize);
+
+            bool surfaceish = def.Placement is EnumSeafarerPlacement.Surface
+                or EnumSeafarerPlacement.SurfaceRuin
+                or EnumSeafarerPlacement.Coastal
+                or EnumSeafarerPlacement.OceanSurface;
+
+            int posY = surfaceish
+                ? request.Chunks[0].MapChunk.WorldGenTerrainHeightMap[lz * chunksize + lx]
+                : startPos.Y + def.schematicData.SizeY / 2 + strucRand.NextInt(Math.Max(1, def.schematicData.SizeY / 2));
+
+            Block rockBlock = null;
+            for (int j = 0; rockBlock == null && j < 10; j++)
+            {
+                var block = worldgenBlockAccessor.GetBlock(
+                    new BlockPos(chunkX * chunksize + lx, posY, chunkZ * chunksize + lz, 0),
+                    BlockLayersAccess.Solid);
+
+                if (block.BlockMaterial == EnumBlockMaterial.Stone)
+                {
+                    rockBlock = block;
+                    if (loc != null)
+                    {
+                        loc.RockBlockCode = block.Code.ToString();
+                        LocationsDirty = true;
+                    }
+                    break;
+                }
+
+                if (surfaceish) posY--;
+                else posY = startPos.Y + def.schematicData.SizeY / 2 + strucRand.NextInt(Math.Max(1, def.schematicData.SizeY / 2));
+            }
+
+            if (rockBlock == null)
+            {
+                api.Logger.Warning("Seafarer structure '{0}': no rock block found at sampled column for rocktype remap.", def.Code);
+            }
+            return rockBlock;
         }
 
         private readonly Cuboidi tmpCuboid = new();
@@ -410,12 +536,13 @@ namespace Seafarer.WorldGen
                     ClearFootprint(chunks, bounds, chunkX, chunkZ);
                 }
 
+                Block rockBlock = ResolveRockBlock(def, null, request, startPos);
                 int blocksPlaced = def.schematicData.PlacePartial(
                     chunks, worldgenBlockAccessor, api.World,
                     chunkX, chunkZ, startPos, EnumReplaceMode.ReplaceAll,
                     ToBaseGamePlacement(def.Placement),
                     GlobalConfig.ReplaceMetaBlocks, GlobalConfig.ReplaceMetaBlocks,
-                    null, Array.Empty<int>(), null, def.DisableSurfaceTerrainBlending
+                    def.resolvedRockTypeRemaps, def.replacewithblocklayersBlockids, rockBlock, def.DisableSurfaceTerrainBlending
                 );
 
                 if (blocksPlaced <= 0) continue;
@@ -464,12 +591,13 @@ namespace Seafarer.WorldGen
                     ClearFootprint(chunks, loc.Location, chunkX, chunkZ);
                 }
 
+                Block rockBlock = ResolveRockBlock(def, loc, request, startPos);
                 int blocksPlaced = def.schematicData.PlacePartial(
                     chunks, worldgenBlockAccessor, api.World,
                     chunkX, chunkZ, startPos, EnumReplaceMode.ReplaceAll,
                     ToBaseGamePlacement(def.Placement),
                     GlobalConfig.ReplaceMetaBlocks, GlobalConfig.ReplaceMetaBlocks,
-                    null, Array.Empty<int>(), null, def.DisableSurfaceTerrainBlending
+                    def.resolvedRockTypeRemaps, def.replacewithblocklayersBlockids, rockBlock, def.DisableSurfaceTerrainBlending
                 );
 
                 if (blocksPlaced <= 0) continue;
