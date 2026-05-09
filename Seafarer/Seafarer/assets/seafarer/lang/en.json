@@ -1365,5 +1365,10 @@ Need to portage? Strip off all storage and accessories first, then <hk>Shift</hk
 	"seafarer:trait-line-uncommon": "<font color=\"#1EFF00\">■ {0} ({1})</font>",
 	"seafarer:trait-line-rare": "<font color=\"#0070FF\">■ {0} ({1})</font>",
 	"seafarer:trait-line-epic": "<font color=\"#A335EE\">■ {0} ({1})</font>",
-	"seafarer:trait-line-legendary": "<font color=\"#FF8000\">■ {0} ({1})</font>"
+	"seafarer:trait-line-legendary": "<font color=\"#FF8000\">■ {0} ({1})</font>",
+
+	"shipwright:item-oar-basic-seasoned": "Oar basic (seasoned)",
+	"shipwright:item-oar-basic-varnished": "Oar basic (varnished)",
+	"shipwright:item-oar-long-seasoned": "Oar long (seasoned)",
+	"shipwright:item-oar-long-varnished": "Oar long (varnished)"
 }

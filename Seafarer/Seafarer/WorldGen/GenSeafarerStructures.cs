@@ -108,11 +108,17 @@ namespace Seafarer.WorldGen
         public string[] PostPlaceDecorators = Array.Empty<string>();
 
         [JsonProperty]
+        public string SeafloorFillBlock;
+
+        [JsonProperty]
         public AssetLocation[] ReplaceWithBlocklayers;
 
         internal BlockSchematicPartial schematicData;
         internal int[] replacewithblocklayersBlockids = Array.Empty<int>();
         internal Dictionary<int, Dictionary<int, int>> resolvedRockTypeRemaps;
+        internal int seafloorFillBlockId;
+        internal bool[,] schematicColumnMask;
+        internal int schematicLowestY;
     }
 
     public class SeafarerStructuresConfig
@@ -325,6 +331,22 @@ namespace Seafarer.WorldGen
                         out var off))
                     {
                         def.schematicData.OffsetY = off;
+                    }
+
+                    if (!string.IsNullOrEmpty(def.SeafloorFillBlock))
+                    {
+                        var fillBlock = api.World.GetBlock(new AssetLocation(def.SeafloorFillBlock));
+                        if (fillBlock == null)
+                        {
+                            api.Logger.Error(
+                                "Seafarer structure '{0}': seafloorFillBlock '{1}' not found.",
+                                def.Code, def.SeafloorFillBlock);
+                        }
+                        else
+                        {
+                            def.seafloorFillBlockId = fillBlock.Id;
+                            BuildSchematicColumnMask(def);
+                        }
                     }
                 }
                 catch (Exception e)
@@ -601,6 +623,11 @@ namespace Seafarer.WorldGen
                 );
 
                 if (blocksPlaced <= 0) continue;
+
+                if (def.seafloorFillBlockId > 0 && def.schematicColumnMask != null)
+                {
+                    FillSeafloorBelow(def, loc, request, chunkX, chunkZ);
+                }
 
                 // Post-placement fix-ups that later worldgen passes depend on.
                 // Matches base-game GenStoryStructures post-PlacePartial block.
@@ -886,6 +913,47 @@ namespace Seafarer.WorldGen
         }
 
         /// <summary>
+        /// Walks the schematic's packed Indices once to build a per-column
+        /// "has any solid block" mask and find the lowest local Y of any solid
+        /// block. Solid here means a real block that isn't air and isn't a fluid
+        /// (waterfalls inside the schematic shouldn't count as "structure
+        /// occupies this column"). The mask drives the seafloor fill silhouette;
+        /// the lowest Y sets the fill ceiling.
+        /// </summary>
+        private void BuildSchematicColumnMask(SeafarerStructure def)
+        {
+            var schem = def.schematicData;
+            if (schem?.Indices == null || schem.BlockIds == null) return;
+
+            int sizeX = schem.SizeX;
+            int sizeZ = schem.SizeZ;
+            var mask = new bool[sizeX, sizeZ];
+            int lowestY = int.MaxValue;
+
+            for (int i = 0; i < schem.Indices.Count; i++)
+            {
+                uint idx = schem.Indices[i];
+                int blockId = schem.BlockIds[i];
+
+                if (!schem.BlockCodes.TryGetValue(blockId, out var blockCode)) continue;
+                Block block = api.World.GetBlock(blockCode);
+                if (block == null || block.Id == 0) continue;
+                if (block.ForFluidsLayer) continue;
+
+                int lx = (int)(idx & 0x3ff);
+                int lz = (int)((idx >> 10) & 0x3ff);
+                int ly = (int)((idx >> 20) & 0x3ff);
+
+                if (lx < 0 || lx >= sizeX || lz < 0 || lz >= sizeZ) continue;
+                mask[lx, lz] = true;
+                if (ly < lowestY) lowestY = ly;
+            }
+
+            def.schematicColumnMask = mask;
+            def.schematicLowestY = lowestY == int.MaxValue ? 0 : lowestY;
+        }
+
+        /// <summary>
         /// Removes duplicate fluid entries from a schematic's packed Indices/BlockIds arrays.
         /// Some schematics (esp. WorldEdit-saved) end up with two entries at the same (x,y,z)
         /// position that both resolve to fluid blocks, which makes BlockSchematicStructure.Init
@@ -977,6 +1045,78 @@ namespace Seafarer.WorldGen
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Raises the seafloor under a chunk slice of an opted-in structure.
+        /// For each XZ column inside the slice that the schematic actually
+        /// occupies (per def.schematicColumnMask), fills from the existing
+        /// terrain Y up to one block below the schematic's lowest solid block
+        /// using def.seafloorFillBlockId. Clears any fluid in the affected
+        /// cells. Caller must guarantee def.seafloorFillBlockId &gt; 0 and
+        /// def.schematicColumnMask != null.
+        /// </summary>
+        private void FillSeafloorBelow(
+            SeafarerStructure def,
+            SeafarerStructureLocation loc,
+            IChunkColumnGenerateRequest request,
+            int chunkX,
+            int chunkZ)
+        {
+            var chunks = request.Chunks;
+            var mapChunk = chunks[0].MapChunk;
+            int mapSizeY = api.WorldManager.MapSizeY;
+
+            int bottomY = loc.Location.Y1 + def.schematicLowestY;
+            int fillTopY = bottomY - 1;
+            if (fillTopY < 0) return;
+            if (fillTopY >= mapSizeY) fillTopY = mapSizeY - 1;
+
+            int chunkMinX = chunkX * chunksize;
+            int chunkMinZ = chunkZ * chunksize;
+            int clipMinX = Math.Max(loc.Location.X1, chunkMinX);
+            int clipMaxX = Math.Min(loc.Location.X2, chunkMinX + chunksize);
+            int clipMinZ = Math.Max(loc.Location.Z1, chunkMinZ);
+            int clipMaxZ = Math.Min(loc.Location.Z2, chunkMinZ + chunksize);
+            if (clipMinX >= clipMaxX || clipMinZ >= clipMaxZ) return;
+
+            int fillId = def.seafloorFillBlockId;
+            var mask = def.schematicColumnMask;
+            int maskW = mask.GetLength(0);
+            int maskD = mask.GetLength(1);
+
+            for (int worldX = clipMinX; worldX < clipMaxX; worldX++)
+            {
+                int localChunkX = worldX - chunkMinX;
+                int localSchemX = worldX - loc.Location.X1;
+                if (localSchemX < 0 || localSchemX >= maskW) continue;
+
+                for (int worldZ = clipMinZ; worldZ < clipMaxZ; worldZ++)
+                {
+                    int localChunkZ = worldZ - chunkMinZ;
+                    int localSchemZ = worldZ - loc.Location.Z1;
+                    if (localSchemZ < 0 || localSchemZ >= maskD) continue;
+
+                    if (!mask[localSchemX, localSchemZ]) continue;
+
+                    int terrainY = mapChunk.WorldGenTerrainHeightMap[localChunkZ * chunksize + localChunkX];
+                    int startY = terrainY + 1;
+                    if (startY > fillTopY) continue;
+
+                    for (int y = startY; y <= fillTopY; y++)
+                    {
+                        int chunkIndex = y / chunksize;
+                        if (chunkIndex < 0 || chunkIndex >= chunks.Length) continue;
+                        int localY = y % chunksize;
+                        var chunk = chunks[chunkIndex];
+                        int blockIndex = (localY * chunksize + localChunkZ) * chunksize + localChunkX;
+                        chunk.Data.SetBlockUnsafe(blockIndex, fillId);
+                        chunk.Data.SetFluid(blockIndex, 0);
+                    }
+                }
+            }
+
+            UpdateHeightmap(request, worldgenBlockAccessor);
         }
 
         private static EnumStructurePlacement ToBaseGamePlacement(EnumSeafarerPlacement p)

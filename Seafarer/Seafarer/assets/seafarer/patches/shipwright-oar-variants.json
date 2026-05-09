@@ -1,0 +1,15 @@
+[
+    // ==================================================================
+    // Adds "seasoned" and "varnished" wood states to shipwright's oar so
+    // the shipwright:recipes/grid/oars.json recipes can resolve their
+    // outputs (oar-long-seasoned, oar-long-varnished, oar-basic-seasoned,
+    // oar-basic-varnished) once seafarer's plank-variants.json adds those
+    // states to game:plank.
+    // ==================================================================
+    { "op": "add", "path": "/variantgroups/1/states/-", "value": "seasoned",
+        "file": "shipwright:itemtypes/oar.json",
+        "dependsOn": [{ "modid": "shipwright" }] },
+    { "op": "add", "path": "/variantgroups/1/states/-", "value": "varnished",
+        "file": "shipwright:itemtypes/oar.json",
+        "dependsOn": [{ "modid": "shipwright" }] }
+]
