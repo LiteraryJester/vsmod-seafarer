@@ -624,6 +624,11 @@ namespace Seafarer.WorldGen
 
                 if (blocksPlaced <= 0) continue;
 
+                if (def.seafloorFillBlockId > 0 && def.schematicColumnMask != null)
+                {
+                    FillSeafloorBelow(def, loc, request, chunkX, chunkZ);
+                }
+
                 // Post-placement fix-ups that later worldgen passes depend on.
                 // Matches base-game GenStoryStructures post-PlacePartial block.
                 if (def.Placement is EnumSeafarerPlacement.Surface
