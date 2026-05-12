@@ -796,6 +796,8 @@ Need to portage? Strip off all storage and accessories first, then <hk>Shift</hk
 	"itemdesc-plank-seasoned": "Air-dried lumber that is lighter and stronger than fresh-cut wood. Essential for quality shipbuilding.",
 	"item-plank-varnished": "Board (Varnished)",
 	"itemdesc-plank-varnished": "A board treated with marine varnish. Waterproof and resistant to rot.",
+	"item-plank-unseasoned": "Unseasoned plank",
+	"itemdesc-plank-unseasoned": "Freshly sawn lumber. Cannot be used for anything yet — leave it in storage to air-dry into seasoned planks.",
 	"block-planks-seasoned": "Seasoned planks",
 	"block-planks-seasoned-*": "Seasoned planks",
 	"block-planks-varnished": "Varnished planks",
