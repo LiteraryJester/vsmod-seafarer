@@ -1,23 +1,22 @@
 [
-    // Add drying transition to base game planks.
-    // Regular wood planks air-dry into seasoned planks over ~1 in-game week (168 hours).
-    // Seasoned, varnished, aged, and veryaged variants are excluded (empty array = no transitions).
-    // VS ByType matching picks the first match, so exclusions must come first.
+    // Add drying transition to unseasoned planks only.
+    // plank-{wood} (raw, fresh-cut) no longer auto-dries — the player must
+    // saw it into plank-unseasoned first (see recipes/grid/plank-unseasoned.json).
+    // plank-unseasoned then air-dries into plank-seasoned over ~1 in-game week (168 hours).
+    // All other plank states (seasoned, varnished, aged, veryaged) carry no transition.
+    // VS ByType matching picks the first match, so *-unseasoned must come before *.
     {
         "op": "add",
         "path": "/transitionablePropsByType",
         "value": {
-            "*-seasoned": [],
-            "*-varnished": [],
-            "*-aged": [],
-            "*-veryaged": [],
-            "*": [{
+            "*-unseasoned": [{
                 "type": "Dry",
                 "freshHours": { "avg": 0 },
                 "transitionHours": { "avg": 168 },
                 "transitionedStack": { "type": "item", "code": "game:plank-seasoned" },
                 "transitionRatio": 1
-            }]
+            }],
+            "*": []
         },
         "file": "game:itemtypes/resource/plank.json"
     }
