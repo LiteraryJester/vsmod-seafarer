@@ -30,7 +30,9 @@ public class GriddleRecipeRegistry : ModSystem
     {
         Recipes.Clear();
 
-        var assets = sapi.Assets.GetMany("recipes/ongriddle/", "seafarer");
+        // Scan all loaded domains so other mods can register griddle recipes
+        // by dropping files at assets/<theirmodid>/recipes/ongriddle/*.json.
+        var assets = sapi.Assets.GetMany("recipes/ongriddle/");
         foreach (var asset in assets)
         {
             try
