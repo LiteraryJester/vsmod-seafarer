@@ -7,7 +7,7 @@
                 type: "item",
                 code: "game:plank-*",
                 name: "wood",
-                skipVariants: ["seasoned", "varnished", "unseasoned"]
+                skipVariants: ["seasoned", "varnished", "unseasoned", "aged", "veryaged", "agedebony"]
             }
         },
         width: 2,
