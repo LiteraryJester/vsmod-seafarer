@@ -10,6 +10,8 @@
         "file": "game:itemtypes/resource/plank.json" },
     { "op": "add", "path": "/variantgroups/0/states/-", "value": "varnished",
         "file": "game:itemtypes/resource/plank.json" },
+    { "op": "add", "path": "/variantgroups/0/states/-", "value": "unseasoned",
+        "file": "game:itemtypes/resource/plank.json" },
     { "op": "replace", "path": "/textures/wood/baseByType",
         "value": {
             "*-seasoned": "seafarer:block/wood/planks/seasoned1",
@@ -17,6 +19,7 @@
             "*-aged": "block/wood/planks/aged/aged1",
             "*-veryaged": "block/wood/planks/aged/veryaged1",
             "*-agedebony": "block/wood/planks/aged/ebony1",
+            "*-unseasoned": "block/wood/planks/oak1",
             "*": "block/wood/planks/{wood}1"
         },
         "file": "game:itemtypes/resource/plank.json" },
