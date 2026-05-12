@@ -767,28 +767,6 @@
 					}
 				}
 			]
-		},
-
-		{
-			"name": "weathervane",
-			"code": "weathervane",
-			"quantityframes": 36,
-			"onActivityStopped": "Rewind",
-			"onAnimationEnd": "Repeat",
-			"keyframes": [
-				{
-					"frame": 0,
-					"elements": {
-						"SailUnfurled": { "rotationX": 0.0, "rotationY": -180.0, "rotationZ": 0.0 }
-					}
-				},
-				{
-					"frame": 35,
-					"elements": {
-						"SailUnfurled": { "rotationX": 0.0, "rotationY": 180.0, "rotationZ": 0.0 }
-					}
-				}
-			]
 		}
 	]
 }

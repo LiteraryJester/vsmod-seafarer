@@ -15,7 +15,7 @@
 		width: 2,
 		height: 1,
 		shapeless: true,
-		output: { type: "item", code: "seafarer:tortilladough", quantity: 2 }
+		output: { type: "item", code: "seafarer:tortilladough-corn", quantity: 2 }
 	},
 	{
 		ingredientPattern: "MW",
@@ -33,7 +33,7 @@
 		width: 2,
 		height: 1,
 		shapeless: true,
-		output: { type: "item", code: "seafarer:tortilladough", quantity: 2 }
+		output: { type: "item", code: "seafarer:tortilladough-corn", quantity: 2 }
 	},
 	{
 		ingredientPattern: "MW",
@@ -51,7 +51,7 @@
 		width: 2,
 		height: 1,
 		shapeless: true,
-		output: { type: "item", code: "seafarer:tortilladough", quantity: 2 }
+		output: { type: "item", code: "seafarer:tortilladough-corn", quantity: 2 }
 	},
 	{
 		ingredientPattern: "MW",
@@ -69,6 +69,6 @@
 		width: 2,
 		height: 1,
 		shapeless: true,
-		output: { type: "item", code: "seafarer:tortilladough", quantity: 2 }
+		output: { type: "item", code: "seafarer:tortilladough-corn", quantity: 2 }
 	}
 ]
