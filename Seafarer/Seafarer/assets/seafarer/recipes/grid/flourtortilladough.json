@@ -1,0 +1,110 @@
+[
+	{
+		ingredientPattern: "DO",
+		ingredients: {
+			"D": { type: "item", code: "game:dough-*", name: "grain" },
+			"O": { type: "block", code: "game:woodbucket", recipeAttributes: { requiresContent: { type: "item", code: "game:oilportion-flax" }, requiresLitres: 0.1 } }
+		},
+		width: 2, height: 1, shapeless: true,
+		output: { type: "item", code: "seafarer:tortilladough-flour", quantity: 2 }
+	},
+	{
+		ingredientPattern: "DO",
+		ingredients: {
+			"D": { type: "item", code: "game:dough-*", name: "grain" },
+			"O": { type: "block", code: "game:woodbucket", recipeAttributes: { requiresContent: { type: "item", code: "game:oilportion-olive" }, requiresLitres: 0.1 } }
+		},
+		width: 2, height: 1, shapeless: true,
+		output: { type: "item", code: "seafarer:tortilladough-flour", quantity: 2 }
+	},
+	{
+		ingredientPattern: "DO",
+		ingredients: {
+			"D": { type: "item", code: "game:dough-*", name: "grain" },
+			"O": { type: "block", code: "game:woodbucket", recipeAttributes: { requiresContent: { type: "item", code: "seafarer:oilportion-coconut" }, requiresLitres: 0.1 } }
+		},
+		width: 2, height: 1, shapeless: true,
+		output: { type: "item", code: "seafarer:tortilladough-flour", quantity: 2 }
+	},
+	{
+		ingredientPattern: "DO",
+		ingredients: {
+			"D": { type: "item", code: "game:dough-*", name: "grain" },
+			"O": { type: "block", code: "game:bowl-*-fired", recipeAttributes: { requiresContent: { type: "item", code: "game:oilportion-flax" }, requiresLitres: 0.1 } }
+		},
+		width: 2, height: 1, shapeless: true,
+		output: { type: "item", code: "seafarer:tortilladough-flour", quantity: 2 }
+	},
+	{
+		ingredientPattern: "DO",
+		ingredients: {
+			"D": { type: "item", code: "game:dough-*", name: "grain" },
+			"O": { type: "block", code: "game:bowl-*-fired", recipeAttributes: { requiresContent: { type: "item", code: "game:oilportion-olive" }, requiresLitres: 0.1 } }
+		},
+		width: 2, height: 1, shapeless: true,
+		output: { type: "item", code: "seafarer:tortilladough-flour", quantity: 2 }
+	},
+	{
+		ingredientPattern: "DO",
+		ingredients: {
+			"D": { type: "item", code: "game:dough-*", name: "grain" },
+			"O": { type: "block", code: "game:bowl-*-fired", recipeAttributes: { requiresContent: { type: "item", code: "seafarer:oilportion-coconut" }, requiresLitres: 0.1 } }
+		},
+		width: 2, height: 1, shapeless: true,
+		output: { type: "item", code: "seafarer:tortilladough-flour", quantity: 2 }
+	},
+	{
+		ingredientPattern: "DO",
+		ingredients: {
+			"D": { type: "item", code: "game:dough-*", name: "grain" },
+			"O": { type: "block", code: "game:jug-*-fired", recipeAttributes: { requiresContent: { type: "item", code: "game:oilportion-flax" }, requiresLitres: 0.1 } }
+		},
+		width: 2, height: 1, shapeless: true,
+		output: { type: "item", code: "seafarer:tortilladough-flour", quantity: 2 }
+	},
+	{
+		ingredientPattern: "DO",
+		ingredients: {
+			"D": { type: "item", code: "game:dough-*", name: "grain" },
+			"O": { type: "block", code: "game:jug-*-fired", recipeAttributes: { requiresContent: { type: "item", code: "game:oilportion-olive" }, requiresLitres: 0.1 } }
+		},
+		width: 2, height: 1, shapeless: true,
+		output: { type: "item", code: "seafarer:tortilladough-flour", quantity: 2 }
+	},
+	{
+		ingredientPattern: "DO",
+		ingredients: {
+			"D": { type: "item", code: "game:dough-*", name: "grain" },
+			"O": { type: "block", code: "game:jug-*-fired", recipeAttributes: { requiresContent: { type: "item", code: "seafarer:oilportion-coconut" }, requiresLitres: 0.1 } }
+		},
+		width: 2, height: 1, shapeless: true,
+		output: { type: "item", code: "seafarer:tortilladough-flour", quantity: 2 }
+	},
+	{
+		ingredientPattern: "DO",
+		ingredients: {
+			"D": { type: "item", code: "game:dough-*", name: "grain" },
+			"O": { type: "block", code: "seafarer:opencoconut", recipeAttributes: { requiresContent: { type: "item", code: "game:oilportion-flax" }, requiresLitres: 0.1 } }
+		},
+		width: 2, height: 1, shapeless: true,
+		output: { type: "item", code: "seafarer:tortilladough-flour", quantity: 2 }
+	},
+	{
+		ingredientPattern: "DO",
+		ingredients: {
+			"D": { type: "item", code: "game:dough-*", name: "grain" },
+			"O": { type: "block", code: "seafarer:opencoconut", recipeAttributes: { requiresContent: { type: "item", code: "game:oilportion-olive" }, requiresLitres: 0.1 } }
+		},
+		width: 2, height: 1, shapeless: true,
+		output: { type: "item", code: "seafarer:tortilladough-flour", quantity: 2 }
+	},
+	{
+		ingredientPattern: "DO",
+		ingredients: {
+			"D": { type: "item", code: "game:dough-*", name: "grain" },
+			"O": { type: "block", code: "seafarer:opencoconut", recipeAttributes: { requiresContent: { type: "item", code: "seafarer:oilportion-coconut" }, requiresLitres: 0.1 } }
+		},
+		width: 2, height: 1, shapeless: true,
+		output: { type: "item", code: "seafarer:tortilladough-flour", quantity: 2 }
+	}
+]
