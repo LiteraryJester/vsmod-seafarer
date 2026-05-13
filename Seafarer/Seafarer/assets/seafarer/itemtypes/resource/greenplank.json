@@ -20,7 +20,7 @@
     maxstacksize: 64,
     shape: { base: "game:item/plank" },
     textures: {
-        wood: "game:block/wood/planks/oak1"
+        wood: { base: "game:block/wood/planks/oak1" }
     },
     creativeinventory: { "general": ["*"], "items": ["*"] },
     transitionableProps: [{
