@@ -20,6 +20,7 @@ namespace Seafarer
         public static BoatConfig BoatConfig { get; private set; } = new();
 
         private Harmony? harmony;
+        private static bool patchesApplied;
 
         public override void Start(ICoreAPI api)
         {
@@ -58,13 +59,24 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             api.RegisterItemClass("ItemOutriggerBoat", typeof(ItemOutriggerBoat));
             api.RegisterItemClass("ItemOutriggerRollers", typeof(ItemOutriggerRollers));
 
-            harmony = new Harmony(HarmonyId);
-            harmony.PatchAll(typeof(SeafarerModSystem).Assembly);
+            // PatchAll runs once per process. Start fires for both server and
+            // client ModSystem instances in single-player; without this guard
+            // every patched method gets its postfix/prefix invoked twice.
+            if (!patchesApplied)
+            {
+                harmony = new Harmony(HarmonyId);
+                harmony.PatchAll(typeof(SeafarerModSystem).Assembly);
+                patchesApplied = true;
+            }
         }
 
         public override void Dispose()
         {
-            harmony?.UnpatchAll(HarmonyId);
+            if (harmony != null)
+            {
+                harmony.UnpatchAll(HarmonyId);
+                patchesApplied = false;
+            }
             base.Dispose();
         }
 
@@ -74,7 +86,7 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             BoatTraitRegistry.Load(api);
             if (api is ICoreServerAPI sapi)
             {
-                LoadConfigs(sapi, log: true);
+                LoadConfigs(sapi);
                 ApplyBoatSpeedOverrides(sapi);
                 if (sapi.ModLoader.IsModEnabled("configlib"))
                 {
@@ -93,13 +105,13 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             {
                 if (domain == "seafarer")
                 {
-                    LoadConfigs(api, log: false);
+                    LoadConfigs(api);
                     ApplyBoatSpeedOverrides(api);
                 }
             };
         }
 
-        private void LoadConfigs(ICoreServerAPI api, bool log = true)
+        private void LoadConfigs(ICoreServerAPI api)
         {
             var defaults = LoadAssetDefaults(api);
 
@@ -117,14 +129,6 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
 
             BoatConfig = new BoatConfig();
             if (defaults != null) ApplyBoatDefaults(BoatConfig, defaults);
-
-            if (log)
-            {
-                Mod.Logger.Notification(
-                    $"Drying frame config: rain={Config.EnableRainRot} (x{Config.RainRotMultiplier}), " +
-                    $"wind={Config.EnableWindDrying} (x{Config.WindDryMultiplier}), " +
-                    $"interval={Config.WeatherCheckIntervalMs}ms");
-            }
         }
 
         private JsonObject? LoadAssetDefaults(ICoreAPI api)

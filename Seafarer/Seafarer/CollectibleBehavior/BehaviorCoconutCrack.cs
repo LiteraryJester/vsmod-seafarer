@@ -103,8 +103,6 @@ public class BehaviorCoconutCrack : CollectibleBehavior, IContainedInteractable
         // (handled in BlockEntityOpenCoconut.OnBlockPlaced)
 
         be.Api.World.PlaySoundAt(new AssetLocation("game:sounds/player/knap1"), byPlayer.Entity, byPlayer, true, 16f);
-
-        be.Api.World.Logger.Audit("{0} cracked a coconut at {1}.", byPlayer.PlayerName, pos);
     }
 
     public bool OnContainedInteractCancel(float secondsUsed, BlockEntityContainer be, ItemSlot slot, IPlayer byPlayer, BlockSelection blockSel, EnumItemUseCancelReason cancelReason)
