@@ -1,11 +1,37 @@
+using System.Collections.Generic;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
+using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
+using Vintagestory.GameContent;
 
 namespace Seafarer;
 
-public class BlockPrepTable : Block
+public class BlockPrepTable : Block, ICustomHandbookPageContent
 {
+    public void OnHandbookPageComposed(
+        List<RichTextComponentBase> components,
+        ItemSlot inSlot,
+        ICoreClientAPI capi,
+        ItemStack[] allStacks,
+        ActionConsumable<string> openDetailPageFor)
+    {
+        var registry = capi.ModLoader.GetModSystem<PrepTableRecipeRegistry>();
+        if (registry == null || registry.Recipes.Count == 0) return;
+
+        bool haveText = true;
+        CollectibleBehaviorHandbookTextAndExtraInfo.AddHeading(
+            components, capi, "seafarer:handbook-preptable-recipes", ref haveText);
+        components.Add(new ClearFloatTextComponent(capi, 2));
+
+        foreach (var recipe in registry.Recipes)
+        {
+            components.AddRange(PrepTableHandbookRenderer.BuildRecipeRow(
+                capi, recipe, allStacks, registry, openDetailPageFor));
+        }
+    }
+
+
     private BlockFacing GetRightDir(string side)
     {
         return side switch
