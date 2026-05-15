@@ -14,7 +14,7 @@
             {
                 requireStacks: [
                     { type: "item", code: "game:firewood", quantity: 8 },
-                    { type: "item", code: "game:plank-*", name: "seafarer-outrigger-ingredient-planks", quantity: 12, storeWildCard: "wood" }
+                    { type: "item", code: "game:plank-*", name: "seafarer-outrigger-ingredient-planks", quantity: 12, storeWildCard: "wood", skipVariants: ["seasoned", "varnished", "unseasoned"] }
                 ],
                 addElements: ["ORIGIN/ORIGIN2MainHull/ORIGIN1props"]
             },

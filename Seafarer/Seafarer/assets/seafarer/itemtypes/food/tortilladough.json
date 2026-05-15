@@ -1,6 +1,9 @@
 {
 	"code": "tortilladough",
 	"maxstacksize": 64,
+	"variantgroups": [
+		{ "code": "grain", "states": ["corn", "flour"] }
+	],
 	"behaviors": [
 		{ "name": "GroundStorable", "properties": { "layout": "Quadrants", "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.125, "z2": 1 } } }
 	],
@@ -10,7 +13,6 @@
 	},
 	"creativeinventory": { "general": ["*"], "seafarer": ["*"] },
 	"attributes": {
-		"foodTags": ["corn", "grain", "dough"],
 		"displaycaseable": true,
 		"shelvable": true,
 		"nutritionPropsWhenInMeal": {
@@ -18,6 +20,14 @@
 			"foodcategory": "Grain"
 		},
 		"validationSkip": ["ef_coverage"]
+	},
+	"attributesByType": {
+		"*-corn": {
+			"foodTags": ["corn", "grain", "dough"]
+		},
+		"*-flour": {
+			"foodTags": ["grain", "dough"]
+		}
 	},
 	"materialDensity": 200,
 	"transitionableProps": [{
@@ -27,13 +37,23 @@
 		"transitionedStack": { "type": "item", "code": "game:rot" },
 		"transitionRatio": 1
 	}],
-	"combustibleProps": {
-		"meltingPoint": 200,
-		"meltingDuration": 30,
-		"smeltedRatio": 1,
-		"smeltingType": "cook",
-		"smeltedStack": { "type": "item", "code": "seafarer:tortilla" },
-		"requiresContainer": false
+	"combustiblePropsByType": {
+		"*-corn": {
+			"meltingPoint": 200,
+			"meltingDuration": 30,
+			"smeltedRatio": 1,
+			"smeltingType": "cook",
+			"smeltedStack": { "type": "item", "code": "seafarer:tortilla-corn" },
+			"requiresContainer": false
+		},
+		"*-flour": {
+			"meltingPoint": 200,
+			"meltingDuration": 30,
+			"smeltedRatio": 1,
+			"smeltingType": "cook",
+			"smeltedStack": { "type": "item", "code": "seafarer:tortilla-flour" },
+			"requiresContainer": false
+		}
 	},
 	"guiTransform": {
 		"translation": { "x": 0, "y": 0, "z": 0 },
