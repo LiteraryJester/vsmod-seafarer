@@ -74,7 +74,7 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             BoatTraitRegistry.Load(api);
             if (api is ICoreServerAPI sapi)
             {
-                LoadConfigs(sapi, log: true);
+                LoadConfigs(sapi);
                 ApplyBoatSpeedOverrides(sapi);
                 if (sapi.ModLoader.IsModEnabled("configlib"))
                 {
@@ -93,13 +93,13 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             {
                 if (domain == "seafarer")
                 {
-                    LoadConfigs(api, log: false);
+                    LoadConfigs(api);
                     ApplyBoatSpeedOverrides(api);
                 }
             };
         }
 
-        private void LoadConfigs(ICoreServerAPI api, bool log = true)
+        private void LoadConfigs(ICoreServerAPI api)
         {
             var defaults = LoadAssetDefaults(api);
 
@@ -117,14 +117,6 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
 
             BoatConfig = new BoatConfig();
             if (defaults != null) ApplyBoatDefaults(BoatConfig, defaults);
-
-            if (log)
-            {
-                Mod.Logger.Notification(
-                    $"Drying frame config: rain={Config.EnableRainRot} (x{Config.RainRotMultiplier}), " +
-                    $"wind={Config.EnableWindDrying} (x{Config.WindDryMultiplier}), " +
-                    $"interval={Config.WeatherCheckIntervalMs}ms");
-            }
         }
 
         private JsonObject? LoadAssetDefaults(ICoreAPI api)

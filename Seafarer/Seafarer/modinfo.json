@@ -8,7 +8,7 @@
         "TechnoGoth",
         "LiteraryJester"
     ],
-    "version": "0.5.5",
+    "version": "0.5.8",
     "dependencies": {
         "game": "1.22.0",
         "progressionframework": "1.0.0"
