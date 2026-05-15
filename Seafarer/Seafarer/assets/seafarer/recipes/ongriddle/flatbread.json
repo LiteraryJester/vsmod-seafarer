@@ -2,7 +2,7 @@
     ingredients: [
         { type: "item", code: "game:dough-*", name: "grain" }
     ],
-    output: { type: "item", code: "seafarer:flatbread-{grain}-plain" },
+    output: { type: "item", code: "seafarer:flatbread-{grain}" },
     cookingTemp: 150,
     cookingDuration: 30,
     minMaterial: "clay"

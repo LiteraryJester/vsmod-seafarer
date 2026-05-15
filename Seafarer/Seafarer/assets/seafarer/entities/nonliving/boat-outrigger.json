@@ -13,7 +13,6 @@
   ],
   "skipVariants": ["*-aged", "*-veryaged", "*-rotten", "*-veryrotten"],
   "attributes": {
-    "disabledweatherVaneAnimCode": "weathervane",
     "deconstructible": true,
     "deconstructDrops": [
       { "type": "item", "code": "game:plank-{material}", "quantity": 32 },
@@ -181,13 +180,6 @@
         "animationSpeed": 1,
         "easeInSpeed": 2,
         "easeOutSpeed": 2
-      },
-      {
-        "code": "weathervane",
-        "animation": "weathervane",
-        "animationSpeed": 0,
-        "weight": 1,
-        "blendMode": "AddAverage"
       }
     ],
     "textures": {

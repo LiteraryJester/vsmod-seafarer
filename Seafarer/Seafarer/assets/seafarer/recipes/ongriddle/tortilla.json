@@ -1,8 +1,8 @@
 {
     ingredients: [
-        { type: "item", code: "seafarer:tortilladough" }
+        { type: "item", code: "seafarer:tortilladough-*", name: "grain" }
     ],
-    output: { type: "item", code: "seafarer:tortilla" },
+    output: { type: "item", code: "seafarer:tortilla-{grain}" },
     cookingTemp: 150,
     cookingDuration: 30,
     minMaterial: "clay"

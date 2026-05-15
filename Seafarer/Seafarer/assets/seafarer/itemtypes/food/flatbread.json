@@ -11,55 +11,38 @@
         }
     ],
     "variantgroups": [
-        { "code": "grain", "states": ["spelt", "rye", "flax", "rice", "cassava", "amaranth", "sunflower"] },
-        { "code": "type", "states": ["plain", "oiled"] }
+        { "code": "grain", "states": ["spelt", "rye", "flax", "rice", "cassava", "amaranth", "sunflower"] }
     ],
     "creativeinventory": {
-        "general": ["*-plain"],
+        "general": ["*"],
         "seafarer": ["*"]
     },
     "shape": { "base": "seafarer:item/food/flatbread" },
     "texturesByType": {
-        "*-spelt-*": { "bread": { "base": "game:item/food/grain/speltbread2" } },
-        "*-rye-*": { "bread": { "base": "game:item/food/grain/ryebread2" } },
-        "*-flax-*": { "bread": { "base": "game:item/food/grain/flaxbread2" } },
-        "*-rice-*": { "bread": { "base": "game:item/food/grain/ricebread2" } },
-        "*-cassava-*": { "bread": { "base": "game:item/food/grain/cassavabread2" } },
-        "*-amaranth-*": { "bread": { "base": "game:item/food/grain/amaranthbread2" } },
-        "*-sunflower-*": { "bread": { "base": "game:item/food/grain/sunflowerbread2" } }
+        "*-spelt": { "bread": { "base": "game:item/food/grain/speltbread2" } },
+        "*-rye": { "bread": { "base": "game:item/food/grain/ryebread2" } },
+        "*-flax": { "bread": { "base": "game:item/food/grain/flaxbread2" } },
+        "*-rice": { "bread": { "base": "game:item/food/grain/ricebread2" } },
+        "*-cassava": { "bread": { "base": "game:item/food/grain/cassavabread2" } },
+        "*-amaranth": { "bread": { "base": "game:item/food/grain/amaranthbread2" } },
+        "*-sunflower": { "bread": { "base": "game:item/food/grain/sunflowerbread2" } }
     },
     "attributes": {
         "foodTags": ["bread", "grain"],
         "handbook": { "groupBy": ["flatbread-*"] }
     },
-    "nutritionPropsByType": {
-        "*-oiled": {
-            "satiety": 250,
-            "foodcategory": "Grain",
-            "health": 0
-        },
-        "*": {
-            "satiety": 200,
-            "foodcategory": "Grain",
-            "health": 0
-        }
+    "nutritionProps": {
+        "satiety": 200,
+        "foodcategory": "Grain",
+        "health": 0
     },
-    "transitionablePropsByType": {
-        "*-oiled": [{
-            "type": "Perish",
-            "freshHours": { "avg": 600 },
-            "transitionHours": { "avg": 200 },
-            "transitionedStack": { "type": "item", "code": "game:rot" },
-            "transitionRatio": 1
-        }],
-        "*": [{
-            "type": "Perish",
-            "freshHours": { "avg": 500 },
-            "transitionHours": { "avg": 200 },
-            "transitionedStack": { "type": "item", "code": "game:rot" },
-            "transitionRatio": 1
-        }]
-    },
+    "transitionableProps": [{
+        "type": "Perish",
+        "freshHours": { "avg": 500 },
+        "transitionHours": { "avg": 200 },
+        "transitionedStack": { "type": "item", "code": "game:rot" },
+        "transitionRatio": 1
+    }],
     "guiTransform": {
         "translation": { "x": 0, "y": 0, "z": 0 },
         "rotation": { "x": -30, "y": 26, "z": 180 },
