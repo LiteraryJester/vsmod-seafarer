@@ -1,0 +1,7 @@
+{
+	"code": "greenplank",
+	"input": { "code": "game:plank-*", "quantity": 1 },
+	"toolSlotRequires": "game:saw-*",
+	"output": { "type": "item", "code": "seafarer:greenplank", "quantity": 1 },
+	"sound": "game:sounds/block/planks"
+}

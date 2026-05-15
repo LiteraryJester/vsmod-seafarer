@@ -451,6 +451,7 @@ Need to portage? Strip off all storage and accessories first, then <hk>Shift</hk
 	"block-preptable-platform-empty-*": "Prep Table",
 	"block-preptable-platform-filled-*": "Prep Table",
 	"seafarer:handbook-preptable-recipes": "Recipes you can prepare here",
+	"seafarer:handbook-preptable-createdat": "Created at a prep table",
 	"seafarer:preptable-slot-barrel": "Barrel slot",
 	"seafarer:preptable-slot-tool": "Tool slot",
 	"seafarer:preptable-slot-empty": "Empty",

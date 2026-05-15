@@ -20,6 +20,7 @@ namespace Seafarer
         public static BoatConfig BoatConfig { get; private set; } = new();
 
         private Harmony? harmony;
+        private static bool patchesApplied;
 
         public override void Start(ICoreAPI api)
         {
@@ -58,13 +59,24 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             api.RegisterItemClass("ItemOutriggerBoat", typeof(ItemOutriggerBoat));
             api.RegisterItemClass("ItemOutriggerRollers", typeof(ItemOutriggerRollers));
 
-            harmony = new Harmony(HarmonyId);
-            harmony.PatchAll(typeof(SeafarerModSystem).Assembly);
+            // PatchAll runs once per process. Start fires for both server and
+            // client ModSystem instances in single-player; without this guard
+            // every patched method gets its postfix/prefix invoked twice.
+            if (!patchesApplied)
+            {
+                harmony = new Harmony(HarmonyId);
+                harmony.PatchAll(typeof(SeafarerModSystem).Assembly);
+                patchesApplied = true;
+            }
         }
 
         public override void Dispose()
         {
-            harmony?.UnpatchAll(HarmonyId);
+            if (harmony != null)
+            {
+                harmony.UnpatchAll(HarmonyId);
+                patchesApplied = false;
+            }
             base.Dispose();
         }
 
