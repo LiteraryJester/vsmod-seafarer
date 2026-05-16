@@ -1,0 +1,24 @@
+[
+    // ==================================================================
+    // Adds "seasoned" and "varnished" wood states to alchemy's herbrack
+    // block so the alchemy:recipes/grid/herbrack.json recipe can resolve
+    // its outputs (herbrack-seasoned-{metal}, herbrack-varnished-{metal})
+    // once seafarer's plank-variants.json adds those states to game:plank.
+    // The wood group uses loadFromProperties with no states array, so the
+    // array is created here. Texture is remapped to seafarer's seasoned/
+    // varnished plank textures (game: has no seasoned1/varnished1).
+    // ==================================================================
+    { "op": "add", "path": "/variantgroups/0/states", "value": ["seasoned", "varnished"],
+        "file": "alchemy:blocktypes/herbrack.json",
+        "dependsOn": [{ "modid": "alchemy" }] },
+    { "op": "replace", "path": "/textures/wood",
+        "value": {
+            "baseByType": {
+                "*-seasoned-*": "seafarer:block/wood/planks/seasoned1",
+                "*-varnished-*": "seafarer:block/wood/planks/varnished1",
+                "*": "game:block/wood/planks/{wood}1"
+            }
+        },
+        "file": "alchemy:blocktypes/herbrack.json",
+        "dependsOn": [{ "modid": "alchemy" }] }
+]

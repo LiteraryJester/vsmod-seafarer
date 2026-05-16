@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ProtoBuf;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
@@ -38,6 +39,12 @@ namespace Seafarer.WorldGen
         public string Group;
         [JsonProperty]
         public bool StoryStructure = false;
+        // When false, this structure is skipped entirely at config-load time. Lets
+        // config packs / companion mods disable a structure by patching the worldgen
+        // file directly. Story structures can also be toggled via ConfigLib — see
+        // LoadStoryStructureToggles.
+        [JsonProperty]
+        public bool Enabled = true;
         [JsonProperty]
         public float Chance = 0f;
         [JsonProperty]
@@ -298,7 +305,27 @@ namespace Seafarer.WorldGen
                 if (conf.Structures != null) structures.AddRange(conf.Structures);
             }
 
-            scfg.Structures = structures.ToArray();
+            // Drop disabled structures before any further processing so they never
+            // load schematics or get considered for placement. A structure is dropped
+            // if its `enabled` JSON field is false, or — for story structures — if its
+            // ConfigLib toggle in seafarer-defaults.json is off.
+            var disabledByConfig = LoadStoryStructureToggles();
+            var kept = new List<SeafarerStructure>();
+            foreach (var def in structures)
+            {
+                bool toggledOff = def.StoryStructure
+                    && !string.IsNullOrEmpty(def.Code)
+                    && disabledByConfig.Contains(def.Code);
+                if (!def.Enabled || toggledOff)
+                {
+                    api.Logger.Notification(
+                        "Seafarer structure '{0}' is disabled ({1}); skipping generation.",
+                        def.Code, def.Enabled ? "config toggle" : "enabled=false");
+                    continue;
+                }
+                kept.Add(def);
+            }
+            scfg.Structures = kept.ToArray();
 
             // Resolve skip-generation-categories to SHA-hashed flags so base-game worldgen
             // can match against our radii.
@@ -376,6 +403,35 @@ namespace Seafarer.WorldGen
             }
 
             api.Logger.Notification("Seafarer structures: loaded {0} definitions.", scfg.Structures.Length);
+        }
+
+        // Reads the `storyStructures` object from seafarer-defaults.json and returns the
+        // set of structure codes whose toggle is explicitly false. ConfigLib patches that
+        // asset in-memory before worldgen runs, so a player's GUI choice is reflected here.
+        // Absent or unparseable config means "everything enabled" (empty set).
+        private HashSet<string> LoadStoryStructureToggles()
+        {
+            var disabled = new HashSet<string>();
+            var asset = api.Assets.TryGet(new AssetLocation("seafarer:config/seafarer-defaults.json"));
+            if (asset == null) return disabled;
+            try
+            {
+                if (JToken.Parse(asset.ToText())["storyStructures"] is JObject toggles)
+                {
+                    foreach (var prop in toggles.Properties())
+                    {
+                        if (prop.Value.Type == JTokenType.Boolean && !prop.Value.Value<bool>())
+                        {
+                            disabled.Add(prop.Name);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                api.Logger.Warning("Seafarer: could not read story-structure toggles: {0}", e.Message);
+            }
+            return disabled;
         }
 
         // Resolves the JSON-form rocktype remap groups and per-structure remap/blocklayer

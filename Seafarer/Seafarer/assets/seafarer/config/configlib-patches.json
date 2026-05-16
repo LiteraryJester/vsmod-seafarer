@@ -5,7 +5,8 @@
 		{ "type": "separator", "title": "seafarer:configlib-title-drying", "weight": 1.0 },
 		{ "type": "separator", "title": "seafarer:configlib-title-saltpan", "weight": 2.0 },
 		{ "type": "separator", "title": "seafarer:configlib-title-griddle", "weight": 3.0 },
-		{ "type": "separator", "title": "seafarer:configlib-title-boats", "weight": 4.0 }
+		{ "type": "separator", "title": "seafarer:configlib-title-boats", "weight": 4.0 },
+		{ "type": "separator", "title": "seafarer:configlib-title-structures", "weight": 5.0 }
 	],
 
 	"settings": {
@@ -30,6 +31,34 @@
 				"weight": 2.1,
 				"default": true,
 				"comment": "Master toggle for salt pan evaporation"
+			},
+			"STRUCTURE_TORTUGA": {
+				"name": "structure-tortuga",
+				"ingui": "seafarer:configlib-structure-tortuga",
+				"weight": 5.1,
+				"default": true,
+				"comment": "Generate the Tortuga story structure (takes effect for newly generated chunks only)"
+			},
+			"STRUCTURE_POTATOKING": {
+				"name": "structure-potatoking",
+				"ingui": "seafarer:configlib-structure-potatoking",
+				"weight": 5.2,
+				"default": true,
+				"comment": "Generate the Potato King's House story structure (takes effect for newly generated chunks only)"
+			},
+			"STRUCTURE_WRECK_CRIMSONROSE": {
+				"name": "structure-wreck-crimsonrose",
+				"ingui": "seafarer:configlib-structure-wreck-crimsonrose",
+				"weight": 5.3,
+				"default": true,
+				"comment": "Generate the Wreck of the Crimson Rose story structure (takes effect for newly generated chunks only)"
+			},
+			"STRUCTURE_ABANDONED_FARM": {
+				"name": "structure-abandoned-farm",
+				"ingui": "seafarer:configlib-structure-abandoned-farm",
+				"weight": 5.4,
+				"default": true,
+				"comment": "Generate the Abandoned Farm story structure (takes effect for newly generated chunks only)"
 			}
 		},
 		"float": {
@@ -169,7 +198,11 @@
 			"seafarer:config/seafarer-defaults.json": {
 				"dryingFrame/enableRainRot": "DRYING_RAIN_ROT",
 				"dryingFrame/enableWindDrying": "DRYING_WIND",
-				"saltPan/enabled": "SALTPAN_ENABLED"
+				"saltPan/enabled": "SALTPAN_ENABLED",
+				"storyStructures/tortuga": "STRUCTURE_TORTUGA",
+				"storyStructures/potatoking": "STRUCTURE_POTATOKING",
+				"storyStructures/wreck-crimsonrose": "STRUCTURE_WRECK_CRIMSONROSE",
+				"storyStructures/abandoned-farm": "STRUCTURE_ABANDONED_FARM"
 			}
 		},
 		"float": {

@@ -33,5 +33,11 @@
 	"boats": {
 		"logbargeSpeedMultiplier": 0.9,
 		"outriggerSpeedMultiplier": 2.0
+	},
+	"storyStructures": {
+		"tortuga": true,
+		"potatoking": true,
+		"wreck-crimsonrose": true,
+		"abandoned-farm": true
 	}
 }
