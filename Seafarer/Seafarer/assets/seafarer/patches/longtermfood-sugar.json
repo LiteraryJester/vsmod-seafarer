@@ -33,5 +33,21 @@
             "output": { "type": "item", "code": "pemmican:syrup-sugar", "litres": 1 }
         },
         "file": "pemmican:recipes/barrel/wort-brewing.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+
+    // --- 4. Match LTF sugar's meal nutrition + bake into LTF caramel ---
+    { "op": "addmerge", "path": "/attributes",
+        "value": {
+            "nutritionPropsWhenInMeal": { "satiety": 450, "foodcategory": "Vegetable" },
+            "bakingProperties": {
+                "temp": 150,
+                "levelFrom": 0.25,
+                "levelTo": 0.75,
+                "startScaleY": 1.0,
+                "endScaleY": 0.65,
+                "resultCode": "pemmican:caramel-cooked"
+            }
+        },
+        "file": "seafarer:itemtypes/food/sugar.json",
         "dependsOn": [{ "modid": "longtermfood" }] }
 ]
