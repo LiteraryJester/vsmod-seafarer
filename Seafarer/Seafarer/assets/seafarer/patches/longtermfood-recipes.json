@@ -1,0 +1,104 @@
+[
+    // ==================================================================
+    // Long-Term Food compat. Adds LTF corn/potato to every additive
+    // ingredient list where Seafarer adds seafarer:corn / seafarer:potato:
+    // vanilla soup/vegetablestew/meatystew, and (when ExpandedFoods is also
+    // present) EF stuffed-pepper and dumpling filling slots.
+    // ==================================================================
+
+    // --- Vanilla soup: vegetable-base slots 1-3 ---
+    { "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/soup.json",
+      "value": { "type": "item", "code": "pemmican:vegetable-corn-raw", "shapeElement": "bowl/vegetable base 1/*" },
+      "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/soup.json",
+      "value": { "type": "item", "code": "pemmican:vegetable-potato-raw", "shapeElement": "bowl/vegetable base 1/*" },
+      "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/soup.json",
+      "value": { "type": "item", "code": "pemmican:vegetable-corn-raw", "shapeElement": "bowl/vegetable base 2/*" },
+      "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/soup.json",
+      "value": { "type": "item", "code": "pemmican:vegetable-potato-raw", "shapeElement": "bowl/vegetable base 2/*" },
+      "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/soup.json",
+      "value": { "type": "item", "code": "pemmican:vegetable-corn-raw", "shapeElement": "bowl/vegetable base 3/*" },
+      "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/soup.json",
+      "value": { "type": "item", "code": "pemmican:vegetable-potato-raw", "shapeElement": "bowl/vegetable base 3/*" },
+      "dependsOn": [{ "modid": "longtermfood" }] },
+
+    // --- Vanilla vegetable stew: vegetable slots 0-3 ---
+    { "op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+      "value": { "type": "item", "code": "pemmican:vegetable-corn-raw", "shapeElement": "bowl/vegetable 1/*" },
+      "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "addmerge", "path": "/ingredients/0/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+      "value": { "type": "item", "code": "pemmican:vegetable-potato-raw", "shapeElement": "bowl/vegetable 1/*" },
+      "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+      "value": { "type": "item", "code": "pemmican:vegetable-corn-raw", "shapeElement": "bowl/vegetable 2/*" },
+      "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "addmerge", "path": "/ingredients/1/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+      "value": { "type": "item", "code": "pemmican:vegetable-potato-raw", "shapeElement": "bowl/vegetable 2/*" },
+      "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+      "value": { "type": "item", "code": "pemmican:vegetable-corn-raw", "shapeElement": "bowl/vegetable 3/*" },
+      "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "addmerge", "path": "/ingredients/2/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+      "value": { "type": "item", "code": "pemmican:vegetable-potato-raw", "shapeElement": "bowl/vegetable 3/*" },
+      "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+      "value": { "type": "item", "code": "pemmican:vegetable-corn-raw", "shapeElement": "bowl/vegetable 4/*" },
+      "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "addmerge", "path": "/ingredients/3/validStacks/-", "file": "game:recipes/cooking/vegetablestew.json",
+      "value": { "type": "item", "code": "pemmican:vegetable-potato-raw", "shapeElement": "bowl/vegetable 4/*" },
+      "dependsOn": [{ "modid": "longtermfood" }] },
+
+    // --- Vanilla meaty stew: vegetable slots 5-6 ---
+    { "op": "addmerge", "path": "/ingredients/5/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+      "value": { "type": "item", "code": "pemmican:vegetable-corn-raw", "shapeElement": "bowl/vegetable 1/*" },
+      "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "addmerge", "path": "/ingredients/5/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+      "value": { "type": "item", "code": "pemmican:vegetable-potato-raw", "shapeElement": "bowl/vegetable 1/*" },
+      "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "addmerge", "path": "/ingredients/6/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+      "value": { "type": "item", "code": "pemmican:vegetable-corn-raw", "shapeElement": "bowl/vegetable 2/*" },
+      "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "addmerge", "path": "/ingredients/6/validStacks/-", "file": "game:recipes/cooking/meatystew.json",
+      "value": { "type": "item", "code": "pemmican:vegetable-potato-raw", "shapeElement": "bowl/vegetable 2/*" },
+      "dependsOn": [{ "modid": "longtermfood" }] },
+
+    // --- ExpandedFoods stuffed pepper: corn into filling slots 0/3/5/8 ---
+    { "op": "addeach", "side": "server", "path": "/0/ingredients/1/inputs/-", "file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+      "value": [ { "type": "item", "code": "pemmican:vegetable-corn-raw", "quantity": 1 } ],
+      "dependsOn": [{ "modid": "longtermfood" }, { "modid": "expandedfoods" }] },
+    { "op": "addeach", "side": "server", "path": "/3/ingredients/1/inputs/-", "file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+      "value": [ { "type": "item", "code": "pemmican:vegetable-corn-raw", "quantity": 1 } ],
+      "dependsOn": [{ "modid": "longtermfood" }, { "modid": "expandedfoods" }] },
+    { "op": "addeach", "side": "server", "path": "/5/ingredients/1/inputs/-", "file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+      "value": [ { "type": "item", "code": "pemmican:vegetable-corn-raw", "quantity": 1 } ],
+      "dependsOn": [{ "modid": "longtermfood" }, { "modid": "expandedfoods" }] },
+    { "op": "addeach", "side": "server", "path": "/8/ingredients/1/inputs/-", "file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+      "value": [ { "type": "item", "code": "pemmican:vegetable-corn-raw", "quantity": 1 } ],
+      "dependsOn": [{ "modid": "longtermfood" }, { "modid": "expandedfoods" }] },
+
+    // --- ExpandedFoods stuffed pepper: potato into filling slots 0/3/5/8 ---
+    { "op": "addeach", "side": "server", "path": "/0/ingredients/1/inputs/-", "file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+      "value": [ { "type": "item", "code": "pemmican:vegetable-potato-raw", "quantity": 1 } ],
+      "dependsOn": [{ "modid": "longtermfood" }, { "modid": "expandedfoods" }] },
+    { "op": "addeach", "side": "server", "path": "/3/ingredients/1/inputs/-", "file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+      "value": [ { "type": "item", "code": "pemmican:vegetable-potato-raw", "quantity": 1 } ],
+      "dependsOn": [{ "modid": "longtermfood" }, { "modid": "expandedfoods" }] },
+    { "op": "addeach", "side": "server", "path": "/5/ingredients/1/inputs/-", "file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+      "value": [ { "type": "item", "code": "pemmican:vegetable-potato-raw", "quantity": 1 } ],
+      "dependsOn": [{ "modid": "longtermfood" }, { "modid": "expandedfoods" }] },
+    { "op": "addeach", "side": "server", "path": "/8/ingredients/1/inputs/-", "file": "expandedfoods:recipes/kneading/stuffedpepper.json",
+      "value": [ { "type": "item", "code": "pemmican:vegetable-potato-raw", "quantity": 1 } ],
+      "dependsOn": [{ "modid": "longtermfood" }, { "modid": "expandedfoods" }] },
+
+    // --- ExpandedFoods dumpling: potato into filling slots 1/3 ---
+    { "op": "addeach", "side": "server", "path": "/1/ingredients/1/inputs/-", "file": "expandedfoods:recipes/kneading/dumpling.json",
+      "value": [ { "type": "item", "code": "pemmican:vegetable-potato-raw", "quantity": 1 } ],
+      "dependsOn": [{ "modid": "longtermfood" }, { "modid": "expandedfoods" }] },
+    { "op": "addeach", "side": "server", "path": "/3/ingredients/1/inputs/-", "file": "expandedfoods:recipes/kneading/dumpling.json",
+      "value": [ { "type": "item", "code": "pemmican:vegetable-potato-raw", "quantity": 1 } ],
+      "dependsOn": [{ "modid": "longtermfood" }, { "modid": "expandedfoods" }] }
+]
