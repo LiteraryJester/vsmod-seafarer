@@ -3,6 +3,7 @@
 		"file": "game:worldgen/blockpatches/crop.json",
 		"op": "addmerge",
 		"path": "/-",
+		"dependsOn": [{ "modid": "longtermfood", "invert": true }],
 		"value": {
 			"comment": "Small patches of wild potatoes",
 			"blockCodes": [
