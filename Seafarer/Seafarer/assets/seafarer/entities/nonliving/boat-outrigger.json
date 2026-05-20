@@ -112,23 +112,10 @@
           "stepParentTo": { "": { "elementName": "PlatformStorage1" } }
         },
         {
-          "code": "Platform Storage 2",
-          "forCategoryCodes": ["chest", "basket", "storagevessel", "lantern", "growpot", "barrel"],
-          "attachmentPointCode": "PlatformStorage2",
-          "stepParentTo": { "": { "elementName": "PlatformStorage2" } }
-        },
-        {
           "code": "Cargo Fore 1",
           "forCategoryCodes": ["chest", "basket", "storagevessel", "lantern", "growpot", "barrel", "ropetiepost"],
           "attachmentPointCode": "CargoFore1",
-          "behindSlots": ["Cargo Fore 2"],
           "stepParentTo": { "": { "elementName": "CargoFor1" } }
-        },
-        {
-          "code": "Cargo Fore 2",
-          "forCategoryCodes": ["chest", "basket", "storagevessel", "lantern", "growpot", "barrel"],
-          "attachmentPointCode": "CargoFore2",
-          "stepParentTo": { "": { "elementName": "CargoFore2" } }
         },
         {
           "code": "Lower Mast Storage",
@@ -142,20 +129,19 @@
       ]
     },
     "selectionboxes": {
+      "// note": "This list MUST stay 1:1 and in the same order as rideableaccessories.wearableSlots above, and every code MUST exist as an attachment point in the boat-outrigger shape. EntityBehaviorSelectionBoxes silently drops codes with no matching shape AP, and EntityBehaviorAttachable.GetInteractionHelp then indexes wearableSlots by the (post-filter) selection-box index -- any mismatch makes seat boxes resolve a storage slot and NRE on a null seat slot.",
       "selectionBoxes": [
-        "AftSeat",
-        "ForeSeat1",
-        "ForeSeat2",
         "OarStorage",
         "FishingrodStorage",
         "SailExtraStorageAP",
         "LanternFor",
         "LanternAft",
         "PlatformStorage1",
-        "PlatformStorage2",
         "CargoFore1",
-        "CargoFore2",
-        "LowerMastAP"
+        "LowerMastAP",
+        "AftSeat",
+        "ForeSeat1",
+        "ForeSeat2"
       ]
     }
   },
