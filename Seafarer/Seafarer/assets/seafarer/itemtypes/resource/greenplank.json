@@ -6,7 +6,7 @@
         properties: {
             layout: "Stacking",
             placeRemoveSound: "sounds/block/planks",
-            stackingModel: "block/wood/plankpile",
+            stackingModel: "game:block/wood/plankpile",
             modelItemsToStackSizeRatio: 1,
             upSolid: true,
             stackingCapacity: 48,

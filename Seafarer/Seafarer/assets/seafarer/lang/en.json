@@ -1224,6 +1224,7 @@ Need to portage? Strip off all storage and accessories first, then <hk>Shift</hk
 	"configlib-title-saltpan": "Salt Pan",
 	"configlib-title-griddle": "Griddle Hearth",
 	"configlib-title-boats": "Boats",
+	"configlib-title-structures": "Story Structures",
 
 	"configlib-drying-rain-rot": "Enable rain rot",
 	"configlib-drying-wind": "Enable wind drying",
@@ -1247,6 +1248,11 @@ Need to portage? Strip off all storage and accessories first, then <hk>Shift</hk
 
 	"configlib-logbarge-speed": "Log barge speed multiplier",
 	"configlib-outrigger-speed": "Outrigger speed multiplier",
+
+	"configlib-structure-tortuga": "Generate Tortuga",
+	"configlib-structure-potatoking": "Generate Potato King's House",
+	"configlib-structure-wreck-crimsonrose": "Generate Wreck of the Crimson Rose",
+	"configlib-structure-abandoned-farm": "Generate Abandoned Farm",
 
 	"recipeingredient-infermented-fermentedvegetable": "Fermented vegetable",
 	"recipeingredient-incandied-candiedfruit": "Candied fruit",
@@ -1337,10 +1343,8 @@ Need to portage? Strip off all storage and accessories first, then <hk>Shift</hk
 	"creature-seafarer:boat-outrigger-*-selectionbox-SailExtraStorageAP": "Sail mount",
 	"creature-seafarer:boat-outrigger-*-selectionbox-LanternFor": "Forward lantern",
 	"creature-seafarer:boat-outrigger-*-selectionbox-LanternAft": "Rear lantern",
-	"creature-seafarer:boat-outrigger-*-selectionbox-PlatformStorage1": "Platform storage (port)",
-	"creature-seafarer:boat-outrigger-*-selectionbox-PlatformStorage2": "Platform storage (starboard)",
+	"creature-seafarer:boat-outrigger-*-selectionbox-PlatformStorage1": "Platform storage",
 	"creature-seafarer:boat-outrigger-*-selectionbox-CargoFore1": "Fore cargo (rope tie post)",
-	"creature-seafarer:boat-outrigger-*-selectionbox-CargoFore2": "Fore cargo (rear)",
 	"creature-seafarer:boat-outrigger-*-selectionbox-LowerMastAP": "Mast halyard (right-click to unfurl sail)",
 	"creature-seafarer:outrigger-construction-*-selectionbox-SeleAP": "Outrigger (under construction)",
 	"seafarer:boatrepair-fullhp": "This boat is already in perfect condition.",

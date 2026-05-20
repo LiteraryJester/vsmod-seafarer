@@ -1,0 +1,53 @@
+[
+    // ==================================================================
+    // Long-Term Food compat. Seafarer and LTF both add a plain "Sugar"
+    // item, which reads as a confusing duplicate. When `longtermfood` is
+    // installed:
+    //  1. rename Seafarer's sugar to "Refined Sugar" so the two are
+    //     visually distinct,
+    //  2. match its nutrition to LTF's sugar so they are balanced,
+    //  3. make seafarer:sugar usable in LTF's sugar recipe (the
+    //     syrup-sugar barrel recipe) by appending a parallel recipe.
+    // ==================================================================
+
+    // --- 1. Rename to "Refined Sugar" ---
+    { "op": "replace", "path": "/item-sugar", "value": "Refined Sugar",
+        "file": "seafarer:lang/en.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+
+    // --- 2. Match LTF sugar's nutrition (satiety 450, health 1) ---
+    { "op": "replace", "path": "/nutritionProps",
+        "value": { "satiety": 450, "health": 1, "foodcategory": "Fruit" },
+        "file": "seafarer:itemtypes/food/sugar.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+
+    // --- 3. Accept seafarer:sugar in LTF's syrup-sugar barrel recipe ---
+    { "op": "addmerge", "path": "/-",
+        "value": {
+            "code": "syrup-sugar-seafarer",
+            "sealHours": 12,
+            "ingredients": [
+                { "type": "item", "code": "game:waterportion", "litres": 1, "consumeLitres": 1 },
+                { "type": "item", "code": "seafarer:sugar", "quantity": 1 }
+            ],
+            "output": { "type": "item", "code": "pemmican:syrup-sugar", "litres": 1 }
+        },
+        "file": "pemmican:recipes/barrel/wort-brewing.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+
+    // --- 4. Match LTF sugar's meal nutrition + bake into LTF caramel ---
+    { "op": "addmerge", "path": "/attributes",
+        "value": {
+            "nutritionPropsWhenInMeal": { "satiety": 450, "foodcategory": "Vegetable" },
+            "bakingProperties": {
+                "temp": 150,
+                "levelFrom": 0.25,
+                "levelTo": 0.75,
+                "startScaleY": 1.0,
+                "endScaleY": 0.65,
+                "resultCode": "pemmican:caramel-cooked"
+            }
+        },
+        "file": "seafarer:itemtypes/food/sugar.json",
+        "dependsOn": [{ "modid": "longtermfood" }] }
+]

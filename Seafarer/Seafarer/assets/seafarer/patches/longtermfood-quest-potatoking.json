@@ -1,0 +1,24 @@
+[
+    // ==================================================================
+    // Long-Term Food compat. The Potato King quest "potatoking-lastpotato"
+    // asks the player to deliver a potato seed. When `longtermfood` is
+    // installed Seafarer's own potato is disabled, so the quest must use
+    // LTF's potato seed instead. Two coupled changes:
+    //  1. the quest objective takes pemmican:seeds-potato,
+    //  2. the potatoking dialogue's "have seed" turn-in branch checks the
+    //     player's inventory for pemmican:seeds-potato (otherwise the
+    //     deliver option never appears).
+    // ==================================================================
+
+    // --- 1. Quest objective: deliver LTF potato seed ---
+    { "op": "replace", "path": "/objectives/0/items/0/item",
+        "value": "pemmican:seeds-potato",
+        "file": "seafarer:config/quests/potatoking-lastpotato.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+
+    // --- 2. Dialogue: gate the deliver branch on the LTF seed ---
+    { "op": "replace", "path": "/components/3/text/2/conditions/1/isValue",
+        "value": "{type: 'item', code: 'pemmican:seeds-potato', stacksize: 1}",
+        "file": "seafarer:config/dialogue/potatoking.json",
+        "dependsOn": [{ "modid": "longtermfood" }] }
+]

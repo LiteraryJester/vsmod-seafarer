@@ -57,9 +57,11 @@ public class BehaviorShellCrush : CollectibleBehavior, IContainedInteractable
         var world = be.Api.World;
         BlockPos pos = blockSel.Position;
 
-        // Damage the tool
-        var toolSlot = byPlayer.InventoryManager.ActiveHotbarSlot;
-        toolSlot.Itemstack?.Collectible.DamageItem(world, byPlayer.Entity, toolSlot);
+        if (IsValidTool(byPlayer))
+        {
+            var toolSlot = byPlayer.InventoryManager.ActiveHotbarSlot;
+            toolSlot.Itemstack?.Collectible.DamageItem(world, byPlayer.Entity, toolSlot);
+        }
 
         // Remove the shell from ground storage
         slot.Itemstack = null;

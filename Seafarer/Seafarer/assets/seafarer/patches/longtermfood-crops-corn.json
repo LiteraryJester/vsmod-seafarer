@@ -1,0 +1,84 @@
+[
+    // ==================================================================
+    // Long-Term Food compat. Routes LTF corn (pemmican:vegetable-corn-*)
+    // into Seafarer's corn chain: a Dry transition produces
+    // seafarer:driedcorn, which already feeds nixtamal -> masa ->
+    // tortilladough -> tortilla and the cornbeer barrel recipe. Raw corn
+    // is also made usable as a burrito filling.
+    //
+    // IMPORTANT: full-object `replace` of transitionablePropsByType (not
+    // addmerge). VS's solveByType (RegistryObjectType.cs) iterates *ByType
+    // keys in JSON declaration order and breaks on the first wildcard
+    // match. LTF declares a general "*-raw" Perish that matches
+    // vegetable-corn-raw, so any addmerge'd "*-corn-raw" is appended
+    // after it and never reached -- corn would only ever perish, never
+    // dry. We must rewrite the dict with "*-corn-raw" listed BEFORE
+    // "*-raw". LTF's sugarbeet/raw/charred Perish values are mirrored
+    // here verbatim; revisit on LTF version bumps.
+    // ==================================================================
+    {
+        "file": "pemmican:itemtypes/crops/vegetable.json",
+        "op": "replace",
+        "path": "/transitionablePropsByType",
+        "value": {
+            "*-sugarbeet-raw": [
+                {
+                    "type": "Perish",
+                    "freshHours": { "avg": 1800 },
+                    "transitionHours": { "avg": 96 },
+                    "transitionedStack": { "type": "item", "code": "game:rot" },
+                    "transitionRatio": 0.5
+                }
+            ],
+            "*-corn-raw": [
+                {
+                    "type": "Dry",
+                    "freshHours": { "avg": 72 },
+                    "transitionHours": { "avg": 48 },
+                    "transitionedStack": { "type": "item", "code": "seafarer:driedcorn" },
+                    "transitionRatio": 1
+                },
+                {
+                    "type": "Perish",
+                    "freshHours": { "avg": 2160 },
+                    "transitionHours": { "avg": 96 },
+                    "transitionedStack": { "type": "item", "code": "game:rot" },
+                    "transitionRatio": 0.5
+                }
+            ],
+            "*-raw": [
+                {
+                    "type": "Perish",
+                    "freshHours": { "avg": 2160 },
+                    "transitionHours": { "avg": 96 },
+                    "transitionedStack": { "type": "item", "code": "game:rot" },
+                    "transitionRatio": 0.5
+                }
+            ],
+            "*-charred": [
+                {
+                    "type": "Perish",
+                    "freshHours": { "avg": 378 },
+                    "transitionHours": { "avg": 80 },
+                    "transitionedStack": { "type": "item", "code": "game:rot" },
+                    "transitionRatio": 0.5
+                }
+            ]
+        },
+        "dependsOn": [{ "modid": "longtermfood" }]
+    },
+    {
+        "file": "pemmican:itemtypes/crops/vegetable.json",
+        "op": "addmerge",
+        "path": "/attributesByType/*-corn-raw",
+        "value": { "inBurritoProperties": { "partType": "Filling" } },
+        "dependsOn": [{ "modid": "longtermfood" }]
+    },
+    {
+        "file": "pemmican:itemtypes/crops/vegetable.json",
+        "op": "addmerge",
+        "path": "/attributesByType/vegetable-corn-charred",
+        "value": { "inBurritoProperties": { "partType": "Filling" } },
+        "dependsOn": [{ "modid": "longtermfood" }]
+    }
+]

@@ -1,0 +1,49 @@
+[
+    // ==================================================================
+    // Long-Term Food compat. When `longtermfood` is installed, Seafarer
+    // cedes corn/potato/sugarcane to it: disable Seafarer's own crop
+    // blocks, hide the raw food items from creative + handbook, and switch
+    // off Seafarer's wild corn/sugarcane worldgen. LTF's own crops and
+    // worldgen take over. Every entry is dependsOn `longtermfood`, so this
+    // whole file is inert when LTF is absent.
+    // ==================================================================
+
+    // --- Disable Seafarer's crop blocks ---
+    { "op": "add", "path": "/enabled", "value": false,
+        "file": "seafarer:blocktypes/plant/crop/corn.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "add", "path": "/enabled", "value": false,
+        "file": "seafarer:blocktypes/plant/crop/potato.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "add", "path": "/enabled", "value": false,
+        "file": "seafarer:blocktypes/plant/crop/sugarcane.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+
+    // --- Hide the raw food items from creative menu + handbook ---
+    { "op": "add", "path": "/creativeinventory", "value": {},
+        "file": "seafarer:itemtypes/food/corn.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "addmerge", "path": "/attributes", "value": { "handbook": { "exclude": true } },
+        "file": "seafarer:itemtypes/food/corn.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "add", "path": "/creativeinventory", "value": {},
+        "file": "seafarer:itemtypes/food/potato.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "addmerge", "path": "/attributes", "value": { "handbook": { "exclude": true } },
+        "file": "seafarer:itemtypes/food/potato.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "add", "path": "/creativeinventory", "value": {},
+        "file": "seafarer:itemtypes/food/sugarcane.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "addmerge", "path": "/attributes", "value": { "handbook": { "exclude": true } },
+        "file": "seafarer:itemtypes/food/sugarcane.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+
+    // --- Switch off wild corn (index 2) + sugarcane (index 3) worldgen ---
+    { "op": "replace", "path": "/2/chance", "value": 0,
+        "file": "seafarer:worldgen/blockpatches/crops.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "replace", "path": "/3/chance", "value": 0,
+        "file": "seafarer:worldgen/blockpatches/crops.json",
+        "dependsOn": [{ "modid": "longtermfood" }] }
+]
