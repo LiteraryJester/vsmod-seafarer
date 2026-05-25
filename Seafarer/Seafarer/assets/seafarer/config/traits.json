@@ -1,0 +1,32 @@
+[
+    {
+        "code": "shipwright",
+        "type": "positive",
+        "attributes": {}
+    },
+    {
+        "code": "bearhunter",
+        "type": "positive",
+        "attributes": {}
+    },
+    {
+        "code": "buccaneer",
+        "type": "positive",
+        "attributes": {}
+    },
+    {
+        "code": "gardener",
+        "type": "positive",
+        "attributes": {}
+    },
+    {
+        "code": "brewer",
+        "type": "positive",
+        "attributes": {}
+    },
+    {
+        "code": "piemaster",
+        "type": "positive",
+        "attributes": {}
+    }
+]

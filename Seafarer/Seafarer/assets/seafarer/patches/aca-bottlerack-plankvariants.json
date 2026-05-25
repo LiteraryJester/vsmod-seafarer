@@ -1,0 +1,63 @@
+[
+    // ==================================================================
+    // ACulinaryArtillery compat. Seafarer's plank-variants.json adds
+    // "seasoned" and "varnished" to game:plank's variantgroups. ACA's
+    // bottlerack recipes (aculinaryartillery:recipes/grid/blocks/
+    // bottlerack.json) all use a wildcard ingredient
+    //   "P": { "code": "game:plank-*", "name": "woodframe" }
+    // and output  aculinaryartillery:bottlerack-{woodframe}-<wood>-north.
+    // With the new plank variants present, {woodframe} now also captures
+    // "seasoned" and "varnished" — but ACA's blocktype doesn't list those
+    // states, so 26 outputs (13 recipes x 2 frame variants) fail to
+    // resolve at startup.
+    //
+    // Patching ACA's blocktype to register seasoned/varnished frames
+    // would also require new texturesByType entries (and the move-trick
+    // to put them before the "*" fallback per
+    // feedback_vs_bytype_first_match_wins.md). Constraining the recipe
+    // ingredient is simpler and produces no new craftable variants we'd
+    // have to texture. SkipVariants on the wildcard ingredient stops the
+    // matcher from binding seasoned/varnished into {woodframe}.
+    //
+    // 13 ops, one per recipe in ACA's bottlerack.json array.
+    // ==================================================================
+    { "op": "add", "path": "/0/ingredients/P/skipVariants", "value": ["seasoned", "varnished"],
+      "file": "aculinaryartillery:recipes/grid/blocks/bottlerack.json",
+      "dependsOn": [{ "modid": "aculinaryartillery" }] },
+    { "op": "add", "path": "/1/ingredients/P/skipVariants", "value": ["seasoned", "varnished"],
+      "file": "aculinaryartillery:recipes/grid/blocks/bottlerack.json",
+      "dependsOn": [{ "modid": "aculinaryartillery" }] },
+    { "op": "add", "path": "/2/ingredients/P/skipVariants", "value": ["seasoned", "varnished"],
+      "file": "aculinaryartillery:recipes/grid/blocks/bottlerack.json",
+      "dependsOn": [{ "modid": "aculinaryartillery" }] },
+    { "op": "add", "path": "/3/ingredients/P/skipVariants", "value": ["seasoned", "varnished"],
+      "file": "aculinaryartillery:recipes/grid/blocks/bottlerack.json",
+      "dependsOn": [{ "modid": "aculinaryartillery" }] },
+    { "op": "add", "path": "/4/ingredients/P/skipVariants", "value": ["seasoned", "varnished"],
+      "file": "aculinaryartillery:recipes/grid/blocks/bottlerack.json",
+      "dependsOn": [{ "modid": "aculinaryartillery" }] },
+    { "op": "add", "path": "/5/ingredients/P/skipVariants", "value": ["seasoned", "varnished"],
+      "file": "aculinaryartillery:recipes/grid/blocks/bottlerack.json",
+      "dependsOn": [{ "modid": "aculinaryartillery" }] },
+    { "op": "add", "path": "/6/ingredients/P/skipVariants", "value": ["seasoned", "varnished"],
+      "file": "aculinaryartillery:recipes/grid/blocks/bottlerack.json",
+      "dependsOn": [{ "modid": "aculinaryartillery" }] },
+    { "op": "add", "path": "/7/ingredients/P/skipVariants", "value": ["seasoned", "varnished"],
+      "file": "aculinaryartillery:recipes/grid/blocks/bottlerack.json",
+      "dependsOn": [{ "modid": "aculinaryartillery" }] },
+    { "op": "add", "path": "/8/ingredients/P/skipVariants", "value": ["seasoned", "varnished"],
+      "file": "aculinaryartillery:recipes/grid/blocks/bottlerack.json",
+      "dependsOn": [{ "modid": "aculinaryartillery" }] },
+    { "op": "add", "path": "/9/ingredients/P/skipVariants", "value": ["seasoned", "varnished"],
+      "file": "aculinaryartillery:recipes/grid/blocks/bottlerack.json",
+      "dependsOn": [{ "modid": "aculinaryartillery" }] },
+    { "op": "add", "path": "/10/ingredients/P/skipVariants", "value": ["seasoned", "varnished"],
+      "file": "aculinaryartillery:recipes/grid/blocks/bottlerack.json",
+      "dependsOn": [{ "modid": "aculinaryartillery" }] },
+    { "op": "add", "path": "/11/ingredients/P/skipVariants", "value": ["seasoned", "varnished"],
+      "file": "aculinaryartillery:recipes/grid/blocks/bottlerack.json",
+      "dependsOn": [{ "modid": "aculinaryartillery" }] },
+    { "op": "add", "path": "/12/ingredients/P/skipVariants", "value": ["seasoned", "varnished"],
+      "file": "aculinaryartillery:recipes/grid/blocks/bottlerack.json",
+      "dependsOn": [{ "modid": "aculinaryartillery" }] }
+]

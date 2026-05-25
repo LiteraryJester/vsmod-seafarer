@@ -100,5 +100,11 @@
       "dependsOn": [{ "modid": "longtermfood" }, { "modid": "expandedfoods" }] },
     { "op": "addeach", "side": "server", "path": "/3/ingredients/1/inputs/-", "file": "expandedfoods:recipes/kneading/dumpling.json",
       "value": [ { "type": "item", "code": "pemmican:vegetable-potato-raw", "quantity": 1 } ],
-      "dependsOn": [{ "modid": "longtermfood" }, { "modid": "expandedfoods" }] }
+      "dependsOn": [{ "modid": "longtermfood" }, { "modid": "expandedfoods" }] },
+
+    // --- Husk LTF corn -> seafarer corn (enable when LTF is present) ---
+    { "op": "replace", "path": "/0/enabled", "file": "seafarer:recipes/grid/husk-ltf-corn.json",
+      "value": true, "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "replace", "path": "/1/enabled", "file": "seafarer:recipes/grid/husk-ltf-corn.json",
+      "value": true, "dependsOn": [{ "modid": "longtermfood" }] }
 ]

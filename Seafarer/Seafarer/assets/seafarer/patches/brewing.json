@@ -77,5 +77,48 @@
 		"*-corn": { "base": "game:block/food/pie/fill-pumpkin", "alpha": 100 },
 		"*-coconut": { "base": "seafarer:block/liquid/coconutwater", "alpha": 100 },
 		"*": { "base": "game:block/food/pie/fill-{fruit}", "alpha": 100 }
-	  } }
+	  } },
+
+	// =====================================================================
+	// ExpandedFoods compat: suppress the EF-added Cure transitions for our
+	// corn/coconut variants. EF patches game:itemtypes/liquid/cider.json
+	// and spirit.json to Cure every variant into
+	// expandedfoods:strongwineportion-{fruit} / strongspiritportion-{fruit}
+	// respectively, but EF only ships strong* variants for its own fruits
+	// — there is no strongwineportion-corn or strongspiritportion-coconut,
+	// so the cure transition target fails to resolve and logs a warning.
+	//
+	// transitionablePropsByType overrides the whole transitionableProps
+	// array on a per-variant basis. For cider corn/coconut we keep just
+	// the Perish (to vinegar) that EF and vanilla both want; for spirit
+	// corn/coconut we drop the only transition (Cure to strongspirit)
+	// since vanilla spirit has no Perish to preserve.
+	// =====================================================================
+	{ "op": "add", "path": "/transitionablePropsByType",
+	  "file": "game:itemtypes/liquid/cider.json",
+	  "value": {
+		"*-corn": [{
+			"type": "Perish",
+			"freshHours": { "avg": 3360 },
+			"transitionHours": { "avg": 144 },
+			"transitionedStack": { "type": "item", "code": "game:vinegarportion" },
+			"transitionRatio": 1
+		}],
+		"*-coconut": [{
+			"type": "Perish",
+			"freshHours": { "avg": 3360 },
+			"transitionHours": { "avg": 144 },
+			"transitionedStack": { "type": "item", "code": "game:vinegarportion" },
+			"transitionRatio": 1
+		}]
+	  },
+	  "dependsOn": [{ "modid": "expandedfoods" }] },
+
+	{ "op": "add", "path": "/transitionablePropsByType",
+	  "file": "game:itemtypes/liquid/spirit.json",
+	  "value": {
+		"*-corn": [],
+		"*-coconut": []
+	  },
+	  "dependsOn": [{ "modid": "expandedfoods" }] }
 ]

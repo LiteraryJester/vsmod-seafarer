@@ -106,13 +106,12 @@ Seafarer/                               # solution root
 This project has Python validators under `vs_validators/`. Run them before
 claiming work is complete.
 
-### Asset validation
-Run after changes to any `assets/` files:
-
-    python3 validate-assets.py
-
-Exit 0 with 0 errors means OK. Warnings acceptable if justified in the commit
-message.
+### Asset validation — DISABLED
+`validate-assets.py` is stubbed out. The underlying `vs_validators` schema
+rules have drifted from the actual VS 1.22 schemas and emit ~127 false
+positives on unchanged files. Re-enable once the validator is rewritten.
+For real validation right now, run the game and read the startup log —
+VS itself is the authoritative source of asset correctness.
 
 ### Food validation
 Run after changes to files under:

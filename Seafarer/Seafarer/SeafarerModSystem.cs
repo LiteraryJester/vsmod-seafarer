@@ -223,9 +223,71 @@ api.RegisterBlockClass("BlockAmphoraStorage", typeof(BlockAmphoraStorage));
             }
         }
 
+        public override void StartServerSide(ICoreServerAPI api)
+        {
+            base.StartServerSide(api);
+
+            // One-time per-join migration: the exposure system
+            // (EntityBehaviorExposure + ExposureConfig + the
+            // exposure-player-behavior.json patch) was removed in commit
+            // 323f5bf. Old saves still carry its persisted state on player
+            // entities — a "exposure" watched-attribute tree and stat
+            // modifiers under the "exposurePenalty" key — so without a
+            // scrub a returning player keeps the reduced walkspeed,
+            // healing effectiveness, hunger rate, max-health bonus, and
+            // thirst multiplier from whatever tier they were at when the
+            // system was removed.
+            //
+            // Idempotent: WatchedAttributes.RemoveAttribute and
+            // entity.Stats.Remove on missing keys are no-ops. Logs once
+            // per migrated player and stays silent for fresh saves.
+            api.Event.PlayerJoin += player => ScrubLegacyExposure(api, player);
+        }
+
+        private static void ScrubLegacyExposure(ICoreServerAPI api, IServerPlayer player)
+        {
+            if (player?.Entity == null) return;
+            var entity = player.Entity;
+
+            // Five stat modifiers from the removed RemoveAllStatModifiers.
+            // Safe to call when absent.
+            entity.Stats.Remove("walkspeed", "exposurePenalty");
+            entity.Stats.Remove("healingeffectivness", "exposurePenalty");
+            entity.Stats.Remove("hungerrate", "exposurePenalty");
+            entity.Stats.Remove("maxhealthExtraPoints", "exposurePenalty");
+            entity.Stats.Remove("thirstRateMul", "exposurePenalty");
+
+            if (entity.WatchedAttributes.HasAttribute("exposure"))
+            {
+                entity.WatchedAttributes.RemoveAttribute("exposure");
+                entity.WatchedAttributes.MarkPathDirty("exposure");
+                api.Logger.Notification(
+                    "[Seafarer] Cleared legacy exposure state from player {0}.",
+                    player.PlayerName);
+            }
+        }
+
         public override void StartClientSide(ICoreClientAPI api)
         {
             Mod.Logger.Notification("Hello from template mod client side: " + Lang.Get("seafarer:hello"));
+
+            // Mirror the server-side channel registered in
+            // GenSeafarerStructures.StartServerSide. That class is
+            // server-only (ShouldLoad => side == Server), so the client
+            // never gets the matching registration there and the engine
+            // logs "Server sends me channel name SeafarerGenFailed, but
+            // no client side mod registered it." Register the same
+            // channel + message type here and surface the missing
+            // structures to the player as a chat message.
+            api.Network
+                .RegisterChannel("SeafarerGenFailed")
+                .RegisterMessageType<Seafarer.WorldGen.SeafarerGenFailed>()
+                .SetMessageHandler<Seafarer.WorldGen.SeafarerGenFailed>(packet =>
+                {
+                    if (packet?.MissingStructures == null || packet.MissingStructures.Count == 0) return;
+                    string list = string.Join(", ", packet.MissingStructures);
+                    api.ShowChatMessage($"[Seafarer] Worldgen could not place: {list}");
+                });
         }
     }
 }

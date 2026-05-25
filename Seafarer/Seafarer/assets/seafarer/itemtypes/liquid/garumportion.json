@@ -15,8 +15,8 @@
         stack: { type: "item", code: "seafarer:garumportion" }
       },
       nutritionPropsPerLitre: {
-        satiety: 0,
-        foodcategory: "NoNutrition"
+        satiety: 200,
+        foodcategory: "Protein"
       },
       nutritionPropsPerLitreWhenInMeal: {
         satiety: 300,

@@ -24,7 +24,12 @@
       "seasoned1": { "base": "game:block/wood/planks/{material}1" },
       "plain": { "base": "game:block/cloth/linen/plain" },
       "rope": { "base": "game:item/resource/rope" },
-      "transparent": { "base": "game:block/transparent" }
+      "transparent": { "base": "game:block/transparent" },
+      // Faces using "#null" are disabled (enabled: false) in the shape, but
+      // VS's item-icon tesselator still looks up every face's texture and
+      // logs an error when the lookup fails. Map "null" to a real texture
+      // so the icon generator stays quiet. Same trick as griddlehearth.json.
+      "null": { "base": "game:block/transparent" }
     }
   },
   "attributes": {
