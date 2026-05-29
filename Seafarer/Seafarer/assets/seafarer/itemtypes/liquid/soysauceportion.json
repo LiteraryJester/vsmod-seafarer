@@ -15,8 +15,8 @@
         stack: { type: "item", code: "seafarer:soysauceportion" }
       },
       nutritionPropsPerLitre: {
-        satiety: 0,
-        foodcategory: "NoNutrition"
+        satiety: 100,
+        foodcategory: "Protein"
       },
       nutritionPropsPerLitreWhenInMeal: {
         satiety: 200,

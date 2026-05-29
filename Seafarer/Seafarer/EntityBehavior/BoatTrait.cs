@@ -51,10 +51,17 @@ public static class BoatTraitRegistry
     {
         traits.Clear();
 
-        var asset = api.Assets.TryGet(new AssetLocation("seafarer:config/boat-traits.json"));
+        // File deliberately named boat-traitdefs.json (not boat-traits.json):
+        // the Trait Acquirer mod scans every asset matching *traits*.json and
+        // tries to deserialize it as List<ExtendedTrait>. This file is a
+        // { "traits": {...} } object, not a List, so a "traits"-suffixed name
+        // would throw inside its loader and abort its CharacterClass /
+        // TraitsByCode initialization mid-pass. See
+        // memory:feedback-vs-traitacquirer-filename-match.
+        var asset = api.Assets.TryGet(new AssetLocation("seafarer:config/boat-traitdefs.json"));
         if (asset == null)
         {
-            api.Logger.Warning("[seafarer] boat-traits.json missing; trait system disabled.");
+            api.Logger.Warning("[seafarer] boat-traitdefs.json missing; trait system disabled.");
             return;
         }
 
@@ -65,7 +72,7 @@ public static class BoatTraitRegistry
         }
         catch (System.Exception e)
         {
-            api.Logger.Warning("[seafarer] boat-traits.json parse failed: {0}", e.Message);
+            api.Logger.Warning("[seafarer] boat-traitdefs.json parse failed: {0}", e.Message);
             return;
         }
 

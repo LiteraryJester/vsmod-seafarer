@@ -1,0 +1,28 @@
+[
+  {
+    "ingredientPattern": "K,C",
+    "recipeGroup": 1,
+    "ingredients": {
+      "K": { "type": "item", "code": "game:knife-*", "isTool": true },
+      "C": { "type": "item", "code": "pemmican:vegetable-corn-raw" }
+    },
+    "width": 1,
+    "height": 2,
+    "shapeless": true,
+    "output": { "type": "item", "code": "seafarer:corn", "quantity": 1 },
+    "enabled": false
+  },
+  {
+    "ingredientPattern": "K,C",
+    "recipeGroup": 2,
+    "ingredients": {
+      "K": { "type": "item", "code": "game:cleaver-*", "isTool": true },
+      "C": { "type": "item", "code": "pemmican:vegetable-corn-raw" }
+    },
+    "width": 1,
+    "height": 2,
+    "shapeless": true,
+    "output": { "type": "item", "code": "seafarer:corn", "quantity": 1 },
+    "enabled": false
+  }
+]

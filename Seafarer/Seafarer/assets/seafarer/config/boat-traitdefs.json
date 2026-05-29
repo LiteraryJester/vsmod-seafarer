@@ -1,0 +1,36 @@
+{
+  "traits": {
+    "canvas-sail": {
+      "source": "sail",
+      "rarity": "common",
+      "speedBonus": 0.05,
+      "healthBonus": 10,
+      "dropItem": "seafarer:canvas-sail"
+    },
+    "oiled-sail": {
+      "source": "sail",
+      "rarity": "uncommon",
+      "speedBonus": 0.10,
+      "healthBonus": 20,
+      "dropItem": "seafarer:oiled-canvas-sail"
+    },
+    "waxed-sail": {
+      "source": "sail",
+      "rarity": "rare",
+      "speedBonus": 0.15,
+      "healthBonus": 30,
+      "dropItem": "seafarer:waxed-canvas-sail"
+    },
+    "seasoned-hull": {
+      "source": "material",
+      "rarity": "uncommon",
+      "healthBonus": 50
+    },
+    "varnished-hull": {
+      "source": "material",
+      "rarity": "rare",
+      "healthBonus": 75,
+      "stormDamageScale": 0.75
+    }
+  }
+}

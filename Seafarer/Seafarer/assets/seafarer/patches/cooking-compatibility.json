@@ -144,6 +144,33 @@
   },
 
   // ==========================================
+  // Vanilla Meaty Stew — topping (idx 8)
+  // Garum + soy sauce join honeyportion as valid liquid toppings so
+  // their nutritionPropsPerLitreWhenInMeal actually contributes when
+  // splashed into a meaty stew.
+  // ==========================================
+  {
+    "op": "addmerge",
+    "path": "/ingredients/8/validStacks/-",
+    "file": "game:recipes/cooking/meatystew.json",
+    "value": {
+      "type": "item",
+      "code": "seafarer:garumportion",
+      "shapeElement": "bowl/topping/*"
+    }
+  },
+  {
+    "op": "addmerge",
+    "path": "/ingredients/8/validStacks/-",
+    "file": "game:recipes/cooking/meatystew.json",
+    "value": {
+      "type": "item",
+      "code": "seafarer:soysauceportion",
+      "shapeElement": "bowl/topping/*"
+    }
+  },
+
+  // ==========================================
   // Vanilla Soup — protein-extra (idx 4)
   // ==========================================
   {

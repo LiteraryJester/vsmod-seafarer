@@ -1,21 +1,39 @@
 [
     // ==================================================================
     // Long-Term Food compat. When `longtermfood` is installed, Seafarer
-    // cedes corn/potato/sugarcane to it: disable Seafarer's own crop
-    // blocks, hide the raw food items from creative + handbook, and switch
-    // off Seafarer's wild corn/sugarcane worldgen. LTF's own crops and
-    // worldgen take over. Every entry is dependsOn `longtermfood`, so this
-    // whole file is inert when LTF is absent.
+    // cedes corn/potato/sugarcane to it: hide Seafarer's crop blocks and
+    // raw food items from creative + handbook, switch off Seafarer's wild
+    // corn/sugarcane worldgen, and reroute seed drops from existing crops
+    // to LTF's seed items. LTF's own crops and worldgen take over.
+    //
+    // IMPORTANT: we do NOT set /enabled = false on the crop blocks. That
+    // unregisters the block IDs, which makes any crop already placed in
+    // existing saves render as a "missing block" (white-box) placeholder.
+    // Instead we soft-hide the blocks (creative + handbook), kill worldgen
+    // so no new wild crops appear, and replace the seed drops so any
+    // existing crop a player harvests yields LTF seeds going forward.
+    //
+    // Every entry is dependsOn `longtermfood`, so this whole file is inert
+    // when LTF is absent.
     // ==================================================================
 
-    // --- Disable Seafarer's crop blocks ---
-    { "op": "add", "path": "/enabled", "value": false,
+    // --- Hide Seafarer's crop blocks from creative menu + handbook ---
+    { "op": "add", "path": "/creativeinventory", "value": {},
         "file": "seafarer:blocktypes/plant/crop/corn.json",
         "dependsOn": [{ "modid": "longtermfood" }] },
-    { "op": "add", "path": "/enabled", "value": false,
+    { "op": "addmerge", "path": "/attributes", "value": { "handbook": { "exclude": true } },
+        "file": "seafarer:blocktypes/plant/crop/corn.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "add", "path": "/creativeinventory", "value": {},
         "file": "seafarer:blocktypes/plant/crop/potato.json",
         "dependsOn": [{ "modid": "longtermfood" }] },
-    { "op": "add", "path": "/enabled", "value": false,
+    { "op": "addmerge", "path": "/attributes", "value": { "handbook": { "exclude": true } },
+        "file": "seafarer:blocktypes/plant/crop/potato.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "add", "path": "/creativeinventory", "value": {},
+        "file": "seafarer:blocktypes/plant/crop/sugarcane.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "addmerge", "path": "/attributes", "value": { "handbook": { "exclude": true } },
         "file": "seafarer:blocktypes/plant/crop/sugarcane.json",
         "dependsOn": [{ "modid": "longtermfood" }] },
 
@@ -45,5 +63,42 @@
         "dependsOn": [{ "modid": "longtermfood" }] },
     { "op": "replace", "path": "/3/chance", "value": 0,
         "file": "seafarer:worldgen/blockpatches/crops.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+
+    // --- Reroute seed drops: existing crops drop LTF seeds (pemmican:seeds-*)
+    //     instead of seafarer:seeds-*. Each crop's dropsByType has the seed
+    //     entry at index 0 of every wildcard's drop array; we replace just
+    //     the code field so quantities and other drop entries stay intact.
+    //     Corn (12 growth stages, harvest drops at *-11 and *-12, partial drop *).
+    { "op": "replace", "path": "/dropsByType/*-11/0/code", "value": "pemmican:seeds-corn",
+        "file": "seafarer:blocktypes/plant/crop/corn.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "replace", "path": "/dropsByType/*-12/0/code", "value": "pemmican:seeds-corn",
+        "file": "seafarer:blocktypes/plant/crop/corn.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "replace", "path": "/dropsByType/*/0/code", "value": "pemmican:seeds-corn",
+        "file": "seafarer:blocktypes/plant/crop/corn.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+
+    //     Potato (7 growth stages, harvest drops at *-6 and *-7, partial drop *).
+    { "op": "replace", "path": "/dropsByType/*-6/0/code", "value": "pemmican:seeds-potato",
+        "file": "seafarer:blocktypes/plant/crop/potato.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "replace", "path": "/dropsByType/*-7/0/code", "value": "pemmican:seeds-potato",
+        "file": "seafarer:blocktypes/plant/crop/potato.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "replace", "path": "/dropsByType/*/0/code", "value": "pemmican:seeds-potato",
+        "file": "seafarer:blocktypes/plant/crop/potato.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+
+    //     Sugarcane (8 growth stages, harvest drops at *-7 and *-8, partial drop *).
+    { "op": "replace", "path": "/dropsByType/*-7/0/code", "value": "pemmican:seeds-sugarcane",
+        "file": "seafarer:blocktypes/plant/crop/sugarcane.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "replace", "path": "/dropsByType/*-8/0/code", "value": "pemmican:seeds-sugarcane",
+        "file": "seafarer:blocktypes/plant/crop/sugarcane.json",
+        "dependsOn": [{ "modid": "longtermfood" }] },
+    { "op": "replace", "path": "/dropsByType/*/0/code", "value": "pemmican:seeds-sugarcane",
+        "file": "seafarer:blocktypes/plant/crop/sugarcane.json",
         "dependsOn": [{ "modid": "longtermfood" }] }
 ]
