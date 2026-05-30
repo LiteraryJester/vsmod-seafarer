@@ -1,0 +1,32 @@
+[
+  // When Terra Preta (modid: terraprety) is installed, switch Seafarer's
+  // flat-landform story structures from "veryflat" to "ultraflat" — Terra
+  // Preta replaces vanilla's flat landform with a flatter variant
+  // ("ultraflat") that its farming system relies on.
+  //
+  // Paths reference array indices in seafarer:worldgen/seafarerstructures.json:
+  //   /structures/0 = tortuga
+  //   /structures/1 = potatoking      <- patched
+  //   /structures/2 = wreck-crimsonrose
+  //   /structures/3 = abandoned-farm  <- patched
+  //   /structures/4 = wreck-one
+  // Keep these in sync if structures[] is reordered.
+  //
+  // Leading // comments before the opening [ break Newtonsoft's parse of the
+  // whole file (returns a Comment token instead of an Array), silently
+  // disabling every patch in it — so keep all comments AFTER the [.
+  {
+    "file": "seafarer:worldgen/seafarerstructures",
+    "dependsOn": [{ "modid": "terraprety" }],
+    "op": "replace",
+    "path": "/structures/1/requireLandform",
+    "value": "ultraflat"
+  },
+  {
+    "file": "seafarer:worldgen/seafarerstructures",
+    "dependsOn": [{ "modid": "terraprety" }],
+    "op": "replace",
+    "path": "/structures/3/requireLandform",
+    "value": "ultraflat"
+  }
+]
