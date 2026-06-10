@@ -1,0 +1,8 @@
+[
+  {
+    "op": "add",
+    "path": "/textures/bagasse",
+    "value": { "base": "block/coal/lignite" },
+    "file": "game:blocktypes/coalpile.json"
+  }
+]

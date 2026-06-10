@@ -19,16 +19,6 @@
 			"groupBy": ["mudrake-*"]
 		}
 	},
-	"attributesByType": {
-		"*-wooden": { "dropRateMultiplier": 1.0 },
-		"*-copper": { "dropRateMultiplier": 1.1 },
-		"*-tinbronze": { "dropRateMultiplier": 1.2 },
-		"*-bismuthbronze": { "dropRateMultiplier": 1.2 },
-		"*-blackbronze": { "dropRateMultiplier": 1.3 },
-		"*-iron": { "dropRateMultiplier": 1.5 },
-		"*-meteoriciron": { "dropRateMultiplier": 1.5 },
-		"*-steel": { "dropRateMultiplier": 1.8 }
-	},
 	"variantgroups": [
 		{
 			"code": "material",

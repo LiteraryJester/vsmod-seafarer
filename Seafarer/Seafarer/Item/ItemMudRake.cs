@@ -13,11 +13,6 @@ public class ItemMudRake : Item
         return drops != null && drops.Exists ? drops : null;
     }
 
-    private float GetDropRateMultiplier()
-    {
-        return Attributes?["dropRateMultiplier"].AsFloat(1f) ?? 1f;
-    }
-
     public override bool OnBlockBrokenWith(
         IWorldAccessor world, Entity byEntity, ItemSlot itemslot,
         BlockSelection blockSel, float dropQuantityMultiplier = 1)
@@ -33,24 +28,22 @@ public class ItemMudRake : Item
         if (dropsJson != null && world.Side == EnumAppSide.Server)
         {
             var cfg = SeafarerModSystem.MudRakeConfig;
-            float multiplier = GetDropRateMultiplier();
-
             for (int i = 0; i < cfg.DropRollsPerBlock; i++)
             {
-                RollDrops(world, byEntity, dropsJson, multiplier, blockSel.Position);
+                RollDrops(world, byEntity, dropsJson, blockSel.Position);
             }
         }
 
         return result;
     }
 
-    private void RollDrops(IWorldAccessor world, Entity byEntity, JsonObject dropsArray, float multiplier, BlockPos pos)
+    private void RollDrops(IWorldAccessor world, Entity byEntity, JsonObject dropsArray, BlockPos pos)
     {
         if (dropsArray.Token == null) return;
         foreach (var dropToken in dropsArray.Token)
         {
             var drop = new JsonObject(dropToken);
-            float chance = drop["chance"]["avg"].AsFloat(0) * multiplier;
+            float chance = drop["chance"]["avg"].AsFloat(0);
 
             if (world.Rand.NextDouble() > chance) continue;
 

@@ -28,7 +28,7 @@
 		"cookSpeedSteel": 2.0
 	},
 	"mudRake": {
-		"dropRollsPerBlock":3
+		"dropRollsPerBlock":1
 	},
 	"boats": {
 		"logbargeSpeedMultiplier": 0.9,

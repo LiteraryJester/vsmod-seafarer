@@ -1243,6 +1243,7 @@ Need to portage? Strip off all storage and accessories first, then <hk>Shift</hk
 	"configlib-title-saltpan": "Salt Pan",
 	"configlib-title-griddle": "Griddle Hearth",
 	"configlib-title-boats": "Boats",
+	"configlib-title-mudrake": "Mud Rake",
 	"configlib-title-structures": "Story Structures",
 
 	"configlib-drying-rain-rot": "Enable rain rot",
@@ -1267,6 +1268,8 @@ Need to portage? Strip off all storage and accessories first, then <hk>Shift</hk
 
 	"configlib-logbarge-speed": "Log barge speed multiplier",
 	"configlib-outrigger-speed": "Outrigger speed multiplier",
+
+	"configlib-mudrake-drop-rolls": "Drop rolls per block",
 
 	"configlib-structure-tortuga": "Generate Tortuga",
 	"configlib-structure-potatoking": "Generate Potato King's House",
