@@ -1,0 +1,42 @@
+[
+	// Eternal Stew compatibility — applied only when the mod is present.
+	// Food: add ES visual tags so our crops/meat are accepted as stew ingredients
+	// (token -> tag = dots to dashes; see EternalStew food_compat.md).
+	// Fuel: flag bagasse as a valid Eternal Stew stove fuel (it already has
+	// combustibleProps with burnDuration > 0).
+
+	// --- Crops (single-variant items use top-level "tags") ---
+	{ "op": "add", "file": "seafarer:itemtypes/food/corn.json", "path": "/tags",
+	  "value": [ "eternalstew-grain-generic" ],
+	  "dependsOn": [ { "modid": "eternalstew" } ] },
+
+	{ "op": "add", "file": "seafarer:itemtypes/food/tomato.json", "path": "/tags",
+	  "value": [ "eternalstew-vegetable-tomato" ],
+	  "dependsOn": [ { "modid": "eternalstew" } ] },
+
+	{ "op": "add", "file": "seafarer:itemtypes/food/chili.json", "path": "/tags",
+	  "value": [ "eternalstew-vegetable-pepper" ],
+	  "dependsOn": [ { "modid": "eternalstew" } ] },
+
+	{ "op": "add", "file": "seafarer:itemtypes/food/potato.json", "path": "/tags",
+	  "value": [ "eternalstew-vegetable-generic" ],
+	  "dependsOn": [ { "modid": "eternalstew" } ] },
+
+	{ "op": "add", "file": "seafarer:itemtypes/food/sugarcane.json", "path": "/tags",
+	  "value": [ "eternalstew-vegetable-generic" ],
+	  "dependsOn": [ { "modid": "eternalstew" } ] },
+
+	{ "op": "add", "file": "seafarer:itemtypes/food/coconutmeat.json", "path": "/tags",
+	  "value": [ "eternalstew-fruit-generic" ],
+	  "dependsOn": [ { "modid": "eternalstew" } ] },
+
+	// --- Meat (premiumfish has variants -> tagsByType wildcard) ---
+	{ "op": "add", "file": "seafarer:itemtypes/food/premiumfish.json", "path": "/tagsByType",
+	  "value": { "premiumfish-*": [ "eternalstew-meat-fish" ] },
+	  "dependsOn": [ { "modid": "eternalstew" } ] },
+
+	// --- Fuel ---
+	{ "op": "add", "file": "seafarer:itemtypes/resource/bagasse.json", "path": "/attributes/eternalstewStoveFuel",
+	  "value": true,
+	  "dependsOn": [ { "modid": "eternalstew" } ] }
+]

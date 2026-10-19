@@ -221,12 +221,29 @@ public class BlockBurrito : Block
             if (filling == null) continue;
 
             filling.ResolveBlockOrItem(world);
-            var nutrition = filling.Collectible?.NutritionProps;
-            if (nutrition != null)
+            var collectible = filling.Collectible;
+            if (collectible == null) continue;
+
+            // Prefer the filling's in-meal nutrition. Raw meats (the only meat variants a
+            // burrito accepts) carry no standalone NutritionProps — their food value lives in
+            // nutritionPropsWhenInMeal — so reading NutritionProps alone gave them 0 satiety.
+            // Mirror vanilla BlockMeal: use nutritionPropsWhenInMeal when present, else fall
+            // back to standalone nutrition with the ×1.3 cooked-meal bonus.
+            var inMeal = collectible.Attributes?["nutritionPropsWhenInMeal"]?.AsObject<FoodNutritionProperties>();
+            if (inMeal != null)
             {
                 list.Add(new FoodNutritionProperties
                 {
-                    Satiety = nutrition.Satiety,
+                    Satiety = inMeal.Satiety,
+                    FoodCategory = inMeal.FoodCategory,
+                    Health = inMeal.Health
+                });
+            }
+            else if (collectible.NutritionProps is { } nutrition)
+            {
+                list.Add(new FoodNutritionProperties
+                {
+                    Satiety = nutrition.Satiety * 1.3f,
                     FoodCategory = nutrition.FoodCategory,
                     Health = nutrition.Health
                 });
@@ -273,9 +290,22 @@ public class BlockBurrito : Block
     public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world,
         bool withDebugInfo)
     {
+        // Resolve filling stacks BEFORE base.GetHeldItemInfo. Other mods (e.g. Dietary Novelty)
+        // patch base GetHeldItemInfo and walk our "contents" tree, dereferencing each filling's
+        // .Collectible without resolving the stack first — on a held burrito those stacks are
+        // deserialized but unresolved, so .Collectible is null and they NRE. Resolving up front
+        // guarantees a non-null Collectible by the time those patches run.
+        var contents = inSlot.Itemstack?.Attributes?.GetTreeAttribute("contents");
+        if (contents != null)
+        {
+            for (int i = 0; i < BlockEntityBurrito.MaxFillings; i++)
+            {
+                (contents["slot" + i] as ItemstackAttribute)?.value?.ResolveBlockOrItem(world);
+            }
+        }
+
         base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
 
-        var contents = inSlot.Itemstack?.Attributes?.GetTreeAttribute("contents");
         if (contents != null)
         {
             bool hasFillings = false;
@@ -283,7 +313,6 @@ public class BlockBurrito : Block
             {
                 var filling = (contents["slot" + i] as ItemstackAttribute)?.value;
                 if (filling == null) continue;
-                filling.ResolveBlockOrItem(world);
                 if (!hasFillings)
                 {
                     dsc.AppendLine(Lang.Get("seafarer:burrito-fillings"));

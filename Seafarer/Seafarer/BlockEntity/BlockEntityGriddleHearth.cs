@@ -35,6 +35,7 @@ public class BlockEntityGriddleHearth : BlockEntityDisplay
     public ItemSlot FuelSlot => inventory![FuelSlotIndex];
     public bool IsBurning => burning;
     public bool HasFuel => !FuelSlot.Empty;
+    public bool CanIgnite => !burning && HasFuel;
     public int FuelCount => FuelSlot.Itemstack?.StackSize ?? 0;
     public float Temperature => hearthTemperature;
 
@@ -162,13 +163,22 @@ public class BlockEntityGriddleHearth : BlockEntityDisplay
         igniting = false;
 
         if (secondsUsed < IgniteTime - 0.1f) return;
+        Ignite();
+    }
+
+    /// <summary>
+    /// Light the hearth. Shared by the custom (non-shift) ignite interaction and the vanilla
+    /// IIgnitable path (shift + torch/firestarter). Server-side, no-op if already burning or unfueled.
+    /// </summary>
+    internal void Ignite()
+    {
         if (Api.Side != EnumAppSide.Server) return;
         if (burning || !HasFuel) return;
 
         burning = true;
         fuelBurnTimeLeft = FuelCount * BurnTimePerLog;
 
-        Api.World.PlaySoundAt(new AssetLocation("sounds/torch-ignite"), byPlayer.Entity, byPlayer, true, 16f);
+        Api.World.PlaySoundAt(new AssetLocation("sounds/torch-ignite"), Pos.X + 0.5, Pos.Y + 0.5, Pos.Z + 0.5, null, true, 16f);
         MarkDirty(true);
     }
 

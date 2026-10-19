@@ -81,10 +81,10 @@ Seafarer/                               # solution root
 - Seafarer's csproj has a `ProjectReference` to the framework csproj; framework types are resolvable at compile time.
 
 ## Reference Resources (local paths)
-- **VintagestoryAPI source**: `D:\Development\vs\vsapi\` — canonical interfaces (`ICoreAPI`, `ModSystem`, `Entity`, etc.). WSL: `/mnt/d/Development/vs/vsapi/`.
-- **VSSurvivalMod source**: `D:\Development\vs\vssurvivalmod\` — base game content implementations (`EntityTrader`, `BehaviorConversable`, `GridRecipe`, etc.). WSL: `/mnt/d/Development/vs/vssurvivalmod/`.
-- **VSEssentialsMod source**: `D:\Development\vs\vsessentialsmod\` — the `VSEssentials.dll` assembly: worldgen systems and structure base classes (`WorldGenStructureBase`, `WorldGenStructuresConfig`), entity AI/physics behaviors, particle systems. WSL: `/mnt/d/Development/vs/vsessentialsmod/`. Note: `WorldGenStructureBase` lives here, NOT in VSSurvivalMod.
-- **Extracted game assets**: `D:\Development\vs\assets\` — WSL: `/mnt/d/Development/vs/assets/`.
+- **VintagestoryAPI source**: `D:\Development\vs\source\vsapi\` — canonical interfaces (`ICoreAPI`, `ModSystem`, `Entity`, etc.). WSL: `/mnt/d/Development/vs/source/vsapi/`.
+- **VSSurvivalMod source**: `D:\Development\vs\source\vssurvivalmod\` — base game content implementations (`EntityTrader`, `BehaviorConversable`, `GridRecipe`, etc.). WSL: `/mnt/d/Development/vs/source/vssurvivalmod/`.
+- **VSEssentialsMod source**: `D:\Development\vs\source\vsessentialsmod\` — the `VSEssentials.dll` assembly: worldgen systems and structure base classes (`WorldGenStructureBase`, `WorldGenStructuresConfig`), entity AI/physics behaviors, particle systems. WSL: `/mnt/d/Development/vs/source/vsessentialsmod/`. Note: `WorldGenStructureBase` lives here, NOT in VSSurvivalMod.
+- **Extracted game assets**: `D:\Development\vs\source\assets\` — WSL: `/mnt/d/Development/vs/source/assets/`.
   - `game/` — core game data (blocktypes, entities, shapes, textures, sounds, lang, config)
   - `survival/` — survival mod data (blocktypes, itemtypes, entities, recipes, worldgen, patches)
   - `creative/` — creative mod data
